@@ -72,18 +72,28 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
-      }`}>
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
+        }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center space-x-2 text-2xl font-bold group">
-            <Car className="w-8 h-8 text-orange-500 transform group-hover:scale-110 transition-transform" />
-            <span className="text-gray-900">Auto</span>
-            <span className="text-orange-500">Rental</span>
+            className="flex items-center justify-start hover:bg-gray-50 rounded-lg transition-all duration-300 group p-2 w-auto"
+          >
+            <img
+              src="/Logo Auto Rental Tirana Black.png"
+              alt="Auto Rental Tirana Logo"
+              className="h-24 w-auto object-contain transform transition-all 
+            group-hover:scale-105 group-hover:drop-shadow-md
+            group-focus:scale-105 group-focus:drop-shadow-md
+            motion-reduce:transition-none"
+              style={{
+                maxWidth: '160px',
+                maxHeight: '80px',
+                minWidth: '120px'
+              }}
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -92,13 +102,12 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-all hover:text-orange-500 relative
-                  ${
-                    isLinkActive(item.path)
-                      ? "text-orange-500"
-                      : "text-gray-700"
+                className={`text-sm font-medium transition-all hover:text-black-900 relative
+                  ${isLinkActive(item.path)
+                    ? "text-black-500"
+                    : "text-gray-700"
                   }
-                  after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-orange-500 
+                  after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-black-900 
                   after:left-0 after:-bottom-1 after:transition-all hover:after:w-full
                   ${isLinkActive(item.path) ? "after:w-full" : ""}`}>
                 {item.label}
@@ -113,12 +122,11 @@ const Navbar = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all">
+                    className="flex items-center space-x-2 px-4 py-2 bg-black-700 text-white rounded-lg hover:bg-black-600 transition-all">
                     <span>Account</span>
                     <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        dropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </motion.button>
 
@@ -131,7 +139,7 @@ const Navbar = () => {
                         className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border border-gray-100">
                         <button
                           onClick={handleLogout}
-                          className="w-full px-4 py-2 text-left text-gray-700 hover:bg-orange-50 hover:text-orange-500 transition-colors flex items-center space-x-2">
+                          className="w-full px-4 py-2 text-left text-gray-700 hover:bg-black-50 hover:text-black-500 transition-colors flex items-center space-x-2">
                           <LogOut className="w-4 h-4" />
                           <span>Logout</span>
                         </button>
@@ -143,14 +151,14 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/login"
-                    className="flex items-center space-x-2 text-gray-700 hover:text-orange-500 transition-all">
+                    className="flex items-center space-x-2 text-gray-700 hover:text-black-500 transition-all">
                     <LogIn className="w-4 h-4" />
                     <span>Login</span>
                   </Link>
                   <Link
                     to="/register"
-                    className="flex items-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg
-                             hover:bg-orange-600 transition-all transform hover:scale-105">
+                    className="flex items-center space-x-2 px-4 py-2 bg-black text-white rounded-lg
+                             hover:bg-black transition-all transform hover:scale-105">
                     <UserPlus className="w-4 h-4" />
                     <span>Sign Up</span>
                   </Link>
@@ -163,7 +171,7 @@ const Navbar = () => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-orange-500 transition-colors">
+            className="lg:hidden p-2 text-gray-700 hover:text-black-500 transition-colors">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </motion.button>
         </div>
@@ -184,13 +192,12 @@ const Navbar = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className={`text-sm font-medium transition-colors hover:text-orange-500 
-                    ${
-                      isLinkActive(item.path)
-                        ? "text-orange-500"
+                    className={`text-sm font-medium transition-colors hover:text-black-500 
+                    ${isLinkActive(item.path)
+                        ? "text-black-900"
                         : "text-gray-700"
-                    }
-                    flex items-center space-x-2 p-2 rounded-lg hover:bg-orange-50`}>
+                      }
+                    flex items-center space-x-2 p-2 rounded-lg hover:bg-black-50`}>
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -200,7 +207,7 @@ const Navbar = () => {
                   {user ? (
                     <button
                       onClick={handleLogout}
-                      className="flex items-center justify-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all">
+                      className="flex items-center justify-center space-x-2 px-4 py-2 bg-black-500 text-white rounded-lg hover:bg-black-600 transition-all">
                       <LogOut className="w-4 h-4" />
                       <span>Logout</span>
                     </button>
@@ -216,7 +223,7 @@ const Navbar = () => {
                       <Link
                         to="/register"
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center justify-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all">
+                        className="flex items-center justify-center space-x-2 px-4 py-2 bg-black-500 text-white rounded-lg hover:bg-black-600 transition-all">
                         <UserPlus className="w-4 h-4" />
                         <span>Sign Up</span>
                       </Link>
