@@ -1,0 +1,39 @@
+/* Base styles for the logo */
+.responsive-logo {
+    height: 4rem; /* Default height for small screens */
+    width: auto;
+    object-fit: contain;
+    transition: all 300ms;
+    max-width: 100px;
+    max-height: 80px;
+    min-width: 120px;
+  }
+  
+  /* Hover and focus effects */
+  .responsive-logo:hover,
+  .responsive-logo:focus {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .responsive-logo {
+      height: 5rem; /* Height for small devices (sm) */
+        max-width: 90px !important;
+        max-height: 80px;
+        min-width: 90px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .responsive-logo {
+      height: 6rem; /* Height for medium devices (md) */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .responsive-logo {
+      height: 7rem; /* Height for large devices (lg) */
+    }
+  }
