@@ -9,19 +9,17 @@ import Booking from "./Pages/Booking";
 import Team from "./Pages/Team";
 import Contact from "./Pages/Contact";
 import Errorpage from "./Pages/Errorpage";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
+import Login from "./components/default/Auth/Login";
+import Register from "./components/default/Auth/Register";
 import LearnMore from "./Pages/LearnMore";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { MainLayout } from "./layout/MainLayout";
 import { AuthLayout } from "./layout/AuthLayout";
-import { MouseTrail } from "@stichiboi/react-elegant-mouse-trail";
 
 
 function App() {
   return (
     <>
-      <MouseTrail strokeColor="#F97316" lineWidthStart={30} />
       <AnimatePresence mode="wait">
         <Routes>
           {/* Auth routes without Navbar and Footer */}

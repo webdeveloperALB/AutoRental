@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn, UserPlus, LogOut, ChevronDown } from "lucide-react";
-import { auth } from "../Auth/Firebase.js";
+import { auth } from "./Auth/Firebase.js";
 import { signOut } from "firebase/auth";
 import useAuthStore from "../../store/store.js";
 import "./Navbar.css";
@@ -65,24 +65,26 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo (unchanged) */}
           <Link
             to="/"
-            className="flex items-center justify-start hover:bg-gray-50 rounded-lg transition-all duration-300 group p-2 w-auto"
+            className="flex items-center justify-start rounded-lg transition-transform duration-200 ease-out group p-2 w-auto hover:bg-opacity-10 hover:shadow-sm"
           >
             <img
               src="/Logo Auto Rental Tirana Black.png"
               alt="Auto Rental Tirana Logo"
-              className="responsive-logo transform transition-all 
-                group-hover:scale-105 group-hover:drop-shadow-md
-                group-focus:scale-105 group-focus:drop-shadow-md
-                motion-reduce:transition-none"
+              className="responsive-logo transform transition-transform 
+      duration-200 ease-out 
+      group-hover:scale-[1.02] 
+      group-hover:translate-z-0
+      group-hover:opacity-95
+      motion-reduce:transform-none
+      origin-center"
             />
           </Link>
 
@@ -114,9 +116,8 @@ const Navbar = () => {
                   >
                     <span>Account</span>
                     <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        dropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </motion.button>
 
@@ -189,11 +190,10 @@ const Navbar = () => {
                     to={item.path}
                     onClick={() => setIsOpen(false)}
                     className={`text-sm font-medium transition-colors hover:text-gray-900 
-                    ${
-                      isLinkActive(item.path)
+                    ${isLinkActive(item.path)
                         ? "text-gray-900"
                         : "text-gray-700"
-                    }
+                      }
                     flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-50`}
                   >
                     <span>{item.label}</span>

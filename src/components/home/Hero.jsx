@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  ChevronRight,
-  Star,
-} from "lucide-react";
+import { ChevronRight, Star } from "lucide-react";
 import { assets } from "../../assets/assets";
 import "./Hero.css";
 
@@ -21,13 +18,6 @@ const Hero = () => {
     animate: { x: 0, opacity: 1 },
     transition: { duration: 0.8, delay: 0.2 },
   };
-
-
-  const stats = [
-    { value: "20+", label: "Car Models" },
-    { value: "98%", label: "Happy Clients" },
-    { value: "24/7", label: "Support" },
-  ];
 
   return (
     <div className="hero-container">
@@ -66,12 +56,10 @@ const Hero = () => {
           </h1>
 
           <p className="description-text">
-           
+            {/* Description text here */}
           </p>
 
           <div className="action-buttons">
-            
-
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -83,22 +71,11 @@ const Hero = () => {
             </motion.button>
           </div>
 
-          
-
-          <div className="stats-container">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-item">
-                <h3 className="stat-value">{stat.value}</h3>
-                <p className="stat-label">{stat.label}</p>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
-      {/* Floating Elements */}
-      <div className="floating-elements">
-          
-
+        {/* Floating Elements */}
+        <div className="floating-elements">
+          {/* Floating elements here */}
         </div>
       </div>
     </div>

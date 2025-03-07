@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
 } from "firebase/auth";
 import {
-  LogIn,
+  UserPlus,
   Mail,
   Lock,
   ChevronRight,
   Car,
   Star,
   Shield,
-  AlertCircle,
   Eye,
   EyeOff,
+  AlertCircle,
+  Users,
 } from "lucide-react";
 import { auth } from "./Firebase.js";
-import { useNavigate } from "react-router-dom";
-import ForgotPassword from "./ForgotPassword";
-import useAuthStore from "../../store/store.js";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import useAuthStore from "../../../store/store.js";
 
-const Login = () => {
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+const Register = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
+  });
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
   });
   const [error, setError] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const setUser = useAuthStore((state) => state.setUser);
 
@@ -40,39 +42,44 @@ const Login = () => {
       if (user) {
         setUser(user);
         navigate("/booking");
-      } else {
-        console.log("User is logged out");
       }
     });
     return () => unsubscribe();
   }, [navigate, setUser]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      alert("Login successful!");
-    } catch (error) {
-      console.error("Login error:", error);
-      setError("Failed to login. Please check your credentials and try again.");
-    }
-  };
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       setUser(result.user);
-      alert("Login with Google successful!");
+      alert("Signed in with Google successfully!");
     } catch (error) {
-      console.error("Google login error:", error);
-      setError("Failed to login with Google. Please try again.");
+      setError("Failed to sign in with Google. Please try again.");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+      setUser(userCredential.user);
+      alert("Registration successful!");
+    } catch (error) {
+      setError("Registration failed. Please check your details and try again.");
     }
   };
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-gray-50 flex">
-      {/* Left Section: Content */}
       {/* Left Section: Content */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -81,7 +88,6 @@ const Login = () => {
         className="hidden lg:flex w-1/2 relative overflow-hidden">
         {/* Background with gradient and pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700">
-          {/* Modern grid pattern */}
           <div
             className="absolute inset-0"
             style={{
@@ -110,13 +116,13 @@ const Login = () => {
             <div className="space-y-8">
               <div>
                 <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
-                  Your Journey
+                  Start Your
                   <br />
-                  Begins Here
+                  Journey Today
                 </h1>
                 <p className="text-orange-50/90 text-lg leading-relaxed max-w-md">
-                  Experience premium car rental services with unlimited miles
-                  and flexible pickup options.
+                  Join thousands of satisfied customers and experience our
+                  premium car rental services.
                 </p>
               </div>
 
@@ -124,14 +130,14 @@ const Login = () => {
               <div className="grid grid-cols-2 gap-4 mt-12">
                 {[
                   {
-                    icon: Star,
-                    title: "Premium Fleet",
-                    desc: "Top-tier vehicles",
+                    icon: Users,
+                    title: "Easy Sign Up",
+                    desc: "Quick registration process",
                   },
                   {
                     icon: Shield,
-                    title: "Secure Booking",
-                    desc: "Protected transactions",
+                    title: "Secure Account",
+                    desc: "Protected personal data",
                   },
                 ].map((feature, index) => (
                   <motion.div
@@ -151,31 +157,28 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Bottom Stats Section */}
+          {/* Bottom Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
             className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-            <div className="grid grid-cols-3 gap-8">
-              {[
-                { value: "50K+", label: "Happy Customers" },
-                { value: "100+", label: "Premium Cars" },
-                { value: "4.9/5", label: "User Rating" },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <h4 className="text-2xl font-bold text-white mb-1">
-                    {stat.value}
-                  </h4>
-                  <p className="text-orange-50/80 text-sm">{stat.label}</p>
-                </div>
-              ))}
+            <div className="flex items-center gap-4">
+              <Star className="w-8 h-8 text-white" />
+              <div>
+                <h4 className="text-white font-semibold">
+                  Trusted by Thousands
+                </h4>
+                <p className="text-orange-50/80 text-sm">
+                  Join our growing community of car renters
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Right Section: Login Form */}
+      {/* Right Section: Register Form */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -199,9 +202,9 @@ const Login = () => {
           </motion.div>
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-2">Login to Your Account</h2>
+            <h2 className="text-3xl font-bold mb-2">Create Your Account</h2>
             <p className="text-gray-600">
-              Welcome back! Please enter your details
+              Join us for the best car rental experience
             </p>
           </div>
 
@@ -230,7 +233,7 @@ const Login = () => {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword.password ? "text" : "password"}
                   value={formData.password}
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
@@ -238,14 +241,57 @@ const Login = () => {
                   required
                   className="w-full px-4 py-3 pl-12 pr-12 border rounded-lg focus:ring-2 focus:ring-orange-500 
                            focus:border-transparent transition-all"
-                  placeholder="Enter your password"
+                  placeholder="Create a password"
                 />
                 <Lock className="w-5 h-5 text-gray-400 absolute left-4 top-3.5" />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() =>
+                    setShowPassword({
+                      ...showPassword,
+                      password: !showPassword.password,
+                    })
+                  }
                   className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 transition-colors">
-                  {showPassword ? (
+                  {showPassword.password ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword.confirmPassword ? "text" : "password"}
+                  value={formData.confirmPassword}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      confirmPassword: e.target.value,
+                    })
+                  }
+                  required
+                  className="w-full px-4 py-3 pl-12 pr-12 border rounded-lg focus:ring-2 focus:ring-orange-500 
+                           focus:border-transparent transition-all"
+                  placeholder="Confirm your password"
+                />
+                <Lock className="w-5 h-5 text-gray-400 absolute left-4 top-3.5" />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword({
+                      ...showPassword,
+                      confirmPassword: !showPassword.confirmPassword,
+                    })
+                  }
+                  className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 transition-colors">
+                  {showPassword.confirmPassword ? (
                     <EyeOff className="w-5 h-5" />
                   ) : (
                     <Eye className="w-5 h-5" />
@@ -264,23 +310,14 @@ const Login = () => {
               </motion.div>
             )}
 
-            <div className="flex items-center justify-between text-sm">
-              <button
-                type="button"
-                onClick={() => setShowForgotPassword(true)}
-                className="text-orange-500 hover:text-orange-600 transition-colors">
-                Forgot password?
-              </button>
-            </div>
-
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
               className="w-full px-4 py-3 bg-orange-500 text-white rounded-lg font-medium 
                        hover:bg-orange-600 transition-colors flex items-center justify-center gap-2">
-              <LogIn className="w-5 h-5" />
-              Sign in
+              <UserPlus className="w-5 h-5" />
+              Create Account
             </motion.button>
 
             <div className="relative my-8">
@@ -289,7 +326,7 @@ const Login = () => {
               </div>
               <div className="relative flex justify-center">
                 <span className="px-4 text-sm text-gray-500 bg-gradient-to-b from-white to-gray-50">
-                  or
+                  or continue with
                 </span>
               </div>
             </div>
@@ -306,29 +343,25 @@ const Login = () => {
                 alt="Google"
                 className="w-5 h-5"
               />
-              Sign in with Google
+              Sign up with Google
             </motion.button>
           </form>
 
           <p className="mt-8 text-center text-gray-600">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <motion.a
               whileHover={{ scale: 1.05 }}
-              href="/register"
+              href="/login"
               className="text-orange-500 font-semibold hover:text-orange-600 transition-colors 
                        inline-flex items-center gap-1">
-              Sign up
+              Sign in
               <ChevronRight className="w-4 h-4" />
             </motion.a>
           </p>
         </div>
       </motion.div>
-
-      {showForgotPassword && (
-        <ForgotPassword onClose={() => setShowForgotPassword(false)} />
-      )}
     </div>
   );
 };
 
-export default Login;
+export default Register;
