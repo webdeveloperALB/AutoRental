@@ -5,7 +5,7 @@ import {
   Car,
   MapPin,
   Calendar,
-  CreditCard,
+  MessageCircle,
   CheckCircle,
   CircleHelp,
 } from "lucide-react";
@@ -54,9 +54,9 @@ const Work = () => {
       iconcolor: "text-purple-500",
     },
     {
-      icon: CreditCard,
-      title: "Make Payment",
-      description: "Quick and secure payment with multiple payment options",
+      icon: MessageCircle,
+      title: "Contact Us",
+      description: "Send your booking details at us for confirmation and assistance",
       bgcolor: "bg-orange-50",
       iconcolor: "text-orange-500",
     },
@@ -71,14 +71,14 @@ const Work = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-4">
-            <CircleHelp className="w-5 h-5 text-orange-500" />
-            <span className="text-orange-700 font-medium">How It Works?</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-4">
+            <CircleHelp className="w-5 h-5 text-white" />
+            <span className="text-white font-medium">How It Works?</span>
           </div>
           <h2 className="text-4xl font-bold mb-6 mt-2">
             Rent Your Dream Car in 4 Easy Steps
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
+          <p className="text-black text-lg leading-relaxed">
             We've streamlined our rental process to get you on the road quickly
             and safely. Follow these simple steps to begin your journey with us.
           </p>
@@ -108,7 +108,7 @@ const Work = () => {
 
                   {/* Step Number */}
                   <div
-                    className="absolute -top-4 -right-4 w-8 h-8 bg-orange-500 rounded-full 
+                    className="absolute -top-4 -right-4 w-8 h-8 bg-black rounded-full 
                               flex items-center justify-center text-white font-bold">
                     {index + 1}
                   </div>
@@ -138,7 +138,7 @@ const Work = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-16 text-center">
-          <p className="text-gray-600 mb-6">
+          <p className="text-black mb-6">
             Ready to get started? Book your dream car now!
           </p>
           <motion.button
@@ -146,8 +146,8 @@ const Work = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate("/models")}
-            className="px-8 py-4 bg-orange-500 text-white rounded-lg shadow-lg 
-                     shadow-orange-500/30 hover:bg-orange-600 transition-all">
+            className="px-8 py-4 bg-black text-white rounded-lg shadow-lg 
+                     shadow-black hover:bg-black transition-all">
             Book a Car Now
           </motion.button>
         </motion.div>
