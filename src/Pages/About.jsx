@@ -2,13 +2,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   Star,
-  Shield,
+  ShieldCheck,
+  Key,
   Car,
   CheckCircle,
   Award,
   Settings,
-  Users,
   CreditCard,
+  Users,
   Clock,
   BarChart,
   PhoneCall,
@@ -24,11 +25,11 @@ const About = () => {
 
   const featureCards = [
     {
-      icon: Shield,
-      title: "Secure Booking",
-      description: "Advanced security measures for safe transactions",
-      color: "text-blue-500",
-      bgColor: "bg-blue-50",
+      icon: ShieldCheck,  // Verified vehicles icon
+      title: "Verified Vehicles",
+      description: "All cars undergo rigorous safety inspections",
+      color: "text-red-500",
+      bgColor: "bg-red-50",
     },
     {
       icon: Car,
@@ -45,13 +46,14 @@ const About = () => {
       bgColor: "bg-green-50",
     },
     {
-      icon: CreditCard,
-      title: "Easy Payments",
-      description: "Flexible and secure payment options",
+      icon: Key,
+      title: "Key Delivery",
+      description: "Hand-delivered keys to your location",
       color: "text-purple-500",
       bgColor: "bg-purple-50",
     },
   ];
+
 
   const advancedFeatures = [
     {
@@ -88,12 +90,12 @@ const About = () => {
       description: "Round-the-clock comprehensive customer assistance",
       color: "text-red-500",
       bgColor: "bg-red-50",
-    },
+    }
   ];
 
   const stats = [
     { value: "15K+", label: "Happy Customers" },
-    { value: "150+", label: "Locations" },
+    { value: "10+", label: "Years in Business" },
     { value: "98%", label: "Satisfaction Rate" },
     { value: "24/7", label: "Customer Support" },
   ];
@@ -108,13 +110,13 @@ const About = () => {
             initial="initial"
             whileInView="whileInView"
             className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-6">
-              <Star className="w-5 h-5 text-orange-500" />
-              <span className="text-orange-700 font-medium">About Us</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
+              <Star className="w-5 h-5 text-white" />
+              <span className="text-white font-medium">About Us</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Experience the Best in
-              <span className="text-orange-500"> Car Rentals</span>
+              <span className="text-black"> Car Rentals</span>
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed">
               Welcome to CarRental, where we redefine the car rental experience.
@@ -135,7 +137,7 @@ const About = () => {
             className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Award className="w-6 h-6 text-orange-500" />
+                <Award className="w-6 h-6 text-black" />
                 <h2 className="text-3xl font-bold">Our Mission</h2>
               </div>
               <p className="text-gray-600 leading-relaxed mb-6">
@@ -157,7 +159,7 @@ const About = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-black flex-shrink-0" />
                     <span className="text-gray-700">{item}</span>
                   </motion.li>
                 ))}
@@ -170,11 +172,11 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-gray-50 p-6 rounded-lg text-center group hover:bg-orange-50 transition-colors">
-                  <h3 className="text-3xl font-bold text-orange-500 mb-2 group-hover:scale-110 transition-transform">
+                  className="bg-gray-50 p-6 rounded-lg text-center group hover:bg-gray-200 transition-colors">
+                  <h3 className="text-3xl font-bold text-black mb-2 group-hover:scale-110 transition-transform">
                     {stat.value}
                   </h3>
-                  <p className="text-gray-600">{stat.label}</p>
+                  <p className="text-black">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -191,7 +193,7 @@ const About = () => {
             whileInView="whileInView"
             className="text-center mb-12">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Settings className="w-6 h-6 text-orange-500" />
+              <Settings className="w-6 h-6 text-black" />
               <h2 className="text-3xl font-bold">Key Features</h2>
             </div>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -235,7 +237,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 border border-gray-100 hover:border-orange-200 
+                  className="bg-white rounded-xl p-6 border border-gray-100 hover:border-gray-300
                            transition-all hover:-translate-y-1 group">
                   <div
                     className={`${feature.bgColor} w-12 h-12 rounded-lg flex items-center justify-center 

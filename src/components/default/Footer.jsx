@@ -37,7 +37,10 @@ const Footer = () => {
 
   const socialLinks = [
     { Icon: Facebook, href: "#", color: "hover:bg-blue-600" },
-    { Icon: X, href: "#", color: "hover:bg-blue-400" },
+    {
+      Icon: X, href: "#", color: "hover:bg-black", // X's official brand color
+      className: "hover:bg-black hover:text-white"
+    },
     { Icon: Instagram, href: "#", color: "hover:bg-pink-600" },
     { Icon: Linkedin, href: "#", color: "hover:bg-blue-700" },
   ];
@@ -116,7 +119,7 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     to={link.path}
-                    className="group hover:text-orange-500 transition-colors inline-flex items-center space-x-2">
+                    className="group hover:text-white transition-colors inline-flex items-center space-x-2">
                     <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     <span>{link.label}</span>
                   </Link>
@@ -136,7 +139,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {workingHours.map((schedule, index) => (
                 <li key={index} className="flex items-center space-x-3">
-                  <Clock className="w-5 h-5 text-orange-500" />
+                  <Clock className="w-5 h-5 text-white" />
                   <div>
                     <span className="block text-sm text-gray-400">
                       {schedule.day}
@@ -148,19 +151,19 @@ const Footer = () => {
             </ul>
             <div className="space-y-4 pt-4 border-t border-gray-800">
               <div className="flex items-center space-x-3 group cursor-pointer">
-                <Phone className="w-5 h-5 text-orange-500 group-hover:rotate-12 transition-transform" />
-                <span className="hover:text-orange-500 transition-colors">
+                <Phone className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
+                <span className="hover:text-white transition-colors">
                   +1 234 567 8900
                 </span>
               </div>
               <div className="flex items-center space-x-3 group cursor-pointer">
-                <Mail className="w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform" />
-                <span className="hover:text-orange-500 transition-colors">
+                <Mail className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+                <span className="hover:text-white transition-colors">
                   info@carrental.com
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-orange-500" />
+                <MapPin className="w-5 h-5 text-white" />
                 <span>123 Car Street, Auto City, AC 12345</span>
               </div>
             </div>
@@ -174,7 +177,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-6">
             <h3 className="text-xl font-semibold text-white">Newsletter</h3>
-            <p className="text-gray-400">
+            <p className="text-white">
               Subscribe to our newsletter for the latest updates and exclusive
               offers.
             </p>
@@ -186,12 +189,12 @@ const Footer = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 
-                           focus:ring-orange-500 text-white placeholder-gray-500"
+                           focus:ring-white text-white placeholder-gray-500"
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-orange-500 
-                           text-white rounded-lg hover:bg-orange-600 transition-all
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-green-500 
+                           text-white rounded-lg hover:bg-green-500 transition-all
                            hover:scale-105 active:scale-95">
                   {isSubscribed ? (
                     <CheckCircle className="w-5 h-5" />
@@ -206,11 +209,11 @@ const Footer = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="p-4 bg-gradient-to-r from-orange-500/10 to-orange-500/20 rounded-lg
+              className="p-4 bg-gradient-to-r from-white to-white rounded-lg
                        border border-orange-500/20">
-              <p className="text-sm">
+              <p className="text-sm text-black">
                 🎉{" "}
-                <span className="text-orange-500 font-semibold">
+                <span className="text-black font-semibold">
                   Special Offer:
                 </span>{" "}
                 Get 15% off your first rental when you subscribe!
@@ -227,8 +230,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="mt-16 pt-8 border-t border-gray-800 text-center">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} CarRental. All rights reserved. Built
-            with ❤️ for better car rental experience.
+            © {new Date().getFullYear()} AutoRental. All rights reserved.
           </p>
         </motion.div>
       </div>
