@@ -1,12 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  CheckCircle,
   ChevronRight,
   Star,
-  Shield,
-  Clock,
-  CreditCard,
 } from "lucide-react";
 import { assets } from "../../assets/assets";
 import "./Hero.css";
@@ -26,14 +22,9 @@ const Hero = () => {
     transition: { duration: 0.8, delay: 0.2 },
   };
 
-  const features = [
-    { icon: Shield, text: "Fully Insured" },
-    { icon: Clock, text: "24/7 Support" },
-    { icon: CreditCard, text: "Flexible Payment" },
-  ];
 
   const stats = [
-    { value: "50+", label: "Car Models" },
+    { value: "20+", label: "Car Models" },
     { value: "98%", label: "Happy Clients" },
     { value: "24/7", label: "Support" },
   ];
@@ -79,15 +70,7 @@ const Hero = () => {
           </p>
 
           <div className="action-buttons">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/models")}
-              className="primary-btn"
-            >
-              <span>Book Ride</span>
-              <CheckCircle className="icon" />
-            </motion.button>
+            
 
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -100,16 +83,7 @@ const Hero = () => {
             </motion.button>
           </div>
 
-          <div className="features-container">
-            {features.map((feature, index) => (
-              <div key={index} className="feature-item">
-                <div className="icon-wrapper">
-                  <feature.icon className="feature-icon" />
-                </div>
-                <span>{feature.text}</span>
-              </div>
-            ))}
-          </div>
+          
 
           <div className="stats-container">
             {stats.map((stat, index) => (
