@@ -6,7 +6,7 @@ import {
   Mail,
   Clock,
   Facebook,
-  Twitter,
+  X,
   Instagram,
   Linkedin,
   Send,
@@ -37,7 +37,7 @@ const Footer = () => {
 
   const socialLinks = [
     { Icon: Facebook, href: "#", color: "hover:bg-blue-600" },
-    { Icon: Twitter, href: "#", color: "hover:bg-blue-400" },
+    { Icon: X, href: "#", color: "hover:bg-blue-400" },
     { Icon: Instagram, href: "#", color: "hover:bg-pink-600" },
     { Icon: Linkedin, href: "#", color: "hover:bg-blue-700" },
   ];
@@ -71,10 +71,14 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-6">
             <Link to="/" className="flex items-center space-x-2 group">
-              <Car className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform" />
+              <img
+                src="/caricon4.png" // Path from public folder
+                alt="Car Rental Logo"
+                className="w-25 h-10 group-hover:scale-110 transition-transform"
+              />
               <span className="text-2xl font-bold">
-                <span className="text-white">Car</span>
-                <span className="text-orange-500">Rental</span>
+                <span className="text-white">Auto</span>
+                <span className="text-red-600">Rental</span>
               </span>
             </Link>
             <p className="text-gray-400 leading-relaxed">

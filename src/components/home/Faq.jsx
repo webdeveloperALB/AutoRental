@@ -137,7 +137,7 @@ const FAQ = () => {
                 return (
                   <div
                     key={itemIndex}
-                    className="border border-gray-200 hover:border-orange-500 rounded-lg bg-white transition-colors">
+                    className="border border-gray-200 hover:border-black rounded-lg bg-white transition-colors">
                     <button
                       onClick={() => toggleAccordion(index)}
                       className="w-full px-6 py-4 flex items-center justify-between text-left">
@@ -165,8 +165,8 @@ const FAQ = () => {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden">
-                          <div className="px-6 py-4 bg-orange-50/50 border-t border-gray-200">
-                            <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                          <div className="px-6 py-4 bg-gray-100 border-t border-gray-200">
+                            <p className="text-black leading-relaxed whitespace-pre-line">
                               {item.answer}
                             </p>
                           </div>
@@ -213,10 +213,10 @@ const FAQ = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-2 px-6 py-3 bg-green-500 text-black rounded-lg hover:bg-green-600 transition-colors"
+                    className="flex items-center gap-2 px-4 py-3 bg-green-500 text-black rounded-lg hover:bg-green-600 transition-colors"
                   >
                     <Phone className="w-5 h-5" />
-                    <span>Call Support</span>
+                    <span>Contact Support</span>
                   </motion.button>
 
                   {/* Dropdown Options */}
@@ -232,7 +232,7 @@ const FAQ = () => {
                       href="https://wa.me/355698357378"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition-colors"
+                      className="flex items-center gap-2 px-6 py-3 hover:bg-gray-100 transition-colors"
                     >
                       <MessageCircle className="w-5 h-5 text-green-500" />
                       <span>WhatsApp</span>
