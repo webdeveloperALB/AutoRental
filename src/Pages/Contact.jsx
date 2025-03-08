@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Phone,
-  Mail,
   MapPin,
   Clock,
   Send,
@@ -11,6 +10,7 @@ import {
   Star,
   MessageSquare,
 } from "lucide-react";
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -55,21 +55,21 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+1 (555) 123-4567", "+1 (555) 765-4321"],
+      details: ["+355 (69) 835-7378"],
       color: "text-blue-500",
       bgColor: "bg-blue-50",
     },
     {
-      icon: Mail,
-      title: "Email",
-      details: ["info@carrental.com", "support@carrental.com"],
-      color: "text-orange-500",
-      bgColor: "bg-orange-50",
+      icon: FaInstagram,
+      title: "Instagram",
+      details: ["@auto_rental_tirana_"],
+      color: "text-pink-500",
+      bgColor: "bg-pink-50",
     },
     {
       icon: MapPin,
       title: "Location",
-      details: ["123 Car Street", "New York, NY 10001"],
+      details: ["Tirane, Albania"],
       color: "text-green-500",
       bgColor: "bg-green-50",
     },
@@ -77,9 +77,7 @@ const Contact = () => {
       icon: Clock,
       title: "Business Hours",
       details: [
-        "Monday - Friday: 9:00 AM - 6:00 PM",
-        "Saturday: 10:00 AM - 4:00 PM",
-        "Sunday: Closed",
+        "Monday - Sunday: 9:00 AM - 6:00 PM",
       ],
       color: "text-purple-500",
       bgColor: "bg-purple-50",
@@ -95,7 +93,8 @@ const Contact = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto">
+            className="text-center max-w-3xl mx-auto"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-6">
               <MessageSquare className="w-5 h-5 text-orange-500" />
               <span className="text-orange-700 font-medium">Contact Us</span>
@@ -114,20 +113,22 @@ const Contact = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <motion.div
-              variants={fadeIn}
-              initial="initial"
-              whileInView="whileInView"
-              className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
+            {/* Contact Information Column */}
+            <div className="space-y-12">
+              <motion.div
+                variants={fadeIn}
+                initial="initial"
+                whileInView="whileInView"
+                className="grid sm:grid-cols-2 gap-6"
+              >
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className={`${info.bgColor} rounded-lg p-6 hover:scale-105 transition-transform`}>
+                    className={`${info.bgColor} rounded-lg p-6 hover:scale-[1.02] transition-transform duration-300`}
+                  >
                     <div className="flex items-center gap-3 mb-4">
                       <info.icon className={`w-6 h-6 ${info.color}`} />
                       <h3 className="text-xl font-semibold">{info.title}</h3>
@@ -141,127 +142,127 @@ const Contact = () => {
                     </div>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
-              {/* Map or Image placeholder */}
+              {/* Optimized Map Component */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="bg-gray-100 rounded-lg p-4 h-64 flex items-center justify-center">
-                <MapPin className="w-12 h-12 text-gray-400" />
-              </motion.div>
-            </motion.div>
+                transition={{ duration: 0.5 }}
+                className="bg-gray-100 rounded-xl overflow-hidden h-96 relative shadow-sm hover:shadow-md transition-shadow duration-300"
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47934.10796158665!2d19.817823200000003!3d41.3331847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1350310470fac5db%3A0x40092af10653720!2zVGlyYW7Dqw!5e0!3m2!1sen!2s!4v1741450655410!5m2!1sen!2s"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
 
-            {/* Contact Form */}
+
+              </motion.div>
+            </div>
+
+            {/* Contact Form Column */}
             <motion.div
               variants={fadeIn}
               initial="initial"
               whileInView="whileInView"
-              className="bg-white rounded-xl p-8 border border-gray-100">
-              <div className="flex items-center gap-2 mb-6">
-                <MessageCircle className="w-6 h-6 text-orange-500" />
-                <h2 className="text-2xl font-bold">Send Us a Message</h2>
+              className="bg-white rounded-xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <MessageCircle className="w-7 h-7 text-orange-500" />
+                <h2 className="text-2xl font-bold">Send Message</h2>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Input */}
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-gray-700 font-medium">
-                    Full Name
-                  </label>
+                  <label className="text-gray-700 font-medium">Full Name</label>
                   <div className="relative">
                     <input
                       type="text"
-                      id="name"
                       name="name"
-                      placeholder="Enter your Name"
+                      placeholder="John Doe"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 
-                               focus:outline-none focus:ring-2 focus:ring-orange-500 
-                               focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                       required
                     />
-                    <User className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2" />
+                    <User className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" />
                   </div>
                 </div>
 
+                {/* Email Input */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-gray-700 font-medium">
-                    Email Address
-                  </label>
+                  <label className="text-gray-700 font-medium">Email</label>
                   <div className="relative">
                     <input
                       type="email"
-                      id="email"
                       name="email"
-                      placeholder="Enter your Email"
+                      placeholder="john@example.com"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 
-                               focus:outline-none focus:ring-2 focus:ring-orange-500 
-                               focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                       required
                     />
-                    <Mail className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2" />
+                    <svg
+                      className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
                   </div>
                 </div>
 
+                {/* Subject Input */}
                 <div className="space-y-2">
-                  <label
-                    htmlFor="subject"
-                    className="text-gray-700 font-medium">
-                    Subject
-                  </label>
+                  <label className="text-gray-700 font-medium">Subject</label>
                   <input
                     type="text"
-                    id="subject"
                     name="subject"
-                    placeholder="Enter the subject"
+                    placeholder="Inquiry about rental"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 
-                             focus:outline-none focus:ring-2 focus:ring-orange-500 
-                             focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                     required
                   />
                 </div>
 
+                {/* Message Input */}
                 <div className="space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="text-gray-700 font-medium">
-                    Message
-                  </label>
+                  <label className="text-gray-700 font-medium">Message</label>
                   <textarea
-                    id="message"
                     name="message"
-                    placeholder="Type your message here"
+                    rows="4"
+                    placeholder="Your message..."
                     value={formData.message}
                     onChange={handleChange}
-                    rows="4"
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 
-                             focus:outline-none focus:ring-2 focus:ring-orange-500 
-                             focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none"
                     required
                   />
                 </div>
 
+                {/* Submit Button */}
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 rounded-lg flex items-center justify-center gap-2
-                           ${isSubmitted ? "bg-green-500" : "bg-orange-500"} 
-                           text-white font-medium transition-colors`}>
+                  className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 ${isSubmitted ? 'bg-green-500' : 'bg-orange-500'
+                    } text-white font-medium transition-colors`}
+                >
                   {isSubmitted ? (
                     <>
-                      <Star className="w-5 h-5" />
-                      <span>Message Sent!</span>
+                      <Star className="w-5 h-5 animate-pulse" />
+                      Message Sent!
                     </>
                   ) : (
                     <>
                       <Send className="w-5 h-5" />
-                      <span>Send Message</span>
+                      Send Message
                     </>
                   )}
                 </motion.button>
