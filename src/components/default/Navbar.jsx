@@ -63,56 +63,54 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
-        }`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={`fixed w-full z-50 h-16 ${scrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-transparent"}`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo (unchanged) */}
+      <div className="container mx-auto px-4 h-full">
+        <div className="flex items-center justify-between h-full">
+          {/* Logo */}
           <Link
             to="/"
-            className="flex items-center justify-start rounded-lg transition-transform duration-200 ease-out group p-2 w-auto hover:bg-opacity-10 hover:shadow-sm"
+            className="flex items-center h-full p-2 hover:opacity-90 transition-opacity"
           >
             <img
               src="/Logo Auto Rental Tirana Black.png"
               alt="Auto Rental Tirana Logo"
-              className="responsive-logo transform transition-transform 
-      duration-200 ease-out 
-      group-hover:scale-[1.02] 
-      group-hover:translate-z-0
-      group-hover:opacity-95
-      motion-reduce:transform-none
-      origin-center"
+              className="h-12 w-auto"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center gap-8 h-full">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-all hover:text-gray-900 relative
-                  ${isLinkActive(item.path) ? "text-gray-900" : "text-gray-700"}
-                  after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-gray-900 
-                  after:left-0 after:-bottom-1 after:transition-all hover:after:w-full
-                  ${isLinkActive(item.path) ? "after:w-full" : ""}`}
+                className={`relative h-full flex items-center text-sm font-medium ${isLinkActive(item.path)
+                    ? "text-black"
+                    : "text-black"
+                  } transition-colors`}
               >
                 {item.label}
+                {isLinkActive(item.path) && (
+                  <motion.div
+                    className="absolute bottom-0 top-12 left-0 right-0 h-0.5 bg-black"
+                    layoutId="underline"
+                  />
+                )}
               </Link>
             ))}
 
             {/* Auth Buttons */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-4 ml-4">
               {user ? (
                 <div className="relative">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                   >
                     <span>Account</span>
                     <ChevronDown
@@ -124,14 +122,14 @@ const Navbar = () => {
                   <AnimatePresence>
                     {dropdownOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
+                        exit={{ opacity: 0, y: -10 }}
                         className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border border-gray-100"
                       >
                         <button
                           onClick={handleLogout}
-                          className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center space-x-2"
+                          className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center gap-2"
                         >
                           <LogOut className="w-4 h-4" />
                           <span>Logout</span>
@@ -144,15 +142,14 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/login"
-                    className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
                   >
                     <LogIn className="w-4 h-4" />
                     <span>Login</span>
                   </Link>
                   <Link
                     to="/register"
-                    className="flex items-center space-x-2 px-4 py-2 bg-gray-900 text-white rounded-lg
-                             hover:bg-gray-800 transition-all transform hover:scale-105"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                   >
                     <UserPlus className="w-4 h-4" />
                     <span>Sign Up</span>
@@ -162,11 +159,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button (unchanged) */}
+          {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-gray-900 transition-colors"
+            className="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </motion.button>
@@ -177,35 +174,33 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-sm border-t"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="lg:hidden absolute top-16 w-full bg-white shadow-lg border-t"
           >
             <div className="container mx-auto px-4 py-4">
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col gap-2">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className={`text-sm font-medium transition-colors hover:text-gray-900 
-                    ${isLinkActive(item.path)
-                        ? "text-gray-900"
-                        : "text-gray-700"
-                      }
-                    flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-50`}
+                    className={`px-4 py-3 rounded-lg ${isLinkActive(item.path)
+                        ? "bg-gray-100 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50"
+                      } transition-colors`}
                   >
-                    <span>{item.label}</span>
+                    {item.label}
                   </Link>
                 ))}
 
                 {/* Mobile Auth Buttons */}
-                <div className="flex flex-col space-y-2 pt-4 border-t">
+                <div className="flex flex-col gap-2 pt-4 border-t mt-2">
                   {user ? (
                     <button
                       onClick={handleLogout}
-                      className="flex items-center justify-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all"
+                      className="flex items-center gap-2 px-4 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
                     >
                       <LogOut className="w-4 h-4" />
                       <span>Logout</span>
@@ -215,7 +210,7 @@ const Navbar = () => {
                       <Link
                         to="/login"
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center justify-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-all"
+                        className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <LogIn className="w-4 h-4" />
                         <span>Login</span>
@@ -223,7 +218,7 @@ const Navbar = () => {
                       <Link
                         to="/register"
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center justify-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all"
+                        className="flex items-center gap-2 px-4 py-3 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors"
                       >
                         <UserPlus className="w-4 h-4" />
                         <span>Sign Up</span>

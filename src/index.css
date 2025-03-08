@@ -22,12 +22,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  /* background-color: #000000; */
+  background-color: #C0C0C0;
   border-radius: 6px;
 }
 
@@ -37,7 +36,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #F97316;;
+  background-color: #808080;;
 }
 
 code {
