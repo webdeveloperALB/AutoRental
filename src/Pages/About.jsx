@@ -8,11 +8,10 @@ import {
   CheckCircle,
   Award,
   Settings,
-  CreditCard,
+  MapPin,
   Users,
   Clock,
-  BarChart,
-  PhoneCall,
+  Shield,
   Calendar,
 } from "lucide-react";
 
@@ -58,40 +57,41 @@ const About = () => {
   const advancedFeatures = [
     {
       icon: Clock,
-      title: "Real-time Availability",
-      description: "Check car availability instantly with live updates",
+      title: "Instant Booking Confirmation",
+      description: "Get real-time confirmation for your car rental via WhatsApp.",
       color: "text-indigo-500",
       bgColor: "bg-indigo-50",
     },
     {
       icon: Calendar,
-      title: "Flexible Duration",
-      description: "Rent cars from hours to months with flexible terms",
+      title: "Flexible Rental Periods",
+      description: "Choose hourly, daily, or long-term rentals based on your needs.",
       color: "text-pink-500",
       bgColor: "bg-pink-50",
     },
     {
-      icon: CreditCard,
-      title: "Integrated Payments",
-      description: "Secure payment gateway with multiple options",
+      icon: MapPin,
+      title: "Convenient Pick-up & Drop-off",
+      description: "Select your preferred location for hassle-free car handover.",
+      color: "text-green-500",
+      bgColor: "bg-green-50",
+    },
+    {
+      icon: Shield,
+      title: "No Prepayment Required",
+      description: "Pay in cash upon pick-up—no online payments needed.",
       color: "text-yellow-500",
       bgColor: "bg-yellow-50",
     },
     {
-      icon: BarChart,
-      title: "Admin Analytics",
-      description: "Comprehensive dashboards with valuable insights",
-      color: "text-teal-500",
-      bgColor: "bg-teal-50",
-    },
-    {
-      icon: PhoneCall,
-      title: "24/7 Support",
-      description: "Round-the-clock comprehensive customer assistance",
-      color: "text-red-500",
-      bgColor: "bg-red-50",
+      icon: Car,
+      title: "Wide Vehicle Selection",
+      description: "Choose from economy, luxury, or SUVs to match your journey.",
+      color: "text-purple-500",
+      bgColor: "bg-purple-50",
     }
   ];
+
 
   const stats = [
     { value: "15K+", label: "Happy Customers" },

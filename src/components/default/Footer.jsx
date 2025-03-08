@@ -5,16 +5,16 @@ import {
   Phone,
   Mail,
   Clock,
-  Facebook,
-  X,
   Instagram,
-  Linkedin,
   Send,
-  Car,
   MapPin,
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
+import { RiTiktokFill } from "react-icons/ri";
+import { FaWhatsapp } from "react-icons/fa";
+
+
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -36,13 +36,12 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { Icon: Facebook, href: "#", color: "hover:bg-blue-600" },
     {
-      Icon: X, href: "#", color: "hover:bg-black", // X's official brand color
+      Icon: FaWhatsapp, href: "https://wa.me/355698357378", color: "hover:bg-green-500", 
       className: "hover:bg-black hover:text-white"
     },
-    { Icon: Instagram, href: "#", color: "hover:bg-pink-600" },
-    { Icon: Linkedin, href: "#", color: "hover:bg-blue-700" },
+    { Icon: Instagram, href: "https://www.instagram.com/auto_rental_tirana_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", color: "hover:bg-pink-600" },
+    { Icon: RiTiktokFill, href: "https://www.tiktok.com/@autorentaltirana?is_from_webapp=1&sender_device=pc", color: "hover:bg-black" },
   ];
 
   const quickLinks = [
@@ -51,12 +50,6 @@ const Footer = () => {
     { label: "Car Models", path: "/models" },
     { label: "Services", path: "/services" },
     { label: "Contact Us", path: "/contact" },
-  ];
-
-  const workingHours = [
-    { day: "Mon - Fri", hours: "9:00AM - 9:00PM" },
-    { day: "Saturday", hours: "9:00AM - 7:00PM" },
-    { day: "Sunday", hours: "10:00AM - 6:00PM" },
   ];
 
   return (
@@ -135,36 +128,23 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Working Hours</h3>
-            <ul className="space-y-4">
-              {workingHours.map((schedule, index) => (
-                <li key={index} className="flex items-center space-x-3">
-                  <Clock className="w-5 h-5 text-white" />
-                  <div>
-                    <span className="block text-sm text-gray-400">
-                      {schedule.day}
-                    </span>
-                    <span className="block text-white">{schedule.hours}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-xl font-semibold text-white">Customer Support</h3>
             <div className="space-y-4 pt-4 border-t border-gray-800">
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Phone className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
                 <span className="hover:text-white transition-colors">
-                  +1 234 567 8900
+                  +355 69 835 7378
                 </span>
               </div>
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Mail className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
                 <span className="hover:text-white transition-colors">
-                  info@carrental.com
+                  example@gmail.com
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-white" />
-                <span>123 Car Street, Auto City, AC 12345</span>
+                <span>Tirane, Albania</span>
               </div>
             </div>
           </motion.div>

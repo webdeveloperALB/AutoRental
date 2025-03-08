@@ -37,10 +37,10 @@ const Models = () => {
   const carModels = [
     {
       id: 1,
-      name: "Tesla Model 3",
+      name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 89,
-      image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "3",
@@ -53,11 +53,10 @@ const Models = () => {
     },
     {
       id: 2,
-      name: "BMW X5",
+      name: "Mercedes Benz S-class",
       category: "SUV",
       price: 129,
-      image:
-        "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "7",
         luggage: "5",
@@ -70,11 +69,10 @@ const Models = () => {
     },
     {
       id: 3,
-      name: "Mercedes S-Class",
+      name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 199,
-      image:
-        "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "4",
@@ -87,11 +85,10 @@ const Models = () => {
     },
     {
       id: 4,
-      name: "Porsche 911",
+      name: "Mercedes Benz S-class",
       category: "Sports",
       price: 249,
-      image:
-        "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "2",
         luggage: "2",
@@ -104,11 +101,10 @@ const Models = () => {
     },
     {
       id: 5,
-      name: "Audi e-tron",
+      name: "Mercedes Benz S-class",
       category: "SUV",
       price: 159,
-      image:
-        "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "4",
@@ -121,10 +117,10 @@ const Models = () => {
     },
     {
       id: 6,
-      name: "Toyota Camry",
+      name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 69,
-      image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "3",
@@ -137,11 +133,10 @@ const Models = () => {
     },
     {
       id: 7,
-      name: "Range Rover Sport",
+      name: "Mercedes Benz S-class",
       category: "SUV",
       price: 189,
-      image:
-        "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "7",
         luggage: "5",
@@ -154,11 +149,10 @@ const Models = () => {
     },
     {
       id: 8,
-      name: "Ferrari F8",
+      name: "Mercedes Benz S-class",
       category: "Sports",
       price: 399,
-      image:
-        "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "2",
         luggage: "1",
@@ -171,11 +165,10 @@ const Models = () => {
     },
     {
       id: 9,
-      name: "Volvo XC90",
+      name: "Mercedes Benz S-class",
       category: "SUV",
       price: 149,
-      image:
-        "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "7",
         luggage: "4",
@@ -188,11 +181,10 @@ const Models = () => {
     },
     {
       id: 10,
-      name: "Lexus LS",
+      name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 179,
-      image:
-        "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "3",
@@ -205,10 +197,10 @@ const Models = () => {
     },
     {
       id: 11,
-      name: "Honda Civic",
+      name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 59,
-      image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "3",
@@ -221,11 +213,10 @@ const Models = () => {
     },
     {
       id: 12,
-      name: "Lamborghini Huracán",
+      name: "Mercedes Benz S-class",
       category: "Sports",
       price: 449,
-      image:
-        "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "2",
         luggage: "1",
@@ -238,11 +229,10 @@ const Models = () => {
     },
     {
       id: 13,
-      name: "Rolls-Royce Ghost",
+      name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 599,
-      image:
-        "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "4",
@@ -255,11 +245,10 @@ const Models = () => {
     },
     {
       id: 14,
-      name: "Tesla Model X",
+      name: "Mercedes Benz S-class",
       category: "SUV",
       price: 199,
-      image:
-        "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "7",
         luggage: "5",
@@ -272,11 +261,10 @@ const Models = () => {
     },
     {
       id: 15,
-      name: "Bentley Continental",
+      name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 449,
-      image:
-        "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "4",
         luggage: "3",
@@ -289,10 +277,10 @@ const Models = () => {
     },
     {
       id: 16,
-      name: "Mazda 3",
+      name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 55,
-      image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "3",
@@ -305,11 +293,10 @@ const Models = () => {
     },
     {
       id: 17,
-      name: "McLaren 720S",
+      name: "Mercedes Benz S-class",
       category: "Sports",
       price: 499,
-      image:
-        "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "2",
         luggage: "1",
@@ -322,11 +309,10 @@ const Models = () => {
     },
     {
       id: 18,
-      name: "Aston Martin DB11",
+      name: "Mercedes Benz S-class",
       category: "Sports",
       price: 399,
-      image:
-        "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "4",
         luggage: "2",
@@ -339,11 +325,10 @@ const Models = () => {
     },
     {
       id: 19,
-      name: "Volkswagen ID.4",
+      name: "Mercedes Benz S-class",
       category: "SUV",
       price: 89,
-      image:
-        "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "4",
@@ -356,11 +341,10 @@ const Models = () => {
     },
     {
       id: 20,
-      name: "Genesis G90",
+      name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 159,
-      image:
-        "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+      image: "/Sclass.jpg",
       features: {
         seats: "5",
         luggage: "4",
@@ -392,14 +376,14 @@ const Models = () => {
             initial="initial"
             whileInView="whileInView"
             className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-6">
-              <Car className="w-5 h-5 text-orange-500" />
-              <span className="text-orange-700 font-medium">Our Fleet</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
+              <Car className="w-5 h-5 text-white" />
+              <span className="text-white font-medium">Our Fleet</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Choose Your Perfect <span className="text-orange-500">Ride</span>
+              Choose Your Perfect <span className="text-red-600">Ride</span>
             </h1>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-black text-lg leading-relaxed">
               Experience premium service with unlimited miles and flexible
               pick-up options at unbeatable prices. Select from our wide range
               of well-maintained vehicles.
@@ -422,7 +406,7 @@ const Models = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none 
-                           focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                           focus:ring-2 focus:ring-black focus:border-transparent"
                 />
                 <Filter className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2" />
               </div>
@@ -432,15 +416,14 @@ const Models = () => {
                 {categories.map((category) => (
                   <motion.button
                     key={category.name}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedCategory(category.name)}
                     className={`flex items-center gap-2 px-4 py-3 rounded-lg whitespace-nowrap
-                             ${
-                               selectedCategory === category.name
-                                 ? "bg-orange-500 text-white"
-                                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                             }`}>
+                             ${selectedCategory === category.name
+                        ? "bg-black text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}>
                     <category.icon className="w-5 h-5" />
                     <span>{category.name}</span>
                   </motion.button>
@@ -467,12 +450,12 @@ const Models = () => {
                              group-hover:-translate-y-2`}>
                   {/* Car Image */}
                   <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
-                    <a href={`/models/${car.id}`}>
+                    <a href={`/booking/${car.id}`}>
                       <img
-                      src={car.image}
-                      alt={car.name}
-                      className="w-full h-full object-cover"
-                    />
+                        src={car.image}
+                        alt={car.name}
+                        className="w-full h-full object-cover"
+                      />
                     </a>
                   </div>
 
@@ -486,10 +469,10 @@ const Models = () => {
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="text-2xl font-bold text-orange-500">
-                          ₹{car.price}
+                        <span className="text-2xl font-bold text-black">
+                          €{car.price}
                         </span>
-                        <span className="text-sm text-gray-600">/day</span>
+                        <span className="text-sm text-black">/day</span>
                       </div>
                     </div>
 
@@ -522,7 +505,7 @@ const Models = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => navigate(`/booking/${car.id}`)}
-                        className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 
+                        className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
                                  transition-colors">
                         Book Now
                       </motion.button>

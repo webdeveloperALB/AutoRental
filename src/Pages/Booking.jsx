@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 const cars = [
   {
     id: 1,
-    name: "Tesla Model 3",
+    name: "Mercedes Benz S-class",
     category: "Sedan",
     price: 89,
-    image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "3",
@@ -20,11 +22,12 @@ const cars = [
   },
   {
     id: 2,
-    name: "BMW X5",
+    name: "Mercedes Benz S-class",
     category: "SUV",
     price: 129,
-    image:
-      "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "7",
       luggage: "5",
@@ -37,11 +40,12 @@ const cars = [
   },
   {
     id: 3,
-    name: "Mercedes S-Class",
+    name: "Mercedes Benz S-class",
     category: "Luxury",
     price: 199,
-    image:
-      "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "4",
@@ -54,11 +58,12 @@ const cars = [
   },
   {
     id: 4,
-    name: "Porsche 911",
+    name: "Mercedes Benz S-class",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     category: "Sports",
     price: 249,
-    image:
-      "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+    image: "/Sclass.jpg",
     features: {
       seats: "2",
       luggage: "2",
@@ -71,11 +76,12 @@ const cars = [
   },
   {
     id: 5,
-    name: "Audi e-tron",
+    name: "Mercedes Benz S-class",
     category: "SUV",
     price: 159,
-    image:
-      "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "4",
@@ -88,10 +94,12 @@ const cars = [
   },
   {
     id: 6,
-    name: "Toyota Camry",
+    name: "Mercedes Benz S-class",
     category: "Sedan",
     price: 69,
-    image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "3",
@@ -104,11 +112,12 @@ const cars = [
   },
   {
     id: 7,
-    name: "Range Rover Sport",
+    name: "Mercedes Benz S-class",
     category: "SUV",
     price: 189,
-    image:
-      "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "7",
       luggage: "5",
@@ -121,11 +130,12 @@ const cars = [
   },
   {
     id: 8,
-    name: "Ferrari F8",
+    name: "Mercedes Benz S-class",
     category: "Sports",
     price: 399,
-    image:
-      "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "2",
       luggage: "1",
@@ -138,11 +148,12 @@ const cars = [
   },
   {
     id: 9,
-    name: "Volvo XC90",
+    name: "Mercedes Benz S-class",
     category: "SUV",
     price: 149,
-    image:
-      "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "7",
       luggage: "4",
@@ -155,11 +166,12 @@ const cars = [
   },
   {
     id: 10,
-    name: "Lexus LS",
+    name: "Mercedes Benz S-class",
     category: "Luxury",
     price: 179,
-    image:
-      "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "3",
@@ -172,10 +184,12 @@ const cars = [
   },
   {
     id: 11,
-    name: "Honda Civic",
+    name: "Mercedes Benz S-class",
     category: "Sedan",
     price: 59,
-    image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "3",
@@ -188,11 +202,12 @@ const cars = [
   },
   {
     id: 12,
-    name: "Lamborghini Huracán",
+    name: "Mercedes Benz S-class",
     category: "Sports",
     price: 449,
-    image:
-      "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "2",
       luggage: "1",
@@ -205,11 +220,12 @@ const cars = [
   },
   {
     id: 13,
-    name: "Rolls-Royce Ghost",
+    name: "Mercedes Benz S-class",
     category: "Luxury",
     price: 599,
-    image:
-      "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "4",
@@ -222,11 +238,12 @@ const cars = [
   },
   {
     id: 14,
-    name: "Tesla Model X",
+    name: "Mercedes Benz S-class",
     category: "SUV",
     price: 199,
-    image:
-      "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "7",
       luggage: "5",
@@ -239,11 +256,12 @@ const cars = [
   },
   {
     id: 15,
-    name: "Bentley Continental",
+    name: "Mercedes Benz S-class",
     category: "Luxury",
     price: 449,
-    image:
-      "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "4",
       luggage: "3",
@@ -256,10 +274,12 @@ const cars = [
   },
   {
     id: 16,
-    name: "Mazda 3",
+    name: "Mercedes Benz S-class",
     category: "Sedan",
     price: 55,
-    image: "https://media.zigcdn.com/media/model/2024/Jun/bmw-m5-2025.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "3",
@@ -272,11 +292,12 @@ const cars = [
   },
   {
     id: 17,
-    name: "McLaren 720S",
+    name: "Mercedes Benz S-class",
     category: "Sports",
     price: 499,
-    image:
-      "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2023/03_29_revuelto/gate_models_s_02_m.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "2",
       luggage: "1",
@@ -289,11 +310,12 @@ const cars = [
   },
   {
     id: 18,
-    name: "Aston Martin DB11",
+    name: "Mercedes Benz S-class",
     category: "Sports",
     price: 399,
-    image:
-      "https://d2m3nfprmhqjvd.cloudfront.net/blog/20220825223325/Luxury-SUVs.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "4",
       luggage: "2",
@@ -306,11 +328,12 @@ const cars = [
   },
   {
     id: 19,
-    name: "Volkswagen ID.4",
+    name: "Mercedes Benz S-class",
     category: "SUV",
     price: 89,
-    image:
-      "https://www.carstudiomohali.com/wp-content/uploads/2023/11/Best-10-SUV-Cars-in-India-With-Prices-1.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "4",
@@ -323,11 +346,12 @@ const cars = [
   },
   {
     id: 20,
-    name: "Genesis G90",
+    name: "Mercedes Benz S-class",
     category: "Luxury",
     price: 159,
-    image:
-      "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Wagon-R/10365/1687580655855/front-left-side-47.jpg",
+    image: "/Sclass.jpg",
+    imageBehind: "/Sclass2.jpg",
+    imageInside: "/Sclass3.jpg",
     features: {
       seats: "5",
       luggage: "4",
@@ -366,7 +390,7 @@ const CarDetailPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Format dates
     const formatDate = (dateString) => {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -390,13 +414,13 @@ Car Details:
 
     // Encode message for URL
     const encodedMessage = encodeURIComponent(message);
-    
+
     // Replace with your WhatsApp number (include country code without + sign)
-    const whatsappNumber = '355688172927'; // Example: 911234567890 for US
-    
+    const whatsappNumber = '355688172927';
+
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    
+
     // Open WhatsApp in new tab
     window.open(whatsappUrl, '_blank');
   };
@@ -407,11 +431,44 @@ Car Details:
         <div className="flex flex-col md:flex-row md:space-x-10">
           {/* Car Image */}
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
-            <img
-              src={selectedCar.image}
-              alt={selectedCar.name}
-              className="w-full h-80 object-cover rounded-lg border hover:shadow-lg hover:scale-105 delay-75 ease-in-out"
-            />
+            <div className="flex flex-col md:flex-row gap-4 h-full">
+              {/* Main Image */}
+              <div className="w-full md:w-2/3 h-64 md:h-auto relative group">
+                <img
+                  src={selectedCar.image}
+                  alt={`${selectedCar.name} main view`}
+                  className="w-full h-full object-cover rounded-lg border hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out"
+                />
+                <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                  Front View
+                </span>
+              </div>
+
+              {/* Thumbnails Column */}
+              <div className="w-full md:w-1/3 flex flex-col gap-4">
+                <div className="relative group h-32 md:h-1/2">
+                  <img
+                    src={selectedCar.imageBehind}
+                    alt={`${selectedCar.name} rear view`}
+                    className="w-full h-full object-cover rounded-lg border hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out"
+                  />
+                  <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                    Rear View
+                  </span>
+                </div>
+
+                <div className="relative group h-32 md:h-1/2">
+                  <img
+                    src={selectedCar.imageInside}
+                    alt={`${selectedCar.name} interior`}
+                    className="w-full h-full object-cover rounded-lg border hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out"
+                  />
+                  <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                    Interior
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Car Details */}
@@ -449,7 +506,7 @@ Car Details:
             {/* Car Features */}
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="flex items-center space-x-2">
-                <div className="text-xl text-gray-600">🪑</div>
+                <div className="text-xl text-gray-600">💺</div>
                 <span>{selectedCar.features.seats} seats</span>
               </div>
               <div className="flex items-center space-x-2">
@@ -458,8 +515,8 @@ Car Details:
               </div>
               <div className="flex items-center space-x-2">
                 <div className="text-xl text-gray-600">
-                  {selectedCar.features.fuel === 'Electric' ? '⚡' : 
-                   selectedCar.features.fuel === 'Hybrid' ? '🌱' : '⛽'}
+                  {selectedCar.features.fuel === 'Electric' ? '⚡' :
+                    selectedCar.features.fuel === 'Hybrid' ? '🌱' : '⛽'}
                 </div>
                 <span>{selectedCar.features.fuel} fuel</span>
               </div>
