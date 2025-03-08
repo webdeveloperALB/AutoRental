@@ -114,10 +114,10 @@ const About = () => {
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Enjoy the Best service in
-              <span className="text-orange-500"> Car Rentals</span>
+              <span className="text-orange-500"> Auto Rental</span>
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Welcome to CarRental, where we redefine the car rental experience.
+              Welcome to Auto Rental, where we redefine the car rental experience.
               Our mission is to provide seamless, reliable, and affordable car
               rental service for everyone, everywhere.
             </p>

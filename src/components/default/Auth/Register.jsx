@@ -87,7 +87,7 @@ const Register = () => {
         transition={{ duration: 0.6 }}
         className="hidden lg:flex w-1/2 relative overflow-hidden">
         {/* Background with gradient and pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700">
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-red-900 to-red-800">
           <div
             className="absolute inset-0"
             style={{
@@ -96,8 +96,8 @@ const Register = () => {
             }}></div>
 
           {/* Floating shapes */}
-          <div className="absolute top-20 right-20 w-64 h-64 bg-orange-400/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-40 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-40 left-20 w-72 h-72 rounded-full blur-3xl"></div>
         </div>
 
         {/* Content Container */}
@@ -106,11 +106,16 @@ const Register = () => {
           <div>
             <Link
               to="/"
-              className="flex items-center gap-2 text-white mb-16 group">
+              className="flex items-center gap-2 text-white mb-16 group"
+            >
               <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm group-hover:bg-white/20 transition-all">
-                <Car className="w-8 h-8" />
+                <img
+                  src="/Logo Auto Rental Tirana White.png" // Path to your image in public folder
+                  alt="Auto Rental Logo"
+                  className="w-40 h-20 object-contain" // Maintain icon dimensions
+                />
               </div>
-              <span className="text-2xl font-bold">CarRental</span>
+              <span className="text-2xl font-bold">Where Excellence Meets the Road</span>
             </Link>
 
             <div className="space-y-8">
@@ -219,7 +224,7 @@ const Register = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-3 pl-12 border rounded-lg focus:ring-2 focus:ring-orange-500 
+                  className="w-full px-4 py-3 pl-12 border rounded-lg focus:ring-black 
                            focus:border-transparent transition-all"
                   placeholder="Enter your email"
                 />
@@ -239,7 +244,7 @@ const Register = () => {
                     setFormData({ ...formData, password: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-3 pl-12 pr-12 border rounded-lg focus:ring-2 focus:ring-orange-500 
+                  className="w-full px-4 py-3 pl-12 pr-12 border rounded-lg focus:ring-black  
                            focus:border-transparent transition-all"
                   placeholder="Create a password"
                 />
@@ -277,7 +282,7 @@ const Register = () => {
                     })
                   }
                   required
-                  className="w-full px-4 py-3 pl-12 pr-12 border rounded-lg focus:ring-2 focus:ring-orange-500 
+                  className="w-full px-4 py-3 pl-12 pr-12 border rounded-lg focus:ring-black  
                            focus:border-transparent transition-all"
                   placeholder="Confirm your password"
                 />
@@ -314,8 +319,8 @@ const Register = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full px-4 py-3 bg-orange-500 text-white rounded-lg font-medium 
-                       hover:bg-orange-600 transition-colors flex items-center justify-center gap-2">
+              className="w-full px-4 py-3 bg-black text-white rounded-lg font-medium 
+                       hover:bg-black transition-colors flex items-center justify-center gap-2">
               <UserPlus className="w-5 h-5" />
               Create Account
             </motion.button>
@@ -325,7 +330,7 @@ const Register = () => {
                 <div className="w-full border-t border-gray-200"></div>
               </div>
               <div className="relative flex justify-center">
-                <span className="px-4 text-sm text-gray-500 bg-gradient-to-b from-white to-gray-50">
+                <span className="px-4 text-sm text-black bg-gradient-to-b from-white to-gray-50">
                   or continue with
                 </span>
               </div>
@@ -352,7 +357,7 @@ const Register = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               href="/login"
-              className="text-orange-500 font-semibold hover:text-orange-600 transition-colors 
+              className="text-black font-semibold hover:text-black transition-colors 
                        inline-flex items-center gap-1">
               Sign in
               <ChevronRight className="w-4 h-4" />

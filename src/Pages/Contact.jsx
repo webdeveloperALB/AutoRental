@@ -10,12 +10,11 @@ import {
   Star,
   MessageSquare,
 } from "lucide-react";
-import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     subject: "",
     message: "",
   });
@@ -37,14 +36,28 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Format WhatsApp message
+    const whatsappMessage = 
+      `New Contact Form Submission:\n\n` +
+      `Name: ${formData.name}\n` +
+      `Subject: ${formData.subject}\n` +
+      `Message: ${formData.message}`;
+
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappNumber = "+355698357378";
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+
+    // Reset form
     setIsSubmitted(true);
-    console.log("Form submitted:", formData);
-    // Reset form after submission
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({
         name: "",
-        email: "",
         subject: "",
         message: "",
       });
@@ -95,14 +108,14 @@ const Contact = () => {
             whileInView="whileInView"
             className="text-center max-w-3xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-6">
-              <MessageSquare className="w-5 h-5 text-orange-500" />
-              <span className="text-orange-700 font-medium">Contact Us</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-400 rounded-full mb-6">
+              <MessageSquare className="w-5 h-5 text-black" />
+              <span className="text-black font-medium">Contact Us</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Get in <span className="text-orange-500">Touch</span>
+              Get in <span className="text-black">Touch</span>
             </h1>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-black text-lg leading-relaxed">
               We'd love to hear from you. Let us know how we can help make your
               car rental experience even better.
             </p>
@@ -144,7 +157,7 @@ const Contact = () => {
                 ))}
               </motion.div>
 
-              {/* Optimized Map Component */}
+              {/* Map Component */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -158,9 +171,8 @@ const Contact = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
+                  title="Location Map"
                 />
-
-
               </motion.div>
             </div>
 
@@ -172,7 +184,7 @@ const Contact = () => {
               className="bg-white rounded-xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
             >
               <div className="flex items-center gap-3 mb-8">
-                <MessageCircle className="w-7 h-7 text-orange-500" />
+                <MessageCircle className="w-7 h-7 text-green-500" />
                 <h2 className="text-2xl font-bold">Send Message</h2>
               </div>
 
@@ -187,34 +199,10 @@ const Contact = () => {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                       required
                     />
                     <User className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" />
-                  </div>
-                </div>
-
-                {/* Email Input */}
-                <div className="space-y-2">
-                  <label className="text-gray-700 font-medium">Email</label>
-                  <div className="relative">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="john@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-                      required
-                    />
-                    <svg
-                      className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
                   </div>
                 </div>
 
@@ -227,7 +215,7 @@ const Contact = () => {
                     placeholder="Inquiry about rental"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     required
                   />
                 </div>
@@ -241,7 +229,7 @@ const Contact = () => {
                     placeholder="Your message..."
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
                     required
                   />
                 </div>
@@ -251,8 +239,9 @@ const Contact = () => {
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 ${isSubmitted ? 'bg-green-500' : 'bg-orange-500'
-                    } text-white font-medium transition-colors`}
+                  className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 ${
+                    isSubmitted ? 'bg-green-500' : 'bg-black'
+                  } text-white font-medium transition-colors`}
                 >
                   {isSubmitted ? (
                     <>
