@@ -190,7 +190,7 @@ const Footer = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               className="p-4 bg-gradient-to-r from-white to-white rounded-lg
-                       border border-orange-500/20">
+                       border">
               <p className="text-sm text-black">
                 🎉{" "}
                 <span className="text-black font-semibold">

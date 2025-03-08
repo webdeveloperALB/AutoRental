@@ -67,47 +67,49 @@ const Testimonials = () => {
     {
       title: "Exceptional Service",
       count: 2481,
-      color: "text-green-500",
-      bgColor: "bg-green-50",
+      color: "text-black",
+      bgColor: "bg-gray-100",
     },
     {
       title: "Clean Vehicles",
       count: 1938,
-      color: "text-blue-500",
-      bgColor: "bg-blue-50",
+      color: "text-black",
+      bgColor: "bg-gray-100",
     },
     {
       title: "Easy Booking",
       count: 1756,
-      color: "text-purple-500",
-      bgColor: "bg-purple-50",
+      color: "text-black",
+      bgColor: "bg-gray-100",
     },
     {
       title: "Great Value",
       count: 1542,
-      color: "text-orange-500",
-      bgColor: "bg-orange-50",
+      color: "text-black",
+      bgColor: "bg-gray-100",
     },
   ];
-
-  const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
 
   const renderStars = (rating) => {
     return [...Array(5)].map((_, index) => (
       <Star
         key={index}
-        className={`w-5 h-5 ${
-          index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-        }`}
+        className={`w-5 h-5 ${index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+          }`}
       />
     ));
   };
+
+  // Carousel functions
+  const nextTestimonial = () => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
@@ -119,16 +121,16 @@ const Testimonials = () => {
             initial="initial"
             whileInView="whileInView"
             className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-6">
-              <Quote className="w-5 h-5 text-orange-500" />
-              <span className="text-orange-700 font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full mb-6">
+              <Quote className="w-5 h-5 text-black" />
+              <span className="text-black font-medium">
                 Customer Stories
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              What Our <span className="text-orange-500">Customers</span> Say
+              What Our <span className="text-red-600">Customers</span> Say
             </h1>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-black text-lg leading-relaxed">
               Discover why thousands of customers choose us for their car rental
               needs and trust us with their travel experiences.
             </p>
@@ -146,9 +148,9 @@ const Testimonials = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-6 rounded-lg bg-gray-50 group hover:bg-orange-50 transition-colors">
+                className="text-center p-6 rounded-lg bg-gray-100 group hover:bg-white transition-colors">
                 <div className="flex justify-center mb-4">
-                  <stat.icon className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform" />
+                  <stat.icon className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />
                 </div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-2">
                   {stat.value}
@@ -169,10 +171,12 @@ const Testimonials = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-2xl p-8 md:p-12 shadow-sm"
+            >
               <div className="max-w-4xl mx-auto">
-                <div className="flex items-start gap-6 mb-8">
-                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-6 mb-8 flex-col md:flex-row">
+                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 mb-4 md:mb-0">
                     <User className="w-8 h-8 text-gray-500" />
                   </div>
                   <div>
@@ -203,26 +207,56 @@ const Testimonials = () => {
               </div>
             </motion.div>
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-center gap-4 mt-6">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={prevTestimonial}
-                className="p-2 rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-orange-50 hover:border-orange-200 transition-colors">
-                <ChevronLeft className="w-6 h-6" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={nextTestimonial}
-                className="p-2 rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-orange-50 hover:border-orange-200 transition-colors">
-                <ChevronRight className="w-6 h-6" />
-              </motion.button>
+            {/* Navigation Controls */}
+            <div className="flex flex-col items-center gap-4 mt-6">
+              {/* Dots Indicator */}
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <motion.button
+                    key={index}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                      setActiveIndex(index);
+                      handleInteraction();
+                    }}
+                    className={`w-3 h-3 rounded-full transition-colors ${activeIndex === index ? "bg-black" : "bg-gray-300"
+                      }`}
+                  />
+                ))}
+              </div>
+
+              {/* Arrows */}
+              <div className="flex gap-4 mt-4">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => {
+                    prevTestimonial();
+                    handleInteraction();
+                  }}
+                  className="p-2 rounded-full bg-white border border-gray-500 text-black hover:bg-black hover:border-white hover:text-white transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => {
+                    nextTestimonial();
+                    handleInteraction();
+                  }}
+                  className="p-2 rounded-full bg-white border border-gray-500 text-black hover:bg-black hover:border-white hover:text-white transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </motion.button>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+
 
       {/* Review Highlights */}
       <section className="py-16 bg-white">
@@ -251,7 +285,7 @@ const Testimonials = () => {
                 <h3 className={`text-2xl font-bold mb-2 ${highlight.color}`}>
                   {highlight.count.toLocaleString()}+
                 </h3>
-                <p className="text-gray-700">{highlight.title}</p>
+                <p className="text-black">{highlight.title}</p>
               </motion.div>
             ))}
           </div>
@@ -265,19 +299,19 @@ const Testimonials = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="bg-orange-500 rounded-2xl p-8 md:p-12 text-center text-white">
+            className="bg-white rounded-2xl p-8 md:p-12 text-center text-black">
             <h2 className="text-3xl font-bold mb-4">
               Ready to Experience It Yourself?
             </h2>
-            <p className="max-w-2xl mx-auto mb-8 text-orange-100">
+            <p className="max-w-2xl mx-auto mb-8 text-black">
               Join thousands of satisfied customers and book your perfect rental
               car today.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-orange-500 px-8 py-3 rounded-lg font-medium 
-                       hover:bg-orange-50 transition-colors">
+              className="bg-black text-white px-8 py-3 rounded-lg font-medium 
+                        transition-colors">
               Book Now
             </motion.button>
           </motion.div>

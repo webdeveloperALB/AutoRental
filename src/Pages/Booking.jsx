@@ -532,7 +532,7 @@ Car Details:
                     name="pickUpDate"
                     value={rentalDetails.pickUpDate}
                     onChange={handleChange}
-                    className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
                     required
                     min={new Date().toISOString().split('T')[0]}
                   />
@@ -545,7 +545,7 @@ Car Details:
                     name="dropOffDate"
                     value={rentalDetails.dropOffDate}
                     onChange={handleChange}
-                    className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
                     required
                     min={rentalDetails.pickUpDate || new Date().toISOString().split('T')[0]}
                   />
@@ -559,7 +559,7 @@ Car Details:
                     value={rentalDetails.location}
                     onChange={handleChange}
                     placeholder="Enter location"
-                    className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
                     required
                   />
                 </div>
@@ -567,7 +567,7 @@ Car Details:
 
               <button
                 type="submit"
-                className="mt-6 w-full py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition ease-in-out duration-200"
+                className="mt-6 w-full py-3 bg-black text-white rounded-lg shadow-md hover:scale-105 transition-transform ease-in-out duration-500"
               >
                 Confirm Booking
               </button>

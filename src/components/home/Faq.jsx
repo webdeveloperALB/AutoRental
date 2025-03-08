@@ -146,11 +146,12 @@ const FAQ = () => {
                       </span>
                       <div
                         className={`p-2 rounded-full ${activeIndex === index
-                            ? "bg-orange-100"
+                            ? "bg-black"
+                          
                             : "bg-gray-100"
                           } transition-colors`}>
                         {activeIndex === index ? (
-                          <Minus className="w-4 h-4 text-orange-500" />
+                          <Minus className="w-4 h-4 text-white" />
                         ) : (
                           <Plus className="w-4 h-4 text-gray-500" />
                         )}

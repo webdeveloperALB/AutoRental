@@ -9,7 +9,7 @@ import {
   Briefcase,
   Star,
   ChevronDown,
-  Settings,
+  HelpCircle,
   Calendar,
   MapPin,
 } from "lucide-react";
@@ -527,10 +527,10 @@ const Models = () => {
             whileInView="whileInView"
             className="text-center max-w-3xl mx-auto mb-12">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Settings className="w-6 h-6 text-orange-500" />
+              <HelpCircle className="w-6 h-6 text-black" />
               <h2 className="text-3xl font-bold">How to Book</h2>
             </div>
-            <p className="text-gray-600">
+            <p className="text-black">
               We've streamlined our rental process to get you on the road
               quickly and safely
             </p>
@@ -561,9 +561,9 @@ const Models = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-50 rounded-lg p-6 text-center">
                 <div
-                  className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center 
+                  className="w-16 h-16 bg-black rounded-full flex items-center justify-center 
                              mx-auto mb-6">
-                  <step.icon className="w-8 h-8 text-orange-500" />
+                  <step.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
