@@ -91,7 +91,7 @@ const Work = () => {
             Explore Our Fleet
           </h3>
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-20 px-2 sm:px-4 mx-auto max-w-screen-xl"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5 md:gap-3 lg:gap-20 px-2 sm:px-4 mx-auto max-w-screen-xl"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
