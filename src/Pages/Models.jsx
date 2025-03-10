@@ -47,7 +47,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 89,
-      image: "/Sclass.jpg",
+      image: "/sedan.png",
       features: {
         seats: "5",
         luggage: "3",
@@ -63,7 +63,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "SUV",
       price: 129,
-      image: "/Sclass.jpg",
+      image: "/suv.png",
       features: {
         seats: "7",
         luggage: "5",
@@ -79,7 +79,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 199,
-      image: "/Sclass.jpg",
+      image: "/luxury.png",
       features: {
         seats: "5",
         luggage: "4",
@@ -95,7 +95,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sports",
       price: 249,
-      image: "/Sclass.jpg",
+      image: "/sports.png",
       features: {
         seats: "2",
         luggage: "2",
@@ -111,7 +111,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "SUV",
       price: 159,
-      image: "/Sclass.jpg",
+      image: "/suv.png",
       features: {
         seats: "5",
         luggage: "4",
@@ -127,7 +127,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 69,
-      image: "/Sclass.jpg",
+      image: "/sedan.png",
       features: {
         seats: "5",
         luggage: "3",
@@ -143,7 +143,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "SUV",
       price: 189,
-      image: "/Sclass.jpg",
+      image: "/suv.png",
       features: {
         seats: "7",
         luggage: "5",
@@ -159,7 +159,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sports",
       price: 399,
-      image: "/Sclass.jpg",
+      image: "/sports.png",
       features: {
         seats: "2",
         luggage: "1",
@@ -175,7 +175,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "SUV",
       price: 149,
-      image: "/Sclass.jpg",
+      image: "/suv.png",
       features: {
         seats: "7",
         luggage: "4",
@@ -191,7 +191,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 179,
-      image: "/Sclass.jpg",
+      image: "/luxury.png",
       features: {
         seats: "5",
         luggage: "3",
@@ -207,7 +207,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 59,
-      image: "/Sclass.jpg",
+      image: "/sedan.png",
       features: {
         seats: "5",
         luggage: "3",
@@ -223,7 +223,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sports",
       price: 449,
-      image: "/Sclass.jpg",
+      image: "/sports.png",
       features: {
         seats: "2",
         luggage: "1",
@@ -239,7 +239,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 599,
-      image: "/Sclass.jpg",
+      image: "/luxury.png",
       features: {
         seats: "5",
         luggage: "4",
@@ -255,7 +255,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "SUV",
       price: 199,
-      image: "/Sclass.jpg",
+      image: "/suv.png",
       features: {
         seats: "7",
         luggage: "5",
@@ -271,7 +271,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 449,
-      image: "/Sclass.jpg",
+      image: "/luxury.png",
       features: {
         seats: "4",
         luggage: "3",
@@ -287,7 +287,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sedan",
       price: 55,
-      image: "/Sclass.jpg",
+      image: "/sedan.png",
       features: {
         seats: "5",
         luggage: "3",
@@ -303,7 +303,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sports",
       price: 499,
-      image: "/Sclass.jpg",
+      image: "/sports.png",
       features: {
         seats: "2",
         luggage: "1",
@@ -319,7 +319,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Sports",
       price: 399,
-      image: "/Sclass.jpg",
+      image: "/sports.png",
       features: {
         seats: "4",
         luggage: "2",
@@ -335,7 +335,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "SUV",
       price: 89,
-      image: "/Sclass.jpg",
+      image: "/suv.png",
       features: {
         seats: "5",
         luggage: "4",
@@ -351,7 +351,7 @@ const Models = () => {
       name: "Mercedes Benz S-class",
       category: "Luxury",
       price: 159,
-      image: "/Sclass.jpg",
+      image: "/luxury.png",
       features: {
         seats: "5",
         luggage: "4",
@@ -457,13 +457,11 @@ const Models = () => {
                              group-hover:-translate-y-2`}>
                   {/* Car Image */}
                   <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
-                    <a href={`/booking/${car.id}`}>
-                      <img
-                        src={car.image}
-                        alt={car.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </a>
+                    <img
+                      src={car.image}
+                      alt={car.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
 
                   {/* Car Info */}
