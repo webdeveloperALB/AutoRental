@@ -102,7 +102,7 @@ const Work = () => {
                 key={index}
                 variants={item}
                 className="relative cursor-pointer group w-full max-w-[140px] sm:max-w-[160px] md:max-w-[180px]"
-                onClick={() => setSelectedFilter(type.name)}
+                onClick={() => navigate(`/models?category=${type.name}`)} // Add category param
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="w-full h-28 sm:h-32 overflow-hidden rounded-lg">

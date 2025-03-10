@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Car,
@@ -12,12 +13,19 @@ import {
   Calendar,
   MapPin,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 const Models = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
+  // Update state when URL changes
+  useEffect(() => {
+    setSelectedCategory(categoryParam || "All");
+  }, [categoryParam]);
+
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -419,7 +427,7 @@ const Models = () => {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedCategory(category.name)}
                     className={`flex items-center gap-2 px-4 py-3 rounded-lg whitespace-nowrap
-                             ${selectedCategory === category.name
+                           ${selectedCategory === category.name
                         ? "bg-black text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}>
