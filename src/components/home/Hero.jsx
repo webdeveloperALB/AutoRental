@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { ChevronRight, Star } from "lucide-react";
 import { assets } from "../../assets/assets";
 import "./Hero.css";
 
 const Hero = () => {
-  const navigate = useNavigate();
-
-  const fadeIn = {
+    const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 },
@@ -54,22 +51,6 @@ const Hero = () => {
             Save <span className="highlight-text">big</span> with our
             <span className="highlight-text"> car rental</span>
           </h1>
-
-          <p className="description-text">
-            {/* Description text here */}
-          </p>
-
-          <div className="action-buttons">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/learnmore")}
-              className="secondary-btn"
-            >
-              <span>Learn More</span>
-              <ChevronRight className="icon" />
-            </motion.button>
-          </div>
 
         </motion.div>
 

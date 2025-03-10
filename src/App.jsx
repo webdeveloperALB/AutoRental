@@ -3,18 +3,16 @@ import { AnimatePresence } from "framer-motion";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Models from "./Pages/Models";
-import Services from "./Pages/Services"
+import Services from "./Pages/Services";
 import Testimonials from "./Pages/Testimonials";
 import Booking from "./Pages/Booking";
 import Contact from "./Pages/Contact";
 import Errorpage from "./Pages/Errorpage";
 import Login from "./components/default/Auth/Login";
 import Register from "./components/default/Auth/Register";
-import LearnMore from "./Pages/LearnMore";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { MainLayout } from "./layout/MainLayout";
 import { AuthLayout } from "./layout/AuthLayout";
-
 
 function App() {
   return (
@@ -35,13 +33,12 @@ function App() {
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/learnmore" element={<LearnMore />} />
             <Route path="*" element={<Errorpage />} />
             <Route
               path="/booking/:id"
               element={
                 <ProtectedRoute>
-                <Booking />
+                  <Booking />
                 </ProtectedRoute>
               }
             />

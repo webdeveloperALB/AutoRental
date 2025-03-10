@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { auth } from './Firebase';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ForgotPassword = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +15,7 @@ const ForgotPassword = ({ onClose }) => {
     setMessage('');
     setIsError(false);
 
-    try {
+    try {-
       await sendPasswordResetEmail(auth, email);
       setMessage('Password reset link sent! Please check your email.');
       setIsError(false);
@@ -159,5 +158,10 @@ const styles = {
     textAlign: 'center'
   }
 };
+
+ForgotPassword.propTypes = {
+  onClose: PropTypes.func.isRequired
+};
+
 
 export default ForgotPassword;
