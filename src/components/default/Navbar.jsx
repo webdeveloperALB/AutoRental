@@ -57,7 +57,6 @@ const Navbar = () => {
     { path: "/about", label: "About" },
     { path: "/models", label: "Models" },
     { path: "/testimonials", label: "Testimonials" },
-    { path: "/team", label: "Our Team" },
     { path: "/contact", label: "Contact" },
   ];
 
