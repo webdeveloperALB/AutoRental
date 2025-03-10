@@ -26,7 +26,6 @@ const Hero = () => {
         animate="animate"
         variants={slideIn}
       >
-        <div className="gradient-overlay" />
         <img
           src={assets.car}
           alt="Luxury Car"

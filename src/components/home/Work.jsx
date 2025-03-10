@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Car,
   MapPin,
@@ -12,7 +11,6 @@ import {
 
 const Work = () => {
   const navigate = useNavigate();
-  const [setSelectedFilter] = useState(null);
 
   const container = {
     hidden: { opacity: 0 },
@@ -33,16 +31,14 @@ const Work = () => {
     {
       icon: Car,
       title: "Select Your Car",
-      description:
-        "Choose from our wide range of premium vehicles for any occasion",
+      description: "Choose from our wide range of premium vehicles for any occasion",
       bgcolor: "bg-blue-50",
       iconcolor: "text-blue-500",
     },
     {
       icon: MapPin,
       title: "Pick-up Location",
-      description:
-        "Select from our numerous convenient pick-up and drop-off locations",
+      description: "Select from our numerous convenient pick-up and drop-off locations",
       bgcolor: "bg-green-50",
       iconcolor: "text-green-500",
     },
@@ -56,71 +52,15 @@ const Work = () => {
     {
       icon: MessageCircle,
       title: "Contact Us",
-      description:
-        "Send your booking details at us for confirmation and assistance",
+      description: "Send your booking details at us for confirmation and assistance",
       bgcolor: "bg-orange-50",
       iconcolor: "text-orange-500",
     },
   ];
 
-  const carTypes = [
-    {
-      name: "SUV",
-      image: "/suv.png",
-    },
-    {
-      name: "Sedan",
-      image: "/sedan.png",
-    },
-    {
-      name: "Luxury",
-      image: "/luxury.png",
-    },
-    {
-      name: "Sports",
-      image: "/sports.png",
-    },
-  ];
-
   return (
     <section className="flex flex-col justify-center items-center">
-      <div className="container mx-auto px-4">
-        {/* New Filters Section */}
-        <div className="mb-40 mt-20 flex flex-col justify-center">
-          <h3 className="text-3xl font-bold text-center mb-8">
-            Explore Our Fleet
-          </h3>
-          <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-7 md:gap-3 lg:gap-20 px-2 sm:px-4 mx-auto max-w-screen-xl"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={container}
-          >
-            {carTypes.map((type, index) => (
-              <motion.div
-                key={index}
-                variants={item}
-                className="relative cursor-pointer group w-full max-w-[140px] sm:max-w-[160px] md:max-w-[180px]"
-                onClick={() => navigate(`/models?category=${type.name}`)} // Add category param
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="w-full h-28 sm:h-32 overflow-hidden rounded-lg">
-                  <img
-                    src={type.image}
-                    alt={type.name}
-                    className="w-80 h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded-lg" />
-                <span className="absolute left-4 text-black font-bold text-lg drop-shadow-md">
-                  {type.name}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
+      <div className="container mt-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -167,7 +107,6 @@ const Work = () => {
                     {step.description}
                   </p>
 
-                  {/* Step Number */}
                   <div
                     className="absolute -top-4 -right-4 w-8 h-8 bg-black rounded-full 
                               flex items-center justify-center text-white font-bold"
@@ -184,7 +123,6 @@ const Work = () => {
                 )}
               </div>
 
-              {/* Completion Check */}
               <div className="absolute bottom-4 right-4">
                 <CheckCircle
                   className="w-6 h-6 text-gray-300 group-hover:text-green-500 
@@ -195,7 +133,6 @@ const Work = () => {
           ))}
         </motion.div>
 
-        {/* Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
