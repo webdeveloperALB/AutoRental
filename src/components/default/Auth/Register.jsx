@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   createUserWithEmailAndPassword,
@@ -41,7 +41,7 @@ const Register = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        navigate("/booking");
+        navigate("/");
       }
     });
     return () => unsubscribe();
@@ -53,7 +53,7 @@ const Register = () => {
       const result = await signInWithPopup(auth, provider);
       setUser(result.user);
       alert("Signed in with Google successfully!");
-    } catch (error) {
+    } catch {
       setError("Failed to sign in with Google. Please try again.");
     }
   };
@@ -73,7 +73,7 @@ const Register = () => {
       );
       setUser(userCredential.user);
       alert("Registration successful!");
-    } catch (error) {
+    } catch  {
       setError("Registration failed. Please check your details and try again.");
     }
   };
@@ -85,7 +85,8 @@ const Register = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="hidden lg:flex w-1/2 relative overflow-hidden">
+        className="hidden lg:flex w-1/2 relative overflow-hidden"
+      >
         {/* Background with gradient and pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-red-900 to-red-800">
           <div
@@ -93,7 +94,8 @@ const Register = () => {
             style={{
               backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)`,
               backgroundSize: "32px 32px",
-            }}></div>
+            }}
+          ></div>
 
           {/* Floating shapes */}
           <div className="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl"></div>
@@ -115,7 +117,9 @@ const Register = () => {
                   className="w-40 h-20 object-contain" // Maintain icon dimensions
                 />
               </div>
-              <span className="text-2xl font-bold">Where Excellence Meets the Road</span>
+              <span className="text-2xl font-bold">
+                Where Excellence Meets the Road
+              </span>
             </Link>
 
             <div className="space-y-8">
@@ -150,7 +154,8 @@ const Register = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + index * 0.1 }}
-                    className="bg-white/10 backdrop-blur-sm p-4 rounded-xl hover:bg-white/20 transition-all">
+                    className="bg-white/10 backdrop-blur-sm p-4 rounded-xl hover:bg-white/20 transition-all"
+                  >
                     <feature.icon className="w-6 h-6 text-white mb-3" />
                     <h3 className="text-white font-semibold mb-1">
                       {feature.title}
@@ -167,7 +172,8 @@ const Register = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+            className="bg-white/10 backdrop-blur-sm rounded-2xl p-6"
+          >
             <div className="flex items-center gap-4">
               <Star className="w-8 h-8 text-white" />
               <div>
@@ -188,13 +194,15 @@ const Register = () => {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12">
+        className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12"
+      >
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="lg:hidden flex flex-col items-center gap-4 mb-8">
+            className="lg:hidden flex flex-col items-center gap-4 mb-8"
+          >
             <Link to="/" className="flex items-center gap-2 group">
               <div className="bg-orange-50 p-2 rounded-lg group-hover:bg-orange-100 transition-all">
                 <Car className="w-8 h-8 text-orange-500" />
@@ -257,7 +265,8 @@ const Register = () => {
                       password: !showPassword.password,
                     })
                   }
-                  className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 transition-colors">
+                  className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 transition-colors"
+                >
                   {showPassword.password ? (
                     <EyeOff className="w-5 h-5" />
                   ) : (
@@ -295,7 +304,8 @@ const Register = () => {
                       confirmPassword: !showPassword.confirmPassword,
                     })
                   }
-                  className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 transition-colors">
+                  className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 transition-colors"
+                >
                   {showPassword.confirmPassword ? (
                     <EyeOff className="w-5 h-5" />
                   ) : (
@@ -309,7 +319,8 @@ const Register = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 text-red-500 bg-red-50 p-3 rounded-lg">
+                className="flex items-center gap-2 text-red-500 bg-red-50 p-3 rounded-lg"
+              >
                 <AlertCircle className="w-5 h-5" />
                 <p className="text-sm">{error}</p>
               </motion.div>
@@ -320,7 +331,8 @@ const Register = () => {
               whileTap={{ scale: 0.98 }}
               type="submit"
               className="w-full px-4 py-3 bg-black text-white rounded-lg font-medium 
-                       hover:bg-black transition-colors flex items-center justify-center gap-2">
+                       hover:bg-black transition-colors flex items-center justify-center gap-2"
+            >
               <UserPlus className="w-5 h-5" />
               Create Account
             </motion.button>
@@ -342,7 +354,8 @@ const Register = () => {
               type="button"
               onClick={handleGoogleSignIn}
               className="w-full px-4 py-3 bg-white border border-gray-200 text-gray-700 rounded-lg 
-                       font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                       font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+            >
               <img
                 src="https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/google_logo-google_icongoogle-512.png"
                 alt="Google"
@@ -358,7 +371,8 @@ const Register = () => {
               whileHover={{ scale: 1.05 }}
               href="/login"
               className="text-black font-semibold hover:text-black transition-colors 
-                       inline-flex items-center gap-1">
+                       inline-flex items-center gap-1"
+            >
               Sign in
               <ChevronRight className="w-4 h-4" />
             </motion.a>

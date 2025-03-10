@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   signInWithEmailAndPassword,
@@ -38,7 +38,7 @@ const Login = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        navigate("/booking");
+        navigate("/");
       } else {
         console.log("User is logged out");
       }
@@ -315,7 +315,7 @@ const Login = () => {
           </form>
 
           <p className="mt-8 text-center text-gray-600">
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <motion.a
               whileHover={{ scale: 1.05 }}
               href="/register"

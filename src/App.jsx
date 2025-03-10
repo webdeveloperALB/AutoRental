@@ -6,7 +6,6 @@ import Models from "./Pages/Models";
 import Services from "./Pages/Services"
 import Testimonials from "./Pages/Testimonials";
 import Booking from "./Pages/Booking";
-import Team from "./Pages/Team";
 import Contact from "./Pages/Contact";
 import Errorpage from "./Pages/Errorpage";
 import Login from "./components/default/Auth/Login";
@@ -34,7 +33,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/models" element={<Models />} />
             <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
             <Route path="/learnmore" element={<LearnMore />} />
@@ -42,9 +40,9 @@ function App() {
             <Route
               path="/booking/:id"
               element={
-                // <ProtectedRoute>
+                <ProtectedRoute>
                 <Booking />
-                // </ProtectedRoute>
+                </ProtectedRoute>
               }
             />
           </Route>
