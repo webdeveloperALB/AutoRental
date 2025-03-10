@@ -1,10 +1,11 @@
-import { Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { Star } from "lucide-react";
 import { assets } from "../../assets/assets";
 import "./Hero.css";
 
 const Hero = () => {
-    const fadeIn = {
+
+  const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 },

@@ -41,7 +41,7 @@ const Register = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        navigate("/");
+        navigate("/models");
       }
     });
     return () => unsubscribe();

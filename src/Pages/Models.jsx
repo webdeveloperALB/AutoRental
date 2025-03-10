@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Car,
@@ -8,7 +8,6 @@ import {
   Users,
   Briefcase,
   Star,
-  ChevronDown,
   HelpCircle,
   Calendar,
   MapPin,
@@ -531,7 +530,7 @@ const Models = () => {
               <h2 className="text-3xl font-bold">How to Book</h2>
             </div>
             <p className="text-black">
-              We've streamlined our rental process to get you on the road
+              We have streamlined our rental process to get you on the road
               quickly and safely
             </p>
           </motion.div>
