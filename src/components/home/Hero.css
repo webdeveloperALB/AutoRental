@@ -94,13 +94,6 @@
   color: #ffffff;
 }
 
-.description-text {
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.6;
-  max-width: 520px;
-  color: var(--gray-700);
-  margin-bottom: 2.5rem;
-}
 
 /* Interactive Elements */
 .action-buttons {
@@ -129,6 +122,7 @@
 .secondary-btn {
   background: var(--white);
   color: var(--black);
+  margin-bottom: 70px;
 }
 
 /* Features & Stats */
