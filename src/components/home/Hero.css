@@ -1,405 +1,235 @@
-/* Base Variables */
-:root {
-  --orange-500: #f97316;
-  --orange-100: #ffedd5;
-  --gray-700: #4b5563;
-  --gray-600: #52525b;
-  --gray-900: #18181b;
-  --white: #ffffff;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
+/* Hero.css */
 
-/* Core Layout */
+/* Base Styles */
 .hero-container {
   position: relative;
   min-height: 100vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 2rem 1rem;
-  overflow: hidden;
+  justify-content: center;
 }
 
 .car-background {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
-  pointer-events: none;
 }
 
 .car-image {
-  position: relative;
   width: 100%;
-  height: 100% !important;
-  object-position: center bottom;
+  height: 100%;
   object-fit: cover;
-  margin-top: auto;
-  transform: none !important;
+  object-position: center;
 }
 
-.premium-badge {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  color: white;
-  font-weight: bold;
-}
-
-.premium-badge .icon {
-  stroke: white; /* For Lucide icons */
-  font-weight: bold;
-}
-
-/* If you need to adjust the background for better contrast */
-/* .premium-badge {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 8px 16px;
-    border-radius: 24px;
-  } */
-
-/* Content Layout */
 .content-overlay {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1280px;
-  margin: 0 auto 150px 140px;
-}
-
-.text-content {
-  position: relative;
-  z-index: 3;
-  max-width: 1000px;
-}
-
-/* Typography */
-.main-heading {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: bold;
-  line-height: 1.1;
-  margin: 1.5rem 0 10rem 0;
-  letter-spacing: -0.05em;
-  color: #ffffff;
-}
-
-
-/* Interactive Elements */
-.action-buttons {
+  padding: 2rem 1rem 2rem 1rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  flex-direction: column;
+  align-self: flex-start;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.116) 0%, rgba(0,0,0,0.3) 100%);
 }
 
-.primary-btn,
-.secondary-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: transform 0.2s, opacity 0.2s;
+/* Search Bar Styles */
+.search-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  margin: 0 auto 3rem;
 }
 
-.primary-btn {
-  background: var(--white);
-  color: var(--black);
-}
-
-.secondary-btn {
-  background: var(--white);
-  color: var(--black);
-  margin-bottom: 70px;
-}
-
-/* Features & Stats */
-.features-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.feature-item {
+.search-bar {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.features-container .feature-item span {
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #18181b;
-    color: #ffffff;
+.search-bar:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-.icon-wrapper {
-  flex-shrink: 0;
-  width: 2.75rem;
-  height: 2.75rem;
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 1.2rem 2rem;
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.search-input::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-button {
+  background: #000000;
+  border: none;
   border-radius: 50%;
-  background: var(--orange-100);
-  display: grid;
-  place-items: center;
+  width: 55px;
+  height: 55px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  max-width: 500px;
+.search-button:hover {
+  background: rgb(0, 0, 0);
+  transform: scale(1.05);
 }
 
-.stat-value {
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: var(--white);
+.search-icon {
+  color: white;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
 }
 
-.stat-label {
-    color: #ffffff;
-    font-weight: bold;
+/* Logo Carousel */
+.logo-carousel {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  overflow: hidden;
 }
 
-/* Floating Elements */
-.floating-elements {
-  position: relative;
-  min-height: 200px;
+.logo-track {
+  display: flex;
+  animation: scroll 40s linear infinite;
+  will-change: transform;
 }
 
-.floating-card {
-  position: absolute;
-  right: 0;
-  bottom: 2rem;
-  background: var(--white);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: var(--shadow-lg);
-  width: max-content;
-  max-width: 260px;
+.logo-slide {
+  padding: 0 1.5rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
-.price-badge {
-  position: absolute;
-  left: 0;
-  top: 2rem;
-  background: var(--orange-500);
-  color: var(--white);
-  padding: 0.75rem 1.5rem;
-  border-radius: 2rem;
-  font-weight: 600;
+.logo-slide img {
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  color: white; /* Fallback for some browsers */
+  fill: currentColor; /* Inherit color from parent */
 }
 
-
-/* Responsive Media Queries */
-/* 1. Large Desktop adjustments (1280px and above) */
-@media screen and (min-width: 1280px) {
-  .content-overlay {
-    margin-bottom: 200px;
-  }
-  
-  .main-heading {
-    letter-spacing: 0.01em;
-  }
+.logo-slide:hover img {
+  filter: grayscale(0);
+  opacity: 1;
 }
 
-/* 2. Standard Desktop (1024px - 1279px) */
-@media screen and (max-width: 1279px) {
-  .content-overlay {
-    margin-left: 80px;
-    margin-bottom: 120px;
-  }
-  
-  .features-container {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1.25rem;
-  }
-  
-  .floating-card {
-    bottom: 1rem;
-    right: -1rem;
-  }
+/* Animations */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* 3. Tablet Landscape (768px - 1023px) */
-@media screen and (max-width: 1023px) {
-  .hero-container {
-    padding: 1.5rem 1rem;
-  }
-  
-  .content-overlay {
-    margin-left: 40px;
-    margin-bottom: 100px;
-  }
-  
-  .text-content {
-    max-width: 480px;
-  }
-  
-  .main-heading {
-    margin: 1rem 0;
-  }
-  
-  .action-buttons {
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .search-container {
     margin-bottom: 2rem;
   }
   
-  .stats-container {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 400px;
+  .search-input {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
   }
   
-  .price-badge {
-    top: 1rem;
-    padding: 0.5rem 1rem;
+  .search-button {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .logo-slide img {
+    height: 25px;
   }
 }
 
-/* 4. Tablet Portrait (640px - 767px) */
-@media screen and (max-width: 767px) {
-  .content-overlay {
-    margin: 0 auto 80px;
-    padding: 0 2rem;
-  }
-  
-  .main-heading {
-    line-height: 1.2;
-  }
-  
-  .description-text {
-    max-width: 100%;
-  }
-  
-  .action-buttons {
-    flex-direction: column;
-  }
-  
-  .primary-btn,
-  .secondary-btn {
-    justify-content: center;
-    width: 100%;
-    padding: 0.875rem 1.5rem;
-  }
-  
-  .features-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  
-  .stats-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .floating-card {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    margin-top: 2rem;
-    max-width: 100%;
-  }
-  
-  .price-badge {
-    left: 2rem;
-    font-size: 0.875rem;
-  }
-}
-
-/* 5. Mobile Devices (480px - 639px) */
-@media screen and (max-width: 639px) {
+@media (max-width: 768px) {
   .hero-container {
-    padding: 1rem 0.5rem;
     min-height: 90vh;
   }
   
   .content-overlay {
-    padding: 0 1rem;
-    margin-bottom: 60px;
+    padding-top: 6rem;
   }
   
-  .main-heading {
-    font-size: clamp(2rem, 8vw, 2.5rem);
-    margin: 0.5rem 0;
+  .search-bar {
+    border-radius: 40px;
   }
   
-  .description-text {
-    margin-bottom: 1.5rem;
-  }
-  
-  .features-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .feature-item {
-    gap: 0.5rem;
-  }
-  
-  .icon-wrapper {
-    width: 2.25rem;
-    height: 2.25rem;
-  }
-  
-  .stat-value {
-    font-size: 1.75rem;
-  }
-  
-  .price-badge {
-    left: 1rem;
-    top: 0.5rem;
-  }
-  
-  .car-image {
-    object-position: 65% bottom;
-    object-fit: cover;
+  .logo-track {
+    animation-duration: 35s;
   }
 }
 
-/* 6. Small Mobile Devices (below 480px) */
-@media screen and (max-width: 479px) {
-  .content-overlay {
-    margin-bottom: 40px;
-  }
-
-  .car-image {
-    object-fit: cover;
-  }
-  
-  .main-heading {
-    line-height: 1.3;
-  }
-  
-  .action-buttons {
-    gap: 0.75rem;
-  }
-  
-  .stats-container {
-    gap: 0.75rem;
-  }
-  
-  .floating-card {
-    padding: 1rem;
-  }
-  
-  .price-badge {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-  }
-  
-}
-
-/* 7. Height adjustments for landscape mobile */
-@media screen and (max-height: 600px) and (orientation: landscape) {
+@media (max-width: 480px) {
   .hero-container {
-    min-height: 120vh;
+    min-height: 80vh;
+  }
+  
+  .content-overlay {
     padding-top: 4rem;
   }
   
-  .content-overlay {
-    margin-bottom: 40px;
+  .search-bar {
+    border-radius: 30px;
   }
   
-  .action-buttons {
-    margin-bottom: 1.5rem;
+  .search-input {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .search-button {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .logo-slide {
+    padding: 0 1rem;
+  }
+  
+  .logo-slide img {
+    height: 20px;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-55%); }
+  }
+}
+
+@media (max-width: 360px) {
+  .search-input::placeholder {
+    font-size: 0.85rem;
+  }
+  
+  .logo-track {
+    animation-duration: 30s;
   }
 }
