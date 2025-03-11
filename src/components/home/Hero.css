@@ -35,7 +35,11 @@
   flex-direction: column;
   align-self: flex-start;
   justify-content: center;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.116) 0%, rgba(0,0,0,0.3) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.116) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
 }
 
 /* Search Bar Styles */
@@ -106,19 +110,24 @@
   transition: transform 0.3s ease;
 }
 
-/* Logo Carousel */
 .logo-carousel {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
   overflow: hidden;
+  position: relative;
 }
 
 .logo-track {
   display: flex;
+  width: max-content;
   animation: scroll 40s linear infinite;
   will-change: transform;
+}
+
+.logo-track:hover {
+  animation-play-state: paused;
 }
 
 .logo-slide {
@@ -126,6 +135,7 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  color: white;
 }
 
 .logo-slide img {
@@ -144,8 +154,12 @@
 
 /* Animations */
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 2));
+  }
 }
 
 /* Responsive Breakpoints */
@@ -153,17 +167,17 @@
   .search-container {
     margin-bottom: 2rem;
   }
-  
+
   .search-input {
     padding: 1rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .search-button {
     width: 50px;
     height: 50px;
   }
-  
+
   .logo-slide img {
     height: 25px;
   }
@@ -173,17 +187,26 @@
   .hero-container {
     min-height: 90vh;
   }
-  
+
   .content-overlay {
     padding-top: 6rem;
   }
-  
+
   .search-bar {
     border-radius: 40px;
   }
-  
+
   .logo-track {
     animation-duration: 35s;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% / 1.8));
+    }
   }
 }
 
@@ -191,36 +214,40 @@
   .hero-container {
     min-height: 80vh;
   }
-  
+
   .content-overlay {
     padding-top: 4rem;
   }
-  
+
   .search-bar {
     border-radius: 30px;
   }
-  
+
   .search-input {
     padding: 0.8rem 1.2rem;
     font-size: 0.95rem;
   }
-  
+
   .search-button {
     width: 45px;
     height: 45px;
   }
-  
+
   .logo-slide {
     padding: 0 1rem;
   }
-  
+
   .logo-slide img {
     height: 20px;
   }
-  
+
   @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-55%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% / 1.6));
+    }
   }
 }
 
@@ -228,7 +255,7 @@
   .search-input::placeholder {
     font-size: 0.85rem;
   }
-  
+
   .logo-track {
     animation-duration: 30s;
   }
