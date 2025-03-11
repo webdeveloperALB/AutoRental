@@ -40,6 +40,11 @@ const Hero = () => {
             </div>
           ))}
         </div>
+
+        {/* Text element */}
+        <div className="cta-text">
+          Book your dream car <span>NOW</span>
+        </div>
       </div>
     </div>
   );
