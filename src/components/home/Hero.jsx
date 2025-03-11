@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import "./Hero.css";
 import { FaSearch } from "react-icons/fa";
@@ -26,6 +27,16 @@ import logo19 from "../../assets/images/volkswagen.svg";
 import logo20 from "../../assets/images/volvo.svg";
 
 const Hero = () => {
+  const navigate = useNavigate(); // Initialize navigate
+
+  // Handle search form submission
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchTerm = e.target.searchInput.value.trim();
+    navigate(
+      `/models${searchTerm ? `?search=${encodeURIComponent(searchTerm)}` : ""}`
+    );
+  };
   const slideIn = {
     initial: { x: 100, opacity: 0 },
     animate: { x: 0, opacity: 1 },
@@ -82,16 +93,19 @@ const Hero = () => {
           animate="animate"
           variants={searchBarVariants}
         >
-          <div className="search-bar">
+          <form onSubmit={handleSearch} className="search-bar">
+            {" "}
+            {/* Wrap with form */}
             <input
               type="text"
+              name="searchInput" // Add name attribute
               placeholder="Search for brand, model or category..."
               className="search-input"
             />
-            <button className="search-button">
+            <button type="submit" className="search-button">
               <FaSearch className="search-icon" />
             </button>
-          </div>
+          </form>
         </motion.div>
 
         {/* Logo Carousel */}

@@ -16,16 +16,23 @@ import {
 
 const Models = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
+  const searchParam = searchParams.get("search");
+
+  // Initialize state from URL params
+  const [selectedCategory, setSelectedCategory] = useState(
+    categoryParam || "All"
+  );
+  const [searchQuery, setSearchQuery] = useState(searchParam || "");
 
   // Update state when URL changes
   useEffect(() => {
-    setSelectedCategory(categoryParam || "All");
-  }, [categoryParam]);
-
+    const params = new URLSearchParams();
+    if (selectedCategory !== "All") params.set("category", selectedCategory);
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
+    setSearchParams(params);
+  }, [selectedCategory, searchQuery, setSearchParams]);
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -382,7 +389,8 @@ const Models = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto">
+            className="text-center max-w-3xl mx-auto"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
               <Car className="w-5 h-5 text-white" />
               <span className="text-white font-medium">Our Fleet</span>
@@ -427,10 +435,12 @@ const Models = () => {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedCategory(category.name)}
                     className={`flex items-center gap-2 px-4 py-3 rounded-lg whitespace-nowrap
-                           ${selectedCategory === category.name
-                        ? "bg-black text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}>
+                           ${
+                             selectedCategory === category.name
+                               ? "bg-black text-white"
+                               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                           }`}
+                  >
                     <category.icon className="w-5 h-5" />
                     <span>{category.name}</span>
                   </motion.button>
@@ -445,80 +455,91 @@ const Models = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCars.map((car) => (
-              <motion.div
-                key={car.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="group">
-                <div
-                  className={`rounded-xl p-6 ${car.color} transition-all duration-300 
-                             group-hover:-translate-y-2`}>
-                  {/* Car Image */}
-                  <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
-                    <img
-                      src={car.image}
-                      alt={car.name}
-                      className="w-full h-full object-cover"
-                    />
+            {filteredCars.length === 0 ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-xl text-gray-600">
+                  No cars found matching your search criteria.
+                </p>
+              </div>
+            ) : (
+              filteredCars.map((car) => (
+                <motion.div
+                  key={car.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div
+                    className={`rounded-xl p-6 ${car.color} transition-all duration-300 
+                             group-hover:-translate-y-2`}
+                  >
+                    {/* Car Image */}
+                    <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
+                      <img
+                        src={car.image}
+                        alt={car.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+
+                    {/* Car Info */}
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-xl font-bold mb-1">{car.name}</h3>
+                          <span className="text-sm text-gray-600">
+                            {car.category}
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-2xl font-bold text-black">
+                            €{car.price}
+                          </span>
+                          <span className="text-sm text-black">/day</span>
+                        </div>
+                      </div>
+
+                      {/* Features */}
+                      <div className="flex justify-between py-4 border-t border-gray-200">
+                        <div className="flex items-center gap-2">
+                          <Users className="w-5 h-5 text-gray-500" />
+                          <span>{car.features.seats} Seats</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Briefcase className="w-5 h-5 text-gray-500" />
+                          <span>{car.features.luggage} Luggage</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Fuel className="w-5 h-5 text-gray-500" />
+                          <span>{car.features.fuel}</span>
+                        </div>
+                      </div>
+
+                      {/* Rating and Book Button */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                          <span className="font-medium">{car.rating}</span>
+                          <span className="text-gray-600">
+                            ({car.reviews} reviews)
+                          </span>
+                        </div>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => navigate(`/booking/${car.id}`)}
+                          className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
+                                 transition-colors"
+                        >
+                          Book Now
+                        </motion.button>
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Car Info */}
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-xl font-bold mb-1">{car.name}</h3>
-                        <span className="text-sm text-gray-600">
-                          {car.category}
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-2xl font-bold text-black">
-                          €{car.price}
-                        </span>
-                        <span className="text-sm text-black">/day</span>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="flex justify-between py-4 border-t border-gray-200">
-                      <div className="flex items-center gap-2">
-                        <Users className="w-5 h-5 text-gray-500" />
-                        <span>{car.features.seats} Seats</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Briefcase className="w-5 h-5 text-gray-500" />
-                        <span>{car.features.luggage} Luggage</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Fuel className="w-5 h-5 text-gray-500" />
-                        <span>{car.features.fuel}</span>
-                      </div>
-                    </div>
-
-                    {/* Rating and Book Button */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                        <span className="font-medium">{car.rating}</span>
-                        <span className="text-gray-600">
-                          ({car.reviews} reviews)
-                        </span>
-                      </div>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => navigate(`/booking/${car.id}`)}
-                        className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
-                                 transition-colors">
-                        Book Now
-                      </motion.button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -530,7 +551,8 @@ const Models = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto mb-12">
+            className="text-center max-w-3xl mx-auto mb-12"
+          >
             <div className="flex items-center justify-center gap-2 mb-4">
               <HelpCircle className="w-6 h-6 text-black" />
               <h2 className="text-3xl font-bold">How to Book</h2>
@@ -564,12 +586,12 @@ const Models = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-lg p-6 text-center">
-                <div
-                  className="w-16 h-16 bg-black rounded-full flex items-center justify-center 
-                             mx-auto mb-6">
-                  <step.icon className="w-8 h-8 text-white" />
+                className="bg-gray-50 rounded-lg p-6 text-center"
+              >
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <step.icon className="w-8 h-8 text-white" /> ❌ ERROR HERE
                 </div>
+
                 <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
               </motion.div>
