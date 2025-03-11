@@ -84,6 +84,10 @@
     padding-top: 2rem;
   }
 
+  .hero-container {
+    height: 40vh;
+  }
+
   .static-logos-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.3rem;
