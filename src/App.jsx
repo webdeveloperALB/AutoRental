@@ -13,11 +13,13 @@ import Register from "./components/default/Auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { MainLayout } from "./layout/MainLayout";
 import { AuthLayout } from "./layout/AuthLayout";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
       <AnimatePresence mode="wait">
+      <ScrollToTop />
         <Routes>
           {/* Auth routes without Navbar and Footer */}
           <Route element={<AuthLayout />}>
