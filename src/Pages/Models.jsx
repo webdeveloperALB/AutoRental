@@ -63,7 +63,7 @@ const Models = () => {
       },
       rating: 4.9,
       reviews: 128,
-      color: "bg-blue-50",
+      color: "bg-gray-100",
       iconColor: "text-blue-500",
     },
     {
@@ -79,7 +79,7 @@ const Models = () => {
       },
       rating: 4.8,
       reviews: 96,
-      color: "bg-orange-50",
+      color: "bg-gray-100",
       iconColor: "text-orange-500",
     },
     {
@@ -95,7 +95,7 @@ const Models = () => {
       },
       rating: 4.9,
       reviews: 156,
-      color: "bg-purple-50",
+      color: "bg-gray-100",
       iconColor: "text-purple-500",
     },
     {
@@ -111,7 +111,7 @@ const Models = () => {
       },
       rating: 5.0,
       reviews: 84,
-      color: "bg-green-50",
+      color: "bg-gray-100",
       iconColor: "text-green-500",
     },
     {
@@ -127,7 +127,7 @@ const Models = () => {
       },
       rating: 4.7,
       reviews: 92,
-      color: "bg-red-50",
+      color: "bg-gray-100",
       iconColor: "text-red-500",
     },
     {
@@ -143,7 +143,7 @@ const Models = () => {
       },
       rating: 4.6,
       reviews: 215,
-      color: "bg-yellow-50",
+      color: "bg-gray-100",
       iconColor: "text-yellow-500",
     },
     {
@@ -159,7 +159,7 @@ const Models = () => {
       },
       rating: 4.8,
       reviews: 145,
-      color: "bg-indigo-50",
+      color: "bg-gray-100",
       iconColor: "text-indigo-500",
     },
     {
@@ -175,7 +175,7 @@ const Models = () => {
       },
       rating: 5.0,
       reviews: 42,
-      color: "bg-pink-50",
+      color: "bg-gray-100",
       iconColor: "text-pink-500",
     },
     {
@@ -191,7 +191,7 @@ const Models = () => {
       },
       rating: 4.7,
       reviews: 168,
-      color: "bg-teal-50",
+      color: "bg-gray-100",
       iconColor: "text-teal-500",
     },
     {
@@ -207,7 +207,7 @@ const Models = () => {
       },
       rating: 4.8,
       reviews: 134,
-      color: "bg-gray-50",
+      color: "bg-gray-100",
       iconColor: "text-gray-500",
     },
     {
@@ -223,7 +223,7 @@ const Models = () => {
       },
       rating: 4.5,
       reviews: 289,
-      color: "bg-blue-50",
+      color: "bg-gray-100",
       iconColor: "text-blue-500",
     },
     {
@@ -239,7 +239,7 @@ const Models = () => {
       },
       rating: 4.9,
       reviews: 36,
-      color: "bg-yellow-50",
+      color: "bg-gray-100",
       iconColor: "text-yellow-500",
     },
     {
@@ -255,7 +255,7 @@ const Models = () => {
       },
       rating: 5.0,
       reviews: 28,
-      color: "bg-purple-50",
+      color: "bg-gray-100",
       iconColor: "text-purple-500",
     },
     {
@@ -271,7 +271,7 @@ const Models = () => {
       },
       rating: 4.8,
       reviews: 156,
-      color: "bg-red-50",
+      color: "bg-gray-100",
       iconColor: "text-red-500",
     },
     {
@@ -287,7 +287,7 @@ const Models = () => {
       },
       rating: 4.9,
       reviews: 48,
-      color: "bg-green-50",
+      color: "bg-gray-100",
       iconColor: "text-green-500",
     },
     {
@@ -303,7 +303,7 @@ const Models = () => {
       },
       rating: 4.6,
       reviews: 198,
-      color: "bg-orange-50",
+      color: "bg-gray-100",
       iconColor: "text-orange-500",
     },
     {
@@ -319,7 +319,7 @@ const Models = () => {
       },
       rating: 5.0,
       reviews: 32,
-      color: "bg-indigo-50",
+      color: "bg-gray-100",
       iconColor: "text-indigo-500",
     },
     {
@@ -335,7 +335,7 @@ const Models = () => {
       },
       rating: 4.9,
       reviews: 45,
-      color: "bg-teal-50",
+      color: "bg-gray-100",
       iconColor: "text-teal-500",
     },
     {
@@ -351,7 +351,7 @@ const Models = () => {
       },
       rating: 4.7,
       reviews: 124,
-      color: "bg-pink-50",
+      color: "bg-gray-100",
       iconColor: "text-pink-500",
     },
     {
@@ -367,7 +367,7 @@ const Models = () => {
       },
       rating: 4.8,
       reviews: 86,
-      color: "bg-gray-50",
+      color: "bg-gray-100",
       iconColor: "text-gray-500",
     },
   ];
@@ -435,9 +435,7 @@ const Models = () => {
 
               {/* Category Filter */}
               <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                {/* Scroll gradient overlay */}
-                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
+                
                 <div className="flex gap-2 sm:gap-3">
                   {categories.map((category) => (
                     <button
