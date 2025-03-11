@@ -130,7 +130,7 @@
 
 .logo-slide img {
   width: auto;
-  height: 30px;
+  height: 40px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   color: white; /* Fallback for some browsers */
