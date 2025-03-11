@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 import {
   Phone,
   Mail,
-  Clock,
   Instagram,
-  Send,
   MapPin,
   ArrowRight,
-  CheckCircle,
+  Map,
 } from "lucide-react";
 import { RiTiktokFill } from "react-icons/ri";
 import { FaWhatsapp } from "react-icons/fa";
@@ -37,7 +35,7 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      Icon: FaWhatsapp, href: "https://wa.me/355698357378", color: "hover:bg-green-500", 
+      Icon: FaWhatsapp, href: "https://wa.me/355698357378", color: "hover:bg-green-500",
       className: "hover:bg-black hover:text-white"
     },
     { Icon: Instagram, href: "https://www.instagram.com/auto_rental_tirana_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", color: "hover:bg-pink-600" },
@@ -148,57 +146,31 @@ const Footer = () => {
               </div>
             </div>
           </motion.div>
-
-          {/* Newsletter */}
           <motion.div
             variants={fadeInUp}
             initial="initial"
             whileInView="whileInView"
             viewport={{ once: true }}
-            className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Newsletter</h3>
-            <p className="text-white">
-              Subscribe to our newsletter for the latest updates and exclusive
-              offers.
-            </p>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 
-                           focus:ring-white text-white placeholder-gray-500"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-green-500 
-                           text-white rounded-lg hover:bg-green-500 transition-all
-                           hover:scale-105 active:scale-95">
-                  {isSubscribed ? (
-                    <CheckCircle className="w-5 h-5" />
-                  ) : (
-                    <Send className="w-5 h-5" />
-                  )}
-                </button>
-              </div>
-            </form>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="p-4 bg-gradient-to-r from-white to-white rounded-lg
-                       border">
-              <p className="text-sm text-black">
-                🎉{" "}
-                <span className="text-black font-semibold">
-                  Special Offer:
-                </span>{" "}
-                Get 15% off your first rental when you subscribe!
-              </p>
-            </motion.div>
+            className="space-y-6"
+          >
+            <h3 className="text-xl font-semibold text-white">Our Location</h3>
+            <div className="h-64 rounded-lg overflow-hidden border border-gray-800">
+              <iframe
+                title="AutoRental Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.363520556493!2d19.817623415424846!3d41.32736697927038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE5JzM4LjUiTiAxOcKwNDknMDguNiJF!5e0!3m2!1sen!2s!4v1718893416354!5m2!1sen!2s&hl=en&q=Tirana+Albania&zoom=15&ui=no"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg"
+              ></iframe>
+            </div>
+            <div className="flex items-center space-x-2 text-gray-400">
+              <MapPin className="w-5 h-5 text-red-600" />
+              <p>Tirana, Albania</p>
+            </div>
           </motion.div>
         </div>
 
