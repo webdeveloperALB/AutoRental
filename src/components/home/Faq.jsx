@@ -11,7 +11,7 @@ import {
   Calendar,
   IdCard,
   CreditCard,
-  Shield 
+  Shield
 } from "lucide-react";
 
 const FAQ = () => {
@@ -24,53 +24,27 @@ const FAQ = () => {
       color: "text-blue-600",
       bgColor: "bg-blue-50",
       questions: [
-        // Original Booking Process
         {
           question: "How do I make a car reservation?",
-          answer:
-            "Making a reservation is simple:\n\n" +
-            "1. Select your desired car model\n" +
-            "2. Choose pickup location\n" +
-            "3. Select pickup and return dates\n" +
-            "4. Confirm reservation details\n" +
-            "5. Submit booking request\n\n" +
-            "Our team will confirm availability and finalize your reservation within 2 business hours.",
+          answer: "Select a vehicle, choose pickup and return dates, and confirm your booking."
         },
         {
           question: "Can I modify my reservation?",
-          answer:
-            "Modifications allowed up to 48 hours before pickup:\n" +
-            "• Date/time changes: Free first adjustment\n" +
-            "• Vehicle upgrades: Price difference applies\n" +
-            "• Location changes: Subject to availability\n" +
-            "• Cancellations: 24h free cancellation policy",
+          answer: "Modifications and cancellations are allowed within specific timeframes."
         },
-        // Original Rental Requirements
         {
           question: "What documents do I need to rent a car?",
-          answer:
-            "Required documentation:\n\n" +
-            "✓ Valid driver's license (minimum 2 years validity)\n" +
-            "✓ Credit card with available deposit amount\n" +
-            "✓ Proof of address (utility bill or bank statement)\n" +
-            "✓ International renters: Passport + IDP translation\n" +
-            "✓ Corporate rentals: Company authorization letter",
+          answer: "A valid driver's license and proof of identity are required. Additional documentation may apply."
         },
         {
           question: "What are the age requirements?",
-          answer:
-            "Age restrictions:\n\n" +
-            "• Standard vehicles: 21+ years\n" +
-            "• Premium vehicles: 25+ years\n" +
-            "• Young driver fee (21-24): $25/day\n" +
-            "• Senior drivers (70+): Medical clearance required\n" +
-            "• All drivers must have 3+ years driving experience",
-        },
+          answer: "Minimum age and driving experience requirements apply based on vehicle type."
+        }
       ],
       subCategories: [
         { title: "Booking Process", icon: Calendar },
-        { title: "Driver Requirements", icon: IdCard },
-      ],
+        { title: "Driver Requirements", icon: IdCard }
+      ]
     },
     {
       title: "Financial Policies & Protection",
@@ -78,57 +52,30 @@ const FAQ = () => {
       color: "text-green-600",
       bgColor: "bg-green-50",
       questions: [
-        // Original Payments & Insurance
         {
           question: "What payment methods are accepted?",
-          answer:
-            "Payment options:\n\n" +
-            "• Visa/Mastercard/Amex (primary)\n" +
-            "• Apple Pay/Google Pay\n" +
-            "• Bank transfers (48h advance)\n" +
-            "• Corporate accounts\n" +
-            "• Debit cards ($500 security hold)\n\n" +
-            "No cash payments accepted",
+          answer: "Various payment methods are accepted, and security deposits may be required."
         },
         {
           question: "What insurance options are available?",
-          answer:
-            "Insurance packages:\n\n" +
-            "1. Basic Cover (included):\n   - $2500 damage deductible\n   - Third party liability\n\n" +
-            "2. Complete Protection (+$29/day):\n   - $0 deductible\n   - Personal accident cover\n   - Roadside assistance\n\n" +
-            "3. Premium Package (+$49/day):\n   - Includes all above\n   - Tire/windshield protection\n   - Key replacement",
+          answer: "Insurance options vary, offering different levels of protection."
         },
-        // Original Policies & Protection
         {
           question: "What is your fuel policy?",
-          answer:
-            "Fuel options:\n\n" +
-            "A) Full-to-Full:\n" +
-            "   - Receive car with full tank\n" +
-            "   - Return full to avoid fees\n\n" +
-            "B) Prepaid Fuel:\n" +
-            "   - Pay for full tank upfront\n" +
-            "   - Return empty (no refund)\n\n" +
-            "C) Partial Refuel:\n" +
-            "   - $7 service fee + local fuel rates",
+          answer: "Vehicles must be returned with a full tank, or a prepaid fuel option is available."
         },
         {
           question: "What happens if I return late?",
-          answer:
-            "Late return policy:\n\n" +
-            "• Grace period: 59 minutes\n" +
-            "• 1-3 hours late: $35/hour\n" +
-            "• 4+ hours late: Full day rate\n" +
-            "• Repeated delays may incur:\n   - $150 admin fee\n   - Account suspension\n\n" +
-            "Always contact us for extensions",
-        },
+          answer: "Late returns may result in additional charges, with penalties for excessive delays."
+        }
       ],
       subCategories: [
         { title: "Payments", icon: CreditCard },
-        { title: "Safety Policies", icon: Lock },
-      ],
-    },
+        { title: "Safety Policies", icon: Lock }
+      ]
+    }
   ];
+
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -189,9 +136,8 @@ const FAQ = () => {
                         {item.question}
                       </span>
                       <div
-                        className={`p-2 rounded-full ${
-                          activeIndex === index ? "bg-black" : "bg-gray-100"
-                        } transition-colors`}
+                        className={`p-2 rounded-full ${activeIndex === index ? "bg-black" : "bg-gray-100"
+                          } transition-colors`}
                       >
                         {activeIndex === index ? (
                           <Minus className="w-4 h-4 text-white" />

@@ -71,6 +71,7 @@ const Navbar = () => {
         { path: "/models?category=Sedan", label: "Sedan" },
         { path: "/models?category=Luxury", label: "Luxury" },
         { path: "/models?category=Sports", label: "Sports" },
+        { path: "/models?category=Economy", label: "Economy" },
       ]
     },
     { path: "/testimonials", label: "Testimonials" },

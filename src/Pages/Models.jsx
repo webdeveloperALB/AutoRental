@@ -46,19 +46,20 @@ const Models = () => {
     { name: "Sedan", icon: Car },
     { name: "Luxury", icon: Car },
     { name: "Sports", icon: Car },
+    { name: "Economy", icon: Car },
   ];
 
   const carModels = [
     {
       id: 1,
       name: "Mercedes Benz S-class",
-      category: "Sedan",
+      category: "Economy",
       price: 89,
       image: "/sedan.png",
       features: {
         seats: "5",
         luggage: "3",
-        fuel: "Electric",
+        fuel: "Hybrid",
       },
       rating: 4.9,
       reviews: 128,
@@ -74,7 +75,7 @@ const Models = () => {
       features: {
         seats: "7",
         luggage: "5",
-        fuel: "Hybrid",
+        fuel: "Diesel",
       },
       rating: 4.8,
       reviews: 96,
@@ -84,7 +85,7 @@ const Models = () => {
     {
       id: 3,
       name: "Mercedes Benz S-class",
-      category: "Luxury",
+      category: "Economy",
       price: 199,
       image: "/luxury.png",
       features: {
@@ -138,7 +139,7 @@ const Models = () => {
       features: {
         seats: "5",
         luggage: "3",
-        fuel: "Hybrid",
+        fuel: "Gasoline",
       },
       rating: 4.6,
       reviews: 215,

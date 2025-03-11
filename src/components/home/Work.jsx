@@ -1,141 +1,156 @@
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { Car, Calendar, CheckCircle, CircleHelp } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
-const Work = () => {
+const SedanIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-8 h-8">
+    <path
+      d="M56 28H8l4-16h40l4 16zM12 44h40v8H12v-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <circle cx="16" cy="52" r="4" fill="currentColor" />
+    <circle cx="48" cy="52" r="4" fill="currentColor" />
+    <path
+      d="M24 28l-4-12M40 28l4-12"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+  </svg>
+);
+
+const SUVIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-8 h-8">
+    <path
+      d="M56 36H8l4-20h40l4 20zM16 48h32v8H16v-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <rect x="12" y="16" width="40" height="8" fill="currentColor" />
+    <circle cx="20" cy="56" r="4" fill="currentColor" />
+    <circle cx="44" cy="56" r="4" fill="currentColor" />
+    <path
+      d="M32 36l-4-16M40 36l4-16"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+  </svg>
+);
+
+const LuxuryIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-8 h-8">
+    <path
+      d="M8 32h48L52 8H12L8 32zM16 48h32v8H16v-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <path
+      d="M24 32l-4-16M40 32l4-16"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <circle cx="20" cy="56" r="4" fill="currentColor" />
+    <circle cx="44" cy="56" r="4" fill="currentColor" />
+    <path
+      d="M32 40l8-8-8-8-8 8 8 8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+  </svg>
+);
+
+const SportIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-8 h-8">
+    <path
+      d="M56 24L48 8H16L8 24v16h48V24zM16 48h32v8H16v-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <path
+      d="M24 24l-8-8M40 24l8-8"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <circle cx="20" cy="56" r="4" fill="currentColor" />
+    <circle cx="44" cy="56" r="4" fill="currentColor" />
+    <path
+      d="M32 28l-8 8h16l-8-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+  </svg>
+);
+
+const EconomyIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-8 h-8">
+    <path
+      d="M56 28H8l4-16h40l4 16zM12 44h40v8H12v-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+    <circle cx="16" cy="52" r="4" fill="currentColor" />
+    <circle cx="48" cy="52" r="4" fill="currentColor" />
+    <path
+      d="M28 28H12M52 28H36"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+    />
+  </svg>
+);
+
+const Categories = () => {
   const navigate = useNavigate();
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
-
-  const steps = [
-    {
-      icon: Car,
-      title: "Select Your Car & Pick-up Location",
-      description:
-        "Choose from our wide range of premium vehicles and select a convenient pick-up and drop-off location",
-      bgcolor: "bg-blue-50",
-      iconcolor: "text-blue-500",
-    },
-    {
-      icon: Calendar,
-      title: "Pick-up Date & Contact Us",
-      description:
-        "Choose your rental duration and preferred pick-up timing, then send your booking details to us for confirmation and assistance",
-      bgcolor: "bg-green-50",
-      iconcolor: "text-green-500",
-    },
+  
+  const categories = [
+    { name: "Sedan", icon: SedanIcon, color: "text-blue-600" },
+    { name: "SUV", icon: SUVIcon, color: "text-green-600" },
+    { name: "Luxury", icon: LuxuryIcon, color: "text-amber-600" },
+    { name: "Sports", icon: SportIcon, color: "text-red-600" }, // Fixed name to match Models
+    { name: "Economy", icon: EconomyIcon, color: "text-emerald-600" },
   ];
 
   return (
-    <section className="flex flex-col justify-center items-center">
-      <div className="container mt-10 mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-4">
-            <CircleHelp className="w-5 h-5 text-white" />
-            <span className="text-white font-medium">How It Works?</span>
-          </div>
-          <h2 className="text-4xl font-bold mb-6 mt-2">
-            Rent Your Dream Car in 2 Easy Steps
+    <section className="py-12 px-4 border-y bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Vehicle Categories
           </h2>
-          <p className="text-black text-lg leading-relaxed">
-            We have streamlined our rental process to get you on the road
-            quickly and safely. Follow these simple steps to begin your journey
-            with us.
+          <p className="text-gray-600 text-lg">
+            Premium fleet selection for every need
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mx-auto justify-center max-w-2xl w-full h-full items-center"
-        >
-          {steps.map((step, index) => (
-            <motion.div key={index} variants={item} className="relative group">
-              <div
-                className={`${step.bgcolor} rounded-xl p-8 h-full transition-all duration-300 
-                           group-hover:shadow-xl group-hover:-translate-y-2`}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div
-                    className={`w-16 h-16 ${step.bgcolor} rounded-full flex items-center 
-                               justify-center mb-6 group-hover:scale-110 transition-transform`}
-                  >
-                    <step.icon className={`w-8 h-8 ${step.iconcolor}`} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {step.description}
-                  </p>
-
-                  <div
-                    className="absolute -top-4 -right-4 w-8 h-8 bg-black rounded-full 
-                              flex items-center justify-center text-white font-bold"
-                  >
-                    {index + 1}
-                  </div>
-                </div>
-
-                {index !== steps.length - 1 && (
-                  <div
-                    className="hidden lg:block absolute top-1/2 left-full w-8 border-t-2 
-                               border-dashed border-orange-300 -translate-y-1/2 z-10"
-                  ></div>
-                )}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              onClick={() => navigate(`/models?category=${category.name}`)}
+              className="group flex flex-col items-center p-6 hover:bg-gray-50 rounded-xl transition-all cursor-pointer"
+            >
+              <div className={`mb-4 ${category.color}`}>
+                <category.icon />
               </div>
-
-              <div className="absolute bottom-4 right-4">
-                <CheckCircle
-                  className="w-6 h-6 text-gray-300 group-hover:text-green-500 
-                                   transition-colors"
-                />
-              </div>
-            </motion.div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                {category.name}
+              </h3>
+              <div className="w-8 h-0.5 bg-gray-200 group-hover:bg-current transition-colors" />
+            </div>
           ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <p className="text-black mb-6">
-            Ready to get started? Book your dream car now!
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate("/models")}
-            className="px-8 py-4 bg-black text-white rounded-lg shadow-lg 
-                     shadow-black hover:bg-black transition-all"
-          >
-            Book a Car Now
-          </motion.button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default Work;
+export default Categories;

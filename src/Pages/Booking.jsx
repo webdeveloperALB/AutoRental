@@ -5,7 +5,7 @@ const cars = [
   {
     id: 1,
     name: "Mercedes Benz S-class",
-    category: "Sedan",
+    category: "Economy",
     price: 89,
     image: "/Sclass.jpg",
     imageBehind: "/Sclass2.jpg",
@@ -41,7 +41,7 @@ const cars = [
   {
     id: 3,
     name: "Mercedes Benz S-class",
-    category: "Luxury",
+    category: "Economy",
     price: 199,
     image: "/Sclass.jpg",
     imageBehind: "/Sclass2.jpg",
