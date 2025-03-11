@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus,
@@ -194,7 +194,7 @@ const FAQ = () => {
                 Still have questions?
               </h3>
               <p className="text-black mb-8">
-                Can't find what you're looking for? Our customer support team is
+                Cant find what you are looking for? Our customer support team is
                 here to help you 24/7.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
