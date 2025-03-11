@@ -385,7 +385,7 @@ const Models = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
       {/* Hero Section */}
       <section className="pt-16 pb-4">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeIn}
             initial="initial"
@@ -396,61 +396,71 @@ const Models = () => {
               <Car className="w-5 h-5 text-white" />
               <span className="text-white font-medium">Our Fleet</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Choose Your Perfect <span className="text-red-600">Ride</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
+              Choose Your Perfect{' '}
+              <span className="text-red-600 whitespace-nowrap">Ride</span>
             </h1>
-            <p className="text-black text-lg leading-relaxed">
-              Experience premium service with unlimited miles and flexible
-              pick-up options at unbeatable prices. Select from our wide range
-              of well-maintained vehicles.
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              Experience premium service with unlimited miles and flexible pick-up
+              options at unbeatable prices. Select from our wide range of
+              well-maintained vehicles.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Search and Filter Section */}
-      <section className="py-8">
-        <div className="container mx-auto px-4">
-          <div className="bg-white rounded-xl p-6 shadow-sm">
-            <div className="grid md:grid-cols-2 gap-6">
+      <section className="py-6 sm:py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
               {/* Search Bar */}
-              <div className="relative">
-                <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <div className="relative flex items-center">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="w-5 h-5 text-gray-400" />
+                </div>
                 <input
                   type="text"
                   placeholder="Search for a car..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none 
-                           focus:ring-2 focus:ring-black focus:border-transparent"
+                  className="w-full pl-10 pr-12 py-2.5 sm:py-3 rounded-lg border border-gray-200 
+                    focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
+                    placeholder-gray-400 text-gray-900 text-sm sm:text-base"
                 />
-                <Filter className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2" />
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                  <Filter className="w-5 h-5 text-gray-400 hover:text-gray-500 cursor-pointer" />
+                </div>
               </div>
 
               {/* Category Filter */}
-              <div className="flex gap-4 overflow-x-auto pb-2">
-                {categories.map((category) => (
-                  <motion.button
-                    key={category.name}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setSelectedCategory(category.name)}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg whitespace-nowrap
-                           ${
-                             selectedCategory === category.name
-                               ? "bg-black text-white"
-                               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                           }`}
-                  >
-                    <category.icon className="w-5 h-5" />
-                    <span>{category.name}</span>
-                  </motion.button>
-                ))}
+              <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                {/* Scroll gradient overlay */}
+                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                <div className="flex gap-2 sm:gap-3">
+                  {categories.map((category) => (
+                    <button
+                      key={category.name}
+                      onClick={() => setSelectedCategory(category.name)}
+                      className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
+        transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
+        ${selectedCategory === category.name
+                          ? 'bg-black text-white shadow-md'
+                          : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                        }`}
+                    >
+                      <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base">{category.name}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Car Models Grid */}
       <section className="py-16">
