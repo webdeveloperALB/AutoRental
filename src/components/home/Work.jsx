@@ -1,13 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {
-  Car,
-  MapPin,
-  Calendar,
-  MessageCircle,
-  CheckCircle,
-  CircleHelp,
-} from "lucide-react";
+import { Car, Calendar, CheckCircle, CircleHelp } from "lucide-react";
 
 const Work = () => {
   const navigate = useNavigate();
@@ -30,31 +23,19 @@ const Work = () => {
   const steps = [
     {
       icon: Car,
-      title: "Select Your Car",
-      description: "Choose from our wide range of premium vehicles for any occasion",
+      title: "Select Your Car & Pick-up Location",
+      description:
+        "Choose from our wide range of premium vehicles and select a convenient pick-up and drop-off location",
       bgcolor: "bg-blue-50",
       iconcolor: "text-blue-500",
     },
     {
-      icon: MapPin,
-      title: "Pick-up Location",
-      description: "Select from our numerous convenient pick-up and drop-off locations",
+      icon: Calendar,
+      title: "Pick-up Date & Contact Us",
+      description:
+        "Choose your rental duration and preferred pick-up timing, then send your booking details to us for confirmation and assistance",
       bgcolor: "bg-green-50",
       iconcolor: "text-green-500",
-    },
-    {
-      icon: Calendar,
-      title: "Pick-up Date",
-      description: "Choose your rental duration and preferred pick-up timing",
-      bgcolor: "bg-purple-50",
-      iconcolor: "text-purple-500",
-    },
-    {
-      icon: MessageCircle,
-      title: "Contact Us",
-      description: "Send your booking details at us for confirmation and assistance",
-      bgcolor: "bg-orange-50",
-      iconcolor: "text-orange-500",
     },
   ];
 
@@ -87,7 +68,7 @@ const Work = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mx-auto justify-center"
         >
           {steps.map((step, index) => (
             <motion.div key={index} variants={item} className="relative group">
