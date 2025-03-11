@@ -565,16 +565,16 @@ const Models = () => {
             className="text-center max-w-3xl mx-auto mb-12"
           >
             <div className="flex items-center justify-center gap-2 mb-4">
-              <HelpCircle className="w-6 h-6 text-black" />
-              <h2 className="text-3xl font-bold">How to Book</h2>
+              <HelpCircle className="w-6 h-6 text-gray-600" />
+              <h2 className="text-3xl font-bold text-gray-900">How to Book</h2>
             </div>
-            <p className="text-black">
+            <p className="text-gray-600">
               We have streamlined our rental process to get you on the road
               quickly and safely
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
                 icon: Car,
@@ -597,14 +597,17 @@ const Models = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-lg p-6 text-center"
+                className="bg-white rounded-xl p-6 text-center border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-md"
               >
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                  <step.icon className="w-8 h-8 text-white" /> ❌ ERROR HERE
+                <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 p-4 transition-all duration-300 hover:bg-gray-800">
+                  <step.icon className="w-10 h-10 text-white flex-shrink-0" />
                 </div>
-
-                <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {step.description}
+                </p>
               </motion.div>
             ))}
           </div>
