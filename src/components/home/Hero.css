@@ -45,13 +45,13 @@
 /* Search Bar Styles */
 .search-container {
   width: 100%;
-  max-width: 1200px;
-  padding: 0 1rem;
+  max-width: 800px;
   margin: 0 auto 3rem;
 }
 
 .search-bar {
   display: flex;
+  height: 60px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 50px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -68,8 +68,8 @@
   flex: 1;
   border: none;
   background: transparent;
-  padding: 1.2rem 2rem;
-  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
   color: #333;
   line-height: 1.5;
 }
@@ -88,9 +88,9 @@
   background: #000000;
   border: none;
   border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  margin: 5px;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +106,7 @@
 
 .search-icon {
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   transition: transform 0.3s ease;
 }
 
@@ -126,9 +126,10 @@
   will-change: transform;
 }
 
+/*
 .logo-track:hover {
   animation-play-state: paused;
-}
+} */
 
 .logo-slide {
   padding: 0 1.5rem;
@@ -176,6 +177,7 @@
   .search-button {
     width: 50px;
     height: 50px;
+    margin: 5px;
   }
 
   .logo-slide img {
@@ -188,12 +190,29 @@
     min-height: 90vh;
   }
 
-  .content-overlay {
-    padding-top: 6rem;
+  .search-container {
+    max-width: 90%;
+    padding: 0 10px;
   }
 
   .search-bar {
-    border-radius: 40px;
+    height: 50px;
+  }
+
+  .search-input {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .search-button {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    margin: 5px;
+  }
+
+  .search-icon {
+    font-size: 1rem;
   }
 
   .logo-track {
@@ -212,25 +231,39 @@
 
 @media (max-width: 480px) {
   .hero-container {
-    min-height: 80vh;
+    min-height: 0;
   }
 
   .content-overlay {
-    padding-top: 4rem;
+    gap: 20px;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically by default */
+    justify-content: center;
+    flex-direction: column-reverse;
+    width: 100%;
+    padding: 2rem 1rem;
+    background-color: #00000042;
+  }
+
+  .search-container {
+    max-width: 100%;
   }
 
   .search-bar {
-    border-radius: 30px;
+    height: 45px;
   }
 
   .search-input {
-    padding: 0.8rem 1.2rem;
-    font-size: 0.95rem;
+    padding: 0.5rem;
+    font-size: 0.8125rem;
   }
 
   .search-button {
-    width: 45px;
-    height: 45px;
+    margin: 2px;
+  }
+
+  .search-icon {
+    font-size: 0.9rem;
   }
 
   .logo-slide {
