@@ -54,7 +54,7 @@ const Work = () => {
             <span className="text-white font-medium">How It Works?</span>
           </div>
           <h2 className="text-4xl font-bold mb-6 mt-2">
-            Rent Your Dream Car in 4 Easy Steps
+            Rent Your Dream Car in 2 Easy Steps
           </h2>
           <p className="text-black text-lg leading-relaxed">
             We have streamlined our rental process to get you on the road
@@ -68,7 +68,7 @@ const Work = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mx-auto justify-center"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mx-auto justify-center max-w-2xl w-full h-full items-center"
         >
           {steps.map((step, index) => (
             <motion.div key={index} variants={item} className="relative group">

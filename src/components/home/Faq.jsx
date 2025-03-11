@@ -7,10 +7,11 @@ import {
   Mail,
   Phone,
   MessageCircle,
-  Car,
-  CreditCard,
+  ClipboardCheck,
   Calendar,
-  Shield,
+  IdCard,
+  CreditCard,
+  Shield 
 } from "lucide-react";
 
 const FAQ = () => {
@@ -18,75 +19,113 @@ const FAQ = () => {
 
   const faqCategories = [
     {
-      title: "Booking Process",
-      icon: Calendar,
-      color: "text-blue-500",
+      title: "Reservation & Rental Requirements",
+      icon: ClipboardCheck,
+      color: "text-blue-600",
       bgColor: "bg-blue-50",
       questions: [
+        // Original Booking Process
         {
           question: "How do I make a car reservation?",
           answer:
-            "Making a reservation is simple:\n\n• Select your desired car model\n• Choose pickup location\n• Choose pickup and return dates\n• Send us a message to confirm your reservation and ask any questions.\n\nOur team will reply as soon as possible to confirm and assist you.",
+            "Making a reservation is simple:\n\n" +
+            "1. Select your desired car model\n" +
+            "2. Choose pickup location\n" +
+            "3. Select pickup and return dates\n" +
+            "4. Confirm reservation details\n" +
+            "5. Submit booking request\n\n" +
+            "Our team will confirm availability and finalize your reservation within 2 business hours.",
         },
         {
           question: "Can I modify my reservation?",
           answer:
-            "Yes, you can modify your reservation through our website or by contacting customer service. Changes made 48 hours before pickup are free of charge.",
+            "Modifications allowed up to 48 hours before pickup:\n" +
+            "• Date/time changes: Free first adjustment\n" +
+            "• Vehicle upgrades: Price difference applies\n" +
+            "• Location changes: Subject to availability\n" +
+            "• Cancellations: 24h free cancellation policy",
         },
-      ],
-    },
-    {
-      title: "Rental Requirements",
-      icon: Car,
-      color: "text-orange-500",
-      bgColor: "bg-orange-50",
-      questions: [
+        // Original Rental Requirements
         {
           question: "What documents do I need to rent a car?",
           answer:
-            "Required documents include:\n\n• Valid driver's license\n• Credit card in renter's name\n• Proof of insurance\n• Government-issued ID\n\nInternational renters may need additional documentation.",
+            "Required documentation:\n\n" +
+            "✓ Valid driver's license (minimum 2 years validity)\n" +
+            "✓ Credit card with available deposit amount\n" +
+            "✓ Proof of address (utility bill or bank statement)\n" +
+            "✓ International renters: Passport + IDP translation\n" +
+            "✓ Corporate rentals: Company authorization letter",
         },
         {
           question: "What are the age requirements?",
           answer:
-            "• Minimum age: 21 years\n• Under 25: Young driver surcharge applies\n• Luxury vehicles: 25+ years required\n• Senior drivers: No upper age limit with valid license",
+            "Age restrictions:\n\n" +
+            "• Standard vehicles: 21+ years\n" +
+            "• Premium vehicles: 25+ years\n" +
+            "• Young driver fee (21-24): $25/day\n" +
+            "• Senior drivers (70+): Medical clearance required\n" +
+            "• All drivers must have 3+ years driving experience",
         },
+      ],
+      subCategories: [
+        { title: "Booking Process", icon: Calendar },
+        { title: "Driver Requirements", icon: IdCard },
       ],
     },
     {
-      title: "Payments & Insurance",
-      icon: CreditCard,
-      color: "text-green-500",
+      title: "Financial Policies & Protection",
+      icon: Shield,
+      color: "text-green-600",
       bgColor: "bg-green-50",
       questions: [
+        // Original Payments & Insurance
         {
           question: "What payment methods are accepted?",
           answer:
-            "We accept:\n\n• Major credit cards\n• Debit cards (with additional verification)\n• Digital wallets\n• Corporate accounts\n\nCash payments are not accepted.",
+            "Payment options:\n\n" +
+            "• Visa/Mastercard/Amex (primary)\n" +
+            "• Apple Pay/Google Pay\n" +
+            "• Bank transfers (48h advance)\n" +
+            "• Corporate accounts\n" +
+            "• Debit cards ($500 security hold)\n\n" +
+            "No cash payments accepted",
         },
         {
           question: "What insurance options are available?",
           answer:
-            "We offer comprehensive coverage options:\n\n• Basic insurance (included)\n• Full coverage protection\n• Personal accident insurance\n• Tire and windshield protection",
+            "Insurance packages:\n\n" +
+            "1. Basic Cover (included):\n   - $2500 damage deductible\n   - Third party liability\n\n" +
+            "2. Complete Protection (+$29/day):\n   - $0 deductible\n   - Personal accident cover\n   - Roadside assistance\n\n" +
+            "3. Premium Package (+$49/day):\n   - Includes all above\n   - Tire/windshield protection\n   - Key replacement",
         },
-      ],
-    },
-    {
-      title: "Policies & Protection",
-      icon: Shield,
-      color: "text-purple-500",
-      bgColor: "bg-purple-50",
-      questions: [
+        // Original Policies & Protection
         {
           question: "What is your fuel policy?",
           answer:
-            "Our fuel policy is simple:\n\n• Cars provided with full tank\n• Return with full tank\n• Missing fuel charged at market rate\n• Prepaid fuel option available",
+            "Fuel options:\n\n" +
+            "A) Full-to-Full:\n" +
+            "   - Receive car with full tank\n" +
+            "   - Return full to avoid fees\n\n" +
+            "B) Prepaid Fuel:\n" +
+            "   - Pay for full tank upfront\n" +
+            "   - Return empty (no refund)\n\n" +
+            "C) Partial Refuel:\n" +
+            "   - $7 service fee + local fuel rates",
         },
         {
           question: "What happens if I return late?",
           answer:
-            "• 29-minute grace period\n• Hourly charges apply after grace period\n• Full day rate for significant delays\n• Early returns do not qualify for refunds",
+            "Late return policy:\n\n" +
+            "• Grace period: 59 minutes\n" +
+            "• 1-3 hours late: $35/hour\n" +
+            "• 4+ hours late: Full day rate\n" +
+            "• Repeated delays may incur:\n   - $150 admin fee\n   - Account suspension\n\n" +
+            "Always contact us for extensions",
         },
+      ],
+      subCategories: [
+        { title: "Payments", icon: CreditCard },
+        { title: "Safety Policies", icon: Lock },
       ],
     },
   ];
@@ -102,7 +141,8 @@ const FAQ = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16">
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-4">
             <HelpCircle className="w-5 h-5 text-white" />
             <span className="text-white font-medium">Need Help?</span>
@@ -123,9 +163,11 @@ const FAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: categoryIndex * 0.1 }}
-              className="space-y-4">
+              className="space-y-4"
+            >
               <div
-                className={`flex items-center gap-3 p-4 ${category.bgColor} rounded-lg`}>
+                className={`flex items-center gap-3 p-4 ${category.bgColor} rounded-lg`}
+              >
                 <category.icon className={`w-6 h-6 ${category.color}`} />
                 <h3 className="text-xl font-semibold text-gray-800">
                   {category.title}
@@ -137,19 +179,20 @@ const FAQ = () => {
                 return (
                   <div
                     key={itemIndex}
-                    className="border border-gray-200 hover:border-black rounded-lg bg-white transition-colors">
+                    className="border border-gray-200 hover:border-black rounded-lg bg-white transition-colors"
+                  >
                     <button
                       onClick={() => toggleAccordion(index)}
-                      className="w-full px-6 py-4 flex items-center justify-between text-left">
+                      className="w-full px-6 py-4 flex items-center justify-between text-left"
+                    >
                       <span className="text-lg font-medium text-gray-800">
                         {item.question}
                       </span>
                       <div
-                        className={`p-2 rounded-full ${activeIndex === index
-                            ? "bg-black"
-                          
-                            : "bg-gray-100"
-                          } transition-colors`}>
+                        className={`p-2 rounded-full ${
+                          activeIndex === index ? "bg-black" : "bg-gray-100"
+                        } transition-colors`}
+                      >
                         {activeIndex === index ? (
                           <Minus className="w-4 h-4 text-white" />
                         ) : (
@@ -165,7 +208,8 @@ const FAQ = () => {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="overflow-hidden">
+                          className="overflow-hidden"
+                        >
                           <div className="px-6 py-4 bg-gray-100 border-t border-gray-200">
                             <p className="text-black leading-relaxed whitespace-pre-line">
                               {item.answer}
@@ -186,7 +230,8 @@ const FAQ = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 relative">
+          className="mt-16 relative"
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl opacity-10"></div>
           <div className="relative bg-white border border-orange-100 rounded-2xl p-8">
             <div className="max-w-3xl mx-auto text-center">
