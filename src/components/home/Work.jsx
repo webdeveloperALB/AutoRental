@@ -1,116 +1,44 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const SedanIcon = () => (
-  <svg viewBox="0 0 64 64" className="w-8 h-8">
-    <path
-      d="M56 28H8l4-16h40l4 16zM12 44h40v8H12v-8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <circle cx="16" cy="52" r="4" fill="currentColor" />
-    <circle cx="48" cy="52" r="4" fill="currentColor" />
-    <path
-      d="M24 28l-4-12M40 28l4-12"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-  </svg>
+  <img
+    src="/sedan2.png"
+    alt="Sedan"
+    className="w-50 h-30"
+  />
 );
 
 const SUVIcon = () => (
-  <svg viewBox="0 0 64 64" className="w-8 h-8">
-    <path
-      d="M56 36H8l4-20h40l4 20zM16 48h32v8H16v-8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <rect x="12" y="16" width="40" height="8" fill="currentColor" />
-    <circle cx="20" cy="56" r="4" fill="currentColor" />
-    <circle cx="44" cy="56" r="4" fill="currentColor" />
-    <path
-      d="M32 36l-4-16M40 36l4-16"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-  </svg>
+  <img src="/suv2.png" alt="SUV" className="w-50 h-30" />
 );
 
 const LuxuryIcon = () => (
-  <svg viewBox="0 0 64 64" className="w-8 h-8">
-    <path
-      d="M8 32h48L52 8H12L8 32zM16 48h32v8H16v-8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <path
-      d="M24 32l-4-16M40 32l4-16"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <circle cx="20" cy="56" r="4" fill="currentColor" />
-    <circle cx="44" cy="56" r="4" fill="currentColor" />
-    <path
-      d="M32 40l8-8-8-8-8 8 8 8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-  </svg>
+  <img
+    src="/luxury1.png"
+    alt="Luxury"
+    className="w-50 h-30"
+  />
 );
 
 const SportIcon = () => (
-  <svg viewBox="0 0 64 64" className="w-8 h-8">
-    <path
-      d="M56 24L48 8H16L8 24v16h48V24zM16 48h32v8H16v-8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <path
-      d="M24 24l-8-8M40 24l8-8"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <circle cx="20" cy="56" r="4" fill="currentColor" />
-    <circle cx="44" cy="56" r="4" fill="currentColor" />
-    <path
-      d="M32 28l-8 8h16l-8-8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-  </svg>
+  <img
+    src="/sports2.png"
+    alt="Sport"
+    className="w-50 h-30"
+  />
 );
 
 const EconomyIcon = () => (
-  <svg viewBox="0 0 64 64" className="w-8 h-8">
-    <path
-      d="M56 28H8l4-16h40l4 16zM12 44h40v8H12v-8z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <circle cx="16" cy="52" r="4" fill="currentColor" />
-    <circle cx="48" cy="52" r="4" fill="currentColor" />
-    <path
-      d="M28 28H12M52 28H36"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-  </svg>
+  <img
+    src="/economic1.png"
+    alt="Economy"
+    className="w-50 h-30"
+  />
 );
 
 const Categories = () => {
   const navigate = useNavigate();
-  
+
   const categories = [
     { name: "Sedan", icon: SedanIcon, color: "text-blue-600" },
     { name: "SUV", icon: SUVIcon, color: "text-green-600" },
