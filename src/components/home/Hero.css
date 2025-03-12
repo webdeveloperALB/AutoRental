@@ -29,7 +29,7 @@
   display: flex;
   justify-content: flex-start;
   padding-top: 4rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.342);
 }
 
 .static-logos-container {
@@ -49,7 +49,7 @@
   margin-top: 2rem !important; /* Adjust the gap size as needed */
   width: 100%;
   display: block;
-  font-size: 2rem;
+  font-size: 4.5rem;
   font-weight: bold;
   color: #fff;
 }
@@ -83,6 +83,10 @@
   .content-overlay {
     padding-top: 3rem;
   }
+
+  .cta-text {
+    font-size: 3rem;
+  }
   
   .static-logos-container {
     grid-template-columns: repeat(3, 1fr);
@@ -98,6 +102,10 @@
 @media (max-width: 480px) {
   .content-overlay {
     padding-top: 2rem;
+  }
+
+  .cta-text {
+    font-size: 2rem;
   }
 
   .hero-container {
@@ -119,6 +127,10 @@
   .static-logos-container {
     grid-template-columns: 1fr;
     max-width: 200px;
+  }
+
+  .cta-text {
+    font-size: 1.7rem;
   }
 
   .logo-item img {
