@@ -1,11 +1,8 @@
-import React from "react";
 import { motion } from "framer-motion";
 import {
   Star,
   Shield,
   Car,
-  CheckCircle,
-  Award,
   Settings,
   Users,
   CreditCard,
@@ -91,13 +88,6 @@ const About = () => {
     },
   ];
 
-  const stats = [
-    { value: "15K+", label: "Happy Customers" },
-    { value: "150+", label: "Locations" },
-    { value: "98%", label: "Satisfaction Rate" },
-    { value: "24/7", label: "Customer Support" },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
       {/* Hero Section */}
@@ -108,15 +98,15 @@ const About = () => {
             initial="initial"
             whileInView="whileInView"
             className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-6">
-              <Star className="w-5 h-5 text-orange-500" />
-              <span className="text-orange-700 font-medium">Our Services</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
+              <Star className="w-5 h-5 text-red-500" />
+              <span className="text-white font-medium">Our Services</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Enjoy the Best service in
-              <span className="text-orange-500"> Auto Rental</span>
+              <span className="text-red-600"> Auto Rental</span>
             </h1>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-black text-lg leading-relaxed">
               Welcome to Auto Rental, where we redefine the car rental experience.
               Our mission is to provide seamless, reliable, and affordable car
               rental service for everyone, everywhere.
@@ -134,7 +124,7 @@ const About = () => {
             whileInView="whileInView"
             className="text-center mb-12">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Settings className="w-6 h-6 text-orange-500" />
+              <Settings className="w-6 h-6 text-red-600" />
               <h2 className="text-3xl font-bold">Main Services</h2>
             </div>
             <p className="text-gray-600 max-w-2xl mx-auto">
