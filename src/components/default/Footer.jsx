@@ -51,8 +51,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-r from-gray-100 via-white to-white text-black pt-16 pb-8 relative overflow-hidden">
-      {/* Background Pattern */}
+    <footer className="bg-gradient-to-r from-gray-200 via-white to-gray-200 text-black pt-16 pb-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
 
       <div className="container mx-auto px-4 relative">
@@ -157,7 +156,7 @@ const Footer = () => {
             <div className="h-64 rounded-lg overflow-hidden border border-gray-800">
               <iframe
                 title="AutoRental Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.363520556493!2d19.817623415424846!3d41.32736697927038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE5JzM4LjUiTiAxOcKwNDknMDguNiJF!5e0!3m2!1sen!2s!4v1718893416354!5m2!1sen!2s&hl=en&q=Tirana+Albania&zoom=15&ui=no"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.5675290166478!2d19.775230499999996!3d41.318270899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135031ae7c63f03f%3A0xe91f64dbdc93a0ac!2sAuto%20Rental%20Tirana!5e0!3m2!1sen!2s!4v1743964708822!5m2!1sen!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
