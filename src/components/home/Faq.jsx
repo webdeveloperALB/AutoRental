@@ -19,62 +19,24 @@ const FAQ = () => {
 
   const faqCategories = [
     {
-      title: "Reservation & Rental Requirements",
+      title: "AutoRental FAQs",
       icon: ClipboardCheck,
       color: "text-blue-600",
       bgColor: "bg-blue-50",
       questions: [
         {
-          question: "How do I make a car reservation?",
-          answer: "Select a vehicle, choose pickup and return dates, and confirm your booking."
+          question: "What do I need to rent a car?",
+          answer: "To rent a car, you need a valid driver's license, proof of identity, and may need to meet certain age and driving experience requirements."
         },
         {
-          question: "Can I modify my reservation?",
-          answer: "Modifications and cancellations are allowed within specific timeframes."
-        },
-        {
-          question: "What documents do I need to rent a car?",
-          answer: "A valid driver's license and proof of identity are required. Additional documentation may apply."
-        },
-        {
-          question: "What are the age requirements?",
-          answer: "Minimum age and driving experience requirements apply based on vehicle type."
+          question: "What are the payment and insurance options?",
+          answer: "We accept various payment methods, with potential security deposits. Insurance options are available with different levels of coverage."
         }
-      ],
-      subCategories: [
-        { title: "Booking Process", icon: Calendar },
-        { title: "Driver Requirements", icon: IdCard }
-      ]
-    },
-    {
-      title: "Financial Policies & Protection",
-      icon: Shield,
-      color: "text-green-600",
-      bgColor: "bg-green-50",
-      questions: [
-        {
-          question: "What payment methods are accepted?",
-          answer: "Various payment methods are accepted, and security deposits may be required."
-        },
-        {
-          question: "What insurance options are available?",
-          answer: "Insurance options vary, offering different levels of protection."
-        },
-        {
-          question: "What is your fuel policy?",
-          answer: "Vehicles must be returned with a full tank, or a prepaid fuel option is available."
-        },
-        {
-          question: "What happens if I return late?",
-          answer: "Late returns may result in additional charges, with penalties for excessive delays."
-        }
-      ],
-      subCategories: [
-        { title: "Payments", icon: CreditCard },
-        { title: "Safety Policies", icon: Lock }
       ]
     }
   ];
+  
+
 
 
   const toggleAccordion = (index) => {
@@ -83,7 +45,7 @@ const FAQ = () => {
 
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-4 max-w-6xl flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -102,7 +64,7 @@ const FAQ = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-1 gap-8 max-w-[490px]">
           {faqCategories.map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
@@ -156,12 +118,13 @@ const FAQ = () => {
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 py-4 bg-gray-100 border-t border-gray-200">
+                          <div className="px-6 py-4 bg-gray-100 border-t border-gray-200 max-w-full"> {/* Ensure width doesn't change */}
                             <p className="text-black leading-relaxed whitespace-pre-line">
                               {item.answer}
                             </p>
                           </div>
                         </motion.div>
+
                       )}
                     </AnimatePresence>
                   </div>

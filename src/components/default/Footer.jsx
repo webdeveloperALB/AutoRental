@@ -51,7 +51,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 relative overflow-hidden">
+    <footer className="bg-gradient-to-r from-gray-100 via-white to-white text-black pt-16 pb-8 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
 
@@ -71,11 +71,11 @@ const Footer = () => {
                 className="w-25 h-10 group-hover:scale-110 transition-transform"
               />
               <span className="text-2xl font-bold">
-                <span className="text-white">Auto</span>
+                <span className="text-black">Auto</span>
                 <span className="text-red-600">Rental</span>
               </span>
             </Link>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-black leading-relaxed">
               Your trusted partner for car rentals. Experience premium service
               with unlimited miles and flexible pick-up options at unbeatable
               prices.
@@ -89,7 +89,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className={`w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center
+                  className={`w-10 h-10 rounded-lg bg-gray-800 text-white flex items-center justify-center
                            ${color} hover:text-white transition-all duration-300`}>
                   <Icon className="w-5 h-5" />
                 </motion.a>
@@ -104,13 +104,13 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Quick Links</h3>
+            <h3 className="text-xl font-semibold text-black">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.path}
-                    className="group hover:text-white transition-colors inline-flex items-center space-x-2">
+                    className="group hover:text-black transition-colors inline-flex items-center space-x-2">
                     <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     <span>{link.label}</span>
                   </Link>
@@ -126,17 +126,17 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Customer Support</h3>
+            <h3 className="text-xl font-semibold text-black">Customer Support</h3>
             <div className="space-y-4 pt-4 border-t border-gray-800">
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Phone className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
-                <span className="hover:text-white transition-colors">
+                <span className="hover:text-black transition-colors">
                   +355 69 835 7378
                 </span>
               </div>
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Mail className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
-                <span className="hover:text-white transition-colors">
+                <span className="hover:text-black transition-colors">
                   example@gmail.com
                 </span>
               </div>
@@ -153,7 +153,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-xl font-semibold text-white">Our Location</h3>
+            <h3 className="text-xl font-semibold text-black">Our Location</h3>
             <div className="h-64 rounded-lg overflow-hidden border border-gray-800">
               <iframe
                 title="AutoRental Location"
@@ -167,7 +167,7 @@ const Footer = () => {
                 className="rounded-lg"
               ></iframe>
             </div>
-            <div className="flex items-center space-x-2 text-gray-400">
+            <div className="flex items-center space-x-2 text-black0">
               <MapPin className="w-5 h-5 text-red-600" />
               <p>Tirana, Albania</p>
             </div>
@@ -181,7 +181,7 @@ const Footer = () => {
           whileInView="whileInView"
           viewport={{ once: true }}
           className="mt-16 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400">
+          <p className="text-black">
             © {new Date().getFullYear()} AutoRental. All rights reserved.
           </p>
         </motion.div>
