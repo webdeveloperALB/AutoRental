@@ -89,7 +89,7 @@ const Footer = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className={`w-10 h-10 rounded-lg bg-gray-800 text-white flex items-center justify-center
-                           ${color} hover:text-white transition-all duration-300`}>
+                             ${color} hover:text-white transition-all duration-300`}>
                   <Icon className="w-5 h-5" />
                 </motion.a>
               ))}
@@ -118,7 +118,7 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Working Hours */}
+          {/* Customer Support */}
           <motion.div
             variants={fadeInUp}
             initial="initial"
@@ -128,32 +128,31 @@ const Footer = () => {
             <h3 className="text-xl font-semibold text-black">Customer Support</h3>
             <div className="space-y-4 pt-4 border-t border-gray-800">
               <div className="flex items-center space-x-3 group cursor-pointer">
-                <Phone className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
-                <span className="hover:text-black transition-colors">
-                  +355 69 835 7378
-                </span>
+                <Phone className="w-5 h-5 text-green-600 group-hover:rotate-12 transition-transform" style={{ fill: 'currentColor' }} />
+                +355 69 835 7378
               </div>
               <div className="flex items-center space-x-3 group cursor-pointer">
-                <Mail className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+                <Mail className="w-5 h-5 text-black group-hover:rotate-12 transition-transform"  />
                 <span className="hover:text-black transition-colors">
                   example@gmail.com
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-white" />
+                <MapPin className="w-5 h-5 text-red-600" />
                 <span>Tirane, Albania</span>
               </div>
             </div>
           </motion.div>
+
+          {/* Our Location */}
           <motion.div
             variants={fadeInUp}
             initial="initial"
             whileInView="whileInView"
             viewport={{ once: true }}
-            className="space-y-6"
-          >
+            className="space-y-6">
             <h3 className="text-xl font-semibold text-black">Our Location</h3>
-            <div className="h-64 rounded-lg overflow-hidden border border-gray-800">
+            <div className="h-64 rounded-lg overflow-hidden border border-gray-300">
               <iframe
                 title="AutoRental Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.5675290166478!2d19.775230499999996!3d41.318270899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135031ae7c63f03f%3A0xe91f64dbdc93a0ac!2sAuto%20Rental%20Tirana!5e0!3m2!1sen!2s!4v1743964708822!5m2!1sen!2s"
@@ -166,7 +165,7 @@ const Footer = () => {
                 className="rounded-lg"
               ></iframe>
             </div>
-            <div className="flex items-center space-x-2 text-black0">
+            <div className="flex items-center space-x-2 text-black">
               <MapPin className="w-5 h-5 text-red-600" />
               <p>Tirana, Albania</p>
             </div>
