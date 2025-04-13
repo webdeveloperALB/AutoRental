@@ -68,13 +68,12 @@ const Models = () => {
     },
     {
       id: 2,
-      name: "Mercedes Benz S-class",
-      category: "SUV",
+      name: "BMW Seria 6 M Packet",
+      category: "Sports",
       price: 129,
-      image: "/suv.png",
+      image: "/cars/bmw seria 6/7V3A9685.png",
       features: {
-        seats: "7",
-        luggage: "5",
+        seats: "4",
         fuel: "Diesel",
       },
       rating: 4.8,
