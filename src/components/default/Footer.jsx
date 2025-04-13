@@ -137,10 +137,6 @@ const Footer = () => {
                   example@gmail.com
                 </span>
               </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-red-600" />
-                <span>Tirane, Albania</span>
-              </div>
             </div>
           </motion.div>
 

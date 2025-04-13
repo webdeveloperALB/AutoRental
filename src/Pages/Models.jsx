@@ -52,14 +52,14 @@ const Models = () => {
   const carModels = [
     {
       id: 1,
-      name: "Mercedes Benz S-class",
-      category: "Economy",
+      name: "Mercedes Benz S Class Lungo",
+      category: "Luxury",
       price: 89,
-      image: "/sedan.png",
+      image: "/cars/s-class/7V3A8562.png",
       features: {
-        seats: "5",
+        seats: "4",
         luggage: "3",
-        fuel: "Hybrid",
+        fuel: "Petrol",
       },
       rating: 4.9,
       reviews: 128,
@@ -226,150 +226,6 @@ const Models = () => {
       color: "bg-gray-100",
       iconColor: "text-blue-500",
     },
-    {
-      id: 12,
-      name: "Mercedes Benz S-class",
-      category: "Sports",
-      price: 449,
-      image: "/sports.png",
-      features: {
-        seats: "2",
-        luggage: "1",
-        fuel: "Petrol",
-      },
-      rating: 4.9,
-      reviews: 36,
-      color: "bg-gray-100",
-      iconColor: "text-yellow-500",
-    },
-    {
-      id: 13,
-      name: "Mercedes Benz S-class",
-      category: "Luxury",
-      price: 599,
-      image: "/luxury.png",
-      features: {
-        seats: "5",
-        luggage: "4",
-        fuel: "Petrol",
-      },
-      rating: 5.0,
-      reviews: 28,
-      color: "bg-gray-100",
-      iconColor: "text-purple-500",
-    },
-    {
-      id: 14,
-      name: "Mercedes Benz S-class",
-      category: "SUV",
-      price: 199,
-      image: "/suv.png",
-      features: {
-        seats: "7",
-        luggage: "5",
-        fuel: "Electric",
-      },
-      rating: 4.8,
-      reviews: 156,
-      color: "bg-gray-100",
-      iconColor: "text-red-500",
-    },
-    {
-      id: 15,
-      name: "Mercedes Benz S-class",
-      category: "Luxury",
-      price: 449,
-      image: "/luxury.png",
-      features: {
-        seats: "4",
-        luggage: "3",
-        fuel: "Petrol",
-      },
-      rating: 4.9,
-      reviews: 48,
-      color: "bg-gray-100",
-      iconColor: "text-green-500",
-    },
-    {
-      id: 16,
-      name: "Mercedes Benz S-class",
-      category: "Sedan",
-      price: 55,
-      image: "/sedan.png",
-      features: {
-        seats: "5",
-        luggage: "3",
-        fuel: "Petrol",
-      },
-      rating: 4.6,
-      reviews: 198,
-      color: "bg-gray-100",
-      iconColor: "text-orange-500",
-    },
-    {
-      id: 17,
-      name: "Mercedes Benz S-class",
-      category: "Sports",
-      price: 499,
-      image: "/sports.png",
-      features: {
-        seats: "2",
-        luggage: "1",
-        fuel: "Petrol",
-      },
-      rating: 5.0,
-      reviews: 32,
-      color: "bg-gray-100",
-      iconColor: "text-indigo-500",
-    },
-    {
-      id: 18,
-      name: "Mercedes Benz S-class",
-      category: "Sports",
-      price: 399,
-      image: "/sports.png",
-      features: {
-        seats: "4",
-        luggage: "2",
-        fuel: "Petrol",
-      },
-      rating: 4.9,
-      reviews: 45,
-      color: "bg-gray-100",
-      iconColor: "text-teal-500",
-    },
-    {
-      id: 19,
-      name: "Mercedes Benz S-class",
-      category: "SUV",
-      price: 89,
-      image: "/suv.png",
-      features: {
-        seats: "5",
-        luggage: "4",
-        fuel: "Electric",
-      },
-      rating: 4.7,
-      reviews: 124,
-      color: "bg-gray-100",
-      iconColor: "text-pink-500",
-    },
-    {
-      id: 20,
-      name: "Mercedes Benz S-class",
-      category: "Luxury",
-      price: 159,
-      image: "/luxury.png",
-      features: {
-        seats: "5",
-        luggage: "4",
-        fuel: "Petrol",
-      },
-      rating: 4.8,
-      reviews: 86,
-      color: "bg-gray-100",
-      iconColor: "text-gray-500",
-    },
   ];
 
   const filteredCars = carModels.filter((car) => {
@@ -515,10 +371,7 @@ const Models = () => {
                           <Users className="w-5 h-5 text-gray-500" />
                           <span>{car.features.seats} Seats</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Briefcase className="w-5 h-5 text-gray-500" />
-                          <span>{car.features.luggage} Luggage</span>
-                        </div>
+                        
                         <div className="flex items-center gap-2">
                           <Fuel className="w-5 h-5 text-gray-500" />
                           <span>{car.features.fuel}</span>
