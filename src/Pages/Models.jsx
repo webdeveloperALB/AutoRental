@@ -7,7 +7,6 @@ import {
   Search,
   Fuel,
   Users,
-  Briefcase,
   Star,
   HelpCircle,
   Calendar,
@@ -55,7 +54,7 @@ const Models = () => {
       name: "Mercedes Benz S Class Lungo",
       category: "Luxury",
       price: 89,
-      image: "/cars/s-class/7V3A8562.png",
+      image: "/cars/s-class/7V3A8562.jpg",
       features: {
         seats: "4",
         luggage: "3",
@@ -71,7 +70,7 @@ const Models = () => {
       name: "BMW Seria 6 M Packet",
       category: "Sports",
       price: 129,
-      image: "/cars/bmw seria 6/7V3A9685.png",
+      image: "/cars/bmw seria 6/7V3A9685.jpg",
       features: {
         seats: "4",
         fuel: "Diesel",

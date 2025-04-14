@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { useParams } from "react-router-dom"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import "./Booking.css"
@@ -16,31 +16,31 @@ const cars = [
     //imageInside: "/cars/s-class/7V3A8562.png",
     images: [
       {
-        url: "/cars/s-class/7V3A8562.png",
+        url: "/cars/s-class/7V3A8562.jpg",
         label: "Front View",
       },
       {
-        url: "/cars/s-class/7V3A8568.png",
+        url: "/cars/s-class/7V3A8568.jpg",
         label: "Front View",
       },
       {
-        url: "/cars/s-class/7V3A8544.png",
+        url: "/cars/s-class/7V3A8544.jpg",
         label: "Rear View",
       },
       {
-        url: "/cars/s-class/7V3A8540.png",
+        url: "/cars/s-class/7V3A8540.jpg",
         label: "Rear View",
       },
       {
-        url: "/cars/s-class/7V3A8572.png",
+        url: "/cars/s-class/7V3A8572.jpg",
         label: "Interior",
       },
       {
-        url: "/cars/s-class/7V3A8587.png",
+        url: "/cars/s-class/7V3A8587.jpg",
         label: "Interior Behind",
       },
       {
-        url: "/cars/s-class/7V3A8554.png",
+        url: "/cars/s-class/7V3A8554.jpg",
         label: "Side View",
       },
     ],
@@ -63,19 +63,19 @@ const cars = [
      //imageInside: "/Sclass3.jpg",
     images: [
       {
-        url: "/cars/bmw seria 6/7V3A9685.png",
+        url: "/cars/bmw seria 6/7V3A9685.jpg",
         label: "Front View",
       },
       {
-        url: "/cars/bmw seria 6/7V3A9677.png",
+        url: "/cars/bmw seria 6/7V3A9677.jpg",
         label: "Rear View",
       },
       {
-        url: "/cars/bmw seria 6/7V3A9702.png",
+        url: "/cars/bmw seria 6/7V3A9702.jpg",
         label: "Interior",
       },
       {
-        url: "/cars/bmw seria 6/7V3A9698.png",
+        url: "/cars/bmw seria 6/7V3A9698.jpg",
         label: "Side View",
       },
     ],
@@ -327,24 +327,27 @@ Car Details:
   }
 
   // Navigate to specific slide
-  const goToSlide = (index) => {
-    if (!scrollContainerRef.current) return
+  const goToSlide = useCallback(
+    (index) => {
+      if (!scrollContainerRef.current) return
 
-    // Ensure index is within bounds
-    const newIndex = Math.max(0, Math.min(index, totalSlides - 1))
+      // Ensure index is within bounds
+      const newIndex = Math.max(0, Math.min(index, totalSlides - 1))
 
-    setActiveIndex(newIndex)
+      setActiveIndex(newIndex)
 
-    // Get container width for precise sliding
-    const containerWidth = scrollContainerRef.current.clientWidth
+      // Get container width for precise sliding
+      const containerWidth = scrollContainerRef.current.clientWidth
 
-    // Apply smooth transition
-    scrollContainerRef.current.style.transition = "transform 0.3s ease-out"
-    const newTranslate = -newIndex * containerWidth
-    scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
-    setPrevTranslate(newTranslate)
-    setCurrentTranslate(newTranslate)
-  }
+      // Apply smooth transition
+      scrollContainerRef.current.style.transition = "transform 0.3s ease-out"
+      const newTranslate = -newIndex * containerWidth
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
+      setPrevTranslate(newTranslate)
+      setCurrentTranslate(newTranslate)
+    },
+    [totalSlides],
+  )
 
   // Navigate to previous slide
   const prevSlide = () => {
@@ -419,7 +422,6 @@ Car Details:
     setIsDragging(false)
 
     // Calculate which slide to snap to based on drag distance
-    const containerWidth = scrollContainerRef.current?.clientWidth || 0
     const dragDistance = currentTranslate - prevTranslate
 
     if (Math.abs(dragDistance) > dragThreshold) {
@@ -446,7 +448,7 @@ Car Details:
       // Update drag threshold based on container width
       setDragThreshold(scrollContainerRef.current.clientWidth * 0.15) // 15% of container width
     }
-  }, [selectedCar])
+  }, [selectedCar, goToSlide])
 
   // Handle window resize
   useEffect(() => {
@@ -462,7 +464,7 @@ Car Details:
 
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-  }, [activeIndex])
+  }, [activeIndex, goToSlide])
 
   return selectedCar ? (
     <div className="container mx-auto p-6 mt-20">
