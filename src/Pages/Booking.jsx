@@ -124,15 +124,33 @@ const cars = [
   {
     id: 4,
     name: "AUDI A7 BITDI",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/audi a7 white/7V3A8612.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/audi a7 white/7V3A8622.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/audi a7 white/7V3A8624.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/audi a7 white/7V3A8603.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/audi a7 white/7V3A8600.jpg",
+        label: "Side View",
+      },
+    ],
     category: "Sports",
     price: 249,
-    image: "/Sclass.jpg",
     features: {
-      seats: "2",
-      luggage: "2",
-      fuel: "Petrol",
+      seats: "4",
+      fuel: "Diesel",
     },
     rating: 5.0,
     reviews: 84,
@@ -141,16 +159,30 @@ const cars = [
   },
   {
     id: 5,
-    name: "Mercedes Benz S-class",
-    category: "SUV",
+    name: "Mercedes Benz C Class",
+    category: "Sedan",
     price: 159,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/c-class 1.8/7V3A9658.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/c-class 1.8/7V3A9673.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/c-class 1.8/7V3A9654.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/c-class 1.8/7V3A9646.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
       seats: "5",
-      luggage: "4",
-      fuel: "Electric",
+      fuel: "Petrol",
     },
     rating: 4.7,
     reviews: 92,
