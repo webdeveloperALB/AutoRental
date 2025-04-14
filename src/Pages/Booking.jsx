@@ -1,17 +1,18 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState, useCallback } from "react"
-import { useParams } from "react-router-dom"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import "./Booking.css"
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import "./Booking.css";
 
 const cars = [
   {
     id: 1,
     name: "Mercedes Benz S Class Lungo",
-    category: "Luxury",
+    category: "Sedan",
+    categories: ["Sedan", "Economy", "Luxury"],
     price: 89,
-    //image: "/cars/s-class/7V3A8562.png", 
+    //image: "/cars/s-class/7V3A8562.png",
     //imageBehind: "/cars/s-class/7V3A8540.png",
     //imageInside: "/cars/s-class/7V3A8562.png",
     images: [
@@ -58,9 +59,9 @@ const cars = [
     name: "BMW Seria 6 M Packet",
     category: "Sports",
     price: 129,
-     //image: "/Sclass.jpg",
-     //imageBehind: "/Sclass2.jpg",
-     //imageInside: "/Sclass3.jpg",
+    //image: "/Sclass.jpg",
+    //imageBehind: "/Sclass2.jpg",
+    //imageInside: "/Sclass3.jpg",
     images: [
       {
         url: "/cars/bmw seria 6/7V3A9685.jpg",
@@ -90,16 +91,30 @@ const cars = [
   },
   {
     id: 3,
-    name: "Mercedes Benz S-class",
-    category: "Economy",
+    name: "Volkswagen Passat CC",
+    category: "Sedan",
     price: 199,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/passat cc/7V3A9613.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/passat cc/7V3A9625.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/passat cc/7V3A9628.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/passat cc/7V3A9606.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
-      seats: "5",
-      luggage: "4",
-      fuel: "Petrol",
+      seats: "4",
+      fuel: "Diesel",
     },
     rating: 4.9,
     reviews: 156,
@@ -108,7 +123,7 @@ const cars = [
   },
   {
     id: 4,
-    name: "Mercedes Benz S-class",
+    name: "AUDI A7 BITDI",
     imageBehind: "/Sclass2.jpg",
     imageInside: "/Sclass3.jpg",
     category: "Sports",
@@ -250,57 +265,64 @@ const cars = [
     color: "bg-blue-50",
     iconColor: "text-blue-500",
   },
-]
+];
 
 const CarDetailPage = () => {
-  const { id } = useParams()
-  const [selectedCar, setSelectedCar] = useState(null)
-  const scrollContainerRef = useRef(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [totalSlides, setTotalSlides] = useState(3) // Default to 3 for backward compatibility
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [currentTranslate, setCurrentTranslate] = useState(0)
-  const [prevTranslate, setPrevTranslate] = useState(0)
-  const [dragThreshold, setDragThreshold] = useState(100) // Threshold to trigger slide change
+  const { id } = useParams();
+  const [selectedCar, setSelectedCar] = useState(null);
+  const scrollContainerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [totalSlides, setTotalSlides] = useState(3); // Default to 3 for backward compatibility
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentTranslate, setCurrentTranslate] = useState(0);
+  const [prevTranslate, setPrevTranslate] = useState(0);
+  const [dragThreshold, setDragThreshold] = useState(100); // Threshold to trigger slide change
 
   useEffect(() => {
-    const car = cars.find((car) => car.id === Number.parseInt(id))
-    setSelectedCar(car)
+    const car = cars.find((car) => car.id === Number.parseInt(id));
+    setSelectedCar(car);
 
     // Set the total number of slides based on the images array if available
     if (car && car.images && car.images.length > 0) {
-      setTotalSlides(car.images.length)
+      setTotalSlides(car.images.length);
     } else {
-      setTotalSlides(3) // Fallback to 3 for backward compatibility
+      setTotalSlides(3); // Fallback to 3 for backward compatibility
     }
-  }, [id])
+  }, [id]);
 
   const [rentalDetails, setRentalDetails] = useState({
     pickUpDate: "",
     dropOffDate: "",
     location: "",
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setRentalDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Format dates
     const formatDate = (dateString) => {
-      const options = { day: "numeric", month: "long", year: "numeric" }
-      return new Date(dateString).toLocaleDateString("en-US", options)
-    }
+      const options = { day: "numeric", month: "long", year: "numeric" };
+      return new Date(dateString).toLocaleDateString("en-US", options);
+    };
+
+    // Get categories as comma-separated string
+    const carCategories = selectedCar.categories
+      ? selectedCar.categories.join(", ")
+      : selectedCar.category;
 
     // Create WhatsApp message
-    const message = `Hello! I want to book the ${selectedCar.name} ($${selectedCar.price}/day).
+    const message = `Hello! I want to book the ${selectedCar.name} ($${
+      selectedCar.price
+    }/day).
     
 📅 Rental Period:
 - Pick-up: ${formatDate(rentalDetails.pickUpDate)}
@@ -309,162 +331,162 @@ const CarDetailPage = () => {
 📍 Pickup Location: ${rentalDetails.location}
 
 Car Details:
-🚗 ${selectedCar.category}
+🚗 ${carCategories}
 💺 ${selectedCar.features.seats} seats
-⛽ ${selectedCar.features.fuel}`
+⛽ ${selectedCar.features.fuel}`;
 
     // Encode message for URL
-    const encodedMessage = encodeURIComponent(message)
+    const encodedMessage = encodeURIComponent(message);
 
     // Replace with your WhatsApp number (include country code without + sign)
-    const whatsappNumber = "355688172927"
+    const whatsappNumber = "355688172927";
 
     // Create WhatsApp URL
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     // Open WhatsApp in new tab
-    window.open(whatsappUrl, "_blank")
-  }
+    window.open(whatsappUrl, "_blank");
+  };
 
   // Navigate to specific slide
   const goToSlide = useCallback(
     (index) => {
-      if (!scrollContainerRef.current) return
+      if (!scrollContainerRef.current) return;
 
       // Ensure index is within bounds
-      const newIndex = Math.max(0, Math.min(index, totalSlides - 1))
+      const newIndex = Math.max(0, Math.min(index, totalSlides - 1));
 
-      setActiveIndex(newIndex)
+      setActiveIndex(newIndex);
 
       // Get container width for precise sliding
-      const containerWidth = scrollContainerRef.current.clientWidth
+      const containerWidth = scrollContainerRef.current.clientWidth;
 
       // Apply smooth transition
-      scrollContainerRef.current.style.transition = "transform 0.3s ease-out"
-      const newTranslate = -newIndex * containerWidth
-      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
-      setPrevTranslate(newTranslate)
-      setCurrentTranslate(newTranslate)
+      scrollContainerRef.current.style.transition = "transform 0.3s ease-out";
+      const newTranslate = -newIndex * containerWidth;
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`;
+      setPrevTranslate(newTranslate);
+      setCurrentTranslate(newTranslate);
     },
-    [totalSlides],
-  )
+    [totalSlides]
+  );
 
   // Navigate to previous slide
   const prevSlide = () => {
-    goToSlide(activeIndex - 1)
-  }
+    goToSlide(activeIndex - 1);
+  };
 
   // Navigate to next slide
   const nextSlide = () => {
-    goToSlide(activeIndex + 1)
-  }
+    goToSlide(activeIndex + 1);
+  };
 
   // Mouse down event for drag scrolling
   const handleMouseDown = (e) => {
-    setIsDragging(true)
-    setStartX(e.clientX)
+    setIsDragging(true);
+    setStartX(e.clientX);
 
     // Disable transition during drag
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transition = "none"
+      scrollContainerRef.current.style.transition = "none";
     }
 
     // Prevent default behavior
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   // Touch start event for mobile drag scrolling
   const handleTouchStart = (e) => {
-    setIsDragging(true)
-    setStartX(e.touches[0].clientX)
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
 
     // Disable transition during drag
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transition = "none"
+      scrollContainerRef.current.style.transition = "none";
     }
-  }
+  };
 
   // Mouse move event for drag scrolling
   const handleMouseMove = (e) => {
-    if (!isDragging) return
+    if (!isDragging) return;
 
-    const currentX = e.clientX
-    const diff = currentX - startX
-    const newTranslate = prevTranslate + diff
+    const currentX = e.clientX;
+    const diff = currentX - startX;
+    const newTranslate = prevTranslate + diff;
 
-    setCurrentTranslate(newTranslate)
+    setCurrentTranslate(newTranslate);
 
     // Apply the translation
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`;
     }
-  }
+  };
 
   // Touch move event for mobile drag scrolling
   const handleTouchMove = (e) => {
-    if (!isDragging) return
+    if (!isDragging) return;
 
-    const currentX = e.touches[0].clientX
-    const diff = currentX - startX
-    const newTranslate = prevTranslate + diff
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    const newTranslate = prevTranslate + diff;
 
-    setCurrentTranslate(newTranslate)
+    setCurrentTranslate(newTranslate);
 
     // Apply the translation
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`;
     }
-  }
+  };
 
   // End dragging
   const handleDragEnd = () => {
-    if (!isDragging) return
-    setIsDragging(false)
+    if (!isDragging) return;
+    setIsDragging(false);
 
     // Calculate which slide to snap to based on drag distance
-    const dragDistance = currentTranslate - prevTranslate
+    const dragDistance = currentTranslate - prevTranslate;
 
     if (Math.abs(dragDistance) > dragThreshold) {
       // If dragged far enough, move to next/prev slide
       if (dragDistance > 0) {
         // Dragged right -> go to previous slide
-        goToSlide(activeIndex - 1)
+        goToSlide(activeIndex - 1);
       } else {
         // Dragged left -> go to next slide
-        goToSlide(activeIndex + 1)
+        goToSlide(activeIndex + 1);
       }
     } else {
       // If not dragged far enough, snap back to current slide
-      goToSlide(activeIndex)
+      goToSlide(activeIndex);
     }
-  }
+  };
 
   // Set initial slide position when component mounts
   useEffect(() => {
     if (scrollContainerRef.current) {
       // Initialize container position
-      goToSlide(0)
+      goToSlide(0);
 
       // Update drag threshold based on container width
-      setDragThreshold(scrollContainerRef.current.clientWidth * 0.15) // 15% of container width
+      setDragThreshold(scrollContainerRef.current.clientWidth * 0.15); // 15% of container width
     }
-  }, [selectedCar, goToSlide])
+  }, [selectedCar, goToSlide]);
 
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       if (scrollContainerRef.current) {
         // Re-calculate position on resize
-        goToSlide(activeIndex)
+        goToSlide(activeIndex);
 
         // Update drag threshold
-        setDragThreshold(scrollContainerRef.current.clientWidth * 0.15)
+        setDragThreshold(scrollContainerRef.current.clientWidth * 0.15);
       }
-    }
+    };
 
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [activeIndex, goToSlide])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeIndex, goToSlide]);
 
   return selectedCar ? (
     <div className="container mx-auto p-6 mt-20">
@@ -473,7 +495,10 @@ Car Details:
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
           <div className="relative">
             {/* Gallery Container */}
-            <div className="relative overflow-hidden rounded-lg" style={{ height: "400px" }}>
+            <div
+              className="relative overflow-hidden rounded-lg"
+              style={{ height: "400px" }}
+            >
               {/* Scroll Container */}
               <div
                 ref={scrollContainerRef}
@@ -494,7 +519,10 @@ Car Details:
                 {selectedCar.images && selectedCar.images.length > 0 ? (
                   // Render from images array if available
                   selectedCar.images.map((image, index) => (
-                    <div key={index} className="relative flex-shrink-0 w-full h-full">
+                    <div
+                      key={index}
+                      className="relative flex-shrink-0 w-full h-full"
+                    >
                       <img
                         src={image.url || "/placeholder.svg"}
                         alt={`${selectedCar.name} - ${image.label}`}
@@ -603,21 +631,49 @@ Car Details:
 
         {/* Car Details */}
         <div className="w-full md:w-1/2 bg-white shadow-xl rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedCar.name}</h2>
-          <p className="text-xl text-gray-600 mb-4">
-            {selectedCar.category} - ${selectedCar.price}/day
-          </p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+            {selectedCar.name}
+          </h2>
+
+          {/* Display multiple categories */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {selectedCar.categories ? (
+              // Display multiple categories as tags if available
+              selectedCar.categories.map((category, index) => (
+                <span
+                  key={index}
+                  className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+                >
+                  {category}
+                </span>
+              ))
+            ) : (
+              // Fallback to single category
+              <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                {selectedCar.category}
+              </span>
+            )}
+            <span className="ml-auto text-xl font-semibold">
+              ${selectedCar.price}/day
+            </span>
+          </div>
 
           {/* Car Rating */}
           <div className="flex items-center space-x-3 mb-6">
             <div className="flex items-center space-x-1">
-              <span className="text-2xl font-semibold text-gray-500">{selectedCar.rating}</span>
+              <span className="text-2xl font-semibold text-gray-500">
+                {selectedCar.rating}
+              </span>
               <div className="flex text-sm text-yellow-500">
                 {[...Array(5)].map((_, index) => (
                   <svg
                     key={index}
                     xmlns="http://www.w3.org/2000/svg"
-                    fill={index < Math.floor(selectedCar.rating) ? "currentColor" : "none"}
+                    fill={
+                      index < Math.floor(selectedCar.rating)
+                        ? "currentColor"
+                        : "none"
+                    }
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                     className="h-5 w-5"
@@ -632,7 +688,9 @@ Car Details:
                 ))}
               </div>
             </div>
-            <span className="text-sm text-gray-500">({selectedCar.reviews} reviews)</span>
+            <span className="text-sm text-gray-500">
+              ({selectedCar.reviews} reviews)
+            </span>
           </div>
 
           {/* Car Features */}
@@ -643,7 +701,11 @@ Car Details:
             </div>
             <div className="flex items-center space-x-2">
               <div className="text-xl text-gray-600">
-                {selectedCar.features.fuel === "Electric" ? "⚡" : selectedCar.features.fuel === "Hybrid" ? "🌱" : "⛽"}
+                {selectedCar.features.fuel === "Electric"
+                  ? "⚡"
+                  : selectedCar.features.fuel === "Hybrid"
+                  ? "🌱"
+                  : "⛽"}
               </div>
               <span>{selectedCar.features.fuel} fuel</span>
             </div>
@@ -678,7 +740,10 @@ Car Details:
                   onChange={handleChange}
                   className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
-                  min={rentalDetails.pickUpDate || new Date().toISOString().split("T")[0]}
+                  min={
+                    rentalDetails.pickUpDate ||
+                    new Date().toISOString().split("T")[0]
+                  }
                 />
               </div>
 
@@ -710,7 +775,7 @@ Car Details:
     </div>
   ) : (
     <div className="container mx-auto p-4">Loading...</div>
-  )
-}
+  );
+};
 
-export default CarDetailPage
+export default CarDetailPage;

@@ -1,58 +1,16 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  Car,
-  Filter,
-  Search,
-  Fuel,
-  Users,
-  Star,
-  HelpCircle,
-  Calendar,
-  MapPin,
-} from "lucide-react";
+"use client"
 
-const Models = () => {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get("category");
-  const searchParam = searchParams.get("search");
-
-  // Initialize state from URL params
-  const [selectedCategory, setSelectedCategory] = useState(
-    categoryParam || "All"
-  );
-  const [searchQuery, setSearchQuery] = useState(searchParam || "");
-
-  // Update state when URL changes
-  useEffect(() => {
-    const params = new URLSearchParams();
-    if (selectedCategory !== "All") params.set("category", selectedCategory);
-    if (searchQuery.trim()) params.set("search", searchQuery.trim());
-    setSearchParams(params);
-  }, [selectedCategory, searchQuery, setSearchParams]);
-
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-  };
-
-  const categories = [
-    { name: "All", icon: Car },
-    { name: "SUV", icon: Car },
-    { name: "Sedan", icon: Car },
-    { name: "Luxury", icon: Car },
-    { name: "Sports", icon: Car },
-    { name: "Economy", icon: Car },
-  ];
+import { useState, useEffect } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { motion } from "framer-motion"
+import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X } from "lucide-react"
 
   const carModels = [
     {
       id: 1,
       name: "Mercedes Benz S Class Lungo",
-      category: "Luxury",
+      category: "Sedan",
+      categories: ["Sedan", "Economy", "Luxury"],
       price: 89,
       image: "/cars/s-class/7V3A8562.jpg",
       features: {
@@ -82,14 +40,13 @@ const Models = () => {
     },
     {
       id: 3,
-      name: "Mercedes Benz S-class",
-      category: "Economy",
+      name: "Volkswagen Passat CC",
+      category: "Sedan",
       price: 199,
-      image: "/luxury.png",
+      image: "/cars/passat cc/7V3A9613.jpg",
       features: {
-        seats: "5",
-        luggage: "4",
-        fuel: "Petrol",
+        seats: "4",
+        fuel: "Diesel",
       },
       rating: 4.9,
       reviews: 156,
@@ -98,14 +55,13 @@ const Models = () => {
     },
     {
       id: 4,
-      name: "Mercedes Benz S-class",
-      category: "Sports",
+      name: "AUDI A7 BITDI",
+      category: "Luxury",
       price: 249,
-      image: "/sports.png",
+      image: "/cars/audi a7 white/7V3A8612.jpg",
       features: {
-        seats: "2",
-        luggage: "2",
-        fuel: "Petrol",
+        seats: "4",
+        fuel: "Diesel",
       },
       rating: 5.0,
       reviews: 84,
@@ -226,244 +182,329 @@ const Models = () => {
     },
   ];
 
-  const filteredCars = carModels.filter((car) => {
-    const matchesCategory =
-      selectedCategory === "All" || car.category === selectedCategory;
-    const matchesSearch = car.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
-      {/* Hero Section */}
-      <section className="pt-16 pb-4">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeIn}
-            initial="initial"
-            whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
-              <Car className="w-5 h-5 text-white" />
-              <span className="text-white font-medium">Our Fleet</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
-              Choose Your Perfect{' '}
-              <span className="text-red-600 whitespace-nowrap">Ride</span>
-            </h1>
-            <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-              Experience premium service with unlimited miles and flexible pick-up
-              options at unbeatable prices. Select from our wide range of
-              well-maintained vehicles.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Search and Filter Section */}
-      <section className="py-6 sm:py-8">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
-              {/* Search Bar */}
-              <div className="relative flex items-center">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="w-5 h-5 text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search for a car..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-12 py-2.5 sm:py-3 rounded-lg border border-gray-200 
-                    focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
-                    placeholder-gray-400 text-gray-900 text-sm sm:text-base"
-                />
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                  <Filter className="w-5 h-5 text-gray-400 hover:text-gray-500 cursor-pointer" />
-                </div>
+  const Models = () => {
+    const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const categoryParam = searchParams.get("categories")
+    const searchParam = searchParams.get("search")
+  
+    // Initialize state from URL params - convert comma-separated categories to array
+    const [selectedCategories, setSelectedCategories] = useState(categoryParam ? categoryParam.split(",") : [])
+    const [searchQuery, setSearchQuery] = useState(searchParam || "")
+  
+    // Update state when URL changes
+    useEffect(() => {
+      const params = new URLSearchParams()
+      if (selectedCategories.length > 0) params.set("categories", selectedCategories.join(","))
+      if (searchQuery.trim()) params.set("search", searchQuery.trim())
+      setSearchParams(params)
+    }, [selectedCategories, searchQuery, setSearchParams])
+  
+    const fadeIn = {
+      initial: { opacity: 0, y: 20 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true },
+    }
+  
+    const categories = [
+      { name: "All", icon: Car },
+      { name: "SUV", icon: Car },
+      { name: "Sedan", icon: Car },
+      { name: "Luxury", icon: Car },
+      { name: "Sports", icon: Car },
+      { name: "Economy", icon: Car },
+    ]
+  
+    // Toggle category selection
+    const toggleCategory = (category) => {
+      if (category === "All") {
+        // If "All" is selected, clear all other selections
+        setSelectedCategories([])
+      } else {
+        // Handle other categories
+        setSelectedCategories((prev) => {
+          if (prev.includes(category)) {
+            // Remove category if already selected
+            return prev.filter((cat) => cat !== category)
+          } else {
+            // Add category if not selected
+            return [...prev, category]
+          }
+        })
+      }
+    }
+  
+    // Helper function to check if a car matches the selected categories
+    const matchesCategories = (car) => {
+      // If no categories are selected or "All" is selected, show all cars
+      if (selectedCategories.length === 0) {
+        return true
+      }
+  
+      // Assuming car.categories is an array of categories the car belongs to
+      // For compatibility with existing code, fallback to car.category if car.categories doesn't exist
+      const carCategories = car.categories || [car.category]
+  
+      // Check if any of the car's categories match any of the selected categories
+      return selectedCategories.some((selected) => carCategories.includes(selected))
+    }
+  
+    const filteredCars = carModels.filter((car) => {
+      const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase())
+      return matchesCategories(car) && matchesSearch
+    })
+  
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
+        {/* Hero Section */}
+        <section className="pt-16 pb-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="whileInView"
+              className="text-center max-w-3xl mx-auto"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
+                <Car className="w-5 h-5 text-white" />
+                <span className="text-white font-medium">Our Fleet</span>
               </div>
-
-              {/* Category Filter */}
-              <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                
-                <div className="flex gap-2 sm:gap-3">
-                  {categories.map((category) => (
-                    <button
-                      key={category.name}
-                      onClick={() => setSelectedCategory(category.name)}
-                      className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
-        transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
-        ${selectedCategory === category.name
-                          ? 'bg-black text-white shadow-md'
-                          : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
-                        }`}
-                    >
-                      <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                      <span className="text-sm sm:text-base">{category.name}</span>
-                    </button>
-                  ))}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
+                Choose Your Perfect <span className="text-red-600 whitespace-nowrap">Ride</span>
+              </h1>
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                Experience premium service with unlimited miles and flexible pick-up options at unbeatable prices. Select
+                from our wide range of well-maintained vehicles.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+  
+        {/* Search and Filter Section */}
+        <section className="py-6 sm:py-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
+                {/* Search Bar */}
+                <div className="relative flex items-center">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Search className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search for a car..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-12 py-2.5 sm:py-3 rounded-lg border border-gray-200 
+                      focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
+                      placeholder-gray-400 text-gray-900 text-sm sm:text-base"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <Filter className="w-5 h-5 text-gray-400 hover:text-gray-500 cursor-pointer" />
+                  </div>
+                </div>
+  
+                {/* Selected Categories Chips - Show when categories are selected */}
+                {selectedCategories.length > 0 && (
+                  <div className="md:col-span-2 flex flex-wrap gap-2 mt-2">
+                    {selectedCategories.map((category) => (
+                      <div
+                        key={`selected-${category}`}
+                        className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full"
+                      >
+                        <span className="text-sm">{category}</span>
+                        <X
+                          className="w-4 h-4 cursor-pointer hover:text-gray-300"
+                          onClick={() => toggleCategory(category)}
+                        />
+                      </div>
+                    ))}
+                    {selectedCategories.length > 0 && (
+                      <button
+                        onClick={() => setSelectedCategories([])}
+                        className="text-sm text-gray-500 hover:text-gray-700 px-2 underline"
+                      >
+                        Clear all
+                      </button>
+                    )}
+                  </div>
+                )}
+  
+                {/* Category Filter */}
+                <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:col-span-2">
+                  <div className="flex gap-2 sm:gap-3">
+                    {categories.map((category) => (
+                      <button
+                        key={category.name}
+                        onClick={() => toggleCategory(category.name)}
+                        className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
+                          transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
+                          ${
+                            category.name === "All" && selectedCategories.length === 0
+                              ? "bg-black text-white shadow-md"
+                              : selectedCategories.includes(category.name)
+                                ? "bg-black text-white shadow-md"
+                                : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                          }`}
+                      >
+                        <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                        <span className="text-sm sm:text-base">{category.name}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-
-      {/* Car Models Grid */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCars.length === 0 ? (
-              <div className="col-span-full text-center py-12">
-                <p className="text-xl text-gray-600">
-                  No cars found matching your search criteria.
-                </p>
+        </section>
+  
+        {/* Car Models Grid */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredCars.length === 0 ? (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-xl text-gray-600">No cars found matching your search criteria.</p>
+                </div>
+              ) : (
+                filteredCars.map((car) => (
+                  <motion.div
+                    key={car.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <div
+                      className={`rounded-xl p-6 ${car.color} transition-all duration-300 
+                               group-hover:-translate-y-2`}
+                    >
+                      {/* Car Image */}
+                      <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
+                        <img
+                          src={car.image || "/placeholder.svg"}
+                          alt={car.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+  
+                      {/* Car Info */}
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="text-xl font-bold mb-1">{car.name}</h3>
+                            <div className="flex flex-wrap gap-2">
+                              {(car.categories || [car.category]).map((cat) => (
+                                <span
+                                  key={`${car.id}-${cat}`}
+                                  className="text-sm text-gray-600 bg-gray-100 py-0.5 rounded-full mr-2 mb-2"
+                                >
+                                  {cat}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-2xl font-bold text-black">€{car.price}</span>
+                            <span className="text-sm text-black">/day</span>
+                          </div>
+                        </div>
+  
+                        {/* Features */}
+                        <div className="flex justify-between py-4 border-t border-gray-200">
+                          <div className="flex items-center gap-2">
+                            <Users className="w-5 h-5 text-gray-500" />
+                            <span>{car.features.seats} Seats</span>
+                          </div>
+  
+                          <div className="flex items-center gap-2">
+                            <Fuel className="w-5 h-5 text-gray-500" />
+                            <span>{car.features.fuel}</span>
+                          </div>
+                        </div>
+  
+                        {/* Rating and Book Button */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-medium">{car.rating}</span>
+                            <span className="text-gray-600">({car.reviews} reviews)</span>
+                          </div>
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => navigate(`/booking/${car.id}`)}
+                            className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
+                                   transition-colors"
+                          >
+                            Book Now
+                          </motion.button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+  
+        {/* Quick Booking Process */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="whileInView"
+              className="text-center max-w-3xl mx-auto mb-12"
+            >
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <HelpCircle className="w-6 h-6 text-gray-600" />
+                <h2 className="text-3xl font-bold text-gray-900">How to Book</h2>
               </div>
-            ) : (
-              filteredCars.map((car) => (
+              <p className="text-gray-600">
+                We have streamlined our rental process to get you on the road quickly and safely
+              </p>
+            </motion.div>
+  
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: Car,
+                  title: "Choose Your Car",
+                  description: "Select from our wide range of premium vehicles",
+                },
+                {
+                  icon: Calendar,
+                  title: "Pick Date & Location",
+                  description: "Choose your pickup date and preferred location",
+                },
+                {
+                  icon: MapPin,
+                  title: "Book & Enjoy",
+                  description: "Complete your booking and enjoy your journey",
+                },
+              ].map((step, index) => (
                 <motion.div
-                  key={car.id}
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="group"
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-xl p-6 text-center border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
-                  <div
-                    className={`rounded-xl p-6 ${car.color} transition-all duration-300 
-                             group-hover:-translate-y-2`}
-                  >
-                    {/* Car Image */}
-                    <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
-                      <img
-                        src={car.image}
-                        alt={car.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-
-                    {/* Car Info */}
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-xl font-bold mb-1">{car.name}</h3>
-                          <span className="text-sm text-gray-600">
-                            {car.category}
-                          </span>
-                        </div>
-                        <div className="text-right">
-                          <span className="text-2xl font-bold text-black">
-                            €{car.price}
-                          </span>
-                          <span className="text-sm text-black">/day</span>
-                        </div>
-                      </div>
-
-                      {/* Features */}
-                      <div className="flex justify-between py-4 border-t border-gray-200">
-                        <div className="flex items-center gap-2">
-                          <Users className="w-5 h-5 text-gray-500" />
-                          <span>{car.features.seats} Seats</span>
-                        </div>
-                        
-                        <div className="flex items-center gap-2">
-                          <Fuel className="w-5 h-5 text-gray-500" />
-                          <span>{car.features.fuel}</span>
-                        </div>
-                      </div>
-
-                      {/* Rating and Book Button */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                          <span className="font-medium">{car.rating}</span>
-                          <span className="text-gray-600">
-                            ({car.reviews} reviews)
-                          </span>
-                        </div>
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => navigate(`/booking/${car.id}`)}
-                          className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
-                                 transition-colors"
-                        >
-                          Book Now
-                        </motion.button>
-                      </div>
-                    </div>
+                  <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 p-4 transition-all duration-300 hover:bg-gray-800">
+                    <step.icon className="w-10 h-10 text-white flex-shrink-0" />
                   </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
                 </motion.div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Booking Process */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeIn}
-            initial="initial"
-            whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto mb-12"
-          >
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <HelpCircle className="w-6 h-6 text-gray-600" />
-              <h2 className="text-3xl font-bold text-gray-900">How to Book</h2>
+              ))}
             </div>
-            <p className="text-gray-600">
-              We have streamlined our rental process to get you on the road
-              quickly and safely
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {[
-              {
-                icon: Car,
-                title: "Choose Your Car",
-                description: "Select from our wide range of premium vehicles",
-              },
-              {
-                icon: Calendar,
-                title: "Pick Date & Location",
-                description: "Choose your pickup date and preferred location",
-              },
-              {
-                icon: MapPin,
-                title: "Book & Enjoy",
-                description: "Complete your booking and enjoy your journey",
-              },
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 text-center border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-md"
-              >
-                <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 p-4 transition-all duration-300 hover:bg-gray-800">
-                  <step.icon className="w-10 h-10 text-white flex-shrink-0" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
           </div>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-export default Models;
+        </section>
+      </div>
+    )
+  }
+  
+  export default Models
+  
