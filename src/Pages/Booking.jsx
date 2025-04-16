@@ -10,7 +10,7 @@ const cars = [
     id: 1,
     name: "Mercedes Benz S Class Lungo",
     category: "Sedan",
-    categories: ["Sedan", "Economy", "Luxury"],
+    categories: ["Sedan", "Sports", "Luxury"],
     price: 89,
     //image: "/cars/s-class/7V3A8562.png",
     //imageBehind: "/cars/s-class/7V3A8540.png",
@@ -191,16 +191,38 @@ const cars = [
   },
   {
     id: 6,
-    name: "Mercedes Benz S-class",
+    name: "Bmw X6 M Packet",
     category: "Sedan",
     price: 69,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/bmw x6/7V3A8659.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/bmw x6/7V3A8657.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/bmw x6/7V3A8677.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/bmw x6/7V3A8670.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/bmw x6/7V3A8637.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/bmw x6/7V3A8646.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
       seats: "5",
-      luggage: "3",
-      fuel: "Hybrid",
+      fuel: "Diesel",
     },
     rating: 4.6,
     reviews: 215,
@@ -209,15 +231,28 @@ const cars = [
   },
   {
     id: 7,
-    name: "Mercedes Benz S-class",
+    name: "Volkswagen Golf 7",
     category: "SUV",
     price: 189,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/golf 7/7V3A9591.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/golf 7/7V3A9598.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/golf 7/7V3A9585.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/golf 7/7V3A9578.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
-      seats: "7",
-      luggage: "5",
       fuel: "Diesel",
     },
     rating: 4.8,

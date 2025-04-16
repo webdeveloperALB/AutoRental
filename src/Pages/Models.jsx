@@ -10,7 +10,7 @@ import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X
       id: 1,
       name: "Mercedes Benz S Class Lungo",
       category: "Sedan",
-      categories: ["Sedan", "Economy", "Luxury"],
+      categories: ["Sedan", "Sports", "Luxury"],
       price: 89,
       image: "/cars/s-class/7V3A8562.jpg",
       features: {
@@ -85,14 +85,13 @@ import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X
     },
     {
       id: 6,
-      name: "Mercedes Benz S-class",
+      name: "Bmw X6 M Packet",
       category: "Sedan",
       price: 69,
-      image: "/sedan.png",
+      image: "/cars/bmw x6/7V3A8659.jpg",
       features: {
         seats: "5",
-        luggage: "3",
-        fuel: "Gasoline",
+        fuel: "Diesel",
       },
       rating: 4.6,
       reviews: 215,
@@ -101,10 +100,10 @@ import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X
     },
     {
       id: 7,
-      name: "Mercedes Benz S-class",
+      name: "Volkswagen Golf 7",
       category: "SUV",
       price: 189,
-      image: "/suv.png",
+      image: "/cars/golf 7/7V3A9591.jpg",
       features: {
         seats: "7",
         luggage: "5",
