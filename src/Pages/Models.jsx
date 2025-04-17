@@ -24,9 +24,9 @@ const carModels = [
     price: 250,
     image: "/cars/s-class/7V3A8562.jpg",
     features: {
-      fuel: "Petrol",
       transmission: "Automatic",
-      engineSize: "V8 Biturbo 4.7",
+      engineSize: "V8 Biturbo 4.7L",
+      fuel: "Petrol",
     },
     rating: 4.9,
     reviews: 128,

@@ -2,19 +2,22 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Fuel,
+  Battery,
+  Leaf,
+} from "lucide-react";
+import { Icon } from "@iconify/react";
 import "./Booking.css";
 
 const cars = [
   {
     id: 1,
-    name: "Mercedes Benz S Class Lungo",
-    category: "Sedan",
-    categories: ["Sedan", "Sports", "Luxury"],
-    price: 89,
-    //image: "/cars/s-class/7V3A8562.png",
-    //imageBehind: "/cars/s-class/7V3A8540.png",
-    //imageInside: "/cars/s-class/7V3A8562.png",
+    name: "Mercedes Benz S-Class W222 Lungo - 6.3 AMG Look",
+    categories: ["Sedan", "Luxury", "Sports"],
+    price: 250,
     images: [
       {
         url: "/cars/s-class/7V3A8562.jpg",
@@ -46,7 +49,8 @@ const cars = [
       },
     ],
     features: {
-      seats: "4",
+      transmission: "Automatic",
+      engineSize: "V8 Biturbo 4.7L",
       fuel: "Petrol",
     },
     rating: 4.9,
@@ -57,11 +61,8 @@ const cars = [
   {
     id: 2,
     name: "BMW Seria 6 M Packet",
-    category: "Sports",
-    price: 129,
-    //image: "/Sclass.jpg",
-    //imageBehind: "/Sclass2.jpg",
-    //imageInside: "/Sclass3.jpg",
+    categories: ["Sports", "Luxury"],
+    price: 150,
     images: [
       {
         url: "/cars/bmw seria 6/7V3A9685.jpg",
@@ -81,8 +82,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "4",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "4.0",
     },
     rating: 4.8,
     reviews: 96,
@@ -113,7 +115,8 @@ const cars = [
       },
     ],
     features: {
-      seats: "4",
+      transmission: "Manual",
+      engineSize: "2.0L",
       fuel: "Diesel",
     },
     rating: 4.9,
@@ -149,7 +152,8 @@ const cars = [
     category: "Sports",
     price: 249,
     features: {
-      seats: "4",
+      transmission: "Automatic",
+      engineSize: "3.0L",
       fuel: "Diesel",
     },
     rating: 5.0,
@@ -181,7 +185,8 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
+      transmission: "Automatic",
+      engineSize: "1.8L",
       fuel: "Petrol",
     },
     rating: 4.7,
@@ -596,7 +601,8 @@ const CarDetailPage = () => {
 
 Car Details:
 🚗 ${carCategories}
-💺 ${selectedCar.features.seats} seats
+🔄 ${selectedCar.features.transmission} transmission
+🔧 ${selectedCar.features.engineSize} engine
 ⛽ ${selectedCar.features.fuel}`;
 
     // Encode message for URL
@@ -918,7 +924,7 @@ Car Details:
               </span>
             )}
             <span className="ml-auto text-xl font-semibold">
-              ${selectedCar.price}/day
+              €{selectedCar.price}/day
             </span>
           </div>
 
@@ -960,19 +966,30 @@ Car Details:
           {/* Car Features */}
           <div className="grid grid-cols-2 gap-6 mb-8">
             <div className="flex items-center space-x-2">
-              <div className="text-xl text-gray-600">💺</div>
-              <span>{selectedCar.features.seats} seats</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="text-xl text-gray-600">
-                {selectedCar.features.fuel === "Electric"
-                  ? "⚡"
-                  : selectedCar.features.fuel === "Hybrid"
-                  ? "🌱"
-                  : "⛽"}
-              </div>
+              {selectedCar.features.fuel === "Electric" ? (
+                <Battery className="h-5 w-5 text-gray-600" />
+              ) : selectedCar.features.fuel === "Hybrid" ? (
+                <Leaf className="h-5 w-5 text-gray-600" />
+              ) : (
+                <Fuel className="h-5 w-5 text-gray-600" />
+              )}
               <span>{selectedCar.features.fuel} fuel</span>
             </div>
+            {selectedCar.features.transmission && (
+              <div className="flex items-center space-x-2">
+                <Icon
+                  icon="lucide-lab:gearbox"
+                  className="h-5 w-5 text-gray-600"
+                />
+                <span>{selectedCar.features.transmission} transmission</span>
+              </div>
+            )}
+            {selectedCar.features.engineSize && (
+              <div className="flex items-center space-x-2">
+                <Icon icon="mdi:engine" className="h-5 w-5 text-gray-600" />
+                <span>{selectedCar.features.engineSize} engine</span>
+              </div>
+            )}
           </div>
 
           {/* Booking Form */}
