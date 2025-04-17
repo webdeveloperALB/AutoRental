@@ -262,16 +262,35 @@ const cars = [
   },
   {
     id: 8,
-    name: "Mercedes Benz S-class",
+    name: "Audi A7",
     category: "Sports",
     price: 399,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/audi a7 gri/7V3A9798.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/audi a7 gri/7V3A9805.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/audi a7 gri/7V3A9808.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/audi a7 gri/7V3A9794.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/audi a7 gri/7V3A9780.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
       seats: "2",
       luggage: "1",
-      fuel: "Petrol",
+      fuel: "Diesel",
     },
     rating: 5.0,
     reviews: 42,

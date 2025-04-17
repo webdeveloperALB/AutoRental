@@ -116,14 +116,13 @@ import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X
     },
     {
       id: 8,
-      name: "Mercedes Benz S-class",
+      name: "Audi A7",
       category: "Sports",
       price: 399,
-      image: "/sports.png",
+      image: "/cars/audi a7 gri/7V3A9798.jpg",
       features: {
-        seats: "2",
-        luggage: "1",
-        fuel: "Petrol",
+        seats: "5",
+        fuel: "Diesel",
       },
       rating: 5.0,
       reviews: 42,
