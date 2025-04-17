@@ -289,7 +289,6 @@ const cars = [
     ],
     features: {
       seats: "2",
-      luggage: "1",
       fuel: "Diesel",
     },
     rating: 5.0,
@@ -299,12 +298,35 @@ const cars = [
   },
   {
     id: 9,
-    name: "Mercedes Benz S-class",
+    name: "Mercedes Benz E-Class",
     category: "SUV",
     price: 149,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/e-class 3.0/7V3A8709.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/e-class 3.0/7V3A8716.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/e-class 3.0/7V3A8726.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/e-class 3.0/7V3A8723.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/e-class 3.0/7V3A8700.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/e-class 3.0/7V3A8681.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
       seats: "7",
       luggage: "4",
@@ -317,16 +339,30 @@ const cars = [
   },
   {
     id: 10,
-    name: "Mercedes Benz S-class",
+    name: "Mercedes Benz E-Class",
     category: "Luxury",
     price: 179,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/e class 2.2/7V3A9763.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/e class 2.2/7V3A9770.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/e class 2.2/7V3A9758.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/e class 2.2/7V3A9746.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
       seats: "5",
-      luggage: "3",
-      fuel: "Hybrid",
+      fuel: "Diesel",
     },
     rating: 4.8,
     reviews: 134,
@@ -335,16 +371,158 @@ const cars = [
   },
   {
     id: 11,
-    name: "Mercedes Benz S-class",
+    name: "BMW Seria 4",
     category: "Sedan",
     price: 59,
-    image: "/Sclass.jpg",
-    imageBehind: "/Sclass2.jpg",
-    imageInside: "/Sclass3.jpg",
+    images: [
+      {
+        url: "/cars/bmw seria 4/7V3A9724.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/bmw seria 4/7V3A9742.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/bmw seria 4/7V3A9716.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/bmw seria 4/7V3A9706.jpg",
+        label: "Side View",
+      },
+    ],
     features: {
       seats: "5",
-      luggage: "3",
-      fuel: "Petrol",
+      fuel: "Diesel",
+    },
+    rating: 4.5,
+    reviews: 289,
+    color: "bg-blue-50",
+    iconColor: "text-blue-500",
+  },
+  {
+    id: 12,
+    name: "C-Class W204 Wagon",
+    category: "Sedan",
+    price: 59,
+    images: [
+      {
+        url: "/cars/c class w204 wagon/3.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/c class w204 wagon/4.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/c class w204 wagon/2.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/c class w204 wagon/1.jpg",
+        label: "Side View",
+      },
+    ],
+    features: {
+      seats: "5",
+      fuel: "Diesel",
+    },
+    rating: 4.5,
+    reviews: 289,
+    color: "bg-blue-50",
+    iconColor: "text-blue-500",
+  },
+  {
+    id: 13,
+    name: "Hyundai Santa Fe",
+    category: "Sedan",
+    price: 59,
+    images: [
+      {
+        url: "/cars/hyundai santa fe/3.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/hyundai santa fe/4.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/hyundai santa fe/2.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/hyundai santa fe/1.jpg",
+        label: "Side View",
+      },
+    ],
+    features: {
+      seats: "5",
+      fuel: "Diesel",
+    },
+    rating: 4.5,
+    reviews: 289,
+    color: "bg-blue-50",
+    iconColor: "text-blue-500",
+  },
+  {
+    id: 14,
+    name: "Volkswagen Touran",
+    category: "Sedan",
+    price: 59,
+    images: [
+      {
+        url: "/cars/touran/3.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/touran/4.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/touran/2.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/touran/1.jpg",
+        label: "Side View",
+      },
+    ],
+    features: {
+      seats: "5",
+      fuel: "Diesel",
+    },
+    rating: 4.5,
+    reviews: 289,
+    color: "bg-blue-50",
+    iconColor: "text-blue-500",
+  },
+  {
+    id: 15,
+    name: "Hyundai Accent",
+    category: "Sedan",
+    price: 59,
+    images: [
+      {
+        url: "/cars/hyundai accent/3.jpg",
+        label: "Front View",
+      },
+      {
+        url: "/cars/hyundai accent/4.jpg",
+        label: "Rear View",
+      },
+      {
+        url: "/cars/hyundai accent/2.jpg",
+        label: "Interior",
+      },
+      {
+        url: "/cars/hyundai accent/1.jpg",
+        label: "Side View",
+      },
+    ],
+    features: {
+      seats: "5",
+      fuel: "Diesel",
     },
     rating: 4.5,
     reviews: 289,
