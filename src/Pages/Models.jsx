@@ -28,7 +28,7 @@ import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X
       name: "BMW Seria 6 M Packet",
       category: "Sports",
       price: 129,
-      image: "/cars/bmw seria 6/7V3A9677.jpg",
+      image: "/cars/bmw seria 6/7V3A9685.jpg",
       features: {
         seats: "4",
         fuel: "Diesel",
@@ -73,7 +73,7 @@ import { Car, Filter, Search, Fuel, Users, Star, HelpCircle, Calendar, MapPin, X
       name: "Mercedes Benz C Class",
       category: "Sedan",
       price: 159,
-      image: "/cars/c-class 1.8/7V3A9654.jpg",
+      image: "/cars/c-class 1.8/7V3A9658.jpg",
       features: {
         seats: "4",
         fuel: "Petrol",

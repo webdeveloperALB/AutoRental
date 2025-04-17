@@ -64,7 +64,7 @@ const cars = [
     //imageInside: "/Sclass3.jpg",
     images: [
       {
-        url: "/cars/bmw seria 6/7V3A9677.jpg",
+        url: "/cars/bmw seria 6/7V3A9685.jpg",
         label: "Front View",
       },
       {
@@ -164,11 +164,11 @@ const cars = [
     price: 159,
     images: [
       {
-        url: "/cars/c-class 1.8/7V3A9654.jpg",
+        url: "/cars/c-class 1.8/7V3A9658.jpg",
         label: "Front View",
       },
       {
-        url: "/cars/c-class 1.8/7V3A9654.jpg",
+        url: "/cars/c-class 1.8/7V3A9673.jpg",
         label: "Rear View",
       },
       {
