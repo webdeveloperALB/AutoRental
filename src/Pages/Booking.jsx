@@ -442,7 +442,7 @@ const cars = [
   {
     id: 13,
     name: "Hyundai Santa Fe",
-    categories: ["Suv"],
+    categories: ["SUV"],
     price: 50,
     images: [
       {
@@ -474,8 +474,8 @@ const cars = [
   },
   {
     id: 14,
-    name: "Hyundai Santa Fe",
-    categories: ["Suv"],
+    name: "Volkswagen Touran 5+2",
+    categories: ["Economy", "SUV"],
     price: 50,
     images: [
       {

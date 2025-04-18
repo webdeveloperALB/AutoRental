@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -116,7 +116,7 @@ const Contact = () => {
               Get in <span className="text-black">Touch</span>
             </h1>
             <p className="text-black text-lg leading-relaxed">
-              We'd love to hear from you. Let us know how we can help make your
+              We&apos;d love to hear from you. Let us know how we can help make your
               car rental experience even better.
             </p>
           </motion.div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Star,
@@ -13,6 +13,7 @@ import {
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -23,35 +24,35 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Johnson",
+      name: "Erion Dashi",
       role: "Business Traveler",
       image: "/path/to/avatar1.jpg",
       rating: 5,
       comment:
         "The best car rental experience I've ever had! The process was seamless from start to finish. The car was immaculate and the customer service was exceptional.",
-      carRented: "Tesla Model 3",
+      carRented: "Mercedes Benz S-Class W222",
       date: "January 2024",
     },
     {
       id: 2,
-      name: "Michael Chen",
+      name: "Alma Zeneli",
       role: "Family Vacation",
       image: "/path/to/avatar2.jpg",
       rating: 5,
       comment:
         "Perfect for our family vacation! The SUV was spacious, clean, and well-maintained. The staff was incredibly helpful with car seat installation.",
-      carRented: "Toyota Highlander",
+      carRented: "Hyundai Santa Fe",
       date: "December 2023",
     },
     {
       id: 3,
-      name: "Emma Davis",
+      name: "Bledar Hoxha",
       role: "Weekend Getaway",
       image: "/path/to/avatar3.jpg",
       rating: 4,
       comment:
         "Great service and competitive prices. The pickup and drop-off process was quick and efficient. Will definitely use again!",
-      carRented: "BMW 3 Series",
+      carRented: "BMW 4 Series",
       date: "February 2024",
     },
   ];
@@ -90,12 +91,39 @@ const Testimonials = () => {
     },
   ];
 
+  // Function to handle user interaction
+  const handleInteraction = () => {
+    // When user interacts, pause the autoplay
+    setAutoplay(false);
+
+    // Reset autoplay after 10 seconds of inactivity
+    const timer = setTimeout(() => {
+      setAutoplay(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  };
+
+  // Autoplay effect
+  useEffect(() => {
+    let interval;
+
+    if (autoplay) {
+      interval = setInterval(() => {
+        setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      }, 5000);
+    }
+
+    return () => clearInterval(interval);
+  }, [autoplay, testimonials.length]);
+
   const renderStars = (rating) => {
     return [...Array(5)].map((_, index) => (
       <Star
         key={index}
-        className={`w-5 h-5 ${index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-          }`}
+        className={`w-5 h-5 ${
+          index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+        }`}
       />
     ));
   };
@@ -106,10 +134,10 @@ const Testimonials = () => {
   };
 
   const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
   };
-
-
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
@@ -120,12 +148,11 @@ const Testimonials = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto">
+            className="text-center max-w-3xl mx-auto"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full mb-6">
               <Quote className="w-5 h-5 text-black" />
-              <span className="text-black font-medium">
-                Customer Stories
-              </span>
+              <span className="text-black font-medium">Customer Stories</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               What Our <span className="text-red-600">Customers</span> Say
@@ -148,7 +175,8 @@ const Testimonials = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-6 rounded-lg bg-gray-100 group hover:bg-white transition-colors">
+                className="text-center p-6 rounded-lg bg-gray-100 group hover:bg-white transition-colors"
+              >
                 <div className="flex justify-center mb-4">
                   <stat.icon className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />
                 </div>
@@ -220,8 +248,9 @@ const Testimonials = () => {
                       setActiveIndex(index);
                       handleInteraction();
                     }}
-                    className={`w-3 h-3 rounded-full transition-colors ${activeIndex === index ? "bg-black" : "bg-gray-300"
-                      }`}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      activeIndex === index ? "bg-black" : "bg-gray-300"
+                    }`}
                   />
                 ))}
               </div>
@@ -256,8 +285,6 @@ const Testimonials = () => {
         </div>
       </section>
 
-
-
       {/* Review Highlights */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -265,7 +292,8 @@ const Testimonials = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="text-center mb-12">
+            className="text-center mb-12"
+          >
             <h2 className="text-3xl font-bold mb-4">
               What People Love About Us
             </h2>
@@ -281,7 +309,8 @@ const Testimonials = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`${highlight.bgColor} rounded-lg p-6 text-center`}>
+                className={`${highlight.bgColor} rounded-lg p-6 text-center`}
+              >
                 <h3 className={`text-2xl font-bold mb-2 ${highlight.color}`}>
                   {highlight.count.toLocaleString()}+
                 </h3>
@@ -299,7 +328,8 @@ const Testimonials = () => {
             variants={fadeIn}
             initial="initial"
             whileInView="whileInView"
-            className="bg-white rounded-2xl p-8 md:p-12 text-center text-black">
+            className="bg-white rounded-2xl p-8 md:p-12 text-center text-black"
+          >
             <h2 className="text-3xl font-bold mb-4">
               Ready to Experience It Yourself?
             </h2>
@@ -307,13 +337,20 @@ const Testimonials = () => {
               Join thousands of satisfied customers and book your perfect rental
               car today.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-black text-white px-8 py-3 rounded-lg font-medium 
-                        transition-colors">
-              Book Now
-            </motion.button>
+            <a
+              href="https://wa.me/355698357378" // replace with your full phone number in international format
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-black text-white px-8 py-3 rounded-lg font-medium 
+               transition-colors"
+              >
+                Book Now
+              </motion.button>
+            </a>
           </motion.div>
         </div>
       </section>

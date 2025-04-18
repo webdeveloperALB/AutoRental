@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Car,
-  Filter,
+
   Search,
   Fuel,
   Star,
@@ -13,6 +13,9 @@ import {
   Calendar,
   MapPin,
   X,
+
+  Settings,
+  Gauge,
 } from "lucide-react";
 import { Icon } from "@iconify/react";
 
@@ -35,7 +38,7 @@ const carModels = [
   },
   {
     id: 2,
-    name: "BMW Seria 6 M Packet BiTurbo 400 HP",
+    name: "BMW 6 Series M Packet BiTurbo 400 HP",
     categories: ["Sports", "Luxury"],
     price: 150,
     image: "/cars/bmw seria 6/7V3A9685.jpg",
@@ -179,7 +182,7 @@ const carModels = [
   },
   {
     id: 11,
-    name: "BMW Seria 4",
+    name: "BMW 4 Series",
     categories: ["Coupe","Sports", "Luxury"],
     price: 80,
     image: "cars/bmw seria 4/7V3A9724.jpg",
@@ -212,7 +215,7 @@ const carModels = [
   {
     id: 13,
     name: "Hyundai Santa Fe",
-    categories: ["Suv"],
+    categories: ["SUV"],
     price: 50,
     image: "/cars/hyundai santa fe/3.jpg",
     features: {
@@ -228,7 +231,7 @@ const carModels = [
   {
     id: 14,
     name: "Volkswagen Touran 5+2",
-    categories: ["Economy", "Suv"],
+    categories: ["Economy", "SUV"],
     price: 35,
     image: "/cars/touran/3.jpg",
     features: {
@@ -264,21 +267,37 @@ const Models = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("categories");
   const searchParam = searchParams.get("search");
-
-  // Initialize state from URL params - convert comma-separated categories to array
+  const fuelParam = searchParams.get("fuel");
+  const transmissionParam = searchParams.get("transmission");
+  const engineSizeParam = searchParams.get("engineSize");
+  
+  // Initialize state from URL params
   const [selectedCategories, setSelectedCategories] = useState(
     categoryParam ? categoryParam.split(",") : []
   );
   const [searchQuery, setSearchQuery] = useState(searchParam || "");
+  const [selectedFuel, setSelectedFuel] = useState(fuelParam || "");
+  const [selectedTransmission, setSelectedTransmission] = useState(transmissionParam || "");
+  const [selectedEngineSize, setSelectedEngineSize] = useState(engineSizeParam || "");
+  // Remove the filter toggle state since filters will always be visible
+  // const [showFilters, setShowFilters] = useState(false);
 
-  // Update state when URL changes
+  // Update URL params when filters change
   useEffect(() => {
     const params = new URLSearchParams();
     if (selectedCategories.length > 0)
       params.set("categories", selectedCategories.join(","));
-    if (searchQuery.trim()) params.set("search", searchQuery.trim());
+    if (searchQuery.trim()) 
+      params.set("search", searchQuery.trim());
+    if (selectedFuel) 
+      params.set("fuel", selectedFuel);
+    if (selectedTransmission)
+      params.set("transmission", selectedTransmission);
+    if (selectedEngineSize)
+      params.set("engineSize", selectedEngineSize);
+    
     setSearchParams(params);
-  }, [selectedCategories, searchQuery, setSearchParams]);
+  }, [selectedCategories, searchQuery, selectedFuel, selectedTransmission, selectedEngineSize, setSearchParams]);
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -295,48 +314,65 @@ const Models = () => {
     { name: "Economy", icon: Car },
   ];
 
+  // Extract unique values for filters from car data
+  const fuelTypes = [...new Set(carModels.map(car => car.features.fuel))];
+  const transmissionTypes = [...new Set(carModels.map(car => car.features.transmission))];
+  const engineSizes = [...new Set(carModels.map(car => car.features.engineSize.toString().split(" ")[0]))];
+
   // Toggle category selection
   const toggleCategory = (category) => {
     if (category === "All") {
-      // If "All" is selected, clear all other selections
       setSelectedCategories([]);
     } else {
-      // Handle other categories
       setSelectedCategories((prev) => {
         if (prev.includes(category)) {
-          // Remove category if already selected
           return prev.filter((cat) => cat !== category);
         } else {
-          // Add category if not selected
           return [...prev, category];
         }
       });
     }
   };
 
-  // Helper function to check if a car matches the selected categories
-  const matchesCategories = (car) => {
-    // If no categories are selected or "All" is selected, show all cars
-    if (selectedCategories.length === 0) {
-      return true;
-    }
-
-    // Assuming car.categories is an array of categories the car belongs to
-    // For compatibility with existing code, fallback to car.category if car.categories doesn't exist
-    const carCategories = car.categories || [car.category];
-
-    // Check if any of the car's categories match any of the selected categories
-    return selectedCategories.some((selected) =>
-      carCategories.includes(selected)
-    );
+  // Clear all filters
+  const clearAllFilters = () => {
+    setSelectedCategories([]);
+    setSelectedFuel("");
+    setSelectedTransmission("");
+    setSelectedEngineSize("");
   };
 
-  const filteredCars = carModels.filter((car) => {
-    const matchesSearch = car.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    return matchesCategories(car) && matchesSearch;
-  });
+  // Helper function to check if a car matches the selected filters
+  const matchesFilters = (car) => {
+    // Match categories
+    const matchesCategories = selectedCategories.length === 0 || 
+      selectedCategories.some(selected => (car.categories || [car.category]).includes(selected));
+    
+    // Match fuel type
+    const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel;
+    
+    // Match transmission
+    const matchesTransmission = !selectedTransmission || car.features.transmission === selectedTransmission;
+    
+    // Match engine size - this is a bit trickier since engine sizes might be stored differently
+    const matchesEngineSize = !selectedEngineSize || 
+      car.features.engineSize.toString().includes(selectedEngineSize);
+    
+    // Match search query
+    const matchesSearch = !searchQuery || car.name.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    return matchesCategories && matchesFuel && matchesTransmission && matchesEngineSize && matchesSearch;
+  };
+
+  const filteredCars = carModels.filter(matchesFilters);
+
+  // Count active filters (excluding search)
+  const activeFilterCount = [
+    selectedCategories.length > 0,
+    !!selectedFuel,
+    !!selectedTransmission,
+    !!selectedEngineSize
+  ].filter(Boolean).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
@@ -372,80 +408,187 @@ const Models = () => {
       {/* Search and Filter Section */}
       <section className="py-6 sm:py-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
-              {/* Search Bar */}
-              <div className="relative flex items-center">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="w-5 h-5 text-gray-400" />
+          <div className="bg-white rounded-xl shadow-sm">
+            {/* Search bar */}
+            <div className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
+                {/* Search Bar */}
+                <div className="relative flex items-center">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Search className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search for a car..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 py-2.5 sm:py-3 rounded-lg border border-gray-200 
+                        focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
+                        placeholder-gray-400 text-gray-900 text-sm sm:text-base"
+                  />
+                  {/* Remove the filter toggle button */}
                 </div>
-                <input
-                  type="text"
-                  placeholder="Search for a car..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-12 py-2.5 sm:py-3 rounded-lg border border-gray-200 
-                      focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
-                      placeholder-gray-400 text-gray-900 text-sm sm:text-base"
-                />
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                  <Filter className="w-5 h-5 text-gray-400 hover:text-gray-500 cursor-pointer" />
-                </div>
-              </div>
 
-              {/* Selected Categories Chips - Show when categories are selected */}
-              {selectedCategories.length > 0 && (
-                <div className="md:col-span-2 flex flex-wrap gap-2 mt-2">
-                  {selectedCategories.map((category) => (
-                    <div
-                      key={`selected-${category}`}
-                      className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full"
-                    >
-                      <span className="text-sm">{category}</span>
-                      <X
-                        className="w-4 h-4 cursor-pointer hover:text-gray-300"
-                        onClick={() => toggleCategory(category)}
-                      />
-                    </div>
-                  ))}
-                  {selectedCategories.length > 0 && (
-                    <button
-                      onClick={() => setSelectedCategories([])}
-                      className="text-sm text-gray-500 hover:text-gray-700 px-2 underline"
-                    >
-                      Clear all
-                    </button>
-                  )}
-                </div>
-              )}
-
-              {/* Category Filter */}
-              <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:col-span-2">
-                <div className="flex gap-2 sm:gap-3">
-                  {categories.map((category) => (
-                    <button
-                      key={category.name}
-                      onClick={() => toggleCategory(category.name)}
-                      className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
-                          transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
-                          ${
-                            category.name === "All" &&
-                            selectedCategories.length === 0
-                              ? "bg-black text-white shadow-md"
-                              : selectedCategories.includes(category.name)
-                              ? "bg-black text-white shadow-md"
-                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"
-                          }`}
-                    >
-                      <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                      <span className="text-sm sm:text-base">
-                        {category.name}
-                      </span>
-                    </button>
-                  ))}
+                {/* Category Filter */}
+                <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:col-span-2">
+                  <div className="flex gap-2 sm:gap-3">
+                    {categories.map((category) => (
+                      <button
+                        key={category.name}
+                        onClick={() => toggleCategory(category.name)}
+                        className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
+                            transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
+                            ${
+                              category.name === "All" &&
+                              selectedCategories.length === 0
+                                ? "bg-black text-white shadow-md"
+                                : selectedCategories.includes(category.name)
+                                ? "bg-black text-white shadow-md"
+                                : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                            }`}
+                      >
+                        <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                        <span className="text-sm sm:text-base">
+                          {category.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Always visible filters - removed conditional rendering and animation for entry/exit */}
+            <div className="px-4 sm:px-6 pb-6 pt-2 border-t border-gray-100">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Fuel Type Filter */}
+                <div>
+                  <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
+                    <Fuel className="w-4 h-4" /> Fuel Type
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {fuelTypes.map((fuel) => (
+                      <button
+                        key={fuel}
+                        onClick={() => setSelectedFuel(selectedFuel === fuel ? "" : fuel)}
+                        className={`px-3 py-1.5 rounded-md text-sm transition-colors
+                          ${selectedFuel === fuel 
+                            ? "bg-black text-white" 
+                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                      >
+                        {fuel}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Transmission Filter */}
+                <div>
+                  <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
+                    <Settings className="w-4 h-4" /> Transmission
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {transmissionTypes.map((transmission) => (
+                      <button
+                        key={transmission}
+                        onClick={() => setSelectedTransmission(selectedTransmission === transmission ? "" : transmission)}
+                        className={`px-3 py-1.5 rounded-md text-sm transition-colors
+                          ${selectedTransmission === transmission 
+                            ? "bg-black text-white" 
+                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                      >
+                        {transmission}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Engine Size Filter */}
+                <div>
+                  <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
+                    <Gauge className="w-4 h-4" /> Engine Size
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {engineSizes.map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedEngineSize(selectedEngineSize === size ? "" : size)}
+                        className={`px-3 py-1.5 rounded-md text-sm transition-colors
+                          ${selectedEngineSize === size 
+                            ? "bg-black text-white" 
+                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                      >
+                        {size}L
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Clear Filters Button */}
+              {activeFilterCount > 0 && (
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={clearAllFilters}
+                    className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors"
+                  >
+                    Clear All Filters
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Active Filter Chips */}
+            {(selectedCategories.length > 0 || selectedFuel || selectedTransmission || selectedEngineSize) && (
+              <div className="px-4 sm:px-6 pb-4 pt-2 flex flex-wrap gap-2 border-t border-gray-100">
+                {selectedCategories.map((category) => (
+                  <div
+                    key={`selected-${category}`}
+                    className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm"
+                  >
+                    <Car className="w-3 h-3" />
+                    <span>{category}</span>
+                    <X
+                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                      onClick={() => toggleCategory(category)}
+                    />
+                  </div>
+                ))}
+                
+                {selectedFuel && (
+                  <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
+                    <Fuel className="w-3 h-3" />
+                    <span>{selectedFuel}</span>
+                    <X
+                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                      onClick={() => setSelectedFuel("")}
+                    />
+                  </div>
+                )}
+                
+                {selectedTransmission && (
+                  <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
+                    <Settings className="w-3 h-3" />
+                    <span>{selectedTransmission}</span>
+                    <X
+                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                      onClick={() => setSelectedTransmission("")}
+                    />
+                  </div>
+                )}
+                
+                {selectedEngineSize && (
+                  <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
+                    <Gauge className="w-3 h-3" />
+                    <span>{selectedEngineSize}L</span>
+                    <X
+                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                      onClick={() => setSelectedEngineSize("")}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </section>
