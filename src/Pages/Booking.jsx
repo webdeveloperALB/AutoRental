@@ -2,13 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Fuel,
-  Battery,
-  Leaf,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Fuel, Battery, Leaf } from "lucide-react";
 import { Icon } from "@iconify/react";
 import "./Booking.css";
 
@@ -60,7 +54,7 @@ const cars = [
   },
   {
     id: 2,
-    name: "BMW Seria 6 M Packet",
+    name: "BMW Seria 6 M Packet BiTurbo 400 HP",
     categories: ["Sports", "Luxury"],
     price: 150,
     images: [
@@ -84,7 +78,7 @@ const cars = [
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
-      engineSize: "4.0",
+      engineSize: "3.0",
     },
     rating: 4.8,
     reviews: 96,
@@ -94,8 +88,8 @@ const cars = [
   {
     id: 3,
     name: "Volkswagen Passat CC",
-    category: "Sedan",
-    price: 199,
+    categories: [" Sedan"],
+    price: 50,
     images: [
       {
         url: "/cars/passat cc/7V3A9613.jpg",
@@ -115,9 +109,9 @@ const cars = [
       },
     ],
     features: {
-      transmission: "Manual",
-      engineSize: "2.0L",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "2.0",
     },
     rating: 4.9,
     reviews: 156,
@@ -126,7 +120,7 @@ const cars = [
   },
   {
     id: 4,
-    name: "AUDI A7 BITDI",
+    name: "AUDI A7 BiTDI 3x S-line",
     images: [
       {
         url: "/cars/audi a7 white/7V3A8612.jpg",
@@ -149,12 +143,12 @@ const cars = [
         label: "Side View",
       },
     ],
-    category: "Sports",
-    price: 249,
+    categories: ["Sports", "Sedan", "Luxury"],
+    price: 150,
     features: {
-      transmission: "Automatic",
-      engineSize: "3.0L",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "3.0",
     },
     rating: 5.0,
     reviews: 84,
@@ -165,7 +159,7 @@ const cars = [
     id: 5,
     name: "Mercedes Benz C Class",
     category: "Sedan",
-    price: 159,
+    price: 60,
     images: [
       {
         url: "/cars/c-class 1.8/7V3A9658.jpg",
@@ -185,9 +179,9 @@ const cars = [
       },
     ],
     features: {
-      transmission: "Automatic",
-      engineSize: "1.8L",
       fuel: "Petrol",
+      transmission: "Automatic",
+      engineSize: "1.8",
     },
     rating: 4.7,
     reviews: 92,
@@ -197,8 +191,8 @@ const cars = [
   {
     id: 6,
     name: "Bmw X6 M Packet",
-    category: "Sedan",
-    price: 69,
+    category: "Suv",
+    price: 150,
     images: [
       {
         url: "/cars/bmw x6/7V3A8659.jpg",
@@ -226,8 +220,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "3.0",
     },
     rating: 4.6,
     reviews: 215,
@@ -237,8 +232,8 @@ const cars = [
   {
     id: 7,
     name: "Volkswagen Golf 7",
-    category: "SUV",
-    price: 189,
+    category: "Economy",
+    price: 60,
     images: [
       {
         url: "/cars/golf 7/7V3A9591.jpg",
@@ -259,6 +254,8 @@ const cars = [
     ],
     features: {
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "1.6",
     },
     rating: 4.8,
     reviews: 145,
@@ -267,9 +264,9 @@ const cars = [
   },
   {
     id: 8,
-    name: "Audi A7",
-    category: "Sports",
-    price: 399,
+    name: "Audi A7 SuperCharger",
+    categories: ["Sports", "Luxury"],
+    price: 150,
     images: [
       {
         url: "/cars/audi a7 gri/7V3A9798.jpg",
@@ -293,8 +290,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "2",
-      fuel: "Diesel",
+      fuel: "Petrol",
+      transmission: "Automatic",
+      engineSize: "3.0",
     },
     rating: 5.0,
     reviews: 42,
@@ -303,9 +301,9 @@ const cars = [
   },
   {
     id: 9,
-    name: "Mercedes Benz E-Class",
-    category: "SUV",
-    price: 149,
+    name: "Mercedes Benz E-Class W213",
+    categories: ["Sports", "Sedan"],
+    price: 230,
     images: [
       {
         url: "/cars/e-class 3.0/7V3A8709.jpg",
@@ -333,9 +331,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "7",
-      luggage: "4",
-      fuel: "Hybrid",
+      fuel: "Petrol",
+      transmission: "Automatic",
+      engineSize: "3.0",
     },
     rating: 4.7,
     reviews: 168,
@@ -344,9 +342,9 @@ const cars = [
   },
   {
     id: 10,
-    name: "Mercedes Benz E-Class",
-    category: "Luxury",
-    price: 179,
+    name: "Mercedes Benz E-Class W212",
+    categories: ["Luxury", "Sedan"],
+    price: 80,
     images: [
       {
         url: "/cars/e class 2.2/7V3A9763.jpg",
@@ -366,8 +364,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "2.0",
     },
     rating: 4.8,
     reviews: 134,
@@ -377,8 +376,8 @@ const cars = [
   {
     id: 11,
     name: "BMW Seria 4",
-    category: "Sedan",
-    price: 59,
+    categories: ["Coupe","Sports", "Luxury"],
+    price: 80,
     images: [
       {
         url: "/cars/bmw seria 4/7V3A9724.jpg",
@@ -398,8 +397,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "2.0",
     },
     rating: 4.5,
     reviews: 289,
@@ -410,7 +410,7 @@ const cars = [
     id: 12,
     name: "C-Class W204 Wagon",
     category: "Sedan",
-    price: 59,
+    price: 35,
     images: [
       {
         url: "/cars/c class w204 wagon/3.jpg",
@@ -430,8 +430,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "2.2",
     },
     rating: 4.5,
     reviews: 289,
@@ -441,8 +442,8 @@ const cars = [
   {
     id: 13,
     name: "Hyundai Santa Fe",
-    category: "Sedan",
-    price: 59,
+    categories: ["Suv"],
+    price: 50,
     images: [
       {
         url: "/cars/hyundai santa fe/3.jpg",
@@ -462,8 +463,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "2.0",
     },
     rating: 4.5,
     reviews: 289,
@@ -472,9 +474,9 @@ const cars = [
   },
   {
     id: 14,
-    name: "Volkswagen Touran",
-    category: "Sedan",
-    price: 59,
+    name: "Hyundai Santa Fe",
+    categories: ["Suv"],
+    price: 50,
     images: [
       {
         url: "/cars/touran/3.jpg",
@@ -494,8 +496,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Manual",
+      engineSize: "1.9",
     },
     rating: 4.5,
     reviews: 289,
@@ -505,8 +508,8 @@ const cars = [
   {
     id: 15,
     name: "Hyundai Accent",
-    category: "Sedan",
-    price: 59,
+    categories: ["Economy"],
+    price: 35,
     images: [
       {
         url: "/cars/hyundai accent/3.jpg",
@@ -526,8 +529,9 @@ const cars = [
       },
     ],
     features: {
-      seats: "5",
       fuel: "Diesel",
+      transmission: "Automatic",
+      engineSize: "1.6",
     },
     rating: 4.5,
     reviews: 289,
@@ -987,7 +991,7 @@ Car Details:
             {selectedCar.features.engineSize && (
               <div className="flex items-center space-x-2">
                 <Icon icon="mdi:engine" className="h-5 w-5 text-gray-600" />
-                <span>{selectedCar.features.engineSize} engine</span>
+                <span>{selectedCar.features.engineSize} L</span>
               </div>
             )}
           </div>

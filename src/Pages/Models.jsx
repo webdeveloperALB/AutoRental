@@ -35,14 +35,14 @@ const carModels = [
   },
   {
     id: 2,
-    name: "BMW Seria 6 M Packet",
+    name: "BMW Seria 6 M Packet BiTurbo 400 HP",
     categories: ["Sports", "Luxury"],
     price: 150,
     image: "/cars/bmw seria 6/7V3A9685.jpg",
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
-      engineSize: "4.0",
+      engineSize: "3.0",
     },
     rating: 4.8,
     reviews: 96,
