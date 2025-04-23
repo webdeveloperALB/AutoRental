@@ -613,7 +613,7 @@ Car Details:
     const encodedMessage = encodeURIComponent(message);
 
     // Replace with your WhatsApp number (include country code without + sign)
-    const whatsappNumber = "355688172927";
+    const whatsappNumber = "355698357378";
 
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
