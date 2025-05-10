@@ -53,11 +53,8 @@ const carModels = [
     images: [
       "/cars/bmw seria 6/7V3A9685.jpg",
       "/cars/bmw seria 6/7V3A9677.jpg",
-      "/cars/bmw seria 6/image3.jpg",
-      "/cars/bmw seria 6/image4.jpg",
-      "/cars/bmw seria 6/image5.jpg",
-      "/cars/bmw seria 6/image6.jpg",
-      "/cars/bmw seria 6/image7.jpg",
+      "/cars/bmw seria 6/7V3A9702.jpg",
+      "/cars/bmw seria 6/7V3A9698.jpg",
     ],
     features: {
       fuel: "Diesel",
@@ -76,12 +73,9 @@ const carModels = [
     price: 50,
     images: [
       "/cars/passat cc/7V3A9613.jpg",
-      "/cars/passat cc/image2.jpg",
-      "/cars/passat cc/image3.jpg",
-      "/cars/passat cc/image4.jpg",
-      "/cars/passat cc/image5.jpg",
-      "/cars/passat cc/image6.jpg",
-      "/cars/passat cc/image7.jpg",
+      "/cars/passat cc/7V3A9625.jpg",
+      "/cars/passat cc/7V3A9628.jpg",
+      "/cars/passat cc/7V3A9606.jpg",
     ],
     features: {
       fuel: "Diesel",
@@ -98,8 +92,14 @@ const carModels = [
     name: "AUDI A7 BiTDI 3x S-line",
     categories: ["Sports", "Sedan", "Luxury"],
     price: 150,
-    image: "/cars/audi a7 white/7V3A8612.jpg",
-    features: {
+    images: [
+      "/cars/audi a7 white/7V3A8612.jpg",
+      "/cars/audi a7 white/7V3A8622.jpg",
+      "/cars/audi a7 white/7V3A8624.jpg",
+      "/cars/audi a7 white/7V3A8603.jpg",
+      "/cars/audi a7 white/7V3A8600.jpg",
+    ],
+      features: {
       fuel: "Diesel",
       transmission: "Automatic",
       engineSize: "3.0",
@@ -114,7 +114,12 @@ const carModels = [
     name: "Mercedes Benz C Class",
     category: "Sedan",
     price: 60,
-    image: "/cars/c-class 1.8/7V3A9658.jpg",
+    images: [
+       "/cars/c-class 1.8/7V3A9658.jpg",
+       "/cars/c-class 1.8/7V3A9673.jpg",
+       "/cars/c-class 1.8/7V3A9654.jpg",
+       "/cars/c-class 1.8/7V3A9646.jpg",
+    ],
     features: {
       fuel: "Petrol",
       transmission: "Automatic",
