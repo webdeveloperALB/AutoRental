@@ -389,10 +389,10 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       />
 
 
-     
+
       {/* Navigation buttons */}
       <button
-        className="absolute left-2 bottom-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        className="absolute left-2 bottom-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={prevImage}
         aria-label="Previous image"
       >
@@ -400,12 +400,28 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       </button>
 
       <button
-        className="absolute right-2 bottom-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        className="absolute right-2 bottom-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={nextImage}
         aria-label="Next image"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
+      {/* <button
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        onClick={prevImage}
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+
+      <button
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        onClick={nextImage}
+        aria-label="Next image"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button> */}
+
 
 
       {/* Image indicators */}
