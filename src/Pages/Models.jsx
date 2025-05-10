@@ -389,11 +389,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       />
 
 
-      {/* Image counter */}
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
-        {currentIndex + 1} / {images.length}
-      </div>
-
+     
       {/* Navigation buttons */}
       <button
         className="absolute left-2 bottom-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
@@ -413,7 +409,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
 
       {/* Image indicators */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-1">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
         {images.map((_, index) => (
           <button
             key={index}
