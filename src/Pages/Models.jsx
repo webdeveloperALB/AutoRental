@@ -389,119 +389,176 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     setIsSwiping(false);
   };
 
+  // Modified handleTouchMove function to fix the vertical scrolling issue
   const handleTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX);
-    // If we're moving more than a tiny bit, we're swiping (increased sensitivity)
-    if (Math.abs(touchStart - e.targetTouches[0].clientX) > 5) {
-      setIsSwiping(true);
 
-      // Add this to prevent screen scrolling while swiping the carousel
+    // Calculate horizontal and vertical movement
+    const horizontalDistance = Math.abs(touchStart - e.targetTouches[0].clientX);
+
+    // If horizontal movement is significant, prevent default scroll behavior
+    if (horizontalDistance > 10) {
+      // This prevents the page from scrolling when swiping horizontally
       e.preventDefault();
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-
-    // Check if the swipe distance is significant enough
-    if (Math.abs(distance) >= minSwipeDistance) {
-      if (distance > 0) {
-        // Swipe left, so go to next image
-        nextImage();
-      } else {
-        // Swipe right, so go to previous image
-        prevImage();
-      }
-    }
-
-    // Reset values
-    setTouchStart(0);
-    setTouchEnd(0);
-
-    // Reset swiping state after a brief delay to prevent accidental navigation
-    setTimeout(() => {
-      setIsSwiping(false);
-    }, 150);
-  };
-
-  // Mouse drag events to support desktop dragging too
-  const handleMouseDown = (e) => {
-    setTouchStart(e.clientX);
-    setIsSwiping(false);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
-
-  const handleMouseMove = (e) => {
-    setTouchEnd(e.clientX);
-    if (Math.abs(touchStart - e.clientX) > 5) {
       setIsSwiping(true);
     }
   };
 
-  const handleMouseUp = (e) => {
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
+  // And the full component with the fix:
+  const ImageCarousel = ({ images, carId, navigate }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
+    const [isSwiping, setIsSwiping] = useState(false);
 
-    if (!touchStart || !touchEnd) return;
+    // Minimum swipe distance in pixels to trigger navigation - lower value = more sensitive
+    const minSwipeDistance = 20;
 
-    const distance = touchStart - e.clientX;
-
-    if (Math.abs(distance) >= minSwipeDistance) {
-      if (distance > 0) {
-        nextImage();
-      } else {
-        prevImage();
+    // Navigate to the booking page when the image is clicked
+    const handleImageClick = () => {
+      if (!isSwiping) {
+        navigate(`/booking/${carId}`);
       }
-    }
+    };
 
-    setTouchStart(0);
-    setTouchEnd(0);
+    // Go to the previous image
+    const prevImage = (e) => {
+      if (e) e.stopPropagation(); // Prevent triggering the parent click event
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      );
+    };
 
-    setTimeout(() => {
+    // Go to the next image
+    const nextImage = (e) => {
+      if (e) e.stopPropagation(); // Prevent triggering the parent click event
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    };
+
+    // Touch event handlers
+    const handleTouchStart = (e) => {
+      setTouchStart(e.targetTouches[0].clientX);
       setIsSwiping(false);
-    }, 150);
-  };
+    };
 
-  return (
-    <div
-      className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
-      onClick={handleImageClick}
-    >
-      {/* Image with touch event handlers */}
+    const handleTouchMove = (e) => {
+      setTouchEnd(e.targetTouches[0].clientX);
+
+      // Calculate horizontal movement
+      const horizontalDistance = Math.abs(touchStart - e.targetTouches[0].clientX);
+
+      // If horizontal movement is significant, prevent default scroll behavior
+      if (horizontalDistance > 10) {
+        // This prevents the page from scrolling when swiping horizontally
+        e.preventDefault();
+        setIsSwiping(true);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (!touchStart || !touchEnd) return;
+
+      const distance = touchStart - touchEnd;
+
+      // Check if the swipe distance is significant enough
+      if (Math.abs(distance) >= minSwipeDistance) {
+        if (distance > 0) {
+          // Swipe left, so go to next image
+          nextImage();
+        } else {
+          // Swipe right, so go to previous image
+          prevImage();
+        }
+      }
+
+      // Reset values
+      setTouchStart(0);
+      setTouchEnd(0);
+
+      // Reset swiping state after a brief delay to prevent accidental navigation
+      setTimeout(() => {
+        setIsSwiping(false);
+      }, 150);
+    };
+
+    // Mouse drag events to support desktop dragging too
+    const handleMouseDown = (e) => {
+      setTouchStart(e.clientX);
+      setIsSwiping(false);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    const handleMouseMove = (e) => {
+      setTouchEnd(e.clientX);
+      if (Math.abs(touchStart - e.clientX) > 5) {
+        setIsSwiping(true);
+      }
+    };
+
+    const handleMouseUp = (e) => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+
+      if (!touchStart || !touchEnd) return;
+
+      const distance = touchStart - e.clientX;
+
+      if (Math.abs(distance) >= minSwipeDistance) {
+        if (distance > 0) {
+          nextImage();
+        } else {
+          prevImage();
+        }
+      }
+
+      setTouchStart(0);
+      setTouchEnd(0);
+
+      setTimeout(() => {
+        setIsSwiping(false);
+      }, 150);
+    };
+
+    return (
       <div
-        className="w-full h-full"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onMouseDown={handleMouseDown}
+        className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
+        onClick={handleImageClick}
       >
-        <img
-          src={images[currentIndex] || "/placeholder.svg"}
-          alt="Car image"
-          className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
-          draggable="false" // Prevent image dragging interfering with swipe
-        />
-      </div>
-      {/* Navigation buttons */}
-      <button
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
-        onClick={prevImage}
-        aria-label="Previous image"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
+        {/* Image with touch event handlers */}
+        <div
+          className="w-full h-full"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+        >
+          <img
+            src={images[currentIndex] || "/placeholder.svg"}
+            alt="Car image"
+            className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
+            draggable="false" // Prevent image dragging interfering with swipe
+          />
+        </div>
+        {/* Navigation buttons */}
+        <button
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+          onClick={prevImage}
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
 
-      <button
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
-        onClick={nextImage}
-        aria-label="Next image"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-      {/*<button
+        <button
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+          onClick={nextImage}
+          aria-label="Next image"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+        {/*<button
         className="absolute left-2 bottom-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={prevImage}
         aria-label="Previous image"
@@ -517,530 +574,531 @@ const ImageCarousel = ({ images, carId, navigate }) => {
         <ChevronRight className="w-5 h-5" />
       </button> */}
 
-      {/* Image indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
-              }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentIndex(index);
-            }}
-            aria-label={`Go to image ${index + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Optional visual feedback during swipe (subtle indicator) */}
-      {isSwiping && touchEnd !== 0 && (
-        <div
-          className={`absolute inset-y-0 ${touchEnd < touchStart ? 'right-0' : 'left-0'} w-12 bg-gradient-to-r from-black/20 to-transparent pointer-events-none`}
-          style={{
-            opacity: Math.min(0.5, Math.abs(touchEnd - touchStart) / 100)
-          }}
-        />
-      )}
-    </div>
-  );
-};
-
-const Models = () => {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get("categories");
-  const searchParam = searchParams.get("search");
-  const fuelParam = searchParams.get("fuel");
-  const transmissionParam = searchParams.get("transmission");
-  const engineSizeParam = searchParams.get("engineSize");
-
-  // Initialize state from URL params
-  const [selectedCategories, setSelectedCategories] = useState(
-    categoryParam ? categoryParam.split(",") : []
-  );
-  const [searchQuery, setSearchQuery] = useState(searchParam || "");
-  const [selectedFuel, setSelectedFuel] = useState(fuelParam || "");
-  const [selectedTransmission, setSelectedTransmission] = useState(transmissionParam || "");
-  const [selectedEngineSize, setSelectedEngineSize] = useState(engineSizeParam || "");
-
-  // Update URL params when filters change
-  useEffect(() => {
-    const params = new URLSearchParams();
-    if (selectedCategories.length > 0)
-      params.set("categories", selectedCategories.join(","));
-    if (searchQuery.trim())
-      params.set("search", searchQuery.trim());
-    if (selectedFuel)
-      params.set("fuel", selectedFuel);
-    if (selectedTransmission)
-      params.set("transmission", selectedTransmission);
-    if (selectedEngineSize)
-      params.set("engineSize", selectedEngineSize);
-
-    setSearchParams(params);
-  }, [selectedCategories, searchQuery, selectedFuel, selectedTransmission, selectedEngineSize, setSearchParams]);
-
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-  };
-
-  const categories = [
-    { name: "All", icon: Car },
-    { name: "SUV", icon: Car },
-    { name: "Sedan", icon: Car },
-    { name: "Luxury", icon: Car },
-    { name: "Sports", icon: Car },
-    { name: "Economy", icon: Car },
-  ];
-
-  // Extract unique values for filters from car data
-  const fuelTypes = [...new Set(carModels.map(car => car.features.fuel))];
-  const transmissionTypes = [...new Set(carModels.map(car => car.features.transmission))];
-  const engineSizes = [...new Set(carModels.map(car => car.features.engineSize.toString().split(" ")[0]))];
-
-  // Toggle category selection
-  const toggleCategory = (category) => {
-    if (category === "All") {
-      setSelectedCategories([]);
-    } else {
-      setSelectedCategories((prev) => {
-        if (prev.includes(category)) {
-          return prev.filter((cat) => cat !== category);
-        } else {
-          return [...prev, category];
-        }
-      });
-    }
-  };
-
-  // Clear all filters
-  const clearAllFilters = () => {
-    setSelectedCategories([]);
-    setSelectedFuel("");
-    setSelectedTransmission("");
-    setSelectedEngineSize("");
-  };
-
-  // Helper function to check if a car matches the selected filters
-  const matchesFilters = (car) => {
-    // Match categories
-    const matchesCategories = selectedCategories.length === 0 ||
-      selectedCategories.some(selected => (car.categories || [car.category]).includes(selected));
-
-    // Match fuel type
-    const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel;
-
-    // Match transmission
-    const matchesTransmission = !selectedTransmission || car.features.transmission === selectedTransmission;
-
-    // Match engine size - this is a bit trickier since engine sizes might be stored differently
-    const matchesEngineSize = !selectedEngineSize ||
-      car.features.engineSize.toString().includes(selectedEngineSize);
-
-    // Match search query
-    const matchesSearch = !searchQuery || car.name.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesCategories && matchesFuel && matchesTransmission && matchesEngineSize && matchesSearch;
-  };
-
-  const filteredCars = carModels.filter(matchesFilters);
-
-  // Count active filters (excluding search)
-  const activeFilterCount = [
-    selectedCategories.length > 0,
-    !!selectedFuel,
-    !!selectedTransmission,
-    !!selectedEngineSize
-  ].filter(Boolean).length;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
-      {/* Hero Section */}
-      <section className="pt-16 pb-4">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeIn}
-            initial="initial"
-            whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
-              <Car className="w-5 h-5 text-white" />
-              <span className="text-white font-medium">Our Fleet</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
-              Choose Your Perfect{" "}
-              <span className="text-red-600 whitespace-nowrap">Ride</span>
-            </h1>
-            <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4">
-              Experience premium service with unlimited miles and flexible
-              pick-up options at unbeatable prices. Select from our wide range
-              of well-maintained vehicles.
-            </p>
-            <p className="text-sm font-medium text-red-600 bg-red-50 inline-block rounded-md py-2 px-4 shadow-sm border border-red-100">
-              Minimum rental period: 2 days for all vehicles
-            </p>
-          </motion.div>
+        {/* Image indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
+                }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentIndex(index);
+              }}
+              aria-label={`Go to image ${index + 1}`}
+            />
+          ))}
         </div>
-      </section>
 
-      {/* Search and Filter Section */}
-      <section className="py-6 sm:py-8">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl shadow-sm">
-            {/* Search bar */}
-            <div className="p-4 sm:p-6">
-              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
-                {/* Search Bar */}
-                <div className="relative flex items-center">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search for a car..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 py-2.5 sm:py-3 rounded-lg border border-gray-200 
+        {/* Optional visual feedback during swipe (subtle indicator) */}
+        {isSwiping && touchEnd !== 0 && (
+          <div
+            className={`absolute inset-y-0 ${touchEnd < touchStart ? 'right-0' : 'left-0'} w-12 bg-gradient-to-r from-black/20 to-transparent pointer-events-none`}
+            style={{
+              opacity: Math.min(0.5, Math.abs(touchEnd - touchStart) / 100)
+            }}
+          />
+        )}
+      </div>
+    );
+  };
+
+  const Models = () => {
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const categoryParam = searchParams.get("categories");
+    const searchParam = searchParams.get("search");
+    const fuelParam = searchParams.get("fuel");
+    const transmissionParam = searchParams.get("transmission");
+    const engineSizeParam = searchParams.get("engineSize");
+
+    // Initialize state from URL params
+    const [selectedCategories, setSelectedCategories] = useState(
+      categoryParam ? categoryParam.split(",") : []
+    );
+    const [searchQuery, setSearchQuery] = useState(searchParam || "");
+    const [selectedFuel, setSelectedFuel] = useState(fuelParam || "");
+    const [selectedTransmission, setSelectedTransmission] = useState(transmissionParam || "");
+    const [selectedEngineSize, setSelectedEngineSize] = useState(engineSizeParam || "");
+
+    // Update URL params when filters change
+    useEffect(() => {
+      const params = new URLSearchParams();
+      if (selectedCategories.length > 0)
+        params.set("categories", selectedCategories.join(","));
+      if (searchQuery.trim())
+        params.set("search", searchQuery.trim());
+      if (selectedFuel)
+        params.set("fuel", selectedFuel);
+      if (selectedTransmission)
+        params.set("transmission", selectedTransmission);
+      if (selectedEngineSize)
+        params.set("engineSize", selectedEngineSize);
+
+      setSearchParams(params);
+    }, [selectedCategories, searchQuery, selectedFuel, selectedTransmission, selectedEngineSize, setSearchParams]);
+
+    const fadeIn = {
+      initial: { opacity: 0, y: 20 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true },
+    };
+
+    const categories = [
+      { name: "All", icon: Car },
+      { name: "SUV", icon: Car },
+      { name: "Sedan", icon: Car },
+      { name: "Luxury", icon: Car },
+      { name: "Sports", icon: Car },
+      { name: "Economy", icon: Car },
+    ];
+
+    // Extract unique values for filters from car data
+    const fuelTypes = [...new Set(carModels.map(car => car.features.fuel))];
+    const transmissionTypes = [...new Set(carModels.map(car => car.features.transmission))];
+    const engineSizes = [...new Set(carModels.map(car => car.features.engineSize.toString().split(" ")[0]))];
+
+    // Toggle category selection
+    const toggleCategory = (category) => {
+      if (category === "All") {
+        setSelectedCategories([]);
+      } else {
+        setSelectedCategories((prev) => {
+          if (prev.includes(category)) {
+            return prev.filter((cat) => cat !== category);
+          } else {
+            return [...prev, category];
+          }
+        });
+      }
+    };
+
+    // Clear all filters
+    const clearAllFilters = () => {
+      setSelectedCategories([]);
+      setSelectedFuel("");
+      setSelectedTransmission("");
+      setSelectedEngineSize("");
+    };
+
+    // Helper function to check if a car matches the selected filters
+    const matchesFilters = (car) => {
+      // Match categories
+      const matchesCategories = selectedCategories.length === 0 ||
+        selectedCategories.some(selected => (car.categories || [car.category]).includes(selected));
+
+      // Match fuel type
+      const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel;
+
+      // Match transmission
+      const matchesTransmission = !selectedTransmission || car.features.transmission === selectedTransmission;
+
+      // Match engine size - this is a bit trickier since engine sizes might be stored differently
+      const matchesEngineSize = !selectedEngineSize ||
+        car.features.engineSize.toString().includes(selectedEngineSize);
+
+      // Match search query
+      const matchesSearch = !searchQuery || car.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchesCategories && matchesFuel && matchesTransmission && matchesEngineSize && matchesSearch;
+    };
+
+    const filteredCars = carModels.filter(matchesFilters);
+
+    // Count active filters (excluding search)
+    const activeFilterCount = [
+      selectedCategories.length > 0,
+      !!selectedFuel,
+      !!selectedTransmission,
+      !!selectedEngineSize
+    ].filter(Boolean).length;
+
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
+        {/* Hero Section */}
+        <section className="pt-16 pb-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="whileInView"
+              className="text-center max-w-3xl mx-auto"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
+                <Car className="w-5 h-5 text-white" />
+                <span className="text-white font-medium">Our Fleet</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
+                Choose Your Perfect{" "}
+                <span className="text-red-600 whitespace-nowrap">Ride</span>
+              </h1>
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4">
+                Experience premium service with unlimited miles and flexible
+                pick-up options at unbeatable prices. Select from our wide range
+                of well-maintained vehicles.
+              </p>
+              <p className="text-sm font-medium text-red-600 bg-red-50 inline-block rounded-md py-2 px-4 shadow-sm border border-red-100">
+                Minimum rental period: 2 days for all vehicles
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Search and Filter Section */}
+        <section className="py-6 sm:py-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white rounded-xl shadow-sm">
+              {/* Search bar */}
+              <div className="p-4 sm:p-6">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 sm:gap-6">
+                  {/* Search Bar */}
+                  <div className="relative flex items-center">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Search className="w-5 h-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Search for a car..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-10 py-2.5 sm:py-3 rounded-lg border border-gray-200 
                         focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
                         placeholder-gray-400 text-gray-900 text-sm sm:text-base"
-                  />
-                </div>
+                    />
+                  </div>
 
-                {/* Category Filter */}
-                <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:col-span-2">
-                  <div className="flex gap-2 sm:gap-3">
-                    {categories.map((category) => (
-                      <button
-                        key={category.name}
-                        onClick={() => toggleCategory(category.name)}
-                        className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
+                  {/* Category Filter */}
+                  <div className="relative flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:col-span-2">
+                    <div className="flex gap-2 sm:gap-3">
+                      {categories.map((category) => (
+                        <button
+                          key={category.name}
+                          onClick={() => toggleCategory(category.name)}
+                          className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
                             transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
                             ${category.name === "All" &&
-                            selectedCategories.length === 0
-                            ? "bg-black text-white shadow-md"
-                            : selectedCategories.includes(category.name)
+                              selectedCategories.length === 0
                               ? "bg-black text-white shadow-md"
-                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"
-                          }`}
-                      >
-                        <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                        <span className="text-sm sm:text-base">
-                          {category.name}
-                        </span>
-                      </button>
-                    ))}
+                              : selectedCategories.includes(category.name)
+                                ? "bg-black text-white shadow-md"
+                                : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                            }`}
+                        >
+                          <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                          <span className="text-sm sm:text-base">
+                            {category.name}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Always visible filters */}
-            <div className="px-4 sm:px-6 pb-6 pt-2 border-t border-gray-100">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Fuel Type Filter */}
-                <div>
-                  <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
-                    <Fuel className="w-4 h-4" /> Fuel Type
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {fuelTypes.map((fuel) => (
-                      <button
-                        key={fuel}
-                        onClick={() => setSelectedFuel(selectedFuel === fuel ? "" : fuel)}
-                        className={`px-3 py-1.5 rounded-md text-sm transition-colors
+              {/* Always visible filters */}
+              <div className="px-4 sm:px-6 pb-6 pt-2 border-t border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Fuel Type Filter */}
+                  <div>
+                    <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
+                      <Fuel className="w-4 h-4" /> Fuel Type
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {fuelTypes.map((fuel) => (
+                        <button
+                          key={fuel}
+                          onClick={() => setSelectedFuel(selectedFuel === fuel ? "" : fuel)}
+                          className={`px-3 py-1.5 rounded-md text-sm transition-colors
                           ${selectedFuel === fuel
-                            ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
-                      >
-                        {fuel}
-                      </button>
-                    ))}
+                              ? "bg-black text-white"
+                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                        >
+                          {fuel}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Transmission Filter */}
-                <div>
-                  <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
-                    <Settings className="w-4 h-4" /> Transmission
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {transmissionTypes.map((transmission) => (
-                      <button
-                        key={transmission}
-                        onClick={() => setSelectedTransmission(selectedTransmission === transmission ? "" : transmission)}
-                        className={`px-3 py-1.5 rounded-md text-sm transition-colors
+                  {/* Transmission Filter */}
+                  <div>
+                    <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
+                      <Settings className="w-4 h-4" /> Transmission
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {transmissionTypes.map((transmission) => (
+                        <button
+                          key={transmission}
+                          onClick={() => setSelectedTransmission(selectedTransmission === transmission ? "" : transmission)}
+                          className={`px-3 py-1.5 rounded-md text-sm transition-colors
                           ${selectedTransmission === transmission
-                            ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
-                      >
-                        {transmission}
-                      </button>
-                    ))}
+                              ? "bg-black text-white"
+                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                        >
+                          {transmission}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Engine Size Filter */}
+                  <div>
+                    <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
+                      <Gauge className="w-4 h-4" /> Engine Size
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {engineSizes.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedEngineSize(selectedEngineSize === size ? "" : size)}
+                          className={`px-3 py-1.5 rounded-md text-sm transition-colors
+                          ${selectedEngineSize === size
+                              ? "bg-black text-white"
+                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                        >
+                          {size}L
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                {/* Engine Size Filter */}
-                <div>
-                  <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
-                    <Gauge className="w-4 h-4" /> Engine Size
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {engineSizes.map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => setSelectedEngineSize(selectedEngineSize === size ? "" : size)}
-                        className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                          ${selectedEngineSize === size
-                            ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
-                      >
-                        {size}L
-                      </button>
-                    ))}
+                {/* Clear Filters Button */}
+                {activeFilterCount > 0 && (
+                  <div className="mt-6 text-center">
+                    <button
+                      onClick={clearAllFilters}
+                      className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors"
+                    >
+                      Clear All Filters
+                    </button>
                   </div>
-                </div>
+                )}
               </div>
 
-              {/* Clear Filters Button */}
-              {activeFilterCount > 0 && (
-                <div className="mt-6 text-center">
-                  <button
-                    onClick={clearAllFilters}
-                    className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors"
-                  >
-                    Clear All Filters
-                  </button>
+              {/* Active Filter Chips */}
+              {(selectedCategories.length > 0 || selectedFuel || selectedTransmission || selectedEngineSize) && (
+                <div className="px-4 sm:px-6 pb-4 pt-2 flex flex-wrap gap-2 border-t border-gray-100">
+                  {selectedCategories.map((category) => (
+                    <div
+                      key={`selected-${category}`}
+                      className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm"
+                    >
+                      <Car className="w-3 h-3" />
+                      <span>{category}</span>
+                      <X
+                        className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                        onClick={() => toggleCategory(category)}
+                      />
+                    </div>
+                  ))}
+
+                  {selectedFuel && (
+                    <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
+                      <Fuel className="w-3 h-3" />
+                      <span>{selectedFuel}</span>
+                      <X
+                        className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                        onClick={() => setSelectedFuel("")}
+                      />
+                    </div>
+                  )}
+
+                  {selectedTransmission && (
+                    <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
+                      <Settings className="w-3 h-3" />
+                      <span>{selectedTransmission}</span>
+                      <X
+                        className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                        onClick={() => setSelectedTransmission("")}
+                      />
+                    </div>
+                  )}
+
+                  {selectedEngineSize && (
+                    <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
+                      <Gauge className="w-3 h-3" />
+                      <span>{selectedEngineSize}L</span>
+                      <X
+                        className="w-3 h-3 cursor-pointer hover:text-gray-300"
+                        onClick={() => setSelectedEngineSize("")}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-
-            {/* Active Filter Chips */}
-            {(selectedCategories.length > 0 || selectedFuel || selectedTransmission || selectedEngineSize) && (
-              <div className="px-4 sm:px-6 pb-4 pt-2 flex flex-wrap gap-2 border-t border-gray-100">
-                {selectedCategories.map((category) => (
-                  <div
-                    key={`selected-${category}`}
-                    className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm"
-                  >
-                    <Car className="w-3 h-3" />
-                    <span>{category}</span>
-                    <X
-                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
-                      onClick={() => toggleCategory(category)}
-                    />
-                  </div>
-                ))}
-
-                {selectedFuel && (
-                  <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
-                    <Fuel className="w-3 h-3" />
-                    <span>{selectedFuel}</span>
-                    <X
-                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
-                      onClick={() => setSelectedFuel("")}
-                    />
-                  </div>
-                )}
-
-                {selectedTransmission && (
-                  <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
-                    <Settings className="w-3 h-3" />
-                    <span>{selectedTransmission}</span>
-                    <X
-                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
-                      onClick={() => setSelectedTransmission("")}
-                    />
-                  </div>
-                )}
-
-                {selectedEngineSize && (
-                  <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
-                    <Gauge className="w-3 h-3" />
-                    <span>{selectedEngineSize}L</span>
-                    <X
-                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
-                      onClick={() => setSelectedEngineSize("")}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Car Models Grid */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCars.length === 0 ? (
-              <div className="col-span-full text-center py-12">
-                <p className="text-xl text-gray-600">
-                  No cars found matching your search criteria.
-                </p>
-              </div>
-            ) : (
-              filteredCars.map((car) => (
-                <motion.div
-                  key={car.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="group"
-                >
-                  <div
-                    className={`rounded-xl bg-transparent sm:bg-gray-100 p-0 sm:p-4 ${car.color} transition-all duration-300 
-              group-hover:-translate-y-2`}
+        {/* Car Models Grid */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredCars.length === 0 ? (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-xl text-gray-600">
+                    No cars found matching your search criteria.
+                  </p>
+                </div>
+              ) : (
+                filteredCars.map((car) => (
+                  <motion.div
+                    key={car.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="group"
                   >
+                    <div
+                      className={`rounded-xl bg-transparent sm:bg-gray-100 p-0 sm:p-4 ${car.color} transition-all duration-300 
+              group-hover:-translate-y-2`}
+                    >
 
 
-                    {/* Replace static image with ImageCarousel component */}
-                    <ImageCarousel
-                      images={car.images || [car.image || "/placeholder.svg"]}
-                      carId={car.id}
-                      navigate={navigate}
-                    />
+                      {/* Replace static image with ImageCarousel component */}
+                      <ImageCarousel
+                        images={car.images || [car.image || "/placeholder.svg"]}
+                        carId={car.id}
+                        navigate={navigate}
+                      />
 
-                    {/* Car Info */}
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-xl font-bold mb-1">{car.name}</h3>
-                          <div className="flex flex-wrap gap-2">
-                            {(car.categories || [car.category]).map((cat) => (
-                              <span
-                                key={`${car.id}-${cat}`}
-                                className="text-sm text-gray-600 bg-gray-100 py-0.5 px-2 rounded-full mr-2 mb-2"
-                              >
-                                {cat}
-                              </span>
-                            ))}
+                      {/* Car Info */}
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="text-xl font-bold mb-1">{car.name}</h3>
+                            <div className="flex flex-wrap gap-2">
+                              {(car.categories || [car.category]).map((cat) => (
+                                <span
+                                  key={`${car.id}-${cat}`}
+                                  className="text-sm text-gray-600 bg-gray-100 py-0.5 px-2 rounded-full mr-2 mb-2"
+                                >
+                                  {cat}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-2xl font-bold text-black">
+                              €{car.price}
+                            </span>
+                            <span className="text-sm text-black">/day</span>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <span className="text-2xl font-bold text-black">
-                            €{car.price}
-                          </span>
-                          <span className="text-sm text-black">/day</span>
-                        </div>
-                      </div>
 
-                      {/* Features */}
-                      <div className="flex flex-wrap justify-between py-4 border-t border-gray-200 gap-y-3">
-                        <div className="flex items-center gap-2">
-                          <Fuel className="w-5 h-5 text-gray-500" />
-                          <span>{car.features.fuel}</span>
+                        {/* Features */}
+                        <div className="flex flex-wrap justify-between py-4 border-t border-gray-200 gap-y-3">
+                          <div className="flex items-center gap-2">
+                            <Fuel className="w-5 h-5 text-gray-500" />
+                            <span>{car.features.fuel}</span>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <Icon
+                              icon="lucide-lab:gearbox"
+                              className="w-5 h-5 text-gray-500"
+                            />
+                            <span>{car.features.transmission}</span>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <Icon
+                              icon="mdi:engine"
+                              className="w-5 h-5 text-gray-500"
+                            />
+                            <span>{car.features.engineSize}L</span>
+                          </div>
                         </div>
 
-                        <div className="flex items-center gap-2">
-                          <Icon
-                            icon="lucide-lab:gearbox"
-                            className="w-5 h-5 text-gray-500"
-                          />
-                          <span>{car.features.transmission}</span>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <Icon
-                            icon="mdi:engine"
-                            className="w-5 h-5 text-gray-500"
-                          />
-                          <span>{car.features.engineSize}L</span>
-                        </div>
-                      </div>
-
-                      {/* Rating and Book Button */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                          <span className="font-medium">{car.rating}</span>
-                          <span className="text-gray-600">
-                            ({car.reviews} reviews)
-                          </span>
-                        </div>
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => navigate(`/booking/${car.id}`)}
-                          className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
+                        {/* Rating and Book Button */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-medium">{car.rating}</span>
+                            <span className="text-gray-600">
+                              ({car.reviews} reviews)
+                            </span>
+                          </div>
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => navigate(`/booking/${car.id}`)}
+                            className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
                                    transition-colors"
-                        >
-                          Book Now
-                        </motion.button>
+                          >
+                            Book Now
+                          </motion.button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Booking Process */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeIn}
-            initial="initial"
-            whileInView="whileInView"
-            className="text-center max-w-3xl mx-auto mb-12"
-          >
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <HelpCircle className="w-6 h-6 text-gray-600" />
-              <h2 className="text-3xl font-bold text-gray-900">How to Book</h2>
+                  </motion.div>
+                ))
+              )}
             </div>
-            <p className="text-gray-600">
-              We have streamlined our rental process to get you on the road
-              quickly and safely
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {[
-              {
-                icon: Car,
-                title: "Choose Your Car",
-                description: "Select from our wide range of premium vehicles",
-              },
-              {
-                icon: Calendar,
-                title: "Pick Date & Location",
-                description: "Choose your pickup date and preferred location",
-              },
-              {
-                icon: MapPin,
-                title: "Book & Enjoy",
-                description: "Complete your booking and enjoy your journey",
-              },
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 text-center border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-md"
-              >
-                <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 p-4 transition-all duration-300 hover:bg-gray-800">
-                  <step.icon className="w-10 h-10 text-white flex-shrink-0" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
           </div>
-        </div>
-      </section>
-    </div>
-  );
+        </section>
+
+        {/* Quick Booking Process */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="whileInView"
+              className="text-center max-w-3xl mx-auto mb-12"
+            >
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <HelpCircle className="w-6 h-6 text-gray-600" />
+                <h2 className="text-3xl font-bold text-gray-900">How to Book</h2>
+              </div>
+              <p className="text-gray-600">
+                We have streamlined our rental process to get you on the road
+                quickly and safely
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: Car,
+                  title: "Choose Your Car",
+                  description: "Select from our wide range of premium vehicles",
+                },
+                {
+                  icon: Calendar,
+                  title: "Pick Date & Location",
+                  description: "Choose your pickup date and preferred location",
+                },
+                {
+                  icon: MapPin,
+                  title: "Book & Enjoy",
+                  description: "Complete your booking and enjoy your journey",
+                },
+              ].map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-xl p-6 text-center border border-gray-100 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-md"
+                >
+                  <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 p-4 transition-all duration-300 hover:bg-gray-800">
+                    <step.icon className="w-10 h-10 text-white flex-shrink-0" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {step.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 };
 
 export default Models;
