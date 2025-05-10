@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -348,71 +348,88 @@ const carModels = [
   },
 ];
 
-// Create a new ImageCarousel component with touch/swipe support
+// Optimized ImageCarousel component with enhanced touch/swipe responsiveness
 const ImageCarousel = ({ images, carId, navigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
 
-  // Minimum swipe distance in pixels to trigger navigation - lower value = more sensitive
-  const minSwipeDistance = 20;
+  // Reference to track if component is mounted (prevent state updates after unmount)
+  const isMounted = useRef(true);
 
-  // Navigate to the booking page when the image is clicked
-  const handleImageClick = () => {
+  // Store previous position to calculate velocity
+  const lastX = useRef(0);
+  const touchStartTime = useRef(0);
+
+  // Use a lower threshold for faster response - adjust as needed
+  const minSwipeDistance = 10; // Lowered from 20 for more sensitive detection
+
+  // Avoid unnecessary re-renders with useCallback
+  const handleImageClick = useCallback(() => {
     if (!isSwiping) {
       navigate(`/booking/${carId}`);
     }
-  };
+  }, [isSwiping, navigate, carId]);
 
-  // Go to the previous image
-  const prevImage = (e) => {
-    if (e) e.stopPropagation(); // Prevent triggering the parent click event
+  // Optimize prev/next functions with useCallback
+  const prevImage = useCallback((e) => {
+    if (e) e.stopPropagation();
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  }, [images.length]);
 
-  // Go to the next image
-  const nextImage = (e) => {
-    if (e) e.stopPropagation(); // Prevent triggering the parent click event
+  const nextImage = useCallback((e) => {
+    if (e) e.stopPropagation();
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
-  };
+  }, [images.length]);
 
-  // Touch event handlers
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
+  // Enhanced touch handling for better responsiveness
+  const handleTouchStart = useCallback((e) => {
+    // Store the starting position and time for velocity calculation
+    const touchX = e.targetTouches[0].clientX;
+    setTouchStart(touchX);
+    setTouchEnd(touchX); // Initialize touchEnd to avoid jumps
+    lastX.current = touchX;
+    touchStartTime.current = Date.now();
     setIsSwiping(false);
-  };
+  }, []);
 
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+  // Use passive: false only when necessary to prevent scroll blocking on all moves
+  const handleTouchMove = useCallback((e) => {
+    const currentX = e.targetTouches[0].clientX;
+    setTouchEnd(currentX);
 
     // Calculate horizontal movement
-    const horizontalDistance = Math.abs(touchStart - e.targetTouches[0].clientX);
+    const horizontalDistance = Math.abs(lastX.current - currentX);
 
-    // If horizontal movement is significant, prevent default scroll behavior
-    if (horizontalDistance > 10) {
-      // This prevents the page from scrolling when swiping horizontally
+    // Update last position for next move event
+    lastX.current = currentX;
+
+    // Only block default scroll behavior if significant horizontal movement
+    if (horizontalDistance > 5) {
       e.preventDefault();
       setIsSwiping(true);
     }
-  };
+  }, []);
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = useCallback(() => {
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
+    const touchDuration = Date.now() - touchStartTime.current;
 
-    // Check if the swipe distance is significant enough
-    if (Math.abs(distance) >= minSwipeDistance) {
+    // Calculate swipe velocity for more responsive feel
+    const velocity = Math.abs(distance) / touchDuration;
+
+    // Check if swipe was fast enough or distance was significant enough
+    if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
       if (distance > 0) {
-        // Swipe left, so go to next image
         nextImage();
       } else {
-        // Swipe right, so go to previous image
         prevImage();
       }
     }
@@ -421,36 +438,48 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     setTouchStart(0);
     setTouchEnd(0);
 
-    // Reset swiping state after a brief delay to prevent accidental navigation
-    setTimeout(() => {
-      setIsSwiping(false);
-    }, 150);
-  };
+    // Use a shorter delay for more responsive feel
+    const timer = setTimeout(() => {
+      if (isMounted.current) {
+        setIsSwiping(false);
+      }
+    }, 50); // Reduced from 150ms to 50ms for faster response
 
-  // Mouse drag events to support desktop dragging too
-  const handleMouseDown = (e) => {
-    setTouchStart(e.clientX);
+    return () => clearTimeout(timer);
+  }, [touchStart, touchEnd, nextImage, prevImage, minSwipeDistance]);
+
+  // Enhanced mouse handling for desktop
+  const handleMouseDown = useCallback((e) => {
+    const mouseX = e.clientX;
+    setTouchStart(mouseX);
+    setTouchEnd(mouseX);
+    lastX.current = mouseX;
+    touchStartTime.current = Date.now();
     setIsSwiping(false);
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
-  };
+  }, []);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = useCallback((e) => {
     setTouchEnd(e.clientX);
-    if (Math.abs(touchStart - e.clientX) > 5) {
+    if (Math.abs(lastX.current - e.clientX) > 3) { // Lower threshold for more sensitivity
       setIsSwiping(true);
     }
-  };
+    lastX.current = e.clientX;
+  }, []);
 
-  const handleMouseUp = (e) => {
+  const handleMouseUp = useCallback((e) => {
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
 
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart) return;
 
     const distance = touchStart - e.clientX;
+    const touchDuration = Date.now() - touchStartTime.current;
+    const velocity = Math.abs(distance) / touchDuration;
 
-    if (Math.abs(distance) >= minSwipeDistance) {
+    if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
       if (distance > 0) {
         nextImage();
       } else {
@@ -461,31 +490,75 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     setTouchStart(0);
     setTouchEnd(0);
 
-    setTimeout(() => {
-      setIsSwiping(false);
-    }, 150);
-  };
+    const timer = setTimeout(() => {
+      if (isMounted.current) {
+        setIsSwiping(false);
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [touchStart, nextImage, prevImage, minSwipeDistance]);
+
+  // Clean up event listeners on unmount
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [handleMouseMove, handleMouseUp]);
+
+  // Apply passive touch events where possible for performance
+  const touchProps = useMemo(() => ({
+    onTouchStart: handleTouchStart,
+    onTouchMove: handleTouchMove,
+    onTouchEnd: handleTouchEnd,
+    onMouseDown: handleMouseDown
+  }), [handleTouchStart, handleTouchMove, handleTouchEnd, handleMouseDown]);
+
+  // Pre-load adjacent images for smoother transitions
+  useEffect(() => {
+    const preloadImages = () => {
+      // Load next image
+      const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+      const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+
+      if (images[nextIndex]) {
+        const nextImg = new Image();
+        nextImg.src = images[nextIndex];
+      }
+
+      if (images[prevIndex]) {
+        const prevImg = new Image();
+        prevImg.src = images[prevIndex];
+      }
+    };
+
+    preloadImages();
+  }, [currentIndex, images]);
 
   return (
     <div
       className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
       onClick={handleImageClick}
     >
-      {/* Image with touch event handlers */}
+      {/* Image with optimized touch event handlers */}
       <div
         className="w-full h-full"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onMouseDown={handleMouseDown}
+        {...touchProps}
       >
         <img
           src={images[currentIndex] || "/placeholder.svg"}
           alt="Car image"
           className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
           draggable="false" // Prevent image dragging interfering with swipe
+          style={{
+            willChange: 'transform', // Hint browser to optimize transformations
+            touchAction: 'pan-y', // Allow vertical scrolling, optimize for horizontal swipes
+          }}
         />
       </div>
+
       {/* Navigation buttons */}
       <button
         className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
@@ -502,22 +575,6 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       >
         <ChevronRight className="w-5 h-5" />
       </button>
-      {/*
-       <button
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
-        onClick={prevImage}
-        aria-label="Previous image"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-
-      <button
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
-        onClick={nextImage}
-        aria-label="Next image"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button> */}
 
       {/* Image indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
@@ -535,13 +592,14 @@ const ImageCarousel = ({ images, carId, navigate }) => {
         ))}
       </div>
 
-      {/* Optional visual feedback during swipe (subtle indicator) */}
+      {/* Enhanced visual feedback during swipe for better UX */}
       {isSwiping && touchEnd !== 0 && (
         <div
           className={`absolute inset-y-0 ${touchEnd < touchStart ? "right-0" : "left-0"
             } w-12 bg-gradient-to-r from-black/20 to-transparent pointer-events-none`}
           style={{
-            opacity: Math.min(0.5, Math.abs(touchEnd - touchStart) / 100)
+            opacity: Math.min(0.6, Math.abs(touchEnd - touchStart) / 80), // More reactive visual feedback
+            transition: 'opacity 0.1s ease' // Smoother transition for indicator
           }}
         />
       )}
