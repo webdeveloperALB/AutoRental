@@ -896,7 +896,7 @@ const Models = () => {
                   className="group"
                 >
                   <div
-                    className={`rounded-xl p-6 ${car.color} transition-all duration-300 
+                    className={`rounded-xl p-4 ${car.color} transition-all duration-300 
                                group-hover:-translate-y-2`}
                   >
                     {/* Replace static image with ImageCarousel component */}
