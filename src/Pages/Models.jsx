@@ -52,7 +52,7 @@ const carModels = [
     price: 150,
     images: [
       "/cars/bmw seria 6/7V3A9685.jpg",
-      "/cars/bmw seria 6/image2.jpg",
+      "/cars/bmw seria 6/7V3A9677.jpg",
       "/cars/bmw seria 6/image3.jpg",
       "/cars/bmw seria 6/image4.jpg",
       "/cars/bmw seria 6/image5.jpg",
@@ -314,15 +314,16 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
   return (
     <div
-      className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden relative cursor-pointer"
+      className="aspect-[4/3] rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
       onClick={handleImageClick}
     >
       {/* Image */}
       <img
         src={images[currentIndex] || "/placeholder.svg"}
         alt="Car image"
-        className="w-full h-full object-cover transition-all duration-300"
+        className="w-full object-contain transition-all duration-300 rounded-lg"
       />
+
 
       {/* Image counter */}
       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
