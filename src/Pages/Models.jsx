@@ -15,7 +15,9 @@ import {
   Settings,
   Gauge,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ImagesIcon,
+  Images
 } from "lucide-react";
 import { Icon } from "@iconify/react";
 
@@ -99,7 +101,7 @@ const carModels = [
       "/cars/audi a7 white/7V3A8603.jpg",
       "/cars/audi a7 white/7V3A8600.jpg",
     ],
-      features: {
+    features: {
       fuel: "Diesel",
       transmission: "Automatic",
       engineSize: "3.0",
@@ -115,10 +117,10 @@ const carModels = [
     category: "Sedan",
     price: 60,
     images: [
-       "/cars/c-class 1.8/7V3A9658.jpg",
-       "/cars/c-class 1.8/7V3A9673.jpg",
-       "/cars/c-class 1.8/7V3A9654.jpg",
-       "/cars/c-class 1.8/7V3A9646.jpg",
+      "/cars/c-class 1.8/7V3A9658.jpg",
+      "/cars/c-class 1.8/7V3A9673.jpg",
+      "/cars/c-class 1.8/7V3A9654.jpg",
+      "/cars/c-class 1.8/7V3A9646.jpg",
     ],
     features: {
       fuel: "Petrol",
@@ -135,7 +137,14 @@ const carModels = [
     name: "Bmw X6 M Packet",
     category: "Suv",
     price: 150,
-    image: "/cars/bmw x6/7V3A8659.jpg",
+    images: [
+      "/cars/bmw x6/7V3A8659.jpg",
+      "/cars/bmw x6/7V3A8657.jpg",
+      "/cars/bmw x6/7V3A8677.jpg",
+      "/cars/bmw x6/7V3A8670.jpg",
+      "/cars/bmw x6/7V3A8637.jpg",
+      "/cars/bmw x6/7V3A8646.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -151,7 +160,12 @@ const carModels = [
     name: "Volkswagen Golf 7",
     category: "Economy",
     price: 60,
-    image: "/cars/golf 7/7V3A9591.jpg",
+    images: [
+      "/cars/golf 7/7V3A9591.jpg",
+      "/cars/golf 7/7V3A9598.jpg",
+      "/cars/golf 7/7V3A9585.jpg",
+      "/cars/golf 7/7V3A9578.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -167,7 +181,13 @@ const carModels = [
     name: "Audi A7 SuperCharger",
     categories: ["Sports", "Luxury"],
     price: 150,
-    image: "/cars/audi a7 gri/7V3A9798.jpg",
+    images: [
+      "/cars/audi a7 gri/7V3A9798.jpg",
+      "/cars/audi a7 gri/7V3A9805.jpg",
+      "/cars/audi a7 gri/7V3A9808.jpg",
+      "/cars/audi a7 gri/7V3A9794.jpg",
+      "/cars/audi a7 gri/7V3A9780.jpg",
+    ],
     features: {
       fuel: "Petrol",
       transmission: "Automatic",
@@ -183,7 +203,14 @@ const carModels = [
     name: "Mercedes Benz E-Class W213",
     categories: ["Sports", "Sedan"],
     price: 230,
-    image: "/cars/e-class 3.0/7V3A8709.jpg",
+    images: [
+      "/cars/e-class 3.0/7V3A8709.jpg",
+      "/cars/e-class 3.0/7V3A8716.jpg",
+      "/cars/e-class 3.0/7V3A8726.jpg",
+      "/cars/e-class 3.0/7V3A8723.jpg",
+      "/cars/e-class 3.0/7V3A8700.jpg",
+      "/cars/e-class 3.0/7V3A8681.jpg",
+    ],
     features: {
       fuel: "Petrol",
       transmission: "Automatic",
@@ -199,7 +226,12 @@ const carModels = [
     name: "Mercedes Benz E-Class W212",
     categories: ["Luxury", "Sedan"],
     price: 80,
-    image: "cars/e class 2.2/7V3A9763.jpg",
+    images: [
+      "cars/e class 2.2/7V3A9763.jpg",
+      "cars/e class 2.2/7V3A9770.jpg",
+      "cars/e class 2.2/7V3A9758.jpg",
+      "cars/e class 2.2/7V3A9746.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -215,7 +247,12 @@ const carModels = [
     name: "BMW 4 Series",
     categories: ["Coupe", "Sports", "Luxury"],
     price: 80,
-    image: "cars/bmw seria 4/7V3A9724.jpg",
+    images: [
+      "cars/bmw seria 4/7V3A9724.jpg",
+      "cars/bmw seria 4/7V3A9742.jpg",
+      "cars/bmw seria 4/7V3A9716.jpg",
+      "cars/bmw seria 4/7V3A9706.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -231,7 +268,12 @@ const carModels = [
     name: "C-Class W204 Wagon",
     category: "Sedan",
     price: 35,
-    image: "cars/c class w204 wagon/3.jpg",
+    images: [
+      "cars/c class w204 wagon/3.jpg",
+      "cars/c class w204 wagon/4.jpg",
+      "cars/c class w204 wagon/2.jpg",
+      "cars/c class w204 wagon/1.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -247,7 +289,12 @@ const carModels = [
     name: "Hyundai Santa Fe",
     categories: ["SUV"],
     price: 50,
-    image: "/cars/hyundai santa fe/3.jpg",
+    images: [
+      "/cars/hyundai santa fe/3.jpg",
+      "/cars/hyundai santa fe/4.jpg",
+      "/cars/hyundai santa fe/2.jpg",
+      "/cars/hyundai santa fe/1.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -263,7 +310,13 @@ const carModels = [
     name: "Volkswagen Touran 5+2",
     categories: ["Economy", "SUV"],
     price: 35,
-    image: "/cars/touran/3.jpg",
+    images: [
+      "/cars/touran/3.jpg",
+      "/cars/touran/4.jpg",
+      "/cars/touran/2.jpg",
+      "/cars/touran/5.jpg",
+      "/cars/touran/1.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Manual",
@@ -279,7 +332,12 @@ const carModels = [
     name: "Hyundai Accent",
     categories: ["Economy"],
     price: 35,
-    image: "/cars/hyundai accent/3.jpg",
+    images: [
+      "/cars/hyundai accent/3.jpg",
+      "/cars/hyundai accent/4.jpg",
+      "/cars/hyundai accent/2.jpg",
+      "/cars/hyundai accent/1.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
