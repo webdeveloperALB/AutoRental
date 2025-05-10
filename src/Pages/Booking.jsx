@@ -376,7 +376,7 @@ const cars = [
   {
     id: 11,
     name: "BMW Seria 4",
-    categories: ["Coupe","Sports", "Luxury"],
+    categories: ["Coupe", "Sports", "Luxury"],
     price: 80,
     images: [
       {
@@ -551,6 +551,8 @@ const CarDetailPage = () => {
   const [currentTranslate, setCurrentTranslate] = useState(0);
   const [prevTranslate, setPrevTranslate] = useState(0);
   const [dragThreshold, setDragThreshold] = useState(100); // Threshold to trigger slide change
+  const [galleryHeight, setGalleryHeight] = useState(400); // Dynamic gallery height
+  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     const car = cars.find((car) => car.id === Number.parseInt(id));
@@ -562,6 +564,23 @@ const CarDetailPage = () => {
     } else {
       setTotalSlides(3); // Fallback to 3 for backward compatibility
     }
+
+    // Set mobile view state
+    const checkMobileView = () => {
+      setIsMobileView(window.innerWidth < 768);
+      // Adjust gallery height based on screen dimensions for mobile
+      if (window.innerWidth < 768) {
+        const aspectRatio = 3/4; // Common car photo aspect ratio
+        const availableWidth = window.innerWidth - 32; // Account for padding
+        setGalleryHeight(availableWidth * aspectRatio);
+      } else {
+        setGalleryHeight(400); // Default height for desktop
+      }
+    };
+    
+    checkMobileView();
+    window.addEventListener('resize', checkMobileView);
+    return () => window.removeEventListener('resize', checkMobileView);
   }, [id]);
 
   const [rentalDetails, setRentalDetails] = useState({
@@ -762,16 +781,25 @@ Car Details:
     return () => window.removeEventListener("resize", handleResize);
   }, [activeIndex, goToSlide]);
 
-  return selectedCar ? (
-    <div className="container mx-auto p-6 mt-20">
-      <div className="flex flex-col md:flex-row md:space-x-10">
+  // Loading state
+  if (!selectedCar) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-xl font-semibold text-gray-700">Loading...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-6 md:p-6 mt-16 md:mt-20">
+      <div className="flex flex-col md:flex-row md:space-x-8 lg:space-x-10">
         {/* Car Image Gallery */}
-        <div className="w-full md:w-1/2 mb-8 md:mb-0">
+        <div className="w-full md:w-1/2 mb-6 md:mb-0">
           <div className="relative">
             {/* Gallery Container */}
-            <div
-              className="relative overflow-hidden rounded-lg"
-              style={{ height: "400px" }}
+            <div 
+              className="relative overflow-hidden rounded-lg shadow-md"
+              style={{ height: `${galleryHeight}px` }}
             >
               {/* Scroll Container */}
               <div
@@ -803,7 +831,7 @@ Car Details:
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
-                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
                         {image.label}
                       </span>
                     </div>
@@ -819,7 +847,7 @@ Car Details:
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
-                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
                         Front View
                       </span>
                     </div>
@@ -832,7 +860,7 @@ Car Details:
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
-                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
                         Rear View
                       </span>
                     </div>
@@ -845,7 +873,7 @@ Car Details:
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
-                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-sm">
+                      <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
                         Interior
                       </span>
                     </div>
@@ -853,37 +881,37 @@ Car Details:
                 )}
               </div>
 
-              {/* Navigation Arrows */}
+              {/* Navigation Arrows - Larger touch targets for mobile */}
               {activeIndex > 0 && (
                 <button
                   onClick={prevSlide}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10 transition-all"
+                  className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1.5 md:p-2 shadow-md z-10 transition-all"
                   aria-label="Previous image"
                 >
-                  <ChevronLeft className="h-6 w-6" />
+                  <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
                 </button>
               )}
 
               {activeIndex < totalSlides - 1 && (
                 <button
                   onClick={nextSlide}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10 transition-all"
+                  className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1.5 md:p-2 shadow-md z-10 transition-all"
                   aria-label="Next image"
                 >
-                  <ChevronRight className="h-6 w-6" />
+                  <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
                 </button>
               )}
             </div>
 
-            {/* Pagination Indicators */}
-            <div className="flex justify-center mt-4 gap-2">
+            {/* Pagination Indicators - More compact for mobile */}
+            <div className="flex justify-center mt-3 gap-1.5 md:gap-2">
               {selectedCar.images && selectedCar.images.length > 0
                 ? selectedCar.images.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => goToSlide(index)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        activeIndex === index ? "bg-black w-4" : "bg-gray-300"
+                      className={`w-2 md:w-2.5 h-2 md:h-2.5 rounded-full transition-all ${
+                        activeIndex === index ? "bg-black w-3 md:w-4" : "bg-gray-300"
                       }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
@@ -893,8 +921,8 @@ Car Details:
                     <button
                       key={index}
                       onClick={() => goToSlide(index)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        activeIndex === index ? "bg-black w-4" : "bg-gray-300"
+                      className={`w-2 md:w-2.5 h-2 md:h-2.5 rounded-full transition-all ${
+                        activeIndex === index ? "bg-black w-3 md:w-4" : "bg-gray-300"
                       }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
@@ -903,39 +931,40 @@ Car Details:
           </div>
         </div>
 
-        {/* Car Details */}
-        <div className="w-full md:w-1/2 bg-white shadow-xl rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+        {/* Car Details - Improved padding and font sizes for mobile */}
+        <div className="w-full md:w-1/2 bg-white shadow-lg md:shadow-xl rounded-lg p-5 md:p-8">
+          {/* Car Name - More compact for mobile */}
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
             {selectedCar.name}
           </h2>
 
-          {/* Display multiple categories */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          {/* Display multiple categories - Improved wrapping */}
+          <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-4">
             {selectedCar.categories ? (
               // Display multiple categories as tags if available
               selectedCar.categories.map((category, index) => (
                 <span
                   key={index}
-                  className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+                  className="bg-gray-100 text-gray-700 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm"
                 >
                   {category}
                 </span>
               ))
             ) : (
               // Fallback to single category
-              <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+              <span className="bg-gray-100 text-gray-700 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm">
                 {selectedCar.category}
               </span>
             )}
-            <span className="ml-auto text-xl font-semibold">
+            <span className="ml-auto text-lg md:text-xl font-semibold">
               €{selectedCar.price}/day
             </span>
           </div>
 
-          {/* Car Rating */}
-          <div className="flex items-center space-x-3 mb-6">
+          {/* Car Rating - Compressed for mobile */}
+          <div className="flex items-center space-x-2 md:space-x-3 mb-4 md:mb-6">
             <div className="flex items-center space-x-1">
-              <span className="text-2xl font-semibold text-gray-500">
+              <span className="text-xl md:text-2xl font-semibold text-gray-500">
                 {selectedCar.rating}
               </span>
               <div className="flex text-sm text-yellow-500">
@@ -950,7 +979,7 @@ Car Details:
                     }
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    className="h-5 w-5"
+                    className="h-4 w-4 md:h-5 md:w-5"
                   >
                     <path
                       strokeLinecap="round"
@@ -962,20 +991,20 @@ Car Details:
                 ))}
               </div>
             </div>
-            <span className="text-sm text-gray-500">
+            <span className="text-xs md:text-sm text-gray-500">
               ({selectedCar.reviews} reviews)
             </span>
           </div>
 
-          {/* Car Features */}
-          <div className="grid grid-cols-2 gap-6 mb-8">
+          {/* Car Features - Better grid for mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6 mb-6 md:mb-8 text-sm md:text-base">
             <div className="flex items-center space-x-2">
               {selectedCar.features.fuel === "Electric" ? (
-                <Battery className="h-5 w-5 text-gray-600" />
+                <Battery className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
               ) : selectedCar.features.fuel === "Hybrid" ? (
-                <Leaf className="h-5 w-5 text-gray-600" />
+                <Leaf className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
               ) : (
-                <Fuel className="h-5 w-5 text-gray-600" />
+                <Fuel className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
               )}
               <span>{selectedCar.features.fuel} fuel</span>
             </div>
@@ -983,57 +1012,60 @@ Car Details:
               <div className="flex items-center space-x-2">
                 <Icon
                   icon="lucide-lab:gearbox"
-                  className="h-5 w-5 text-gray-600"
+                  className="h-4 w-4 md:h-5 md:w-5 text-gray-600"
                 />
                 <span>{selectedCar.features.transmission} transmission</span>
               </div>
             )}
             {selectedCar.features.engineSize && (
               <div className="flex items-center space-x-2">
-                <Icon icon="mdi:engine" className="h-5 w-5 text-gray-600" />
-                <span>{selectedCar.features.engineSize} L</span>
+                <Icon icon="mdi:engine" className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
+                <span>{selectedCar.features.engineSize}</span>
               </div>
             )}
           </div>
 
-          {/* Booking Form */}
-          <form onSubmit={handleSubmit}>
-            <div className="space-y-6">
-              <div className="flex flex-col">
-                <label htmlFor="pickUpDate" className="text-sm text-gray-600">
-                  Pick-up Date
-                </label>
-                <input
-                  type="date"
-                  name="pickUpDate"
-                  value={rentalDetails.pickUpDate}
-                  onChange={handleChange}
-                  className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
-                  required
-                  min={new Date().toISOString().split("T")[0]}
-                />
+          {/* Booking Form - Better spacing on mobile */}
+          <form onSubmit={handleSubmit} className="mt-2 md:mt-0">
+            <div className="space-y-4 md:space-y-6">
+              {/* Date inputs side by side on wider mobile screens */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col">
+                  <label htmlFor="pickUpDate" className="text-xs md:text-sm text-gray-600 mb-1">
+                    Pick-up Date
+                  </label>
+                  <input
+                    type="date"
+                    name="pickUpDate"
+                    value={rentalDetails.pickUpDate}
+                    onChange={handleChange}
+                    className="p-2 md:p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black text-sm md:text-base"
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label htmlFor="dropOffDate" className="text-xs md:text-sm text-gray-600 mb-1">
+                    Drop-off Date
+                  </label>
+                  <input
+                    type="date"
+                    name="dropOffDate"
+                    value={rentalDetails.dropOffDate}
+                    onChange={handleChange}
+                    className="p-2 md:p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black text-sm md:text-base"
+                    required
+                    min={
+                      rentalDetails.pickUpDate ||
+                      new Date().toISOString().split("T")[0]
+                    }
+                  />
+                </div>
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="dropOffDate" className="text-sm text-gray-600">
-                  Drop-off Date
-                </label>
-                <input
-                  type="date"
-                  name="dropOffDate"
-                  value={rentalDetails.dropOffDate}
-                  onChange={handleChange}
-                  className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
-                  required
-                  min={
-                    rentalDetails.pickUpDate ||
-                    new Date().toISOString().split("T")[0]
-                  }
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="location" className="text-sm text-gray-600">
+                <label htmlFor="location" className="text-xs md:text-sm text-gray-600 mb-1">
                   Pickup Location
                 </label>
                 <input
@@ -1042,15 +1074,18 @@ Car Details:
                   value={rentalDetails.location}
                   onChange={handleChange}
                   placeholder="Enter location"
-                  className="p-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black"
+                  className="p-2 md:p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black text-sm md:text-base"
                   required
                 />
               </div>
             </div>
 
+            {/* Fixed at bottom on mobile for better UX */}
             <button
               type="submit"
-              className="mt-6 w-full py-3 bg-black text-white rounded-lg shadow-md hover:scale-105 transition-transform ease-in-out duration-500"
+              className={`mt-4 md:mt-6 w-full py-3 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 active:scale-95 transition-all duration-300 text-sm md:text-base font-medium ${
+                isMobileView ? 'sticky bottom-4' : ''
+              }`}
             >
               Confirm Booking
             </button>
@@ -1058,8 +1093,6 @@ Car Details:
         </div>
       </div>
     </div>
-  ) : (
-    <div className="container mx-auto p-4">Loading...</div>
   );
 };
 
