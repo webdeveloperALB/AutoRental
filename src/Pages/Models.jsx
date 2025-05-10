@@ -5,7 +5,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Car,
-
   Search,
   Fuel,
   Star,
@@ -13,9 +12,10 @@ import {
   Calendar,
   MapPin,
   X,
-
   Settings,
   Gauge,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { Icon } from "@iconify/react";
 
@@ -25,7 +25,16 @@ const carModels = [
     name: "Mercedes Benz S-Class W222",
     categories: ["Sedan", "Luxury", "Sports"],
     price: 250,
-    image: "/cars/s-class/7V3A8562.jpg",
+    // Add array of images for carousel
+    images: [
+      "/cars/s-class/7V3A8562.jpg",
+      "/cars/s-class/7V3A8568.jpg",
+      "/cars/s-class/7V3A8544.jpg",
+      "/cars/s-class/7V3A8540.jpg",
+      "/cars/s-class/7V3A8572.jpg",
+      "/cars/s-class/7V3A8587.jpg",
+      "/cars/s-class/7V3A8554.jpg",
+    ],
     features: {
       transmission: "Automatic",
       engineSize: "V8 Biturbo 4.7L",
@@ -41,7 +50,15 @@ const carModels = [
     name: "BMW 6 Series M Packet BiTurbo 400 HP",
     categories: ["Sports", "Luxury"],
     price: 150,
-    image: "/cars/bmw seria 6/7V3A9685.jpg",
+    images: [
+      "/cars/bmw seria 6/7V3A9685.jpg",
+      "/cars/bmw seria 6/image2.jpg",
+      "/cars/bmw seria 6/image3.jpg",
+      "/cars/bmw seria 6/image4.jpg",
+      "/cars/bmw seria 6/image5.jpg",
+      "/cars/bmw seria 6/image6.jpg",
+      "/cars/bmw seria 6/image7.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -57,7 +74,15 @@ const carModels = [
     name: "Volkswagen Passat CC",
     categories: [" Sedan"],
     price: 50,
-    image: "/cars/passat cc/7V3A9613.jpg",
+    images: [
+      "/cars/passat cc/7V3A9613.jpg",
+      "/cars/passat cc/image2.jpg",
+      "/cars/passat cc/image3.jpg",
+      "/cars/passat cc/image4.jpg",
+      "/cars/passat cc/image5.jpg",
+      "/cars/passat cc/image6.jpg",
+      "/cars/passat cc/image7.jpg",
+    ],
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
@@ -183,7 +208,7 @@ const carModels = [
   {
     id: 11,
     name: "BMW 4 Series",
-    categories: ["Coupe","Sports", "Luxury"],
+    categories: ["Coupe", "Sports", "Luxury"],
     price: 80,
     image: "cars/bmw seria 4/7V3A9724.jpg",
     features: {
@@ -262,6 +287,84 @@ const carModels = [
   },
 ];
 
+// Create a new ImageCarousel component
+const ImageCarousel = ({ images, carId, navigate }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Navigate to the booking page when the image is clicked
+  const handleImageClick = () => {
+    navigate(`/booking/${carId}`);
+  };
+
+  // Go to the previous image
+  const prevImage = (e) => {
+    e.stopPropagation(); // Prevent triggering the parent click event
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Go to the next image
+  const nextImage = (e) => {
+    e.stopPropagation(); // Prevent triggering the parent click event
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  return (
+    <div
+      className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden relative cursor-pointer"
+      onClick={handleImageClick}
+    >
+      {/* Image */}
+      <img
+        src={images[currentIndex] || "/placeholder.svg"}
+        alt="Car image"
+        className="w-full h-full object-cover transition-all duration-300"
+      />
+
+      {/* Image counter */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
+        {currentIndex + 1} / {images.length}
+      </div>
+
+      {/* Navigation buttons */}
+      <button
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        onClick={prevImage}
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+
+      <button
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        onClick={nextImage}
+        aria-label="Next image"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Image indicators */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-1">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
+              }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentIndex(index);
+            }}
+            aria-label={`Go to image ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Models = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -270,7 +373,7 @@ const Models = () => {
   const fuelParam = searchParams.get("fuel");
   const transmissionParam = searchParams.get("transmission");
   const engineSizeParam = searchParams.get("engineSize");
-  
+
   // Initialize state from URL params
   const [selectedCategories, setSelectedCategories] = useState(
     categoryParam ? categoryParam.split(",") : []
@@ -279,23 +382,21 @@ const Models = () => {
   const [selectedFuel, setSelectedFuel] = useState(fuelParam || "");
   const [selectedTransmission, setSelectedTransmission] = useState(transmissionParam || "");
   const [selectedEngineSize, setSelectedEngineSize] = useState(engineSizeParam || "");
-  // Remove the filter toggle state since filters will always be visible
-  // const [showFilters, setShowFilters] = useState(false);
 
   // Update URL params when filters change
   useEffect(() => {
     const params = new URLSearchParams();
     if (selectedCategories.length > 0)
       params.set("categories", selectedCategories.join(","));
-    if (searchQuery.trim()) 
+    if (searchQuery.trim())
       params.set("search", searchQuery.trim());
-    if (selectedFuel) 
+    if (selectedFuel)
       params.set("fuel", selectedFuel);
     if (selectedTransmission)
       params.set("transmission", selectedTransmission);
     if (selectedEngineSize)
       params.set("engineSize", selectedEngineSize);
-    
+
     setSearchParams(params);
   }, [selectedCategories, searchQuery, selectedFuel, selectedTransmission, selectedEngineSize, setSearchParams]);
 
@@ -345,22 +446,22 @@ const Models = () => {
   // Helper function to check if a car matches the selected filters
   const matchesFilters = (car) => {
     // Match categories
-    const matchesCategories = selectedCategories.length === 0 || 
+    const matchesCategories = selectedCategories.length === 0 ||
       selectedCategories.some(selected => (car.categories || [car.category]).includes(selected));
-    
+
     // Match fuel type
     const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel;
-    
+
     // Match transmission
     const matchesTransmission = !selectedTransmission || car.features.transmission === selectedTransmission;
-    
+
     // Match engine size - this is a bit trickier since engine sizes might be stored differently
-    const matchesEngineSize = !selectedEngineSize || 
+    const matchesEngineSize = !selectedEngineSize ||
       car.features.engineSize.toString().includes(selectedEngineSize);
-    
+
     // Match search query
     const matchesSearch = !searchQuery || car.name.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesCategories && matchesFuel && matchesTransmission && matchesEngineSize && matchesSearch;
   };
 
@@ -426,7 +527,6 @@ const Models = () => {
                         focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
                         placeholder-gray-400 text-gray-900 text-sm sm:text-base"
                   />
-                  {/* Remove the filter toggle button */}
                 </div>
 
                 {/* Category Filter */}
@@ -438,14 +538,13 @@ const Models = () => {
                         onClick={() => toggleCategory(category.name)}
                         className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
                             transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
-                            ${
-                              category.name === "All" &&
-                              selectedCategories.length === 0
-                                ? "bg-black text-white shadow-md"
-                                : selectedCategories.includes(category.name)
-                                ? "bg-black text-white shadow-md"
-                                : "bg-gray-50 text-gray-700 hover:bg-gray-100"
-                            }`}
+                            ${category.name === "All" &&
+                            selectedCategories.length === 0
+                            ? "bg-black text-white shadow-md"
+                            : selectedCategories.includes(category.name)
+                              ? "bg-black text-white shadow-md"
+                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                          }`}
                       >
                         <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                         <span className="text-sm sm:text-base">
@@ -458,7 +557,7 @@ const Models = () => {
               </div>
             </div>
 
-            {/* Always visible filters - removed conditional rendering and animation for entry/exit */}
+            {/* Always visible filters */}
             <div className="px-4 sm:px-6 pb-6 pt-2 border-t border-gray-100">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Fuel Type Filter */}
@@ -472,8 +571,8 @@ const Models = () => {
                         key={fuel}
                         onClick={() => setSelectedFuel(selectedFuel === fuel ? "" : fuel)}
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                          ${selectedFuel === fuel 
-                            ? "bg-black text-white" 
+                          ${selectedFuel === fuel
+                            ? "bg-black text-white"
                             : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
                       >
                         {fuel}
@@ -493,8 +592,8 @@ const Models = () => {
                         key={transmission}
                         onClick={() => setSelectedTransmission(selectedTransmission === transmission ? "" : transmission)}
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                          ${selectedTransmission === transmission 
-                            ? "bg-black text-white" 
+                          ${selectedTransmission === transmission
+                            ? "bg-black text-white"
                             : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
                       >
                         {transmission}
@@ -514,8 +613,8 @@ const Models = () => {
                         key={size}
                         onClick={() => setSelectedEngineSize(selectedEngineSize === size ? "" : size)}
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                          ${selectedEngineSize === size 
-                            ? "bg-black text-white" 
+                          ${selectedEngineSize === size
+                            ? "bg-black text-white"
                             : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
                       >
                         {size}L
@@ -554,7 +653,7 @@ const Models = () => {
                     />
                   </div>
                 ))}
-                
+
                 {selectedFuel && (
                   <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
                     <Fuel className="w-3 h-3" />
@@ -565,7 +664,7 @@ const Models = () => {
                     />
                   </div>
                 )}
-                
+
                 {selectedTransmission && (
                   <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
                     <Settings className="w-3 h-3" />
@@ -576,7 +675,7 @@ const Models = () => {
                     />
                   </div>
                 )}
-                
+
                 {selectedEngineSize && (
                   <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
                     <Gauge className="w-3 h-3" />
@@ -616,14 +715,12 @@ const Models = () => {
                     className={`rounded-xl p-6 ${car.color} transition-all duration-300 
                                group-hover:-translate-y-2`}
                   >
-                    {/* Car Image */}
-                    <div className="aspect-[4/3] rounded-lg bg-white mb-6 overflow-hidden">
-                      <img
-                        src={car.image || "/placeholder.svg"}
-                        alt={car.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    {/* Replace static image with ImageCarousel component */}
+                    <ImageCarousel
+                      images={car.images || [car.image || "/placeholder.svg"]}
+                      carId={car.id}
+                      navigate={navigate}
+                    />
 
                     {/* Car Info */}
                     <div className="space-y-4">
