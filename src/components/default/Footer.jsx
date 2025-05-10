@@ -65,14 +65,10 @@ const Footer = () => {
             className="space-y-6">
             <Link to="/" className="flex items-center space-x-2 group">
               <img
-                src="/caricon4.png" // Path from public folder
+                src="/Logo Auto Rental Tirana Black.png" // Path from public folder
                 alt="Car Rental Logo"
                 className="w-25 h-10 group-hover:scale-110 transition-transform"
               />
-              <span className="text-2xl font-bold">
-                <span className="text-black">Auto</span>
-                <span className="text-red-600">Rental</span>
-              </span>
             </Link>
             <p className="text-black leading-relaxed">
               Your trusted partner for car rentals. Experience premium service
