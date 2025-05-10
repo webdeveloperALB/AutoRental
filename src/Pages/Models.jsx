@@ -314,14 +314,15 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
   return (
     <div
-      className="aspect-[4/3] rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
+      //className="aspect-[4/3] rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
+      className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
       onClick={handleImageClick}
     >
       {/* Image */}
       <img
         src={images[currentIndex] || "/placeholder.svg"}
         alt="Car image"
-        className="w-full object-contain transition-all duration-300 rounded-lg"
+        className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
       />
 
 
@@ -332,7 +333,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
       {/* Navigation buttons */}
       <button
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        className="absolute left-2 bottom-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={prevImage}
         aria-label="Previous image"
       >
@@ -340,12 +341,13 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       </button>
 
       <button
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        className="absolute right-2 bottom-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={nextImage}
         aria-label="Next image"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
+
 
       {/* Image indicators */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-1">
@@ -713,9 +715,11 @@ const Models = () => {
                   className="group"
                 >
                   <div
-                    className={`rounded-xl p-6 ${car.color} transition-all duration-300 
-                               group-hover:-translate-y-2`}
+                    className={`rounded-xl bg-transparent sm:bg-gray-100 p-0 sm:p-4 ${car.color} transition-all duration-300 
+              group-hover:-translate-y-2`}
                   >
+
+
                     {/* Replace static image with ImageCarousel component */}
                     <ImageCarousel
                       images={car.images || [car.image || "/placeholder.svg"]}
