@@ -357,8 +357,8 @@ const ImageCarousel = ({ images, carId, navigate }) => {
   const [touchEnd, setTouchEnd] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
 
-  // Minimum swipe distance in pixels to trigger navigation
-  const minSwipeDistance = 50;
+  // Minimum swipe distance in pixels to trigger navigation - lower value = more sensitive
+  const minSwipeDistance = 20;
 
   // Navigate to the booking page when the image is clicked
   const handleImageClick = () => {
@@ -391,9 +391,12 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
   const handleTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX);
-    // If we're moving more than a little bit, we're swiping
-    if (Math.abs(touchStart - e.targetTouches[0].clientX) > 10) {
+    // If we're moving more than a tiny bit, we're swiping (increased sensitivity)
+    if (Math.abs(touchStart - e.targetTouches[0].clientX) > 5) {
       setIsSwiping(true);
+
+      // Add this to prevent screen scrolling while swiping the carousel
+      e.preventDefault();
     }
   };
 
@@ -420,7 +423,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     // Reset swiping state after a brief delay to prevent accidental navigation
     setTimeout(() => {
       setIsSwiping(false);
-    }, 300);
+    }, 150);
   };
 
   // Mouse drag events to support desktop dragging too
@@ -433,7 +436,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
   const handleMouseMove = (e) => {
     setTouchEnd(e.clientX);
-    if (Math.abs(touchStart - e.clientX) > 10) {
+    if (Math.abs(touchStart - e.clientX) > 5) {
       setIsSwiping(true);
     }
   };
@@ -459,7 +462,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
     setTimeout(() => {
       setIsSwiping(false);
-    }, 300);
+    }, 150);
   };
 
   return (
@@ -482,9 +485,23 @@ const ImageCarousel = ({ images, carId, navigate }) => {
           draggable="false" // Prevent image dragging interfering with swipe
         />
       </div>
-
-      {/* Navigation buttons (kept from original) */}
+      {/* Navigation buttons */}
       <button
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        onClick={prevImage}
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+
+      <button
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        onClick={nextImage}
+        aria-label="Next image"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+      {/*<button
         className="absolute left-2 bottom-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={prevImage}
         aria-label="Previous image"
@@ -498,7 +515,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
         aria-label="Next image"
       >
         <ChevronRight className="w-5 h-5" />
-      </button>
+      </button> */}
 
       {/* Image indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
