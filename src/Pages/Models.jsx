@@ -350,18 +350,26 @@ const carModels = [
   },
 ];
 
-// Create a new ImageCarousel component
+// Create a new ImageCarousel component with touch/swipe support
 const ImageCarousel = ({ images, carId, navigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  // Minimum swipe distance in pixels to trigger navigation
+  const minSwipeDistance = 50;
 
   // Navigate to the booking page when the image is clicked
   const handleImageClick = () => {
-    navigate(`/booking/${carId}`);
+    if (!isSwiping) {
+      navigate(`/booking/${carId}`);
+    }
   };
 
   // Go to the previous image
   const prevImage = (e) => {
-    e.stopPropagation(); // Prevent triggering the parent click event
+    if (e) e.stopPropagation(); // Prevent triggering the parent click event
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
@@ -369,28 +377,113 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
   // Go to the next image
   const nextImage = (e) => {
-    e.stopPropagation(); // Prevent triggering the parent click event
+    if (e) e.stopPropagation(); // Prevent triggering the parent click event
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
+  // Touch event handlers
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsSwiping(false);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+    // If we're moving more than a little bit, we're swiping
+    if (Math.abs(touchStart - e.targetTouches[0].clientX) > 10) {
+      setIsSwiping(true);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+
+    // Check if the swipe distance is significant enough
+    if (Math.abs(distance) >= minSwipeDistance) {
+      if (distance > 0) {
+        // Swipe left, so go to next image
+        nextImage();
+      } else {
+        // Swipe right, so go to previous image
+        prevImage();
+      }
+    }
+
+    // Reset values
+    setTouchStart(0);
+    setTouchEnd(0);
+
+    // Reset swiping state after a brief delay to prevent accidental navigation
+    setTimeout(() => {
+      setIsSwiping(false);
+    }, 300);
+  };
+
+  // Mouse drag events to support desktop dragging too
+  const handleMouseDown = (e) => {
+    setTouchStart(e.clientX);
+    setIsSwiping(false);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseMove = (e) => {
+    setTouchEnd(e.clientX);
+    if (Math.abs(touchStart - e.clientX) > 10) {
+      setIsSwiping(true);
+    }
+  };
+
+  const handleMouseUp = (e) => {
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - e.clientX;
+
+    if (Math.abs(distance) >= minSwipeDistance) {
+      if (distance > 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
+
+    setTimeout(() => {
+      setIsSwiping(false);
+    }, 300);
+  };
+
   return (
     <div
-      //className="aspect-[4/3] rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
       className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
       onClick={handleImageClick}
     >
-      {/* Image */}
-      <img
-        src={images[currentIndex] || "/placeholder.svg"}
-        alt="Car image"
-        className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
-      />
+      {/* Image with touch event handlers */}
+      <div
+        className="w-full h-full"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+      >
+        <img
+          src={images[currentIndex] || "/placeholder.svg"}
+          alt="Car image"
+          className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
+          draggable="false" // Prevent image dragging interfering with swipe
+        />
+      </div>
 
-
-
-      {/* Navigation buttons */}
+      {/* Navigation buttons (kept from original) */}
       <button
         className="absolute left-2 bottom-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
         onClick={prevImage}
@@ -406,23 +499,6 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       >
         <ChevronRight className="w-5 h-5" />
       </button>
-      {/* <button
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
-        onClick={prevImage}
-        aria-label="Previous image"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-
-      <button
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
-        onClick={nextImage}
-        aria-label="Next image"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button> */}
-
-
 
       {/* Image indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
@@ -439,6 +515,16 @@ const ImageCarousel = ({ images, carId, navigate }) => {
           />
         ))}
       </div>
+
+      {/* Optional visual feedback during swipe (subtle indicator) */}
+      {isSwiping && touchEnd !== 0 && (
+        <div
+          className={`absolute inset-y-0 ${touchEnd < touchStart ? 'right-0' : 'left-0'} w-12 bg-gradient-to-r from-black/20 to-transparent pointer-events-none`}
+          style={{
+            opacity: Math.min(0.5, Math.abs(touchEnd - touchStart) / 100)
+          }}
+        />
+      )}
     </div>
   );
 };
