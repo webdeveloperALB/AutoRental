@@ -290,10 +290,10 @@ const carModels = [
     categories: ["SUV"],
     price: 50,
     images: [
-      "/cars/hyundai santa fe/3.jpg",
-      "/cars/hyundai santa fe/4.jpg",
-      "/cars/hyundai santa fe/2.jpg",
-      "/cars/hyundai santa fe/1.jpg",
+      "/cars/hyundai santa fe/3.jpg",
+      "/cars/hyundai santa fe/4.jpg",
+      "/cars/hyundai santa fe/2.jpg",
+      "/cars/hyundai santa fe/1.jpg",
     ],
     features: {
       fuel: "Diesel",
