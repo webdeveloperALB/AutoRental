@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types"; // Added PropTypes import
 import {
   Car,
   Search,
@@ -288,10 +289,10 @@ const carModels = [
     categories: ["SUV"],
     price: 50,
     images: [
-      "/cars/hyundai santa fe/3.jpg",
-      "/cars/hyundai santa fe/4.jpg",
-      "/cars/hyundai santa fe/2.jpg",
-      "/cars/hyundai santa fe/1.jpg",
+      "/cars/hyundai santa fe/3.jpg",
+      "/cars/hyundai santa fe/4.jpg",
+      "/cars/hyundai santa fe/2.jpg",
+      "/cars/hyundai santa fe/1.jpg",
     ],
     features: {
       fuel: "Diesel",
@@ -378,14 +379,18 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  }, [images.length]);
+  }, [images?.length]);
 
   const nextImage = useCallback((e) => {
     if (e) e.stopPropagation();
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
-  }, [images.length]);
+  }, [images?.length]);
+
+  // Store mouse event handlers in refs to avoid dependency cycles
+  const handleMouseMoveRef = useRef(null);
+  const handleMouseUpRef = useRef(null);
 
   // Enhanced touch handling for better responsiveness
   const handleTouchStart = useCallback((e) => {
@@ -448,7 +453,50 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     return () => clearTimeout(timer);
   }, [touchStart, touchEnd, nextImage, prevImage, minSwipeDistance]);
 
-  // Enhanced mouse handling for desktop
+  // Initialize the event handler refs
+  useEffect(() => {
+    // Define mouse move handler
+    handleMouseMoveRef.current = (e) => {
+      setTouchEnd(e.clientX);
+      if (Math.abs(lastX.current - e.clientX) > 3) { // Lower threshold for more sensitivity
+        setIsSwiping(true);
+      }
+      lastX.current = e.clientX;
+    };
+
+    // Define mouse up handler
+    handleMouseUpRef.current = (e) => {
+      document.removeEventListener('mousemove', handleMouseMoveRef.current);
+      document.removeEventListener('mouseup', handleMouseUpRef.current);
+
+      if (!touchStart) return;
+
+      const distance = touchStart - e.clientX;
+      const touchDuration = Date.now() - touchStartTime.current;
+      const velocity = Math.abs(distance) / touchDuration;
+
+      if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
+        if (distance > 0) {
+          nextImage();
+        } else {
+          prevImage();
+        }
+      }
+
+      setTouchStart(0);
+      setTouchEnd(0);
+
+      const timer = setTimeout(() => {
+        if (isMounted.current) {
+          setIsSwiping(false);
+        }
+      }, 50);
+
+      return () => clearTimeout(timer);
+    };
+  }, [touchStart, nextImage, prevImage, minSwipeDistance]);
+
+  // Enhanced mouse handling for desktop using refs
   const handleMouseDown = useCallback((e) => {
     const mouseX = e.clientX;
     setTouchStart(mouseX);
@@ -457,56 +505,18 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     touchStartTime.current = Date.now();
     setIsSwiping(false);
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMouseMoveRef.current);
+    document.addEventListener('mouseup', handleMouseUpRef.current);
   }, []);
-
-  const handleMouseMove = useCallback((e) => {
-    setTouchEnd(e.clientX);
-    if (Math.abs(lastX.current - e.clientX) > 3) { // Lower threshold for more sensitivity
-      setIsSwiping(true);
-    }
-    lastX.current = e.clientX;
-  }, []);
-
-  const handleMouseUp = useCallback((e) => {
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
-
-    if (!touchStart) return;
-
-    const distance = touchStart - e.clientX;
-    const touchDuration = Date.now() - touchStartTime.current;
-    const velocity = Math.abs(distance) / touchDuration;
-
-    if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
-      if (distance > 0) {
-        nextImage();
-      } else {
-        prevImage();
-      }
-    }
-
-    setTouchStart(0);
-    setTouchEnd(0);
-
-    const timer = setTimeout(() => {
-      if (isMounted.current) {
-        setIsSwiping(false);
-      }
-    }, 50);
-
-    return () => clearTimeout(timer);
-  }, [touchStart, nextImage, prevImage, minSwipeDistance]);
 
   // Clean up event listeners on unmount
   useEffect(() => {
     return () => {
       isMounted.current = false;
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMoveRef.current);
+      document.removeEventListener('mouseup', handleMouseUpRef.current);
     };
-  }, [handleMouseMove, handleMouseUp]);
+  }, []);
 
   // Apply passive touch events where possible for performance
   const touchProps = useMemo(() => ({
@@ -519,6 +529,8 @@ const ImageCarousel = ({ images, carId, navigate }) => {
   // Pre-load adjacent images for smoother transitions
   useEffect(() => {
     const preloadImages = () => {
+      if (!images || images.length <= 1) return;
+      
       // Load next image
       const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
       const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
@@ -548,7 +560,7 @@ const ImageCarousel = ({ images, carId, navigate }) => {
         {...touchProps}
       >
         <img
-          src={images[currentIndex] || "/placeholder.svg"}
+          src={images?.[currentIndex] || "/placeholder.svg"}
           alt="Car image"
           className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
           draggable="false" // Prevent image dragging interfering with swipe
@@ -577,20 +589,22 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       </button>
 
       {/* Image indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
-              }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentIndex(index);
-            }}
-            aria-label={`Go to image ${index + 1}`}
-          />
-        ))}
-      </div>
+      {images && images.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
+                }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentIndex(index);
+              }}
+              aria-label={`Go to image ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Enhanced visual feedback during swipe for better UX */}
       {isSwiping && touchEnd !== 0 && (
@@ -605,6 +619,13 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       )}
     </div>
   );
+};
+
+// Add PropTypes validation for the ImageCarousel component
+ImageCarousel.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  carId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  navigate: PropTypes.func.isRequired
 };
 
 const Models = () => {
@@ -954,7 +975,7 @@ const Models = () => {
                   className="group"
                 >
                   <div
-                    className={`rounded-xl p-4 ${car.color} transition-all duration-300 
+                    className={`rounded-xl p-4 ${car.color || "bg-gray-50"} transition-all duration-300 
                                group-hover:-translate-y-2`}
                   >
                     {/* Replace static image with ImageCarousel component */}
