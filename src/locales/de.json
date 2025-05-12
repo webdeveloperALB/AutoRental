@@ -63,5 +63,11 @@
       "address": "Tirana, Albanien"
     },
     "copyright": "© {year} AutoRental. Alle Rechte vorbehalten."
+  },
+  "hero": {
+    "cta": "Buchen Sie Ihr exklusives Auto",
+    "ctaSpan": "JETZT",
+    "imageAlt": "Luxusauto",
+    "brandLogo": "Markenlogo"
   }
 }

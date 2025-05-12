@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { assets } from "../../assets/assets";
 import "./Hero.css";
 
@@ -10,6 +11,8 @@ import logo4 from "../../assets/images/porsche.svg";
 import logo5 from "../../assets/images/volkswagen.svg";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   const slideIn = {
     initial: { x: 100, opacity: 0 },
     animate: { x: 0, opacity: 1 },
@@ -27,7 +30,7 @@ const Hero = () => {
         animate="animate"
         variants={slideIn}
       >
-        <img src={assets.car} alt="Luxury Car" className="car-image" />
+        <img src={assets.car} alt={t("hero.imageAlt")} className="car-image" />
       </motion.div>
 
       {/* Content Overlay */}
@@ -36,14 +39,14 @@ const Hero = () => {
         <div className="static-logos-container">
           {logos.map((logo, index) => (
             <div key={index} className="logo-item">
-              <img src={logo} alt={`Brand Logo ${index + 1}`} />
+              <img src={logo} alt={`${t("hero.brandLogo")} ${index + 1}`} />
             </div>
           ))}
         </div>
 
         {/* Text element */}
         <div className="cta-text">
-          Book your exclusive car <span>NOW</span>
+          {t("hero.cta")} <span>{t("hero.ctaSpan")}</span>
         </div>
       </div>
     </div>

@@ -63,5 +63,11 @@
       "address": "Tiranë, Shqipëri"
     },
     "copyright": "© {year} AutoRental. Të gjitha të drejtat e rezervuara."
+  },
+   "hero": {
+    "cta": "Rezervo makinën tënde ekskluzive",
+    "ctaSpan": "TANI",
+    "imageAlt": "Makina luksoze",
+    "brandLogo": "Logoja e markës"
   }
 }
