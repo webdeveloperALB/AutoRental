@@ -1,14 +1,46 @@
 {
-  "Home": "Kreu",
+  "Home": "Ballina",
   "Models": "Modelet",
   "suv": "SUV",
-  "sedan": "Sedan",
-  "luxury": "Luksoze",
+  "sedan": "Sedan", 
+  "luxury": "Luksi",
   "sports": "Sportive",
   "economy": "Ekonomike",
   "Testimonials": "Dëshmitë",
-  "Contact": "Kontakti",
+  "Contact": "Kontakt",
   "logout": "Dil",
   "login": "Hyr",
-  "signUp": "Regjistrohu"
+  "signUp": "Regjistrohu",
+  "vehicleCategories": "Kategoritë e Mjeteve",
+  "fleetSelectionText": "Zgjedhje e flotës premium për çdo nevojë",
+  "faq": {
+    "helpBadge": "Qendra e Ndihmës",
+    "title": "Pyetje të Shpeshta",
+    "subtitle": "Gjeni shpejt përgjigje për pyetjet e zakonshme rreth shërbimeve tona të qirasë së makinave",
+    "categories": [
+      {
+        "title": "Kërkesat e Qirasë",
+        "bgColor": "bg-blue-100",
+        "color": "text-blue-600",
+        "questions": [
+          {
+            "question": "Çfarë më duhet për të marrë me qira një makinë?",
+            "answer": "Për të marrë me qira një makinë, ju duhet një leje drejtimi e vlefshme, dëshmi identiteti dhe mund të duhet të plotësoni disa kërkesa të moshës dhe përvojës në drejtim."
+          },
+          {
+            "question": "Cilat janë opsionet e pagesës dhe sigurimit?",
+            "answer": "Ne pranojmë metoda të ndryshme pagese, me depozita të mundshme sigurie. Opsionet e sigurimit janë të disponueshme me nivele të ndryshme mbulimi."
+          }
+        ]
+      }
+    ],
+    "contactSupport": {
+      "title": "Ende keni pyetje?",
+      "description": "Nuk mund ta gjeni atë që po kërkoni? Ekipi ynë i mbështetjes së klientëve është këtu për t'ju ndihmuar 24/7.",
+      "emailButton": "Mbështetje me Email",
+      "contactButton": "Kontaktoni Mbështetjen",
+      "callOption": "Thirrje e Drejtpërdrejtë",
+      "whatsappOption": "WhatsApp"
+    }
+  }
 }

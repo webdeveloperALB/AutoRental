@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import {
   Plus,
   Minus,
@@ -11,28 +12,10 @@ import {
 } from "lucide-react";
 
 const FAQ = () => {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const faqCategories = [
-    {
-      title: "AutoRental FAQs",
-      icon: ClipboardCheck,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
-      questions: [
-        {
-          question: "What do I need to rent a car?",
-          answer:
-            "To rent a car, you need a valid driver's license, proof of identity, and may need to meet certain age and driving experience requirements.",
-        },
-        {
-          question: "What are the payment and insurance options?",
-          answer:
-            "We accept various payment methods, with potential security deposits. Insurance options are available with different levels of coverage.",
-        },
-      ],
-    },
-  ];
+  const faqCategories = t('faq.categories', { returnObjects: true });
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -49,13 +32,13 @@ const FAQ = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-4">
             <HelpCircle className="w-5 h-5 text-white" />
-            <span className="text-white font-medium">Need Help?</span>
+            <span className="text-white font-medium">{t('faq.helpBadge')}</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Frequently Asked Questions
+            {t('faq.title')}
           </h2>
           <p className="text-black max-w-2xl mx-auto">
-            Find quick answers to common questions about our car rental services
+            {t('faq.subtitle')}
           </p>
         </motion.div>
 
@@ -76,7 +59,7 @@ const FAQ = () => {
                   <div
                     className={`flex items-center gap-3 p-4 ${category.bgColor} rounded-lg`}
                   >
-                    <category.icon className={`w-6 h-6 ${category.color}`} />
+                    <ClipboardCheck className={`w-6 h-6 ${category.color}`} />
                     <h3 className="text-xl font-semibold text-gray-800">
                       {category.title}
                     </h3>
@@ -146,11 +129,10 @@ const FAQ = () => {
               <div className="relative bg-white border border-orange-100 rounded-2xl p-8 h-full flex flex-col justify-center">
                 <div className="max-w-3xl mx-auto text-center">
                   <h3 className="text-2xl font-semibold mb-4">
-                    Still have questions?
+                    {t('faq.contactSupport.title')}
                   </h3>
                   <p className="text-black mb-8">
-                    Can&apos;t find what you are looking for? Our customer
-                    support team is here to help you 24/7.
+                    {t('faq.contactSupport.description')}
                   </p>
 
                   <div className="flex flex-wrap justify-center gap-6">
@@ -162,7 +144,7 @@ const FAQ = () => {
                       className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                     >
                       <Mail className="w-5 h-5" />
-                      <span>Email Support</span>
+                      <span>{t('faq.contactSupport.emailButton')}</span>
                     </motion.a>
 
                     {/* Phone Dropdown */}
@@ -173,7 +155,7 @@ const FAQ = () => {
                         className="flex items-center gap-2 px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
                       >
                         <Phone className="w-5 h-5" />
-                        <span>Contact Support</span>
+                        <span>{t('faq.contactSupport.contactButton')}</span>
                       </motion.button>
 
                       {/* Dropdown Options */}
@@ -183,7 +165,7 @@ const FAQ = () => {
                           className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition-colors"
                         >
                           <Phone className="w-5 h-5 text-green-500" />
-                          <span>Direct Call</span>
+                          <span>{t('faq.contactSupport.callOption')}</span>
                         </a>
                         <a
                           href="https://wa.me/355698357378"
@@ -192,7 +174,7 @@ const FAQ = () => {
                           className="flex items-center gap-2 px-6 py-3 hover:bg-gray-100 transition-colors"
                         >
                           <MessageCircle className="w-5 h-5 text-green-500" />
-                          <span>WhatsApp</span>
+                          <span>{t('faq.contactSupport.whatsappOption')}</span>
                         </a>
                       </div>
                     </div>

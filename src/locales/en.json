@@ -2,7 +2,7 @@
   "Home": "Home",
   "Models": "Models",
   "suv": "SUV",
-  "sedan": "Sedan",
+  "sedan": "Sedan", 
   "luxury": "Luxury",
   "sports": "Sports",
   "economy": "Economy",
@@ -10,5 +10,37 @@
   "Contact": "Contact",
   "logout": "Log out",
   "login": "Log in",
-  "signUp": "Sign Up"
+  "signUp": "Sign Up",
+  "vehicleCategories": "Vehicle Categories",
+  "fleetSelectionText": "Premium fleet selection for every need",
+  "faq": {
+    "helpBadge": "Help Center",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find quick answers to common questions about our car rental services",
+    "categories": [
+      {
+        "title": "Rental Requirements",
+        "bgColor": "bg-blue-100",
+        "color": "text-blue-600",
+        "questions": [
+          {
+            "question": "What do I need to rent a car?",
+            "answer": "To rent a car, you need a valid driver's license, proof of identity, and may need to meet certain age and driving experience requirements."
+          },
+          {
+            "question": "What are the payment and insurance options?",
+            "answer": "We accept various payment methods, with potential security deposits. Insurance options are available with different levels of coverage."
+          }
+        ]
+      }
+    ],
+    "contactSupport": {
+      "title": "Still have questions?",
+      "description": "Can't find what you are looking for? Our customer support team is here to help you 24/7.",
+      "emailButton": "Email Support",
+      "contactButton": "Contact Support",
+      "callOption": "Direct Call",
+      "whatsappOption": "WhatsApp"
+    }
+  }
 }

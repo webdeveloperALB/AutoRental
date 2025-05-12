@@ -2,7 +2,7 @@
   "Home": "Inicio",
   "Models": "Modelos",
   "suv": "SUV",
-  "sedan": "Sedán",
+  "sedan": "Sedán", 
   "luxury": "Lujo",
   "sports": "Deportivo",
   "economy": "Económico",
@@ -10,5 +10,37 @@
   "Contact": "Contacto",
   "logout": "Cerrar sesión",
   "login": "Iniciar sesión",
-  "signUp": "Registrarse"
+  "signUp": "Registrarse",
+  "vehicleCategories": "Categorías de Vehículos",
+  "fleetSelectionText": "Selección de flota premium para cada necesidad",
+  "faq": {
+    "helpBadge": "Centro de Ayuda",
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Encuentre rápidamente respuestas a preguntas comunes sobre nuestros servicios de alquiler de coches",
+    "categories": [
+      {
+        "title": "Requisitos de Alquiler",
+        "bgColor": "bg-blue-100",
+        "color": "text-blue-600",
+        "questions": [
+          {
+            "question": "¿Qué necesito para alquilar un coche?",
+            "answer": "Para alquilar un coche, necesita una licencia de conducir válida, un documento de identidad y es posible que deba cumplir con ciertos requisitos de edad y experiencia de conducción."
+          },
+          {
+            "question": "¿Cuáles son las opciones de pago y seguro?",
+            "answer": "Aceptamos varios métodos de pago, con posibles depósitos de seguridad. Hay opciones de seguro disponibles con diferentes niveles de cobertura."
+          }
+        ]
+      }
+    ],
+    "contactSupport": {
+      "title": "¿Aún tiene preguntas?",
+      "description": "¿No encuentra lo que busca? Nuestro equipo de soporte al cliente está aquí para ayudarle 24/7.",
+      "emailButton": "Soporte por Correo",
+      "contactButton": "Contactar Soporte",
+      "callOption": "Llamada Directa",
+      "whatsappOption": "WhatsApp"
+    }
+  }
 }

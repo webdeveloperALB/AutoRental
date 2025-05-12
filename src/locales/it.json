@@ -1,14 +1,46 @@
 {
-  "Home": "Home",
+  "Home": "Inizio",
   "Models": "Modelli",
   "suv": "SUV",
-  "sedan": "Berlina",
+  "sedan": "Berlina", 
   "luxury": "Lusso",
-  "sports": "Sport",
+  "sports": "Sportive",
   "economy": "Economica",
   "Testimonials": "Testimonianze",
   "Contact": "Contatto",
-  "logout": "Disconnetti",
+  "logout": "Esci",
   "login": "Accedi",
-  "signUp": "Registrati"
+  "signUp": "Registrati",
+  "vehicleCategories": "Categorie di Veicoli",
+  "fleetSelectionText": "Selezione di flotte premium per ogni esigenza",
+  "faq": {
+    "helpBadge": "Centro Assistenza",
+    "title": "Domande Frequenti",
+    "subtitle": "Trova rapidamente risposte alle domande più comuni sui nostri servizi di noleggio auto",
+    "categories": [
+      {
+        "title": "Requisiti di Noleggio",
+        "bgColor": "bg-blue-100",
+        "color": "text-blue-600",
+        "questions": [
+          {
+            "question": "Cosa serve per noleggiare un'auto?",
+            "answer": "Per noleggiare un'auto, è necessaria una patente di guida valida, un documento di identità e potrebbe essere richiesto di soddisfare determinati requisiti di età ed esperienza di guida."
+          },
+          {
+            "question": "Quali sono le opzioni di pagamento e assicurazione?",
+            "answer": "Accettiamo vari metodi di pagamento, con potenziali depositi cauzionali. Sono disponibili opzioni assicurative con diversi livelli di copertura."
+          }
+        ]
+      }
+    ],
+    "contactSupport": {
+      "title": "Hai ancora domande?",
+      "description": "Non riesci a trovare ciò che cerchi? Il nostro team di supporto clienti è qui per aiutarti 24/7.",
+      "emailButton": "Supporto via Email",
+      "contactButton": "Contatta il Supporto",
+      "callOption": "Chiamata Diretta",
+      "whatsappOption": "WhatsApp"
+    }
+  }
 }

@@ -2,13 +2,45 @@
   "Home": "Startseite",
   "Models": "Modelle",
   "suv": "SUV",
-  "sedan": "Limousine",
+  "sedan": "Limousine", 
   "luxury": "Luxus",
-  "sports": "Sportwagen",
-  "economy": "Kompakt",
-  "Testimonials": "Erfahrungen",
+  "sports": "Sport",
+  "economy": "Wirtschaftlich",
+  "Testimonials": "Bewertungen",
   "Contact": "Kontakt",
   "logout": "Abmelden",
   "login": "Anmelden",
-  "signUp": "Registrieren"
+  "signUp": "Registrieren",
+  "vehicleCategories": "Fahrzeugkategorien",
+  "fleetSelectionText": "Premium-Flottenauswahl für jeden Bedarf",
+  "faq": {
+    "helpBadge": "Hilfe-Center",
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Finden Sie schnell Antworten auf häufige Fragen zu unseren Autovermietungsservices",
+    "categories": [
+      {
+        "title": "Mietanforderungen",
+        "bgColor": "bg-blue-100",
+        "color": "text-blue-600",
+        "questions": [
+          {
+            "question": "Was benötige ich, um ein Auto zu mieten?",
+            "answer": "Um ein Auto zu mieten, benötigen Sie einen gültigen Führerschein, einen Identitätsnachweis und müssen möglicherweise bestimmte Alters- und Fahrerfahrungsanforderungen erfüllen."
+          },
+          {
+            "question": "Was sind die Zahlungs- und Versicherungsoptionen?",
+            "answer": "Wir akzeptieren verschiedene Zahlungsmethoden mit möglichen Sicherheitseinlagen. Versicherungsoptionen sind mit unterschiedlichen Deckungsstufen verfügbar."
+          }
+        ]
+      }
+    ],
+    "contactSupport": {
+      "title": "Haben Sie noch Fragen?",
+      "description": "Sie können nicht finden, was Sie suchen? Unser Kundenservice-Team ist 24/7 für Sie da.",
+      "emailButton": "E-Mail-Support",
+      "contactButton": "Kontakt-Support",
+      "callOption": "Direktanruf",
+      "whatsappOption": "WhatsApp"
+    }
+  }
 }
