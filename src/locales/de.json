@@ -5,8 +5,8 @@
   "sedan": "Limousine",
   "luxury": "Luxus",
   "sports": "Sport",
-  "economy": "Wirtschaftlich",
-  "Testimonials": "Bewertungen",
+  "economy": "Wirtschaft",
+  "Testimonials": "Kundenbewertungen",
   "Contact": "Kontakt",
   "logout": "Abmelden",
   "login": "Anmelden",
@@ -14,9 +14,9 @@
   "vehicleCategories": "Fahrzeugkategorien",
   "fleetSelectionText": "Premium-Flottenauswahl für jeden Bedarf",
   "faq": {
-    "helpBadge": "Hilfe-Center",
+    "helpBadge": "Hilfezentrum",
     "title": "Häufig gestellte Fragen",
-    "subtitle": "Finden Sie schnell Antworten auf häufige Fragen zu unseren Autovermietungsservices",
+    "subtitle": "Finden Sie schnelle Antworten auf häufige Fragen zu unseren Autovermietungsdiensten",
     "categories": [
       {
         "title": "Mietanforderungen",
@@ -28,35 +28,35 @@
             "answer": "Um ein Auto zu mieten, benötigen Sie einen gültigen Führerschein, einen Identitätsnachweis und müssen möglicherweise bestimmte Alters- und Fahrerfahrungsanforderungen erfüllen."
           },
           {
-            "question": "Was sind die Zahlungs- und Versicherungsoptionen?",
-            "answer": "Wir akzeptieren verschiedene Zahlungsmethoden mit möglichen Sicherheitseinlagen. Versicherungsoptionen sind mit unterschiedlichen Deckungsstufen verfügbar."
+            "question": "Welche Zahlungs- und Versicherungsoptionen gibt es?",
+            "answer": "Wir akzeptieren verschiedene Zahlungsmethoden, mit möglichen Sicherheitseinlagen. Versicherungsoptionen sind mit verschiedenen Deckungsstufen verfügbar."
           }
         ]
       }
     ],
     "contactSupport": {
-      "title": "Haben Sie noch Fragen?",
-      "description": "Sie können nicht finden, was Sie suchen? Unser Kundenservice-Team ist 24/7 für Sie da.",
+      "title": "Noch Fragen?",
+      "description": "Können Sie nicht finden, wonach Sie suchen? Unser Kundendienstteam steht Ihnen rund um die Uhr zur Verfügung.",
       "emailButton": "E-Mail-Support",
       "contactButton": "Kontakt-Support",
-      "callOption": "Direktanruf",
+      "callOption": "Direkter Anruf",
       "whatsappOption": "WhatsApp"
     }
   },
   "footer": {
-    "companyDescription": "Ihr vertrauenswürdiger Partner für Autovermietungen. Erleben Sie Premium-Service mit unbegrenzten Kilometern und flexiblen Abholoptionen zu unschlagbaren Preisen.",
+    "companyDescription": "Ihr vertrauenswürdiger Partner für Autovermietungen. Erleben Sie erstklassigen Service mit unbegrenzten Kilometern und flexiblen Abholoptionen zu unschlagbaren Preisen.",
     "quickLinks": {
-      "title": "Schnelle Links",
+      "title": "Schnelllinks",
       "home": "Startseite",
-      "aboutUs": "Über Uns",
+      "aboutUs": "Über uns",
       "carModels": "Automodelle",
       "services": "Dienstleistungen",
-      "contactUs": "Kontakt"
+      "contactUs": "Kontaktieren Sie uns"
     },
     "customerSupport": {
-      "title": "Kundenunterstützung",
+      "title": "Kundendienst",
       "phone": "+355 69 835 7378",
-      "email": "beispiel@gmail.com"
+      "email": "example@gmail.com"
     },
     "location": {
       "title": "Unser Standort",
@@ -72,30 +72,30 @@
   },
   "testimonials": {
     "heroSection": {
-      "badge": "Kundenstimmen",
+      "badge": "Kundengeschichten",
       "title": "Was unsere Kunden sagen",
-      "subtitle": "Entdecken Sie, warum Tausende von Kunden uns für ihre Autovermietung wählen und uns bei ihren Reiseerlebnissen vertrauen."
+      "subtitle": "Entdecken Sie, warum Tausende von Kunden uns für ihre Autovermietungsbedürfnisse wählen und uns mit ihren Reiseerfahrungen vertrauen."
     },
     "stats": [
       { "value": "15K+", "label": "Zufriedene Kunden" },
       { "value": "4.9", "label": "Durchschnittliche Bewertung" },
       { "value": "98%", "label": "Zufriedenheitsrate" },
-      { "value": "24/7", "label": "Kundenservice" }
+      { "value": "24/7", "label": "Kundendienst" }
     ],
     "testimonialData": [
       {
         "name": "Erion Dashi",
         "role": "Geschäftsreisender",
         "rating": 5,
-        "comment": "Die beste Autovermietungserfahrung, die ich je hatte! Der Prozess war von Anfang bis Ende nahtlos. Das Auto war makellos und der Kundenservice war hervorragend.",
-        "carRented": "Mercedes Benz S-Klasse W222",
+        "comment": "Die beste Autovermietungserfahrung, die ich je hatte! Der Prozess war von Anfang bis Ende nahtlos. Das Auto war makellos und der Kundenservice war außergewöhnlich.",
+        "carRented": "Mercedes Benz S-Class W222",
         "date": "Januar 2024"
       },
       {
         "name": "Alma Zeneli",
         "role": "Familienurlaub",
         "rating": 5,
-        "comment": "Perfekt für unseren Familienurlaub! Der SUV war geräumig, sauber und gut gepflegt. Das Personal war unglaublich hilfsbereit bei der Kindersitzinstallation.",
+        "comment": "Perfekt für unseren Familienurlaub! Der SUV war geräumig, sauber und gut gewartet. Das Personal war unglaublich hilfsbereit bei der Installation des Kindersitzes.",
         "carRented": "Hyundai Santa Fe",
         "date": "Dezember 2023"
       },
@@ -103,20 +103,20 @@
         "name": "Bledar Hoxha",
         "role": "Wochenendausflug",
         "rating": 4,
-        "comment": "Toller Service und wettbewerbsfähige Preise. Der Abhol- und Rückgabeprozess war schnell und effizient. Werde definitiv wiederkommen!",
-        "carRented": "BMW 4er Serie",
+        "comment": "Großartiger Service und wettbewerbsfähige Preise. Der Abhol- und Abgabeprozess war schnell und effizient. Werde definitiv wieder nutzen!",
+        "carRented": "BMW 4 Series",
         "date": "Februar 2024"
       }
     ],
     "reviewHighlights": [
-      { "title": "Hervorragender Service", "count": 2481 },
+      { "title": "Außergewöhnlicher Service", "count": 2481 },
       { "title": "Saubere Fahrzeuge", "count": 1938 },
       { "title": "Einfache Buchung", "count": 1756 },
       { "title": "Gutes Preis-Leistungs-Verhältnis", "count": 1542 }
     ],
     "reviewSection": {
-      "title": "Was Kunden an uns schätzen",
-      "subtitle": "Sehen Sie, welche Aspekte unseres Services von Kunden besonders geschätzt werden"
+      "title": "Was Menschen an uns lieben",
+      "subtitle": "Sehen Sie, welche Aspekte unseres Service Kunden am meisten schätzen"
     },
     "ctaSection": {
       "title": "Bereit, es selbst zu erleben?",
@@ -127,35 +127,85 @@
   "contact": {
     "contactUs": "Kontaktieren Sie uns",
     "title": "Nehmen Sie Kontakt mit uns auf",
-    "subtitle": "Ob Fragen oder Anliegen – wir sind immer für Sie da",
+    "subtitle": "Wir sind hier, um zu helfen und alle Fragen zu beantworten, die Sie haben könnten. Wir freuen uns darauf, von Ihnen zu hören!",
     "contactInfo": {
       "phone": {
-        "title": "Telefonnummer",
+        "title": "Telefon",
         "details": "+355 69 835 7378"
       },
       "instagram": {
         "title": "Instagram",
-        "details": "@autorental.al"
+        "details": "@autorental.tirana"
       },
       "location": {
         "title": "Standort",
         "details": "Tirana, Albanien"
       },
       "businessHours": {
-        "title": "Öffnungszeiten",
-        "details": "Montag - Sonntag, 08:00 - 20:00 Uhr"
+        "title": "Geschäftszeiten",
+        "details": "Mo-Sa: 9-18 Uhr"
       }
     },
     "form": {
       "title": "Senden Sie uns eine Nachricht",
-      "nameLabel": "Ihr Name",
-      "namePlaceholder": "Geben Sie Ihren Namen ein",
+      "nameLabel": "Vollständiger Name",
+      "namePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
       "subjectLabel": "Betreff",
-      "subjectPlaceholder": "Geben Sie den Betreff ein",
-      "messageLabel": "Nachricht",
-      "messagePlaceholder": "Schreiben Sie Ihre Nachricht hier...",
+      "subjectPlaceholder": "Worum geht es?",
+      "messageLabel": "Ihre Nachricht",
+      "messagePlaceholder": "Geben Sie hier Ihre Nachricht ein...",
       "submitButton": "Nachricht senden",
-      "submitButtonSent": "Gesendet!"
+      "submitButtonSent": "Nachricht gesendet!"
+    }
+  },
+  "ourFleet": "Unsere Flotte",
+  "chooseYourPerfect": "Wählen Sie Ihre perfekte",
+  "ride": "Fahrt",
+  "experiencePremiumService": "Erleben Sie erstklassigen Service mit unbegrenzten Kilometern und flexiblen Abholoptionen zu unschlagbaren Preisen. Wählen Sie aus unserer breiten Palette gut gewarteter Fahrzeuge.",
+  "minimumRentalPeriod": "Mindestmietdauer: 2 Tage für alle Fahrzeuge",
+  "searchForACar": "Nach einem Auto suchen...",
+  "fuelType": "Kraftstoffart",
+  "transmissionType": "Getriebe",
+  "engineSize": "Motorgröße",
+  "clearAllFilters": "Alle Filter löschen",
+  "noCarsFound": "Keine Autos gefunden, die Ihren Suchkriterien entsprechen.",
+  "day": "Tag",
+  "reviews": "Bewertungen",
+  "bookNow": "Jetzt buchen",
+  "howToBook": "Wie man bucht",
+  "streamlinedProcess": "Wir haben unseren Mietprozess optimiert, damit Sie schnell und sicher auf die Straße kommen",
+  "carImage": "Autobild",
+  "previousImage": "Vorheriges Bild",
+  "nextImage": "Nächstes Bild",
+  "goToImage": "Zu Bild {{number}} gehen",
+  "categories": {
+    "all": "Alle",
+    "suv": "SUV",
+    "sedan": "Limousine",
+    "luxury": "Luxus",
+    "sports": "Sport",
+    "economy": "Wirtschaft"
+  },
+  "fuel": {
+    "petrol": "Benzin",
+    "diesel": "Diesel"
+  },
+  "transmission": {
+    "automatic": "Automatik",
+    "manual": "Manuell"
+  },
+  "bookingSteps": {
+    "chooseCar": {
+      "title": "Wählen Sie Ihr Auto",
+      "description": "Wählen Sie aus unserer breiten Palette an Premium-Fahrzeugen"
+    },
+    "pickDate": {
+      "title": "Datum & Ort wählen",
+      "description": "Wählen Sie Ihr Abholdatum und Ihren bevorzugten Ort"
+    },
+    "bookAndEnjoy": {
+      "title": "Buchen & Genießen",
+      "description": "Schließen Sie Ihre Buchung ab und genießen Sie Ihre Reise"
     }
   }
 }

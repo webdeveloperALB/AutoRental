@@ -1,9 +1,10 @@
-"use client";
+"use client"
 
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types"; // Added PropTypes import
+import { useState, useRef, useEffect, useCallback, useMemo } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { motion } from "framer-motion"
+import PropTypes from "prop-types"
+import { useTranslation } from "react-i18next"
 import {
   Car,
   Search,
@@ -17,8 +18,8 @@ import {
   Gauge,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react";
-import { Icon } from "@iconify/react";
+} from "lucide-react"
+import { Icon } from "@iconify/react"
 
 const carModels = [
   {
@@ -289,10 +290,10 @@ const carModels = [
     categories: ["SUV"],
     price: 50,
     images: [
-      "/cars/hyundai santa fe/3.jpg",
-      "/cars/hyundai santa fe/4.jpg",
-      "/cars/hyundai santa fe/2.jpg",
-      "/cars/hyundai santa fe/1.jpg",
+      "/cars/hyundai santa fe/3.jpg",
+      "/cars/hyundai santa fe/4.jpg",
+      "/cars/hyundai santa fe/2.jpg",
+      "/cars/hyundai santa fe/1.jpg",
     ],
     features: {
       fuel: "Diesel",
@@ -347,323 +348,282 @@ const carModels = [
     color: "bg-gray-100",
     iconColor: "text-blue-500",
   },
-];
+]
 
 const ImageCarousel = ({ images, carId, navigate }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [isSwiping, setIsSwiping] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false);
+  const { t } = useTranslation()
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
+  const [isSwiping, setIsSwiping] = useState(false)
+  const [isNavigating, setIsNavigating] = useState(false)
 
   // Reference to track if component is mounted
-  const isMounted = useRef(true);
+  const isMounted = useRef(true)
 
   // Track interaction type to prevent conflicts between touch/mouse and buttons
-  const interactionType = useRef(null); // Can be 'touch', 'mouse', or 'button'
+  const interactionType = useRef(null) // Can be 'touch', 'mouse', or 'button'
 
   // Store position for velocity calculations
-  const lastX = useRef(0);
-  const touchStartTime = useRef(0);
+  const lastX = useRef(0)
+  const touchStartTime = useRef(0)
 
   // Threshold for swipe detection
-  const minSwipeDistance = 10;
+  const minSwipeDistance = 10
 
   // Reset interaction type after a delay
   const resetInteractionType = useCallback(() => {
     setTimeout(() => {
       if (isMounted.current) {
-        interactionType.current = null;
+        interactionType.current = null
       }
-    }, 300);
-  }, []);
+    }, 300)
+  }, [])
 
   // Handle image click - only navigate if not swiping
   const handleImageClick = useCallback(() => {
     if (!isSwiping) {
-      navigate(`/booking/${carId}`);
+      navigate(`/booking/${carId}`)
     }
-  }, [isSwiping, navigate, carId]);
+  }, [isSwiping, navigate, carId])
 
   // Navigation functions with interaction type tracking
   const prevImage = useCallback(
     (e) => {
-      if (e) e.stopPropagation();
+      if (e) e.stopPropagation()
 
       // Prevent navigation if already in progress or if touch/mouse interaction is happening
-      if (
-        isNavigating ||
-        (interactionType.current && interactionType.current !== "button")
-      )
-        return;
+      if (isNavigating || (interactionType.current && interactionType.current !== "button")) return
 
       // Set interaction type to button
-      interactionType.current = "button";
+      interactionType.current = "button"
 
       // Set navigation lock
-      setIsNavigating(true);
+      setIsNavigating(true)
 
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? images.length - 1 : prevIndex - 1
-      );
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
 
       // Release navigation lock after animation completes
       setTimeout(() => {
         if (isMounted.current) {
-          setIsNavigating(false);
-          resetInteractionType();
+          setIsNavigating(false)
+          resetInteractionType()
         }
-      }, 300);
+      }, 300)
     },
-    [images?.length, isNavigating, resetInteractionType]
-  );
+    [images?.length, isNavigating, resetInteractionType],
+  )
 
   const nextImage = useCallback(
     (e) => {
-      if (e) e.stopPropagation();
+      if (e) e.stopPropagation()
 
       // Prevent navigation if already in progress or if touch/mouse interaction is happening
-      if (
-        isNavigating ||
-        (interactionType.current && interactionType.current !== "button")
-      )
-        return;
+      if (isNavigating || (interactionType.current && interactionType.current !== "button")) return
 
       // Set interaction type to button
-      interactionType.current = "button";
+      interactionType.current = "button"
 
       // Set navigation lock
-      setIsNavigating(true);
+      setIsNavigating(true)
 
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1))
 
       // Release navigation lock after animation completes
       setTimeout(() => {
         if (isMounted.current) {
-          setIsNavigating(false);
-          resetInteractionType();
+          setIsNavigating(false)
+          resetInteractionType()
         }
-      }, 300);
+      }, 300)
     },
-    [images?.length, isNavigating, resetInteractionType]
-  );
+    [images?.length, isNavigating, resetInteractionType],
+  )
 
   // Store event handlers in refs to avoid dependency cycles
-  const handleMouseMoveRef = useRef(null);
-  const handleMouseUpRef = useRef(null);
+  const handleMouseMoveRef = useRef(null)
+  const handleMouseUpRef = useRef(null)
 
   // Touch handling with interaction type tracking
   const handleTouchStart = useCallback(
     (e) => {
       // Skip if we're already navigating or another interaction is in progress
-      if (
-        isNavigating ||
-        (interactionType.current && interactionType.current !== "touch")
-      )
-        return;
+      if (isNavigating || (interactionType.current && interactionType.current !== "touch")) return
 
       // Set interaction type to touch
-      interactionType.current = "touch";
+      interactionType.current = "touch"
 
       // Store the starting position and time for velocity calculation
-      const touchX = e.targetTouches[0].clientX;
-      setTouchStart(touchX);
-      setTouchEnd(touchX);
-      lastX.current = touchX;
-      touchStartTime.current = Date.now();
-      setIsSwiping(false);
+      const touchX = e.targetTouches[0].clientX
+      setTouchStart(touchX)
+      setTouchEnd(touchX)
+      lastX.current = touchX
+      touchStartTime.current = Date.now()
+      setIsSwiping(false)
     },
-    [isNavigating]
-  );
+    [isNavigating],
+  )
 
   const handleTouchMove = useCallback(
     (e) => {
       // Skip if we're in navigation lock or if this isn't a touch interaction
-      if (isNavigating || interactionType.current !== "touch") return;
+      if (isNavigating || interactionType.current !== "touch") return
 
-      const currentX = e.targetTouches[0].clientX;
-      setTouchEnd(currentX);
+      const currentX = e.targetTouches[0].clientX
+      setTouchEnd(currentX)
 
       // Calculate horizontal movement
-      const horizontalDistance = Math.abs(lastX.current - currentX);
+      const horizontalDistance = Math.abs(lastX.current - currentX)
 
       // Update last position for next move event
-      lastX.current = currentX;
+      lastX.current = currentX
 
       // Only block default scroll behavior if significant horizontal movement
       if (horizontalDistance > 5) {
-        e.preventDefault();
-        setIsSwiping(true);
+        e.preventDefault()
+        setIsSwiping(true)
       }
     },
-    [isNavigating]
-  );
+    [isNavigating],
+  )
 
   const handleTouchEnd = useCallback(() => {
     // Skip if we're in navigation lock or missing touch data or if this isn't a touch interaction
-    if (
-      isNavigating ||
-      !touchStart ||
-      !touchEnd ||
-      interactionType.current !== "touch"
-    )
-      return;
+    if (isNavigating || !touchStart || !touchEnd || interactionType.current !== "touch") return
 
-    const distance = touchStart - touchEnd;
-    const touchDuration = Date.now() - touchStartTime.current;
+    const distance = touchStart - touchEnd
+    const touchDuration = Date.now() - touchStartTime.current
 
     // Calculate swipe velocity for more responsive feel
-    const velocity = Math.abs(distance) / touchDuration;
+    const velocity = Math.abs(distance) / touchDuration
 
     // Check if swipe was fast enough or distance was significant enough
     if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
       // Set navigation lock before changing image
-      setIsNavigating(true);
+      setIsNavigating(true)
 
       if (distance > 0) {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === images.length - 1 ? 0 : prevIndex + 1
-        );
+        setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1))
       } else {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === 0 ? images.length - 1 : prevIndex - 1
-        );
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
       }
 
       // Release the navigation lock after animation completes
       setTimeout(() => {
         if (isMounted.current) {
-          setIsNavigating(false);
-          resetInteractionType();
+          setIsNavigating(false)
+          resetInteractionType()
         }
-      }, 300);
+      }, 300)
     } else {
       // If no significant swipe, just reset the interaction type
-      resetInteractionType();
+      resetInteractionType()
     }
 
     // Reset touch values
-    setTouchStart(0);
-    setTouchEnd(0);
+    setTouchStart(0)
+    setTouchEnd(0)
 
     // Use a short delay for more responsive feel
     const timer = setTimeout(() => {
       if (isMounted.current) {
-        setIsSwiping(false);
+        setIsSwiping(false)
       }
-    }, 50);
+    }, 50)
 
-    return () => clearTimeout(timer);
-  }, [
-    touchStart,
-    touchEnd,
-    minSwipeDistance,
-    isNavigating,
-    images?.length,
-    resetInteractionType,
-  ]);
+    return () => clearTimeout(timer)
+  }, [touchStart, touchEnd, minSwipeDistance, isNavigating, images?.length, resetInteractionType])
 
   // Mouse handling with interaction type tracking
   useEffect(() => {
     // Define mouse move handler
     handleMouseMoveRef.current = (e) => {
       // Skip if navigation is locked or if this isn't a mouse interaction
-      if (isNavigating || interactionType.current !== "mouse") return;
+      if (isNavigating || interactionType.current !== "mouse") return
 
-      setTouchEnd(e.clientX);
+      setTouchEnd(e.clientX)
       if (Math.abs(lastX.current - e.clientX) > 3) {
-        setIsSwiping(true);
+        setIsSwiping(true)
       }
-      lastX.current = e.clientX;
-    };
+      lastX.current = e.clientX
+    }
 
     // Define mouse up handler
     handleMouseUpRef.current = (e) => {
-      document.removeEventListener("mousemove", handleMouseMoveRef.current);
-      document.removeEventListener("mouseup", handleMouseUpRef.current);
+      document.removeEventListener("mousemove", handleMouseMoveRef.current)
+      document.removeEventListener("mouseup", handleMouseUpRef.current)
 
       // Skip if we're in navigation lock or missing touch data or if this isn't a mouse interaction
-      if (isNavigating || !touchStart || interactionType.current !== "mouse")
-        return;
+      if (isNavigating || !touchStart || interactionType.current !== "mouse") return
 
-      const distance = touchStart - e.clientX;
-      const touchDuration = Date.now() - touchStartTime.current;
-      const velocity = Math.abs(distance) / touchDuration;
+      const distance = touchStart - e.clientX
+      const touchDuration = Date.now() - touchStartTime.current
+      const velocity = Math.abs(distance) / touchDuration
 
       if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
         // Set navigation lock before changing image
-        setIsNavigating(true);
+        setIsNavigating(true)
 
         if (distance > 0) {
-          setCurrentIndex((prevIndex) =>
-            prevIndex === images?.length - 1 ? 0 : prevIndex + 1
-          );
+          setCurrentIndex((prevIndex) => (prevIndex === images?.length - 1 ? 0 : prevIndex + 1))
         } else {
-          setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? images?.length - 1 : prevIndex - 1
-          );
+          setCurrentIndex((prevIndex) => (prevIndex === 0 ? images?.length - 1 : prevIndex - 1))
         }
 
         // Release navigation lock after animation completes
         setTimeout(() => {
           if (isMounted.current) {
-            setIsNavigating(false);
-            resetInteractionType();
+            setIsNavigating(false)
+            resetInteractionType()
           }
-        }, 300);
+        }, 300)
       } else {
         // If no significant swipe, just reset the interaction type
-        resetInteractionType();
+        resetInteractionType()
       }
 
-      setTouchStart(0);
-      setTouchEnd(0);
+      setTouchStart(0)
+      setTouchEnd(0)
 
       const timer = setTimeout(() => {
         if (isMounted.current) {
-          setIsSwiping(false);
+          setIsSwiping(false)
         }
-      }, 50);
+      }, 50)
 
-      return () => clearTimeout(timer);
-    };
-  }, [touchStart, isNavigating, images?.length, resetInteractionType]);
+      return () => clearTimeout(timer)
+    }
+  }, [touchStart, isNavigating, images?.length, resetInteractionType])
 
   const handleMouseDown = useCallback(
     (e) => {
       // Skip if in navigation lock or another interaction is in progress
-      if (
-        isNavigating ||
-        (interactionType.current && interactionType.current !== "mouse")
-      )
-        return;
+      if (isNavigating || (interactionType.current && interactionType.current !== "mouse")) return
 
       // Set interaction type to mouse
-      interactionType.current = "mouse";
+      interactionType.current = "mouse"
 
-      const mouseX = e.clientX;
-      setTouchStart(mouseX);
-      setTouchEnd(mouseX);
-      lastX.current = mouseX;
-      touchStartTime.current = Date.now();
-      setIsSwiping(false);
+      const mouseX = e.clientX
+      setTouchStart(mouseX)
+      setTouchEnd(mouseX)
+      lastX.current = mouseX
+      touchStartTime.current = Date.now()
+      setIsSwiping(false)
 
-      document.addEventListener("mousemove", handleMouseMoveRef.current);
-      document.addEventListener("mouseup", handleMouseUpRef.current);
+      document.addEventListener("mousemove", handleMouseMoveRef.current)
+      document.addEventListener("mouseup", handleMouseUpRef.current)
     },
-    [isNavigating]
-  );
+    [isNavigating],
+  )
 
   // Clean up event listeners on unmount
   useEffect(() => {
     return () => {
-      isMounted.current = false;
-      document.removeEventListener("mousemove", handleMouseMoveRef.current);
-      document.removeEventListener("mouseup", handleMouseUpRef.current);
-    };
-  }, []);
+      isMounted.current = false
+      document.removeEventListener("mousemove", handleMouseMoveRef.current)
+      document.removeEventListener("mouseup", handleMouseUpRef.current)
+    }
+  }, [])
 
   // Apply touch events
   const touchProps = useMemo(
@@ -673,75 +633,66 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       onTouchEnd: handleTouchEnd,
       onMouseDown: handleMouseDown,
     }),
-    [handleTouchStart, handleTouchMove, handleTouchEnd, handleMouseDown]
-  );
+    [handleTouchStart, handleTouchMove, handleTouchEnd, handleMouseDown],
+  )
 
   // Pre-load adjacent images for smoother transitions
   useEffect(() => {
     const preloadImages = () => {
-      if (!images || images.length <= 1) return;
+      if (!images || images.length <= 1) return
 
       // Load next image
-      const nextIndex =
-        currentIndex === images.length - 1 ? 0 : currentIndex + 1;
-      const prevIndex =
-        currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+      const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
+      const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
 
       if (images[nextIndex]) {
-        const nextImg = new Image();
-        nextImg.src = images[nextIndex];
+        const nextImg = new Image()
+        nextImg.src = images[nextIndex]
       }
 
       if (images[prevIndex]) {
-        const prevImg = new Image();
-        prevImg.src = images[prevIndex];
+        const prevImg = new Image()
+        prevImg.src = images[prevIndex]
       }
-    };
+    }
 
-    preloadImages();
-  }, [currentIndex, images]);
+    preloadImages()
+  }, [currentIndex, images])
 
   // Handle indicator clicks with interaction type tracking
   const handleIndicatorClick = useCallback(
     (index, e) => {
-      e.stopPropagation();
+      e.stopPropagation()
 
       // Skip if navigation is in progress or another interaction is happening
-      if (
-        isNavigating ||
-        (interactionType.current && interactionType.current !== "button")
-      )
-        return;
+      if (isNavigating || (interactionType.current && interactionType.current !== "button")) return
 
       // Set interaction type to button
-      interactionType.current = "button";
+      interactionType.current = "button"
 
       // Set navigation lock
-      setIsNavigating(true);
+      setIsNavigating(true)
 
-      setCurrentIndex(index);
+      setCurrentIndex(index)
 
       // Release navigation lock after animation completes
       setTimeout(() => {
         if (isMounted.current) {
-          setIsNavigating(false);
-          resetInteractionType();
+          setIsNavigating(false)
+          resetInteractionType()
         }
-      }, 300);
+      }, 300)
     },
-    [isNavigating, resetInteractionType]
-  );
+    [isNavigating, resetInteractionType],
+  )
 
   return (
-    <div
-      className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
-      onClick={handleImageClick}
-    >
+    <div className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer" onClick={handleImageClick}>
       {/* Image with optimized touch event handlers */}
       <div className="w-full h-full" {...touchProps}>
         <img
           src={images?.[currentIndex] || "/placeholder.svg"}
-          alt="Car image"
+          alt={t("carImage")}
           className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
           draggable="false" // Prevent image dragging interfering with swipe
           style={{
@@ -755,13 +706,9 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       <button
         className={`absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 
                   hover:bg-opacity-70 text-white p-2 rounded-full transition-all
-                  ${
-                    isNavigating
-                      ? "opacity-50 cursor-not-allowed"
-                      : "opacity-100"
-                  }`}
+                  ${isNavigating ? "opacity-50 cursor-not-allowed" : "opacity-100"}`}
         onClick={prevImage}
-        aria-label="Previous image"
+        aria-label={t("previousImage")}
         disabled={isNavigating}
       >
         <ChevronLeft className="w-5 h-5" />
@@ -770,13 +717,9 @@ const ImageCarousel = ({ images, carId, navigate }) => {
       <button
         className={`absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 
                   hover:bg-opacity-70 text-white p-2 rounded-full transition-all
-                  ${
-                    isNavigating
-                      ? "opacity-50 cursor-not-allowed"
-                      : "opacity-100"
-                  }`}
+                  ${isNavigating ? "opacity-50 cursor-not-allowed" : "opacity-100"}`}
         onClick={nextImage}
-        aria-label="Next image"
+        aria-label={t("nextImage")}
         disabled={isNavigating}
       >
         <ChevronRight className="w-5 h-5" />
@@ -789,14 +732,10 @@ const ImageCarousel = ({ images, carId, navigate }) => {
             <button
               key={index}
               className={`w-2 h-2 rounded-full transition-all ${
-                currentIndex === index
-                  ? "bg-white scale-125"
-                  : "bg-white bg-opacity-50"
-              } ${
-                isNavigating ? "opacity-50 cursor-not-allowed" : "opacity-100"
-              }`}
+                currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
+              } ${isNavigating ? "opacity-50 cursor-not-allowed" : "opacity-100"}`}
               onClick={(e) => handleIndicatorClick(index, e)}
-              aria-label={`Go to image ${index + 1}`}
+              aria-label={t("goToImage", { number: index + 1 })}
               disabled={isNavigating}
             />
           ))}
@@ -816,143 +755,111 @@ const ImageCarousel = ({ images, carId, navigate }) => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
 // Add PropTypes validation for the ImageCarousel component
 ImageCarousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   carId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   navigate: PropTypes.func.isRequired,
-};
+}
+
 const Models = () => {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get("categories");
-  const searchParam = searchParams.get("search");
-  const fuelParam = searchParams.get("fuel");
-  const transmissionParam = searchParams.get("transmission");
-  const engineSizeParam = searchParams.get("engineSize");
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const categoryParam = searchParams.get("categories")
+  const searchParam = searchParams.get("search")
+  const fuelParam = searchParams.get("fuel")
+  const transmissionParam = searchParams.get("transmission")
+  const engineSizeParam = searchParams.get("engineSize")
 
   // Initialize state from URL params
-  const [selectedCategories, setSelectedCategories] = useState(
-    categoryParam ? categoryParam.split(",") : []
-  );
-  const [searchQuery, setSearchQuery] = useState(searchParam || "");
-  const [selectedFuel, setSelectedFuel] = useState(fuelParam || "");
-  const [selectedTransmission, setSelectedTransmission] = useState(
-    transmissionParam || ""
-  );
-  const [selectedEngineSize, setSelectedEngineSize] = useState(
-    engineSizeParam || ""
-  );
+  const [selectedCategories, setSelectedCategories] = useState(categoryParam ? categoryParam.split(",") : [])
+  const [searchQuery, setSearchQuery] = useState(searchParam || "")
+  const [selectedFuel, setSelectedFuel] = useState(fuelParam || "")
+  const [selectedTransmission, setSelectedTransmission] = useState(transmissionParam || "")
+  const [selectedEngineSize, setSelectedEngineSize] = useState(engineSizeParam || "")
 
   // Update URL params when filters change
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (selectedCategories.length > 0)
-      params.set("categories", selectedCategories.join(","));
-    if (searchQuery.trim()) params.set("search", searchQuery.trim());
-    if (selectedFuel) params.set("fuel", selectedFuel);
-    if (selectedTransmission) params.set("transmission", selectedTransmission);
-    if (selectedEngineSize) params.set("engineSize", selectedEngineSize);
+    const params = new URLSearchParams()
+    if (selectedCategories.length > 0) params.set("categories", selectedCategories.join(","))
+    if (searchQuery.trim()) params.set("search", searchQuery.trim())
+    if (selectedFuel) params.set("fuel", selectedFuel)
+    if (selectedTransmission) params.set("transmission", selectedTransmission)
+    if (selectedEngineSize) params.set("engineSize", selectedEngineSize)
 
-    setSearchParams(params);
-  }, [
-    selectedCategories,
-    searchQuery,
-    selectedFuel,
-    selectedTransmission,
-    selectedEngineSize,
-    setSearchParams,
-  ]);
+    setSearchParams(params)
+  }, [selectedCategories, searchQuery, selectedFuel, selectedTransmission, selectedEngineSize, setSearchParams])
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-  };
+  }
 
   const categories = [
-    { name: "All", icon: Car },
-    { name: "SUV", icon: Car },
-    { name: "Sedan", icon: Car },
-    { name: "Luxury", icon: Car },
-    { name: "Sports", icon: Car },
-    { name: "Economy", icon: Car },
-  ];
+    { name: t("categories.all"), icon: Car },
+    { name: t("categories.suv"), icon: Car },
+    { name: t("categories.sedan"), icon: Car },
+    { name: t("categories.luxury"), icon: Car },
+    { name: t("categories.sports"), icon: Car },
+    { name: t("categories.economy"), icon: Car },
+  ]
 
   // Extract unique values for filters from car data
-  const fuelTypes = [...new Set(carModels.map((car) => car.features.fuel))];
-  const transmissionTypes = [
-    ...new Set(carModels.map((car) => car.features.transmission)),
-  ];
-  const engineSizes = [
-    ...new Set(
-      carModels.map((car) => car.features.engineSize.toString().split(" ")[0])
-    ),
-  ];
+  const fuelTypes = [...new Set(carModels.map((car) => car.features.fuel))]
+  const transmissionTypes = [...new Set(carModels.map((car) => car.features.transmission))]
+  const engineSizes = [...new Set(carModels.map((car) => car.features.engineSize.toString().split(" ")[0]))]
 
   // Toggle category selection
   const toggleCategory = (category) => {
-    if (category === "All") {
-      setSelectedCategories([]);
+    if (category === t("categories.all")) {
+      setSelectedCategories([])
     } else {
       setSelectedCategories((prev) => {
         if (prev.includes(category)) {
-          return prev.filter((cat) => cat !== category);
+          return prev.filter((cat) => cat !== category)
         } else {
-          return [...prev, category];
+          return [...prev, category]
         }
-      });
+      })
     }
-  };
+  }
 
   // Clear all filters
   const clearAllFilters = () => {
-    setSelectedCategories([]);
-    setSelectedFuel("");
-    setSelectedTransmission("");
-    setSelectedEngineSize("");
-  };
+    setSelectedCategories([])
+    setSelectedFuel("")
+    setSelectedTransmission("")
+    setSelectedEngineSize("")
+  }
 
   // Helper function to check if a car matches the selected filters
   const matchesFilters = (car) => {
     // Match categories
     const matchesCategories =
       selectedCategories.length === 0 ||
-      selectedCategories.some((selected) =>
-        (car.categories || [car.category]).includes(selected)
-      );
+      selectedCategories.some((selected) => (car.categories || [car.category]).includes(selected))
 
     // Match fuel type
-    const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel;
+    const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel
 
     // Match transmission
-    const matchesTransmission =
-      !selectedTransmission ||
-      car.features.transmission === selectedTransmission;
+    const matchesTransmission = !selectedTransmission || car.features.transmission === selectedTransmission
 
     // Match engine size - this is a bit trickier since engine sizes might be stored differently
-    const matchesEngineSize =
-      !selectedEngineSize ||
-      car.features.engineSize.toString().includes(selectedEngineSize);
+    const matchesEngineSize = !selectedEngineSize || car.features.engineSize.toString().includes(selectedEngineSize)
 
     // Match search query
-    const matchesSearch =
-      !searchQuery ||
-      car.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = !searchQuery || car.name.toLowerCase().includes(searchQuery.toLowerCase())
 
-    return (
-      matchesCategories &&
-      matchesFuel &&
-      matchesTransmission &&
-      matchesEngineSize &&
-      matchesSearch
-    );
-  };
+    return matchesCategories && matchesFuel && matchesTransmission && matchesEngineSize && matchesSearch
+  }
 
-  const filteredCars = carModels.filter(matchesFilters);
+  const filteredCars = carModels.filter(matchesFilters)
 
   // Count active filters (excluding search)
   const activeFilterCount = [
@@ -960,7 +867,7 @@ const Models = () => {
     !!selectedFuel,
     !!selectedTransmission,
     !!selectedEngineSize,
-  ].filter(Boolean).length;
+  ].filter(Boolean).length
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-8">
@@ -975,19 +882,16 @@ const Models = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-black rounded-full mb-6">
               <Car className="w-5 h-5 text-white" />
-              <span className="text-white font-medium">Our Fleet</span>
+              <span className="text-white font-medium">{t("ourFleet")}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
-              Choose Your Perfect{" "}
-              <span className="text-red-600 whitespace-nowrap">Ride</span>
+              {t("chooseYourPerfect")} <span className="text-red-600 whitespace-nowrap">{t("ride")}</span>
             </h1>
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4">
-              Experience premium service with unlimited miles and flexible
-              pick-up options at unbeatable prices. Select from our wide range
-              of well-maintained vehicles.
+              {t("experiencePremiumService")}
             </p>
             <p className="text-sm font-medium text-red-600 bg-red-50 inline-block rounded-md py-2 px-4 shadow-sm border border-red-100">
-              Minimum rental period: 2 days for all vehicles
+              {t("minimumRentalPeriod")}
             </p>
           </motion.div>
         </div>
@@ -1007,7 +911,7 @@ const Models = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="Search for a car..."
+                    placeholder={t("searchForACar")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 py-2.5 sm:py-3 rounded-lg border border-gray-200 
@@ -1026,18 +930,15 @@ const Models = () => {
                         className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
                           transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
                           ${
-                            category.name === "All" &&
-                            selectedCategories.length === 0
+                            category.name === t("categories.all") && selectedCategories.length === 0
                               ? "bg-black text-white shadow-md"
                               : selectedCategories.includes(category.name)
-                              ? "bg-black text-white shadow-md"
-                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                                ? "bg-black text-white shadow-md"
+                                : "bg-gray-50 text-gray-700 hover:bg-gray-100"
                           }`}
                       >
                         <category.icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                        <span className="text-sm sm:text-base">
-                          {category.name}
-                        </span>
+                        <span className="text-sm sm:text-base">{category.name}</span>
                       </button>
                     ))}
                   </div>
@@ -1051,23 +952,19 @@ const Models = () => {
                 {/* Fuel Type Filter */}
                 <div>
                   <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
-                    <Fuel className="w-4 h-4" /> Fuel Type
+                    <Fuel className="w-4 h-4" /> {t("fuelType")}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {fuelTypes.map((fuel) => (
                       <button
                         key={fuel}
-                        onClick={() =>
-                          setSelectedFuel(selectedFuel === fuel ? "" : fuel)
-                        }
+                        onClick={() => setSelectedFuel(selectedFuel === fuel ? "" : fuel)}
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
                         ${
-                          selectedFuel === fuel
-                            ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                          selectedFuel === fuel ? "bg-black text-white" : "bg-gray-50 text-gray-700 hover:bg-gray-100"
                         }`}
                       >
-                        {fuel}
+                        {t(`fuel.${fuel.toLowerCase()}`)}
                       </button>
                     ))}
                   </div>
@@ -1076,18 +973,14 @@ const Models = () => {
                 {/* Transmission Filter */}
                 <div>
                   <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
-                    <Settings className="w-4 h-4" /> Transmission
+                    <Settings className="w-4 h-4" /> {t("transmissionType")}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {transmissionTypes.map((transmission) => (
                       <button
                         key={transmission}
                         onClick={() =>
-                          setSelectedTransmission(
-                            selectedTransmission === transmission
-                              ? ""
-                              : transmission
-                          )
+                          setSelectedTransmission(selectedTransmission === transmission ? "" : transmission)
                         }
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
                         ${
@@ -1096,7 +989,7 @@ const Models = () => {
                             : "bg-gray-50 text-gray-700 hover:bg-gray-100"
                         }`}
                       >
-                        {transmission}
+                        {t(`transmission.${transmission.toLowerCase()}`)}
                       </button>
                     ))}
                   </div>
@@ -1105,17 +998,13 @@ const Models = () => {
                 {/* Engine Size Filter */}
                 <div>
                   <h3 className="flex items-center gap-2 font-medium mb-3 text-gray-700">
-                    <Gauge className="w-4 h-4" /> Engine Size
+                    <Gauge className="w-4 h-4" /> {t("engineSize")}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {engineSizes.map((size) => (
                       <button
                         key={size}
-                        onClick={() =>
-                          setSelectedEngineSize(
-                            selectedEngineSize === size ? "" : size
-                          )
-                        }
+                        onClick={() => setSelectedEngineSize(selectedEngineSize === size ? "" : size)}
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
                           ${
                             selectedEngineSize === size
@@ -1137,17 +1026,14 @@ const Models = () => {
                     onClick={clearAllFilters}
                     className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors"
                   >
-                    Clear All Filters
+                    {t("clearAllFilters")}
                   </button>
                 </div>
               )}
             </div>
 
             {/* Active Filter Chips */}
-            {(selectedCategories.length > 0 ||
-              selectedFuel ||
-              selectedTransmission ||
-              selectedEngineSize) && (
+            {(selectedCategories.length > 0 || selectedFuel || selectedTransmission || selectedEngineSize) && (
               <div className="px-4 sm:px-6 pb-4 pt-2 flex flex-wrap gap-2 border-t border-gray-100">
                 {selectedCategories.map((category) => (
                   <div
@@ -1166,18 +1052,15 @@ const Models = () => {
                 {selectedFuel && (
                   <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
                     <Fuel className="w-3 h-3" />
-                    <span>{selectedFuel}</span>
-                    <X
-                      className="w-3 h-3 cursor-pointer hover:text-gray-300"
-                      onClick={() => setSelectedFuel("")}
-                    />
+                    <span>{t(`fuel.${selectedFuel.toLowerCase()}`)}</span>
+                    <X className="w-3 h-3 cursor-pointer hover:text-gray-300" onClick={() => setSelectedFuel("")} />
                   </div>
                 )}
 
                 {selectedTransmission && (
                   <div className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-full text-sm">
                     <Settings className="w-3 h-3" />
-                    <span>{selectedTransmission}</span>
+                    <span>{t(`transmission.${selectedTransmission.toLowerCase()}`)}</span>
                     <X
                       className="w-3 h-3 cursor-pointer hover:text-gray-300"
                       onClick={() => setSelectedTransmission("")}
@@ -1207,9 +1090,7 @@ const Models = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCars.length === 0 ? (
               <div className="col-span-full text-center py-12">
-                <p className="text-xl text-gray-600">
-                  No cars found matching your search criteria.
-                </p>
+                <p className="text-xl text-gray-600">{t("noCarsFound")}</p>
               </div>
             ) : (
               filteredCars.map((car) => (
@@ -1221,9 +1102,7 @@ const Models = () => {
                   className="group"
                 >
                   <div
-                    className={`rounded-xl p-4 ${
-                      car.color || "bg-gray-50"
-                    } transition-all duration-300 
+                    className={`rounded-xl p-4 ${car.color || "bg-gray-50"} transition-all duration-300 
                                group-hover:-translate-y-2`}
                   >
                     {/* Replace static image with ImageCarousel component */}
@@ -1250,10 +1129,8 @@ const Models = () => {
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className="text-2xl font-bold text-black">
-                            €{car.price}
-                          </span>
-                          <span className="text-sm text-black">/day</span>
+                          <span className="text-2xl font-bold text-black">€{car.price}</span>
+                          <span className="text-sm text-black">/{t("day")}</span>
                         </div>
                       </div>
 
@@ -1261,22 +1138,16 @@ const Models = () => {
                       <div className="flex flex-wrap justify-between py-4 border-t border-gray-200 gap-y-3">
                         <div className="flex items-center gap-2">
                           <Fuel className="w-5 h-5 text-gray-500" />
-                          <span>{car.features.fuel}</span>
+                          <span>{t(`fuel.${car.features.fuel.toLowerCase()}`)}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <Icon
-                            icon="lucide-lab:gearbox"
-                            className="w-5 h-5 text-gray-500"
-                          />
-                          <span>{car.features.transmission}</span>
+                          <Icon icon="lucide-lab:gearbox" className="w-5 h-5 text-gray-500" />
+                          <span>{t(`transmission.${car.features.transmission.toLowerCase()}`)}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <Icon
-                            icon="mdi:engine"
-                            className="w-5 h-5 text-gray-500"
-                          />
+                          <Icon icon="mdi:engine" className="w-5 h-5 text-gray-500" />
                           <span>{car.features.engineSize}L</span>
                         </div>
                       </div>
@@ -1287,7 +1158,7 @@ const Models = () => {
                           <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                           <span className="font-medium">{car.rating}</span>
                           <span className="text-gray-600">
-                            ({car.reviews} reviews)
+                            ({car.reviews} {t("reviews")})
                           </span>
                         </div>
                         <motion.button
@@ -1297,7 +1168,7 @@ const Models = () => {
                           className="px-6 py-2 bg-black text-white rounded-lg hover:bg-black
                                    transition-colors"
                         >
-                          Book Now
+                          {t("bookNow")}
                         </motion.button>
                       </div>
                     </div>
@@ -1320,30 +1191,27 @@ const Models = () => {
           >
             <div className="flex items-center justify-center gap-2 mb-4">
               <HelpCircle className="w-6 h-6 text-gray-600" />
-              <h2 className="text-3xl font-bold text-gray-900">How to Book</h2>
+              <h2 className="text-3xl font-bold text-gray-900">{t("howToBook")}</h2>
             </div>
-            <p className="text-gray-600">
-              We have streamlined our rental process to get you on the road
-              quickly and safely
-            </p>
+            <p className="text-gray-600">{t("streamlinedProcess")}</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
                 icon: Car,
-                title: "Choose Your Car",
-                description: "Select from our wide range of premium vehicles",
+                title: t("bookingSteps.chooseCar.title"),
+                description: t("bookingSteps.chooseCar.description"),
               },
               {
                 icon: Calendar,
-                title: "Pick Date & Location",
-                description: "Choose your pickup date and preferred location",
+                title: t("bookingSteps.pickDate.title"),
+                description: t("bookingSteps.pickDate.description"),
               },
               {
                 icon: MapPin,
-                title: "Book & Enjoy",
-                description: "Complete your booking and enjoy your journey",
+                title: t("bookingSteps.bookAndEnjoy.title"),
+                description: t("bookingSteps.bookAndEnjoy.description"),
               },
             ].map((step, index) => (
               <motion.div
@@ -1356,19 +1224,15 @@ const Models = () => {
                 <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 p-4 transition-all duration-300 hover:bg-gray-800">
                   <step.icon className="w-10 h-10 text-white flex-shrink-0" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {step.description}
-                </p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Models;
+export default Models

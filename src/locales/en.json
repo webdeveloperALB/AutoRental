@@ -43,7 +43,6 @@
       "whatsappOption": "WhatsApp"
     }
   },
-
   "footer": {
     "companyDescription": "Your trusted partner for car rentals. Experience premium service with unlimited miles and flexible pick-up options at unbeatable prices.",
     "quickLinks": {
@@ -157,6 +156,56 @@
       "messagePlaceholder": "Type your message here...",
       "submitButton": "Send Message",
       "submitButtonSent": "Message Sent!"
+    }
+  },
+  "ourFleet": "Our Fleet",
+  "chooseYourPerfect": "Choose Your Perfect",
+  "ride": "Ride",
+  "experiencePremiumService": "Experience premium service with unlimited miles and flexible pick-up options at unbeatable prices. Select from our wide range of well-maintained vehicles.",
+  "minimumRentalPeriod": "Minimum rental period: 2 days for all vehicles",
+  "searchForACar": "Search for a car...",
+  "fuelType": "Fuel Type",
+  "transmissionType": "Transmission",
+  "engineSize": "Engine Size",
+  "clearAllFilters": "Clear All Filters",
+  "noCarsFound": "No cars found matching your search criteria.",
+  "day": "day",
+  "reviews": "reviews",
+  "bookNow": "Book Now",
+  "howToBook": "How to Book",
+  "streamlinedProcess": "We have streamlined our rental process to get you on the road quickly and safely",
+  "carImage": "Car image",
+  "previousImage": "Previous image",
+  "nextImage": "Next image",
+  "goToImage": "Go to image {{number}}",
+  "categories": {
+    "all": "All",
+    "suv": "SUV",
+    "sedan": "Sedan",
+    "luxury": "Luxury",
+    "sports": "Sports",
+    "economy": "Economy"
+  },
+  "fuel": {
+    "petrol": "Petrol",
+    "diesel": "Diesel"
+  },
+  "transmission": {
+    "automatic": "Automatic",
+    "manual": "Manual"
+  },
+  "bookingSteps": {
+    "chooseCar": {
+      "title": "Choose Your Car",
+      "description": "Select from our wide range of premium vehicles"
+    },
+    "pickDate": {
+      "title": "Pick Date & Location",
+      "description": "Choose your pickup date and preferred location"
+    },
+    "bookAndEnjoy": {
+      "title": "Book & Enjoy",
+      "description": "Complete your booking and enjoy your journey"
     }
   }
 }

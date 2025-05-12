@@ -1,22 +1,22 @@
 {
-  "Home": "Inizio",
+  "Home": "Home",
   "Models": "Modelli",
   "suv": "SUV",
   "sedan": "Berlina",
   "luxury": "Lusso",
-  "sports": "Sportive",
+  "sports": "Sportiva",
   "economy": "Economica",
   "Testimonials": "Testimonianze",
-  "Contact": "Contatto",
+  "Contact": "Contatti",
   "logout": "Esci",
   "login": "Accedi",
   "signUp": "Registrati",
-  "vehicleCategories": "Categorie di Veicoli",
-  "fleetSelectionText": "Selezione di flotte premium per ogni esigenza",
+  "vehicleCategories": "Categorie di veicoli",
+  "fleetSelectionText": "Selezione di flotta premium per ogni esigenza",
   "faq": {
     "helpBadge": "Centro Assistenza",
     "title": "Domande Frequenti",
-    "subtitle": "Trova rapidamente risposte alle domande più comuni sui nostri servizi di noleggio auto",
+    "subtitle": "Trova risposte rapide alle domande comuni sui nostri servizi di noleggio auto",
     "categories": [
       {
         "title": "Requisiti di Noleggio",
@@ -24,8 +24,8 @@
         "color": "text-blue-600",
         "questions": [
           {
-            "question": "Cosa serve per noleggiare un'auto?",
-            "answer": "Per noleggiare un'auto, è necessaria una patente di guida valida, un documento di identità e potrebbe essere richiesto di soddisfare determinati requisiti di età ed esperienza di guida."
+            "question": "Cosa mi serve per noleggiare un'auto?",
+            "answer": "Per noleggiare un'auto, hai bisogno di una patente di guida valida, di un documento d'identità e potresti dover soddisfare determinati requisiti di età ed esperienza di guida."
           },
           {
             "question": "Quali sono le opzioni di pagamento e assicurazione?",
@@ -36,30 +36,30 @@
     ],
     "contactSupport": {
       "title": "Hai ancora domande?",
-      "description": "Non riesci a trovare ciò che cerchi? Il nostro team di supporto clienti è qui per aiutarti 24/7.",
-      "emailButton": "Supporto via Email",
-      "contactButton": "Contatta il Supporto",
+      "description": "Non riesci a trovare quello che stai cercando? Il nostro team di assistenza clienti è qui per aiutarti 24/7.",
+      "emailButton": "Supporto Email",
+      "contactButton": "Contatta Supporto",
       "callOption": "Chiamata Diretta",
       "whatsappOption": "WhatsApp"
     }
   },
   "footer": {
-    "companyDescription": "Il tuo partner affidabile per noleggio auto. Esperienza di servizio premium con chilometri illimitati e opzioni di ritiro flessibili a prezzi imbattibili.",
+    "companyDescription": "Il tuo partner di fiducia per il noleggio auto. Sperimenta un servizio premium con chilometraggio illimitato e opzioni di ritiro flessibili a prezzi imbattibili.",
     "quickLinks": {
-      "title": "Link Veloci",
+      "title": "Link Rapidi",
       "home": "Home",
       "aboutUs": "Chi Siamo",
-      "carModels": "Modelli Auto",
+      "carModels": "Modelli di Auto",
       "services": "Servizi",
       "contactUs": "Contattaci"
     },
     "customerSupport": {
-      "title": "Supporto Clienti",
+      "title": "Assistenza Clienti",
       "phone": "+355 69 835 7378",
-      "email": "esempio@gmail.com"
+      "email": "example@gmail.com"
     },
     "location": {
-      "title": "La Nostra Posizione",
+      "title": "La Nostra Sede",
       "address": "Tirana, Albania"
     },
     "copyright": "© {year} AutoRental. Tutti i diritti riservati."
@@ -67,20 +67,20 @@
   "hero": {
     "cta": "Prenota la tua auto esclusiva",
     "ctaSpan": "ORA",
-    "imageAlt": "Auto di lusso",
-    "brandLogo": "Logo del marchio"
+    "imageAlt": "Auto di Lusso",
+    "brandLogo": "Logo del Marchio"
   },
   "testimonials": {
     "heroSection": {
       "badge": "Storie dei Clienti",
-      "title": "Cosa dicono i nostri Clienti",
-      "subtitle": "Scopri perché migliaia di clienti scelgono noi per il noleggio auto e si fidano delle nostre esperienze di viaggio."
+      "title": "Cosa Dicono i Nostri Clienti",
+      "subtitle": "Scopri perché migliaia di clienti ci scelgono per le loro esigenze di noleggio auto e si fidano di noi per le loro esperienze di viaggio."
     },
     "stats": [
       { "value": "15K+", "label": "Clienti Soddisfatti" },
       { "value": "4.9", "label": "Valutazione Media" },
       { "value": "98%", "label": "Tasso di Soddisfazione" },
-      { "value": "24/7", "label": "Supporto Clienti" }
+      { "value": "24/7", "label": "Assistenza Clienti" }
     ],
     "testimonialData": [
       {
@@ -93,18 +93,18 @@
       },
       {
         "name": "Alma Zeneli",
-        "role": "Vacanza Familiare",
+        "role": "Vacanza in Famiglia",
         "rating": 5,
-        "comment": "Perfetto per la nostra vacanza in famiglia! Il SUV era spazioso, pulito e ben curato. Lo staff è stato incredibilmente disponibile con l'installazione del seggiolino.",
+        "comment": "Perfetto per la nostra vacanza in famiglia! Il SUV era spazioso, pulito e ben mantenuto. Il personale è stato incredibilmente utile con l'installazione del seggiolino per bambini.",
         "carRented": "Hyundai Santa Fe",
         "date": "Dicembre 2023"
       },
       {
         "name": "Bledar Hoxha",
-        "role": "Gita del Fine Settimana",
+        "role": "Fuga di Fine Settimana",
         "rating": 4,
-        "comment": "Ottimo servizio e prezzi competitivi. Il processo di ritiro e riconsegna è stato veloce ed efficiente. Tornerò sicuramente!",
-        "carRented": "BMW Serie 4",
+        "comment": "Ottimo servizio e prezzi competitivi. Il processo di ritiro e riconsegna è stato rapido ed efficiente. Sicuramente userò di nuovo!",
+        "carRented": "BMW 4 Series",
         "date": "Febbraio 2024"
       }
     ],
@@ -115,19 +115,19 @@
       { "title": "Ottimo Valore", "count": 1542 }
     ],
     "reviewSection": {
-      "title": "Cosa Apprezzano di Noi",
-      "subtitle": "Scopri quali aspetti del nostro servizio i clienti apprezzano di più"
+      "title": "Cosa Amano le Persone di Noi",
+      "subtitle": "Vedi quali aspetti del nostro servizio i clienti apprezzano di più"
     },
     "ctaSection": {
-      "title": "Pronto a Provarlo?",
-      "subtitle": "Unisciti a migliaia di clienti soddisfatti e prenota la tua auto a noleggio perfetta oggi stesso.",
+      "title": "Pronto a Sperimentarlo Tu Stesso?",
+      "subtitle": "Unisciti a migliaia di clienti soddisfatti e prenota oggi la tua auto a noleggio perfetta.",
       "buttonText": "Prenota Ora"
     }
   },
-   "contact": {
+  "contact": {
     "contactUs": "Contattaci",
     "title": "Mettiti in Contatto con Noi",
-    "subtitle": "Siamo qui per aiutarti e rispondere a qualsiasi domanda tu possa avere. Non vediamo l'ora di sentirti!",
+    "subtitle": "Siamo qui per aiutare e rispondere a qualsiasi domanda tu possa avere. Non vediamo l'ora di sentirti!",
     "contactInfo": {
       "phone": {
         "title": "Telefono",
@@ -138,12 +138,12 @@
         "details": "@autorental.tirana"
       },
       "location": {
-        "title": "Posizione",
+        "title": "Sede",
         "details": "Tirana, Albania"
       },
       "businessHours": {
         "title": "Orari di Apertura",
-        "details": "Lun-Sab: 9-18"
+        "details": "Lun-Sab: 9:00 - 18:00"
       }
     },
     "form": {
@@ -156,6 +156,56 @@
       "messagePlaceholder": "Scrivi il tuo messaggio qui...",
       "submitButton": "Invia Messaggio",
       "submitButtonSent": "Messaggio Inviato!"
+    }
+  },
+  "ourFleet": "La Nostra Flotta",
+  "chooseYourPerfect": "Scegli il Tuo",
+  "ride": "Viaggio Perfetto",
+  "experiencePremiumService": "Sperimenta un servizio premium con chilometraggio illimitato e opzioni di ritiro flessibili a prezzi imbattibili. Scegli tra la nostra vasta gamma di veicoli ben mantenuti.",
+  "minimumRentalPeriod": "Periodo minimo di noleggio: 2 giorni per tutti i veicoli",
+  "searchForACar": "Cerca un'auto...",
+  "fuelType": "Tipo di carburante",
+  "transmissionType": "Trasmissione",
+  "engineSize": "Cilindrata",
+  "clearAllFilters": "Cancella tutti i filtri",
+  "noCarsFound": "Nessuna auto trovata che corrisponda ai tuoi criteri di ricerca.",
+  "day": "giorno",
+  "reviews": "recensioni",
+  "bookNow": "Prenota ora",
+  "howToBook": "Come prenotare",
+  "streamlinedProcess": "Abbiamo semplificato il nostro processo di noleggio per farti mettere in strada rapidamente e in sicurezza",
+  "carImage": "Immagine dell'auto",
+  "previousImage": "Immagine precedente",
+  "nextImage": "Immagine successiva",
+  "goToImage": "Vai all'immagine {{number}}",
+  "categories": {
+    "all": "Tutte",
+    "suv": "SUV",
+    "sedan": "Berlina",
+    "luxury": "Lusso",
+    "sports": "Sportiva",
+    "economy": "Economica"
+  },
+  "fuel": {
+    "petrol": "Benzina",
+    "diesel": "Diesel"
+  },
+  "transmission": {
+    "automatic": "Automatica",
+    "manual": "Manuale"
+  },
+  "bookingSteps": {
+    "chooseCar": {
+      "title": "Scegli la tua auto",
+      "description": "Seleziona dalla nostra vasta gamma di veicoli premium"
+    },
+    "pickDate": {
+      "title": "Scegli data e luogo",
+      "description": "Scegli la data di ritiro e il luogo preferito"
+    },
+    "bookAndEnjoy": {
+      "title": "Prenota e goditi",
+      "description": "Completa la prenotazione e goditi il tuo viaggio"
     }
   }
 }

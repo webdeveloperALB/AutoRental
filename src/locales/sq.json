@@ -1,22 +1,22 @@
 {
-  "Home": "Ballina",
+  "Home": "Kryefaqja",
   "Models": "Modelet",
   "suv": "SUV",
   "sedan": "Sedan",
-  "luxury": "Luksi",
+  "luxury": "Luksoze",
   "sports": "Sportive",
   "economy": "Ekonomike",
   "Testimonials": "Dëshmitë",
-  "Contact": "Kontakt",
-  "logout": "Dil",
-  "login": "Hyr",
-  "signUp": "Regjistrohu",
-  "vehicleCategories": "Kategoritë e Mjeteve",
-  "fleetSelectionText": "Zgjedhje e flotës premium për çdo nevojë",
+  "Contact": "Kontakti",
+  "logout": "Dilni",
+  "login": "Hyni",
+  "signUp": "Regjistrohuni",
+  "vehicleCategories": "Kategoritë e automjeteve",
+  "fleetSelectionText": "Përzgjedhje premium e flotës për çdo nevojë",
   "faq": {
     "helpBadge": "Qendra e Ndihmës",
-    "title": "Pyetje të Shpeshta",
-    "subtitle": "Gjeni shpejt përgjigje për pyetjet e zakonshme rreth shërbimeve tona të qirasë së makinave",
+    "title": "Pyetjet e Bëra Shpesh",
+    "subtitle": "Gjeni përgjigje të shpejta për pyetjet e zakonshme rreth shërbimeve tona të qirasë së makinave",
     "categories": [
       {
         "title": "Kërkesat e Qirasë",
@@ -25,7 +25,7 @@
         "questions": [
           {
             "question": "Çfarë më duhet për të marrë me qira një makinë?",
-            "answer": "Për të marrë me qira një makinë, ju duhet një leje drejtimi e vlefshme, dëshmi identiteti dhe mund të duhet të plotësoni disa kërkesa të moshës dhe përvojës në drejtim."
+            "answer": "Për të marrë me qira një makinë, ju nevojitet një patentë shoferi e vlefshme, provë identiteti dhe mund të duhet të plotësoni disa kërkesa të caktuara të moshës dhe përvojës së drejtimit."
           },
           {
             "question": "Cilat janë opsionet e pagesës dhe sigurimit?",
@@ -35,28 +35,28 @@
       }
     ],
     "contactSupport": {
-      "title": "Ende keni pyetje?",
-      "description": "Nuk mund ta gjeni atë që po kërkoni? Ekipi ynë i mbështetjes së klientëve është këtu për t'ju ndihmuar 24/7.",
+      "title": "Keni ende pyetje?",
+      "description": "Nuk mund të gjeni atë që po kërkoni? Ekipi ynë i mbështetjes së klientit është këtu për t'ju ndihmuar 24/7.",
       "emailButton": "Mbështetje me Email",
       "contactButton": "Kontaktoni Mbështetjen",
-      "callOption": "Thirrje e Drejtpërdrejtë",
+      "callOption": "Telefonatë Direkte",
       "whatsappOption": "WhatsApp"
     }
   },
   "footer": {
-    "companyDescription": "Partneri juaj i besuar për qira makinash. Përjetoni shërbimin premium me mijë kilometra të pakufizuara dhe opsione fleksible të marrjes me çmime të pakapërcyeshme.",
+    "companyDescription": "Partneri juaj i besuar për qira makinash. Përjetoni shërbim premium me kilometra të pakufizuar dhe opsione fleksibël marrjeje me çmime të pakonkurrueshme.",
     "quickLinks": {
       "title": "Lidhje të Shpejta",
-      "home": "Ballina",
+      "home": "Kryefaqja",
       "aboutUs": "Rreth Nesh",
       "carModels": "Modelet e Makinave",
       "services": "Shërbimet",
       "contactUs": "Na Kontaktoni"
     },
     "customerSupport": {
-      "title": "Mbështetje Klientësh",
+      "title": "Mbështetja e Klientit",
       "phone": "+355 69 835 7378",
-      "email": "shembull@gmail.com"
+      "email": "example@gmail.com"
     },
     "location": {
       "title": "Vendndodhja Jonë",
@@ -65,29 +65,29 @@
     "copyright": "© {year} AutoRental. Të gjitha të drejtat e rezervuara."
   },
   "hero": {
-    "cta": "Rezervo makinën tënde ekskluzive",
+    "cta": "Rezervoni makinën tuaj ekskluzive",
     "ctaSpan": "TANI",
-    "imageAlt": "Makina luksoze",
-    "brandLogo": "Logoja e markës"
+    "imageAlt": "Makinë Luksoze",
+    "brandLogo": "Logo e Markës"
   },
   "testimonials": {
     "heroSection": {
-      "badge": "Histori Klientësh",
+      "badge": "Historitë e Klientëve",
       "title": "Çfarë Thonë Klientët Tanë",
-      "subtitle": "Zbuloni përse mijëra klientë na zgjedhin për qiranë e makinave dhe besojnë në përvojat tona të udhëtimit."
+      "subtitle": "Zbuloni pse mijëra klientë na zgjedhin për nevojat e tyre të qirasë së makinave dhe na besojnë me përvojat e tyre të udhëtimit."
     },
     "stats": [
-      { "value": "15K+", "label": "Klientë të Lumtur" },
-      { "value": "4.9", "label": "Vlerësim Mesatar" },
+      { "value": "15K+", "label": "Klientë të Kënaqur" },
+      { "value": "4.9", "label": "Vlerësimi Mesatar" },
       { "value": "98%", "label": "Shkalla e Kënaqësisë" },
-      { "value": "24/7", "label": "Mbështetje Klientësh" }
+      { "value": "24/7", "label": "Mbështetje për Klientët" }
     ],
     "testimonialData": [
       {
         "name": "Erion Dashi",
         "role": "Udhëtar Biznesi",
         "rating": 5,
-        "comment": "Përvoja më e mirë e qirasë së makinës që kam pasur ndonjëherë! Procesi ishte i pamëkat nga fillimi deri në fund. Makina ishte e paqortueshme dhe shërbimi ndaj klientëve ishte i jashtëzakonshëm.",
+        "comment": "Përvoja më e mirë e qirasë së makinave që kam pasur ndonjëherë! Procesi ishte i përkryer nga fillimi deri në fund. Makina ishte e paqortueshme dhe shërbimi ndaj klientit ishte i jashtëzakonshëm.",
         "carRented": "Mercedes Benz S-Class W222",
         "date": "Janar 2024"
       },
@@ -95,16 +95,16 @@
         "name": "Alma Zeneli",
         "role": "Pushime Familjare",
         "rating": 5,
-        "comment": "Perfekt për pushimet tona familjare! SUV-ja ishte e hapësirës, e pastër dhe e mirëmbajtur. Personeli ishte jashtëzakonisht i dobishëm me instalimin e kariges për fëmijë.",
+        "comment": "Perfekte për pushimet tona familjare! SUV-i ishte i gjerë, i pastër dhe i mirëmbajtur. Stafi ishte jashtëzakonisht i dobishëm me instalimin e karrigës së fëmijëve.",
         "carRented": "Hyundai Santa Fe",
         "date": "Dhjetor 2023"
       },
       {
         "name": "Bledar Hoxha",
-        "role": "Dalje Fundjavë",
+        "role": "Ikje Fundjavë",
         "rating": 4,
-        "comment": "Shërbim i shkëlqyer dhe çmime konkurruese. Procesi i marrjes dhe kthimit ishte i shpejtë dhe efikas. Me siguri do të kthehem përsëri!",
-        "carRented": "BMW Seria 4",
+        "comment": "Shërbim i shkëlqyer dhe çmime konkurruese. Procesi i marrjes dhe dorëzimit ishte i shpejtë dhe efikas. Padyshim do ta përdor përsëri!",
+        "carRented": "BMW 4 Series",
         "date": "Shkurt 2024"
       }
     ],
@@ -112,22 +112,22 @@
       { "title": "Shërbim i Jashtëzakonshëm", "count": 2481 },
       { "title": "Automjete të Pastra", "count": 1938 },
       { "title": "Rezervim i Lehtë", "count": 1756 },
-      { "title": "Vlerë e Madhe", "count": 1542 }
+      { "title": "Vlerë e Shkëlqyer", "count": 1542 }
     ],
     "reviewSection": {
-      "title": "Çfarë Njerëzit Duan tek Ne",
-      "subtitle": "Shihni se çfarë aspektesh të shërbimit tonë vlerësojnë më shumë klientët"
+      "title": "Çfarë Duan Njerëzit tek Ne",
+      "subtitle": "Shihni cilat aspekte të shërbimit tonë vlerësojnë më shumë klientët"
     },
     "ctaSection": {
-      "title": "Jeni Gati ta Provoni?",
-      "subtitle": "Bashkohuni me mijëra klientë të kënaqur dhe rezervoni makinën tuaj perfekte me qira sot.",
-      "buttonText": "Rezervoni Tani"
+      "title": "Gati ta Përjetoni Vetë?",
+      "subtitle": "Bashkohuni me mijëra klientë të kënaqur dhe rezervoni sot makinën tuaj perfekte me qira.",
+      "buttonText": "Rezervo Tani"
     }
   },
   "contact": {
     "contactUs": "Na Kontaktoni",
-    "title": "Na Kontaktoni",
-    "subtitle": "Ne jemi këtu për t'ju ndihmuar dhe për t'iu përgjigjur çdo pyetjeje që mund të keni. Jemi duke pritur me padurim të dëgjojmë nga ju!",
+    "title": "Lidhuni me Ne",
+    "subtitle": "Jemi këtu për të ndihmuar dhe për t'iu përgjigjur çdo pyetjeje që mund të keni. Presim me padurim të dëgjojmë nga ju!",
     "contactInfo": {
       "phone": {
         "title": "Telefon",
@@ -142,20 +142,70 @@
         "details": "Tiranë, Shqipëri"
       },
       "businessHours": {
-        "title": "Orët e Punës",
-        "details": "Hën-Sht: 9-18"
+        "title": "Orari i Punës",
+        "details": "Hën-Sht: 9am - 6pm"
       }
     },
     "form": {
-      "title": "Dërgoni një Mesazh",
+      "title": "Na Dërgoni një Mesazh",
       "nameLabel": "Emri i Plotë",
       "namePlaceholder": "Shkruani emrin tuaj të plotë",
       "subjectLabel": "Subjekti",
-      "subjectPlaceholder": "Çfarë është kjo?",
+      "subjectPlaceholder": "Për çfarë bëhet fjalë?",
       "messageLabel": "Mesazhi Juaj",
       "messagePlaceholder": "Shkruani mesazhin tuaj këtu...",
       "submitButton": "Dërgo Mesazhin",
       "submitButtonSent": "Mesazhi u Dërgua!"
+    }
+  },
+  "ourFleet": "Flota Jonë",
+  "chooseYourPerfect": "Zgjidhni Udhëtimin Tuaj",
+  "ride": "Perfekt",
+  "experiencePremiumService": "Përjetoni shërbim premium me kilometra të pakufizuar dhe opsione fleksibël marrjeje me çmime të pakonkurrueshme. Zgjidhni nga gama jonë e gjerë e automjeteve të mirëmbajtura.",
+  "minimumRentalPeriod": "Periudha minimale e qirasë: 2 ditë për të gjitha automjetet",
+  "searchForACar": "Kërko për një makinë...",
+  "fuelType": "Lloji i karburantit",
+  "transmissionType": "Transmisioni",
+  "engineSize": "Madhësia e motorit",
+  "clearAllFilters": "Pastro të gjitha filtrat",
+  "noCarsFound": "Nuk u gjetën makina që përputhen me kriteret tuaja të kërkimit.",
+  "day": "ditë",
+  "reviews": "vlerësime",
+  "bookNow": "Rezervo tani",
+  "howToBook": "Si të rezervoni",
+  "streamlinedProcess": "Kemi thjeshtuar procesin tonë të qirasë për t'ju ndihmuar të niseni në rrugë shpejt dhe në mënyrë të sigurt",
+  "carImage": "Imazhi i makinës",
+  "previousImage": "Imazhi i mëparshëm",
+  "nextImage": "Imazhi tjetër",
+  "goToImage": "Shko tek imazhi {{number}}",
+  "categories": {
+    "all": "Të gjitha",
+    "suv": "SUV",
+    "sedan": "Sedan",
+    "luxury": "Luksoze",
+    "sports": "Sportive",
+    "economy": "Ekonomike"
+  },
+  "fuel": {
+    "petrol": "Benzinë",
+    "diesel": "Naftë"
+  },
+  "transmission": {
+    "automatic": "Automatike",
+    "manual": "Manuale"
+  },
+  "bookingSteps": {
+    "chooseCar": {
+      "title": "Zgjidhni makinën tuaj",
+      "description": "Zgjidhni nga gama jonë e gjerë e automjeteve premium"
+    },
+    "pickDate": {
+      "title": "Zgjidhni datën dhe vendndodhjen",
+      "description": "Zgjidhni datën e marrjes dhe vendndodhjen e preferuar"
+    },
+    "bookAndEnjoy": {
+      "title": "Rezervoni dhe shijoni",
+      "description": "Përfundoni rezervimin tuaj dhe shijoni udhëtimin tuaj"
     }
   }
 }

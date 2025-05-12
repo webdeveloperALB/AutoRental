@@ -11,12 +11,12 @@
   "logout": "Cerrar sesión",
   "login": "Iniciar sesión",
   "signUp": "Registrarse",
-  "vehicleCategories": "Categorías de Vehículos",
+  "vehicleCategories": "Categorías de vehículos",
   "fleetSelectionText": "Selección de flota premium para cada necesidad",
   "faq": {
     "helpBadge": "Centro de Ayuda",
     "title": "Preguntas Frecuentes",
-    "subtitle": "Encuentre rápidamente respuestas a preguntas comunes sobre nuestros servicios de alquiler de coches",
+    "subtitle": "Encuentre respuestas rápidas a preguntas comunes sobre nuestros servicios de alquiler de coches",
     "categories": [
       {
         "title": "Requisitos de Alquiler",
@@ -25,18 +25,18 @@
         "questions": [
           {
             "question": "¿Qué necesito para alquilar un coche?",
-            "answer": "Para alquilar un coche, necesita una licencia de conducir válida, un documento de identidad y es posible que deba cumplir con ciertos requisitos de edad y experiencia de conducción."
+            "answer": "Para alquilar un coche, necesita una licencia de conducir válida, prueba de identidad y puede necesitar cumplir con ciertos requisitos de edad y experiencia de conducción."
           },
           {
             "question": "¿Cuáles son las opciones de pago y seguro?",
-            "answer": "Aceptamos varios métodos de pago, con posibles depósitos de seguridad. Hay opciones de seguro disponibles con diferentes niveles de cobertura."
+            "answer": "Aceptamos varios métodos de pago, con posibles depósitos de seguridad. Las opciones de seguro están disponibles con diferentes niveles de cobertura."
           }
         ]
       }
     ],
     "contactSupport": {
-      "title": "¿Aún tiene preguntas?",
-      "description": "¿No encuentra lo que busca? Nuestro equipo de soporte al cliente está aquí para ayudarle 24/7.",
+      "title": "¿Todavía tiene preguntas?",
+      "description": "¿No encuentra lo que está buscando? Nuestro equipo de atención al cliente está aquí para ayudarle las 24 horas del día, los 7 días de la semana.",
       "emailButton": "Soporte por Correo",
       "contactButton": "Contactar Soporte",
       "callOption": "Llamada Directa",
@@ -44,19 +44,19 @@
     }
   },
   "footer": {
-    "companyDescription": "Su socio confiable para alquiler de automóviles. Experimente un servicio premium con millas ilimitadas y opciones de recogida flexibles a precios inigualables.",
+    "companyDescription": "Su socio de confianza para alquileres de coches. Experimente un servicio premium con kilómetros ilimitados y opciones de recogida flexibles a precios imbatibles.",
     "quickLinks": {
       "title": "Enlaces Rápidos",
       "home": "Inicio",
       "aboutUs": "Sobre Nosotros",
-      "carModels": "Modelos de Autos",
+      "carModels": "Modelos de Coches",
       "services": "Servicios",
       "contactUs": "Contáctenos"
     },
     "customerSupport": {
-      "title": "Soporte al Cliente",
+      "title": "Atención al Cliente",
       "phone": "+355 69 835 7378",
-      "email": "ejemplo@gmail.com"
+      "email": "example@gmail.com"
     },
     "location": {
       "title": "Nuestra Ubicación",
@@ -65,29 +65,29 @@
     "copyright": "© {year} AutoRental. Todos los derechos reservados."
   },
   "hero": {
-    "cta": "Reserva tu coche exclusivo",
+    "cta": "Reserve su coche exclusivo",
     "ctaSpan": "AHORA",
-    "imageAlt": "Coche de lujo",
-    "brandLogo": "Logotipo de la marca"
+    "imageAlt": "Coche de Lujo",
+    "brandLogo": "Logo de la Marca"
   },
   "testimonials": {
     "heroSection": {
       "badge": "Historias de Clientes",
       "title": "Lo que Dicen Nuestros Clientes",
-      "subtitle": "Descubre por qué miles de clientes nos eligen para alquilar coches y confían en nuestras experiencias de viaje."
+      "subtitle": "Descubra por qué miles de clientes nos eligen para sus necesidades de alquiler de coches y confían en nosotros con sus experiencias de viaje."
     },
     "stats": [
       { "value": "15K+", "label": "Clientes Felices" },
       { "value": "4.9", "label": "Calificación Promedio" },
       { "value": "98%", "label": "Tasa de Satisfacción" },
-      { "value": "24/7", "label": "Servicio al Cliente" }
+      { "value": "24/7", "label": "Atención al Cliente" }
     ],
     "testimonialData": [
       {
         "name": "Erion Dashi",
         "role": "Viajero de Negocios",
         "rating": 5,
-        "comment": "¡La mejor experiencia de alquiler de coches que he tenido! El proceso fue impecable de principio a fin. El coche estaba inmaculado y el servicio al cliente fue excepcional.",
+        "comment": "¡La mejor experiencia de alquiler de coches que he tenido! El proceso fue perfecto de principio a fin. El coche estaba impecable y el servicio al cliente fue excepcional.",
         "carRented": "Mercedes Benz S-Class W222",
         "date": "Enero 2024"
       },
@@ -95,7 +95,7 @@
         "name": "Alma Zeneli",
         "role": "Vacaciones Familiares",
         "rating": 5,
-        "comment": "¡Perfecto para nuestras vacaciones familiares! El SUV era espacioso, limpio y bien mantenido. El personal fue increíblemente útil con la instalación de la silla infantil.",
+        "comment": "¡Perfecto para nuestras vacaciones familiares! El SUV era espacioso, limpio y bien mantenido. El personal fue increíblemente útil con la instalación del asiento para niños.",
         "carRented": "Hyundai Santa Fe",
         "date": "Diciembre 2023"
       },
@@ -103,8 +103,8 @@
         "name": "Bledar Hoxha",
         "role": "Escapada de Fin de Semana",
         "rating": 4,
-        "comment": "Excelente servicio y precios competitivos. El proceso de recogida y devolución fue rápido y eficiente. ¡Definitivamente volveré!",
-        "carRented": "BMW Serie 4",
+        "comment": "Gran servicio y precios competitivos. El proceso de recogida y entrega fue rápido y eficiente. ¡Definitivamente volveré a usar!",
+        "carRented": "BMW 4 Series",
         "date": "Febrero 2024"
       }
     ],
@@ -116,18 +116,18 @@
     ],
     "reviewSection": {
       "title": "Lo que la Gente Ama de Nosotros",
-      "subtitle": "Descubre qué aspectos de nuestro servicio aprecian más los clientes"
+      "subtitle": "Vea qué aspectos de nuestro servicio aprecian más los clientes"
     },
     "ctaSection": {
-      "title": "¿Listo para Experimentarlo?",
-      "subtitle": "Únete a miles de clientes satisfechos y reserva tu coche de alquiler perfecto hoy mismo.",
+      "title": "¿Listo para Experimentarlo Usted Mismo?",
+      "subtitle": "Únase a miles de clientes satisfechos y reserve hoy su coche de alquiler perfecto.",
       "buttonText": "Reservar Ahora"
     }
   },
   "contact": {
-    "contactUs": "Contáctanos",
-    "title": "Ponte en Contacto con Nosotros",
-    "subtitle": "Estamos aquí para ayudarte y responder cualquier pregunta que puedas tener. ¡Esperamos saber de ti!",
+    "contactUs": "Contáctenos",
+    "title": "Póngase en Contacto con Nosotros",
+    "subtitle": "Estamos aquí para ayudar y responder cualquier pregunta que pueda tener. ¡Esperamos saber de usted!",
     "contactInfo": {
       "phone": {
         "title": "Teléfono",
@@ -142,20 +142,70 @@
         "details": "Tirana, Albania"
       },
       "businessHours": {
-        "title": "Horario de Atención",
-        "details": "Lun-Sáb: 9-18 hrs"
+        "title": "Horario Comercial",
+        "details": "Lun-Sáb: 9am - 6pm"
       }
     },
     "form": {
-      "title": "Envíanos un Mensaje",
+      "title": "Envíenos un Mensaje",
       "nameLabel": "Nombre Completo",
-      "namePlaceholder": "Ingresa tu nombre completo",
+      "namePlaceholder": "Ingrese su nombre completo",
       "subjectLabel": "Asunto",
       "subjectPlaceholder": "¿De qué se trata?",
-      "messageLabel": "Tu Mensaje",
-      "messagePlaceholder": "Escribe tu mensaje aquí...",
+      "messageLabel": "Su Mensaje",
+      "messagePlaceholder": "Escriba su mensaje aquí...",
       "submitButton": "Enviar Mensaje",
       "submitButtonSent": "¡Mensaje Enviado!"
+    }
+  },
+  "ourFleet": "Nuestra Flota",
+  "chooseYourPerfect": "Elige tu",
+  "ride": "Viaje Perfecto",
+  "experiencePremiumService": "Experimente un servicio premium con kilómetros ilimitados y opciones de recogida flexibles a precios imbatibles. Seleccione entre nuestra amplia gama de vehículos bien mantenidos.",
+  "minimumRentalPeriod": "Período mínimo de alquiler: 2 días para todos los vehículos",
+  "searchForACar": "Buscar un coche...",
+  "fuelType": "Tipo de combustible",
+  "transmissionType": "Transmisión",
+  "engineSize": "Tamaño del motor",
+  "clearAllFilters": "Borrar todos los filtros",
+  "noCarsFound": "No se encontraron coches que coincidan con sus criterios de búsqueda.",
+  "day": "día",
+  "reviews": "reseñas",
+  "bookNow": "Reservar ahora",
+  "howToBook": "Cómo reservar",
+  "streamlinedProcess": "Hemos optimizado nuestro proceso de alquiler para que pueda ponerse en marcha de forma rápida y segura",
+  "carImage": "Imagen del coche",
+  "previousImage": "Imagen anterior",
+  "nextImage": "Siguiente imagen",
+  "goToImage": "Ir a la imagen {{number}}",
+  "categories": {
+    "all": "Todos",
+    "suv": "SUV",
+    "sedan": "Sedán",
+    "luxury": "Lujo",
+    "sports": "Deportivo",
+    "economy": "Económico"
+  },
+  "fuel": {
+    "petrol": "Gasolina",
+    "diesel": "Diésel"
+  },
+  "transmission": {
+    "automatic": "Automático",
+    "manual": "Manual"
+  },
+  "bookingSteps": {
+    "chooseCar": {
+      "title": "Elige tu coche",
+      "description": "Seleccione entre nuestra amplia gama de vehículos premium"
+    },
+    "pickDate": {
+      "title": "Elige fecha y ubicación",
+      "description": "Elija su fecha de recogida y ubicación preferida"
+    },
+    "bookAndEnjoy": {
+      "title": "Reserva y disfruta",
+      "description": "Complete su reserva y disfrute de su viaje"
     }
   }
 }
