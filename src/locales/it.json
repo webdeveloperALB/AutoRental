@@ -2,7 +2,7 @@
   "Home": "Inizio",
   "Models": "Modelli",
   "suv": "SUV",
-  "sedan": "Berlina", 
+  "sedan": "Berlina",
   "luxury": "Lusso",
   "sports": "Sportive",
   "economy": "Economica",
@@ -42,5 +42,26 @@
       "callOption": "Chiamata Diretta",
       "whatsappOption": "WhatsApp"
     }
+  },
+  "footer": {
+    "companyDescription": "Il tuo partner affidabile per noleggio auto. Esperienza di servizio premium con chilometri illimitati e opzioni di ritiro flessibili a prezzi imbattibili.",
+    "quickLinks": {
+      "title": "Link Veloci",
+      "home": "Home",
+      "aboutUs": "Chi Siamo",
+      "carModels": "Modelli Auto",
+      "services": "Servizi",
+      "contactUs": "Contattaci"
+    },
+    "customerSupport": {
+      "title": "Supporto Clienti",
+      "phone": "+355 69 835 7378",
+      "email": "esempio@gmail.com"
+    },
+    "location": {
+      "title": "La Nostra Posizione",
+      "address": "Tirana, Albania"
+    },
+    "copyright": "© {year} AutoRental. Tutti i diritti riservati."
   }
 }

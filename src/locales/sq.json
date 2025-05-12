@@ -2,7 +2,7 @@
   "Home": "Ballina",
   "Models": "Modelet",
   "suv": "SUV",
-  "sedan": "Sedan", 
+  "sedan": "Sedan",
   "luxury": "Luksi",
   "sports": "Sportive",
   "economy": "Ekonomike",
@@ -42,5 +42,26 @@
       "callOption": "Thirrje e Drejtpërdrejtë",
       "whatsappOption": "WhatsApp"
     }
+  },
+  "footer": {
+    "companyDescription": "Partneri juaj i besuar për qira makinash. Përjetoni shërbimin premium me mijë kilometra të pakufizuara dhe opsione fleksible të marrjes me çmime të pakapërcyeshme.",
+    "quickLinks": {
+      "title": "Lidhje të Shpejta",
+      "home": "Ballina",
+      "aboutUs": "Rreth Nesh",
+      "carModels": "Modelet e Makinave",
+      "services": "Shërbimet",
+      "contactUs": "Na Kontaktoni"
+    },
+    "customerSupport": {
+      "title": "Mbështetje Klientësh",
+      "phone": "+355 69 835 7378",
+      "email": "shembull@gmail.com"
+    },
+    "location": {
+      "title": "Vendndodhja Jonë",
+      "address": "Tiranë, Shqipëri"
+    },
+    "copyright": "© {year} AutoRental. Të gjitha të drejtat e rezervuara."
   }
 }

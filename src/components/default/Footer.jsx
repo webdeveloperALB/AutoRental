@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Phone,
   Mail,
@@ -11,6 +12,8 @@ import { RiTiktokFill } from "react-icons/ri";
 import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -27,11 +30,11 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { label: "Home", path: "/" },
-    { label: "About Us", path: "/about" },
-    { label: "Car Models", path: "/models" },
-    { label: "Services", path: "/services" },
-    { label: "Contact Us", path: "/contact" },
+    { label: t('footer.quickLinks.home'), path: "/" },
+    { label: t('footer.quickLinks.aboutUs'), path: "/about" },
+    { label: t('footer.quickLinks.carModels'), path: "/models" },
+    { label: t('footer.quickLinks.services'), path: "/services" },
+    { label: t('footer.quickLinks.contactUs'), path: "/contact" },
   ];
 
   return (
@@ -49,15 +52,13 @@ const Footer = () => {
             className="space-y-6">
             <Link to="/" className="flex items-center space-x-2 group">
               <img
-                src="/Logo Auto Rental Tirana Black.png" // Path from public folder
+                src="/Logo Auto Rental Tirana Black.png"
                 alt="Car Rental Logo"
                 className="w-25 h-10 group-hover:scale-110 transition-transform"
               />
             </Link>
             <p className="text-black leading-relaxed">
-              Your trusted partner for car rentals. Experience premium service
-              with unlimited miles and flexible pick-up options at unbeatable
-              prices.
+              {t('footer.companyDescription')}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map(({ Icon, href, color }, index) => (
@@ -83,7 +84,9 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
-            <h3 className="text-xl font-semibold text-black">Quick Links</h3>
+            <h3 className="text-xl font-semibold text-black">
+              {t('footer.quickLinks.title')}
+            </h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -105,16 +108,18 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
-            <h3 className="text-xl font-semibold text-black">Customer Support</h3>
+            <h3 className="text-xl font-semibold text-black">
+              {t('footer.customerSupport.title')}
+            </h3>
             <div className="space-y-4 pt-4 border-t border-gray-800">
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Phone className="w-5 h-5 text-green-600 group-hover:rotate-12 transition-transform" style={{ fill: 'currentColor' }} />
-                +355 69 835 7378
+                {t('footer.customerSupport.phone')}
               </div>
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Mail className="w-5 h-5 text-black group-hover:rotate-12 transition-transform"  />
                 <span className="hover:text-black transition-colors">
-                  example@gmail.com
+                  {t('footer.customerSupport.email')}
                 </span>
               </div>
             </div>
@@ -127,7 +132,9 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
-            <h3 className="text-xl font-semibold text-black">Our Location</h3>
+            <h3 className="text-xl font-semibold text-black">
+              {t('footer.location.title')}
+            </h3>
             <div className="h-64 rounded-lg overflow-hidden border border-gray-300">
               <iframe
                 title="AutoRental Location"
@@ -143,7 +150,7 @@ const Footer = () => {
             </div>
             <div className="flex items-center space-x-2 text-black">
               <MapPin className="w-5 h-5 text-red-600" />
-              <p>Tirana, Albania</p>
+              <p>{t('footer.location.address')}</p>
             </div>
           </motion.div>
         </div>
@@ -156,7 +163,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="mt-16 pt-8 border-t border-gray-800 text-center">
           <p className="text-black">
-            © {new Date().getFullYear()} AutoRental. All rights reserved.
+            {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
         </motion.div>
       </div>

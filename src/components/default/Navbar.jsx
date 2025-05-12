@@ -49,22 +49,29 @@ const Navbar = () => {
 
     // Close dropdowns when clicking outside
     const handleClickOutside = (event) => {
-      if (languageDropdownOpen && !event.target.closest(".language-dropdown")) {
+      // Only close if clicking outside the dropdown
+      const isClickingOutsideDesktopDropdown = languageDropdownOpen && !event.target.closest(".language-dropdown")
+
+      const isClickingOutsideMobileDropdown =
+        mobileLangDropdownOpen && !event.target.closest(".mobile-language-dropdown")
+
+      if (isClickingOutsideDesktopDropdown) {
         setLanguageDropdownOpen(false)
       }
-      if (mobileLangDropdownOpen && !event.target.closest(".mobile-language-dropdown")) {
+
+      if (isClickingOutsideMobileDropdown) {
         setMobileLangDropdownOpen(false)
       }
     }
 
     window.addEventListener("scroll", handleScroll)
-    window.addEventListener("click", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside)
     setIsOpen(false)
 
     return () => {
       unsubscribe()
       window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("click", handleClickOutside)
+      document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [setUser, logout, location, languageDropdownOpen, mobileLangDropdownOpen])
 
@@ -290,7 +297,10 @@ const Navbar = () => {
             <div className="relative mobile-language-dropdown mr-2">
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setMobileLangDropdownOpen(!mobileLangDropdownOpen)}
+                onClick={(e) => {
+                  e.stopPropagation() // Prevent event bubbling
+                  setMobileLangDropdownOpen(!mobileLangDropdownOpen)
+                }}
                 className="language-dropdown-btn py-2 px-3 min-w-0"
               >
                 <div className="language-flag-text">
@@ -301,29 +311,25 @@ const Navbar = () => {
                 </div>
               </motion.button>
 
-              <AnimatePresence>
-                {mobileLangDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    className="language-dropdown-content open"
-                  >
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => handleLanguageChange(lang.code)}
-                        className="language-dropdown-item"
-                      >
-                        <div className="language-flag-text">
-                          <Flag country={lang.countryCode} width={20} height={20} />
-                          <span className="text-sm">{lang.name}</span>
-                        </div>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {mobileLangDropdownOpen && (
+                <div className="language-dropdown-content open">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={(e) => {
+                        e.stopPropagation() // Prevent event bubbling
+                        handleLanguageChange(lang.code)
+                      }}
+                      className="language-dropdown-item"
+                    >
+                      <div className="language-flag-text">
+                        <Flag country={lang.countryCode} width={20} height={20} />
+                        <span className="text-sm">{lang.name}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <motion.button

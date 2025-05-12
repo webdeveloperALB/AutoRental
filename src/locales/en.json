@@ -42,5 +42,27 @@
       "callOption": "Direct Call",
       "whatsappOption": "WhatsApp"
     }
+  },
+
+  "footer": {
+    "companyDescription": "Your trusted partner for car rentals. Experience premium service with unlimited miles and flexible pick-up options at unbeatable prices.",
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "aboutUs": "About Us", 
+      "carModels": "Car Models",
+      "services": "Services",
+      "contactUs": "Contact Us"
+    },
+    "customerSupport": {
+      "title": "Customer Support",
+      "phone": "+355 69 835 7378",
+      "email": "example@gmail.com"
+    },
+    "location": {
+      "title": "Our Location",
+      "address": "Tirana, Albania"
+    },
+    "copyright": "© {year} AutoRental. All rights reserved."
   }
 }

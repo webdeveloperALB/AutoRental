@@ -2,7 +2,7 @@
   "Home": "Startseite",
   "Models": "Modelle",
   "suv": "SUV",
-  "sedan": "Limousine", 
+  "sedan": "Limousine",
   "luxury": "Luxus",
   "sports": "Sport",
   "economy": "Wirtschaftlich",
@@ -42,5 +42,26 @@
       "callOption": "Direktanruf",
       "whatsappOption": "WhatsApp"
     }
+  },
+  "footer": {
+    "companyDescription": "Ihr vertrauenswürdiger Partner für Autovermietungen. Erleben Sie Premium-Service mit unbegrenzten Kilometern und flexiblen Abholoptionen zu unschlagbaren Preisen.",
+    "quickLinks": {
+      "title": "Schnelle Links",
+      "home": "Startseite",
+      "aboutUs": "Über Uns",
+      "carModels": "Automodelle",
+      "services": "Dienstleistungen",
+      "contactUs": "Kontakt"
+    },
+    "customerSupport": {
+      "title": "Kundenunterstützung",
+      "phone": "+355 69 835 7378",
+      "email": "beispiel@gmail.com"
+    },
+    "location": {
+      "title": "Unser Standort",
+      "address": "Tirana, Albanien"
+    },
+    "copyright": "© {year} AutoRental. Alle Rechte vorbehalten."
   }
 }

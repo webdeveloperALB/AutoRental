@@ -2,7 +2,7 @@
   "Home": "Inicio",
   "Models": "Modelos",
   "suv": "SUV",
-  "sedan": "Sedán", 
+  "sedan": "Sedán",
   "luxury": "Lujo",
   "sports": "Deportivo",
   "economy": "Económico",
@@ -42,5 +42,26 @@
       "callOption": "Llamada Directa",
       "whatsappOption": "WhatsApp"
     }
+  },
+  "footer": {
+    "companyDescription": "Su socio confiable para alquiler de automóviles. Experimente un servicio premium con millas ilimitadas y opciones de recogida flexibles a precios inigualables.",
+    "quickLinks": {
+      "title": "Enlaces Rápidos",
+      "home": "Inicio",
+      "aboutUs": "Sobre Nosotros",
+      "carModels": "Modelos de Autos",
+      "services": "Servicios",
+      "contactUs": "Contáctenos"
+    },
+    "customerSupport": {
+      "title": "Soporte al Cliente",
+      "phone": "+355 69 835 7378",
+      "email": "ejemplo@gmail.com"
+    },
+    "location": {
+      "title": "Nuestra Ubicación",
+      "address": "Tirana, Albania"
+    },
+    "copyright": "© {year} AutoRental. Todos los derechos reservados."
   }
 }
