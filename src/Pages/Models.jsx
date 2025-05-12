@@ -349,80 +349,167 @@ const carModels = [
   },
 ];
 
-// Optimized ImageCarousel component with enhanced touch/swipe responsiveness
 const ImageCarousel = ({ images, carId, navigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  // Reference to track if component is mounted (prevent state updates after unmount)
+  // Reference to track if component is mounted
   const isMounted = useRef(true);
 
-  // Store previous position to calculate velocity
+  // Track interaction type to prevent conflicts between touch/mouse and buttons
+  const interactionType = useRef(null); // Can be 'touch', 'mouse', or 'button'
+
+  // Store position for velocity calculations
   const lastX = useRef(0);
   const touchStartTime = useRef(0);
 
-  // Use a lower threshold for faster response - adjust as needed
-  const minSwipeDistance = 10; // Lowered from 20 for more sensitive detection
+  // Threshold for swipe detection
+  const minSwipeDistance = 10;
 
-  // Avoid unnecessary re-renders with useCallback
+  // Reset interaction type after a delay
+  const resetInteractionType = useCallback(() => {
+    setTimeout(() => {
+      if (isMounted.current) {
+        interactionType.current = null;
+      }
+    }, 300);
+  }, []);
+
+  // Handle image click - only navigate if not swiping
   const handleImageClick = useCallback(() => {
     if (!isSwiping) {
       navigate(`/booking/${carId}`);
     }
   }, [isSwiping, navigate, carId]);
 
-  // Optimize prev/next functions with useCallback
-  const prevImage = useCallback((e) => {
-    if (e) e.stopPropagation();
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  }, [images?.length]);
+  // Navigation functions with interaction type tracking
+  const prevImage = useCallback(
+    (e) => {
+      if (e) e.stopPropagation();
 
-  const nextImage = useCallback((e) => {
-    if (e) e.stopPropagation();
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  }, [images?.length]);
+      // Prevent navigation if already in progress or if touch/mouse interaction is happening
+      if (
+        isNavigating ||
+        (interactionType.current && interactionType.current !== "button")
+      )
+        return;
 
-  // Store mouse event handlers in refs to avoid dependency cycles
+      // Set interaction type to button
+      interactionType.current = "button";
+
+      // Set navigation lock
+      setIsNavigating(true);
+
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      );
+
+      // Release navigation lock after animation completes
+      setTimeout(() => {
+        if (isMounted.current) {
+          setIsNavigating(false);
+          resetInteractionType();
+        }
+      }, 300);
+    },
+    [images?.length, isNavigating, resetInteractionType]
+  );
+
+  const nextImage = useCallback(
+    (e) => {
+      if (e) e.stopPropagation();
+
+      // Prevent navigation if already in progress or if touch/mouse interaction is happening
+      if (
+        isNavigating ||
+        (interactionType.current && interactionType.current !== "button")
+      )
+        return;
+
+      // Set interaction type to button
+      interactionType.current = "button";
+
+      // Set navigation lock
+      setIsNavigating(true);
+
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+
+      // Release navigation lock after animation completes
+      setTimeout(() => {
+        if (isMounted.current) {
+          setIsNavigating(false);
+          resetInteractionType();
+        }
+      }, 300);
+    },
+    [images?.length, isNavigating, resetInteractionType]
+  );
+
+  // Store event handlers in refs to avoid dependency cycles
   const handleMouseMoveRef = useRef(null);
   const handleMouseUpRef = useRef(null);
 
-  // Enhanced touch handling for better responsiveness
-  const handleTouchStart = useCallback((e) => {
-    // Store the starting position and time for velocity calculation
-    const touchX = e.targetTouches[0].clientX;
-    setTouchStart(touchX);
-    setTouchEnd(touchX); // Initialize touchEnd to avoid jumps
-    lastX.current = touchX;
-    touchStartTime.current = Date.now();
-    setIsSwiping(false);
-  }, []);
+  // Touch handling with interaction type tracking
+  const handleTouchStart = useCallback(
+    (e) => {
+      // Skip if we're already navigating or another interaction is in progress
+      if (
+        isNavigating ||
+        (interactionType.current && interactionType.current !== "touch")
+      )
+        return;
 
-  // Use passive: false only when necessary to prevent scroll blocking on all moves
-  const handleTouchMove = useCallback((e) => {
-    const currentX = e.targetTouches[0].clientX;
-    setTouchEnd(currentX);
+      // Set interaction type to touch
+      interactionType.current = "touch";
 
-    // Calculate horizontal movement
-    const horizontalDistance = Math.abs(lastX.current - currentX);
+      // Store the starting position and time for velocity calculation
+      const touchX = e.targetTouches[0].clientX;
+      setTouchStart(touchX);
+      setTouchEnd(touchX);
+      lastX.current = touchX;
+      touchStartTime.current = Date.now();
+      setIsSwiping(false);
+    },
+    [isNavigating]
+  );
 
-    // Update last position for next move event
-    lastX.current = currentX;
+  const handleTouchMove = useCallback(
+    (e) => {
+      // Skip if we're in navigation lock or if this isn't a touch interaction
+      if (isNavigating || interactionType.current !== "touch") return;
 
-    // Only block default scroll behavior if significant horizontal movement
-    if (horizontalDistance > 5) {
-      e.preventDefault();
-      setIsSwiping(true);
-    }
-  }, []);
+      const currentX = e.targetTouches[0].clientX;
+      setTouchEnd(currentX);
+
+      // Calculate horizontal movement
+      const horizontalDistance = Math.abs(lastX.current - currentX);
+
+      // Update last position for next move event
+      lastX.current = currentX;
+
+      // Only block default scroll behavior if significant horizontal movement
+      if (horizontalDistance > 5) {
+        e.preventDefault();
+        setIsSwiping(true);
+      }
+    },
+    [isNavigating]
+  );
 
   const handleTouchEnd = useCallback(() => {
-    if (!touchStart || !touchEnd) return;
+    // Skip if we're in navigation lock or missing touch data or if this isn't a touch interaction
+    if (
+      isNavigating ||
+      !touchStart ||
+      !touchEnd ||
+      interactionType.current !== "touch"
+    )
+      return;
 
     const distance = touchStart - touchEnd;
     const touchDuration = Date.now() - touchStartTime.current;
@@ -432,33 +519,61 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
     // Check if swipe was fast enough or distance was significant enough
     if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
+      // Set navigation lock before changing image
+      setIsNavigating(true);
+
       if (distance > 0) {
-        nextImage();
+        setCurrentIndex((prevIndex) =>
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        );
       } else {
-        prevImage();
+        setCurrentIndex((prevIndex) =>
+          prevIndex === 0 ? images.length - 1 : prevIndex - 1
+        );
       }
+
+      // Release the navigation lock after animation completes
+      setTimeout(() => {
+        if (isMounted.current) {
+          setIsNavigating(false);
+          resetInteractionType();
+        }
+      }, 300);
+    } else {
+      // If no significant swipe, just reset the interaction type
+      resetInteractionType();
     }
 
-    // Reset values
+    // Reset touch values
     setTouchStart(0);
     setTouchEnd(0);
 
-    // Use a shorter delay for more responsive feel
+    // Use a short delay for more responsive feel
     const timer = setTimeout(() => {
       if (isMounted.current) {
         setIsSwiping(false);
       }
-    }, 50); // Reduced from 150ms to 50ms for faster response
+    }, 50);
 
     return () => clearTimeout(timer);
-  }, [touchStart, touchEnd, nextImage, prevImage, minSwipeDistance]);
+  }, [
+    touchStart,
+    touchEnd,
+    minSwipeDistance,
+    isNavigating,
+    images?.length,
+    resetInteractionType,
+  ]);
 
-  // Initialize the event handler refs
+  // Mouse handling with interaction type tracking
   useEffect(() => {
     // Define mouse move handler
     handleMouseMoveRef.current = (e) => {
+      // Skip if navigation is locked or if this isn't a mouse interaction
+      if (isNavigating || interactionType.current !== "mouse") return;
+
       setTouchEnd(e.clientX);
-      if (Math.abs(lastX.current - e.clientX) > 3) { // Lower threshold for more sensitivity
+      if (Math.abs(lastX.current - e.clientX) > 3) {
         setIsSwiping(true);
       }
       lastX.current = e.clientX;
@@ -466,21 +581,41 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
     // Define mouse up handler
     handleMouseUpRef.current = (e) => {
-      document.removeEventListener('mousemove', handleMouseMoveRef.current);
-      document.removeEventListener('mouseup', handleMouseUpRef.current);
+      document.removeEventListener("mousemove", handleMouseMoveRef.current);
+      document.removeEventListener("mouseup", handleMouseUpRef.current);
 
-      if (!touchStart) return;
+      // Skip if we're in navigation lock or missing touch data or if this isn't a mouse interaction
+      if (isNavigating || !touchStart || interactionType.current !== "mouse")
+        return;
 
       const distance = touchStart - e.clientX;
       const touchDuration = Date.now() - touchStartTime.current;
       const velocity = Math.abs(distance) / touchDuration;
 
       if (Math.abs(distance) >= minSwipeDistance || velocity > 0.2) {
+        // Set navigation lock before changing image
+        setIsNavigating(true);
+
         if (distance > 0) {
-          nextImage();
+          setCurrentIndex((prevIndex) =>
+            prevIndex === images?.length - 1 ? 0 : prevIndex + 1
+          );
         } else {
-          prevImage();
+          setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? images?.length - 1 : prevIndex - 1
+          );
         }
+
+        // Release navigation lock after animation completes
+        setTimeout(() => {
+          if (isMounted.current) {
+            setIsNavigating(false);
+            resetInteractionType();
+          }
+        }, 300);
+      } else {
+        // If no significant swipe, just reset the interaction type
+        resetInteractionType();
       }
 
       setTouchStart(0);
@@ -494,46 +629,63 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 
       return () => clearTimeout(timer);
     };
-  }, [touchStart, nextImage, prevImage, minSwipeDistance]);
+  }, [touchStart, isNavigating, images?.length, resetInteractionType]);
 
-  // Enhanced mouse handling for desktop using refs
-  const handleMouseDown = useCallback((e) => {
-    const mouseX = e.clientX;
-    setTouchStart(mouseX);
-    setTouchEnd(mouseX);
-    lastX.current = mouseX;
-    touchStartTime.current = Date.now();
-    setIsSwiping(false);
+  const handleMouseDown = useCallback(
+    (e) => {
+      // Skip if in navigation lock or another interaction is in progress
+      if (
+        isNavigating ||
+        (interactionType.current && interactionType.current !== "mouse")
+      )
+        return;
 
-    document.addEventListener('mousemove', handleMouseMoveRef.current);
-    document.addEventListener('mouseup', handleMouseUpRef.current);
-  }, []);
+      // Set interaction type to mouse
+      interactionType.current = "mouse";
+
+      const mouseX = e.clientX;
+      setTouchStart(mouseX);
+      setTouchEnd(mouseX);
+      lastX.current = mouseX;
+      touchStartTime.current = Date.now();
+      setIsSwiping(false);
+
+      document.addEventListener("mousemove", handleMouseMoveRef.current);
+      document.addEventListener("mouseup", handleMouseUpRef.current);
+    },
+    [isNavigating]
+  );
 
   // Clean up event listeners on unmount
   useEffect(() => {
     return () => {
       isMounted.current = false;
-      document.removeEventListener('mousemove', handleMouseMoveRef.current);
-      document.removeEventListener('mouseup', handleMouseUpRef.current);
+      document.removeEventListener("mousemove", handleMouseMoveRef.current);
+      document.removeEventListener("mouseup", handleMouseUpRef.current);
     };
   }, []);
 
-  // Apply passive touch events where possible for performance
-  const touchProps = useMemo(() => ({
-    onTouchStart: handleTouchStart,
-    onTouchMove: handleTouchMove,
-    onTouchEnd: handleTouchEnd,
-    onMouseDown: handleMouseDown
-  }), [handleTouchStart, handleTouchMove, handleTouchEnd, handleMouseDown]);
+  // Apply touch events
+  const touchProps = useMemo(
+    () => ({
+      onTouchStart: handleTouchStart,
+      onTouchMove: handleTouchMove,
+      onTouchEnd: handleTouchEnd,
+      onMouseDown: handleMouseDown,
+    }),
+    [handleTouchStart, handleTouchMove, handleTouchEnd, handleMouseDown]
+  );
 
   // Pre-load adjacent images for smoother transitions
   useEffect(() => {
     const preloadImages = () => {
       if (!images || images.length <= 1) return;
-      
+
       // Load next image
-      const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
-      const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+      const nextIndex =
+        currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+      const prevIndex =
+        currentIndex === 0 ? images.length - 1 : currentIndex - 1;
 
       if (images[nextIndex]) {
         const nextImg = new Image();
@@ -549,41 +701,83 @@ const ImageCarousel = ({ images, carId, navigate }) => {
     preloadImages();
   }, [currentIndex, images]);
 
+  // Handle indicator clicks with interaction type tracking
+  const handleIndicatorClick = useCallback(
+    (index, e) => {
+      e.stopPropagation();
+
+      // Skip if navigation is in progress or another interaction is happening
+      if (
+        isNavigating ||
+        (interactionType.current && interactionType.current !== "button")
+      )
+        return;
+
+      // Set interaction type to button
+      interactionType.current = "button";
+
+      // Set navigation lock
+      setIsNavigating(true);
+
+      setCurrentIndex(index);
+
+      // Release navigation lock after animation completes
+      setTimeout(() => {
+        if (isMounted.current) {
+          setIsNavigating(false);
+          resetInteractionType();
+        }
+      }, 300);
+    },
+    [isNavigating, resetInteractionType]
+  );
+
   return (
     <div
       className="rounded-lg bg-transparent mb-6 overflow-hidden relative cursor-pointer"
       onClick={handleImageClick}
     >
       {/* Image with optimized touch event handlers */}
-      <div
-        className="w-full h-full"
-        {...touchProps}
-      >
+      <div className="w-full h-full" {...touchProps}>
         <img
           src={images?.[currentIndex] || "/placeholder.svg"}
           alt="Car image"
           className="w-full object-contain sm:object-cover transition-all duration-300 rounded-lg sm:h-[280px]"
           draggable="false" // Prevent image dragging interfering with swipe
           style={{
-            willChange: 'transform', // Hint browser to optimize transformations
-            touchAction: 'pan-y', // Allow vertical scrolling, optimize for horizontal swipes
+            willChange: "transform", // Hint browser to optimize transformations
+            touchAction: "pan-y", // Allow vertical scrolling, optimize for horizontal swipes
           }}
         />
       </div>
 
-      {/* Navigation buttons */}
+      {/* Navigation buttons with a disabled state */}
       <button
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        className={`absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 
+                  hover:bg-opacity-70 text-white p-2 rounded-full transition-all
+                  ${
+                    isNavigating
+                      ? "opacity-50 cursor-not-allowed"
+                      : "opacity-100"
+                  }`}
         onClick={prevImage}
         aria-label="Previous image"
+        disabled={isNavigating}
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
 
       <button
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all"
+        className={`absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 
+                  hover:bg-opacity-70 text-white p-2 rounded-full transition-all
+                  ${
+                    isNavigating
+                      ? "opacity-50 cursor-not-allowed"
+                      : "opacity-100"
+                  }`}
         onClick={nextImage}
         aria-label="Next image"
+        disabled={isNavigating}
       >
         <ChevronRight className="w-5 h-5" />
       </button>
@@ -594,26 +788,30 @@ const ImageCarousel = ({ images, carId, navigate }) => {
           {images.map((_, index) => (
             <button
               key={index}
-              className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-white scale-125" : "bg-white bg-opacity-50"
-                }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrentIndex(index);
-              }}
+              className={`w-2 h-2 rounded-full transition-all ${
+                currentIndex === index
+                  ? "bg-white scale-125"
+                  : "bg-white bg-opacity-50"
+              } ${
+                isNavigating ? "opacity-50 cursor-not-allowed" : "opacity-100"
+              }`}
+              onClick={(e) => handleIndicatorClick(index, e)}
               aria-label={`Go to image ${index + 1}`}
+              disabled={isNavigating}
             />
           ))}
         </div>
       )}
 
       {/* Enhanced visual feedback during swipe for better UX */}
-      {isSwiping && touchEnd !== 0 && (
+      {isSwiping && touchEnd !== 0 && !isNavigating && (
         <div
-          className={`absolute inset-y-0 ${touchEnd < touchStart ? "right-0" : "left-0"
-            } w-12 bg-gradient-to-r from-black/20 to-transparent pointer-events-none`}
+          className={`absolute inset-y-0 ${
+            touchEnd < touchStart ? "right-0" : "left-0"
+          } w-12 bg-gradient-to-r from-black/20 to-transparent pointer-events-none`}
           style={{
-            opacity: Math.min(0.6, Math.abs(touchEnd - touchStart) / 80), // More reactive visual feedback
-            transition: 'opacity 0.1s ease' // Smoother transition for indicator
+            opacity: Math.min(0.6, Math.abs(touchEnd - touchStart) / 80),
+            transition: "opacity 0.1s ease",
           }}
         />
       )}
@@ -625,9 +823,8 @@ const ImageCarousel = ({ images, carId, navigate }) => {
 ImageCarousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   carId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  navigate: PropTypes.func.isRequired
+  navigate: PropTypes.func.isRequired,
 };
-
 const Models = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -643,25 +840,32 @@ const Models = () => {
   );
   const [searchQuery, setSearchQuery] = useState(searchParam || "");
   const [selectedFuel, setSelectedFuel] = useState(fuelParam || "");
-  const [selectedTransmission, setSelectedTransmission] = useState(transmissionParam || "");
-  const [selectedEngineSize, setSelectedEngineSize] = useState(engineSizeParam || "");
+  const [selectedTransmission, setSelectedTransmission] = useState(
+    transmissionParam || ""
+  );
+  const [selectedEngineSize, setSelectedEngineSize] = useState(
+    engineSizeParam || ""
+  );
 
   // Update URL params when filters change
   useEffect(() => {
     const params = new URLSearchParams();
     if (selectedCategories.length > 0)
       params.set("categories", selectedCategories.join(","));
-    if (searchQuery.trim())
-      params.set("search", searchQuery.trim());
-    if (selectedFuel)
-      params.set("fuel", selectedFuel);
-    if (selectedTransmission)
-      params.set("transmission", selectedTransmission);
-    if (selectedEngineSize)
-      params.set("engineSize", selectedEngineSize);
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
+    if (selectedFuel) params.set("fuel", selectedFuel);
+    if (selectedTransmission) params.set("transmission", selectedTransmission);
+    if (selectedEngineSize) params.set("engineSize", selectedEngineSize);
 
     setSearchParams(params);
-  }, [selectedCategories, searchQuery, selectedFuel, selectedTransmission, selectedEngineSize, setSearchParams]);
+  }, [
+    selectedCategories,
+    searchQuery,
+    selectedFuel,
+    selectedTransmission,
+    selectedEngineSize,
+    setSearchParams,
+  ]);
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -679,9 +883,15 @@ const Models = () => {
   ];
 
   // Extract unique values for filters from car data
-  const fuelTypes = [...new Set(carModels.map(car => car.features.fuel))];
-  const transmissionTypes = [...new Set(carModels.map(car => car.features.transmission))];
-  const engineSizes = [...new Set(carModels.map(car => car.features.engineSize.toString().split(" ")[0]))];
+  const fuelTypes = [...new Set(carModels.map((car) => car.features.fuel))];
+  const transmissionTypes = [
+    ...new Set(carModels.map((car) => car.features.transmission)),
+  ];
+  const engineSizes = [
+    ...new Set(
+      carModels.map((car) => car.features.engineSize.toString().split(" ")[0])
+    ),
+  ];
 
   // Toggle category selection
   const toggleCategory = (category) => {
@@ -709,23 +919,37 @@ const Models = () => {
   // Helper function to check if a car matches the selected filters
   const matchesFilters = (car) => {
     // Match categories
-    const matchesCategories = selectedCategories.length === 0 ||
-      selectedCategories.some(selected => (car.categories || [car.category]).includes(selected));
+    const matchesCategories =
+      selectedCategories.length === 0 ||
+      selectedCategories.some((selected) =>
+        (car.categories || [car.category]).includes(selected)
+      );
 
     // Match fuel type
     const matchesFuel = !selectedFuel || car.features.fuel === selectedFuel;
 
     // Match transmission
-    const matchesTransmission = !selectedTransmission || car.features.transmission === selectedTransmission;
+    const matchesTransmission =
+      !selectedTransmission ||
+      car.features.transmission === selectedTransmission;
 
     // Match engine size - this is a bit trickier since engine sizes might be stored differently
-    const matchesEngineSize = !selectedEngineSize ||
+    const matchesEngineSize =
+      !selectedEngineSize ||
       car.features.engineSize.toString().includes(selectedEngineSize);
 
     // Match search query
-    const matchesSearch = !searchQuery || car.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      !searchQuery ||
+      car.name.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchesCategories && matchesFuel && matchesTransmission && matchesEngineSize && matchesSearch;
+    return (
+      matchesCategories &&
+      matchesFuel &&
+      matchesTransmission &&
+      matchesEngineSize &&
+      matchesSearch
+    );
   };
 
   const filteredCars = carModels.filter(matchesFilters);
@@ -735,7 +959,7 @@ const Models = () => {
     selectedCategories.length > 0,
     !!selectedFuel,
     !!selectedTransmission,
-    !!selectedEngineSize
+    !!selectedEngineSize,
   ].filter(Boolean).length;
 
   return (
@@ -801,10 +1025,11 @@ const Models = () => {
                         onClick={() => toggleCategory(category.name)}
                         className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg whitespace-nowrap
                           transition-colors duration-200 min-w-[7rem] sm:min-w-[8.5rem]
-                          ${category.name === "All" &&
+                          ${
+                            category.name === "All" &&
                             selectedCategories.length === 0
-                            ? "bg-black text-white shadow-md"
-                            : selectedCategories.includes(category.name)
+                              ? "bg-black text-white shadow-md"
+                              : selectedCategories.includes(category.name)
                               ? "bg-black text-white shadow-md"
                               : "bg-gray-50 text-gray-700 hover:bg-gray-100"
                           }`}
@@ -832,11 +1057,15 @@ const Models = () => {
                     {fuelTypes.map((fuel) => (
                       <button
                         key={fuel}
-                        onClick={() => setSelectedFuel(selectedFuel === fuel ? "" : fuel)}
+                        onClick={() =>
+                          setSelectedFuel(selectedFuel === fuel ? "" : fuel)
+                        }
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                        ${selectedFuel === fuel
+                        ${
+                          selectedFuel === fuel
                             ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                        }`}
                       >
                         {fuel}
                       </button>
@@ -853,11 +1082,19 @@ const Models = () => {
                     {transmissionTypes.map((transmission) => (
                       <button
                         key={transmission}
-                        onClick={() => setSelectedTransmission(selectedTransmission === transmission ? "" : transmission)}
+                        onClick={() =>
+                          setSelectedTransmission(
+                            selectedTransmission === transmission
+                              ? ""
+                              : transmission
+                          )
+                        }
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                        ${selectedTransmission === transmission
+                        ${
+                          selectedTransmission === transmission
                             ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                        }`}
                       >
                         {transmission}
                       </button>
@@ -874,11 +1111,17 @@ const Models = () => {
                     {engineSizes.map((size) => (
                       <button
                         key={size}
-                        onClick={() => setSelectedEngineSize(selectedEngineSize === size ? "" : size)}
+                        onClick={() =>
+                          setSelectedEngineSize(
+                            selectedEngineSize === size ? "" : size
+                          )
+                        }
                         className={`px-3 py-1.5 rounded-md text-sm transition-colors
-                          ${selectedEngineSize === size
-                            ? "bg-black text-white"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"}`}
+                          ${
+                            selectedEngineSize === size
+                              ? "bg-black text-white"
+                              : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                          }`}
                       >
                         {size}L
                       </button>
@@ -901,7 +1144,10 @@ const Models = () => {
             </div>
 
             {/* Active Filter Chips */}
-            {(selectedCategories.length > 0 || selectedFuel || selectedTransmission || selectedEngineSize) && (
+            {(selectedCategories.length > 0 ||
+              selectedFuel ||
+              selectedTransmission ||
+              selectedEngineSize) && (
               <div className="px-4 sm:px-6 pb-4 pt-2 flex flex-wrap gap-2 border-t border-gray-100">
                 {selectedCategories.map((category) => (
                   <div
@@ -975,7 +1221,9 @@ const Models = () => {
                   className="group"
                 >
                   <div
-                    className={`rounded-xl p-4 ${car.color || "bg-gray-50"} transition-all duration-300 
+                    className={`rounded-xl p-4 ${
+                      car.color || "bg-gray-50"
+                    } transition-all duration-300 
                                group-hover:-translate-y-2`}
                   >
                     {/* Replace static image with ImageCarousel component */}
