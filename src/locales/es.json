@@ -69,5 +69,59 @@
     "ctaSpan": "AHORA",
     "imageAlt": "Coche de lujo",
     "brandLogo": "Logotipo de la marca"
+  },
+  "testimonials": {
+    "heroSection": {
+      "badge": "Historias de Clientes",
+      "title": "Lo que Dicen Nuestros Clientes",
+      "subtitle": "Descubre por qué miles de clientes nos eligen para alquilar coches y confían en nuestras experiencias de viaje."
+    },
+    "stats": [
+      { "value": "15K+", "label": "Clientes Felices" },
+      { "value": "4.9", "label": "Calificación Promedio" },
+      { "value": "98%", "label": "Tasa de Satisfacción" },
+      { "value": "24/7", "label": "Servicio al Cliente" }
+    ],
+    "testimonialData": [
+      {
+        "name": "Erion Dashi",
+        "role": "Viajero de Negocios",
+        "rating": 5,
+        "comment": "¡La mejor experiencia de alquiler de coches que he tenido! El proceso fue impecable de principio a fin. El coche estaba inmaculado y el servicio al cliente fue excepcional.",
+        "carRented": "Mercedes Benz S-Class W222",
+        "date": "Enero 2024"
+      },
+      {
+        "name": "Alma Zeneli",
+        "role": "Vacaciones Familiares",
+        "rating": 5,
+        "comment": "¡Perfecto para nuestras vacaciones familiares! El SUV era espacioso, limpio y bien mantenido. El personal fue increíblemente útil con la instalación de la silla infantil.",
+        "carRented": "Hyundai Santa Fe",
+        "date": "Diciembre 2023"
+      },
+      {
+        "name": "Bledar Hoxha",
+        "role": "Escapada de Fin de Semana",
+        "rating": 4,
+        "comment": "Excelente servicio y precios competitivos. El proceso de recogida y devolución fue rápido y eficiente. ¡Definitivamente volveré!",
+        "carRented": "BMW Serie 4",
+        "date": "Febrero 2024"
+      }
+    ],
+    "reviewHighlights": [
+      { "title": "Servicio Excepcional", "count": 2481 },
+      { "title": "Vehículos Limpios", "count": 1938 },
+      { "title": "Reserva Fácil", "count": 1756 },
+      { "title": "Gran Valor", "count": 1542 }
+    ],
+    "reviewSection": {
+      "title": "Lo que la Gente Ama de Nosotros",
+      "subtitle": "Descubre qué aspectos de nuestro servicio aprecian más los clientes"
+    },
+    "ctaSection": {
+      "title": "¿Listo para Experimentarlo?",
+      "subtitle": "Únete a miles de clientes satisfechos y reserva tu coche de alquiler perfecto hoy mismo.",
+      "buttonText": "Reservar Ahora"
+    }
   }
 }

@@ -69,5 +69,59 @@
     "ctaSpan": "JETZT",
     "imageAlt": "Luxusauto",
     "brandLogo": "Markenlogo"
+  },
+   "testimonials": {
+    "heroSection": {
+      "badge": "Kundenstimmen",
+      "title": "Was unsere Kunden sagen",
+      "subtitle": "Entdecken Sie, warum Tausende von Kunden uns für ihre Autovermietung wählen und uns bei ihren Reiseerlebnissen vertrauen."
+    },
+    "stats": [
+      { "value": "15K+", "label": "Zufriedene Kunden" },
+      { "value": "4.9", "label": "Durchschnittliche Bewertung" },
+      { "value": "98%", "label": "Zufriedenheitsrate" },
+      { "value": "24/7", "label": "Kundenservice" }
+    ],
+    "testimonialData": [
+      {
+        "name": "Erion Dashi",
+        "role": "Geschäftsreisender",
+        "rating": 5,
+        "comment": "Die beste Autovermietungserfahrung, die ich je hatte! Der Prozess war von Anfang bis Ende nahtlos. Das Auto war makellos und der Kundenservice war hervorragend.",
+        "carRented": "Mercedes Benz S-Klasse W222",
+        "date": "Januar 2024"
+      },
+      {
+        "name": "Alma Zeneli",
+        "role": "Familienurlaub",
+        "rating": 5,
+        "comment": "Perfekt für unseren Familienurlaub! Der SUV war geräumig, sauber und gut gepflegt. Das Personal war unglaublich hilfsbereit bei der Kindersitzinstallation.",
+        "carRented": "Hyundai Santa Fe",
+        "date": "Dezember 2023"
+      },
+      {
+        "name": "Bledar Hoxha",
+        "role": "Wochenendausflug",
+        "rating": 4,
+        "comment": "Toller Service und wettbewerbsfähige Preise. Der Abhol- und Rückgabeprozess war schnell und effizient. Werde definitiv wiederkommen!",
+        "carRented": "BMW 4er Serie",
+        "date": "Februar 2024"
+      }
+    ],
+    "reviewHighlights": [
+      { "title": "Hervorragender Service", "count": 2481 },
+      { "title": "Saubere Fahrzeuge", "count": 1938 },
+      { "title": "Einfache Buchung", "count": 1756 },
+      { "title": "Gutes Preis-Leistungs-Verhältnis", "count": 1542 }
+    ],
+    "reviewSection": {
+      "title": "Was Kunden an uns schätzen",
+      "subtitle": "Sehen Sie, welche Aspekte unseres Services von Kunden besonders geschätzt werden"
+    },
+    "ctaSection": {
+      "title": "Bereit, es selbst zu erleben?",
+      "subtitle": "Schließen Sie sich Tausenden zufriedener Kunden an und buchen Sie noch heute Ihr perfektes Mietauto.",
+      "buttonText": "Jetzt buchen"
+    }
   }
 }

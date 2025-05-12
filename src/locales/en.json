@@ -2,7 +2,7 @@
   "Home": "Home",
   "Models": "Models",
   "suv": "SUV",
-  "sedan": "Sedan", 
+  "sedan": "Sedan",
   "luxury": "Luxury",
   "sports": "Sports",
   "economy": "Economy",
@@ -49,7 +49,7 @@
     "quickLinks": {
       "title": "Quick Links",
       "home": "Home",
-      "aboutUs": "About Us", 
+      "aboutUs": "About Us",
       "carModels": "Car Models",
       "services": "Services",
       "contactUs": "Contact Us"
@@ -70,5 +70,59 @@
     "ctaSpan": "NOW",
     "imageAlt": "Luxury Car",
     "brandLogo": "Brand Logo"
+  },
+  "testimonials": {
+    "heroSection": {
+      "badge": "Customer Stories",
+      "title": "What Our Customers Say",
+      "subtitle": "Discover why thousands of customers choose us for their car rental needs and trust us with their travel experiences."
+    },
+    "stats": [
+      { "value": "15K+", "label": "Happy Customers" },
+      { "value": "4.9", "label": "Average Rating" },
+      { "value": "98%", "label": "Satisfaction Rate" },
+      { "value": "24/7", "label": "Customer Support" }
+    ],
+    "testimonialData": [
+      {
+        "name": "Erion Dashi",
+        "role": "Business Traveler",
+        "rating": 5,
+        "comment": "The best car rental experience I've ever had! The process was seamless from start to finish. The car was immaculate and the customer service was exceptional.",
+        "carRented": "Mercedes Benz S-Class W222",
+        "date": "January 2024"
+      },
+      {
+        "name": "Alma Zeneli",
+        "role": "Family Vacation",
+        "rating": 5,
+        "comment": "Perfect for our family vacation! The SUV was spacious, clean, and well-maintained. The staff was incredibly helpful with car seat installation.",
+        "carRented": "Hyundai Santa Fe",
+        "date": "December 2023"
+      },
+      {
+        "name": "Bledar Hoxha",
+        "role": "Weekend Getaway",
+        "rating": 4,
+        "comment": "Great service and competitive prices. The pickup and drop-off process was quick and efficient. Will definitely use again!",
+        "carRented": "BMW 4 Series",
+        "date": "February 2024"
+      }
+    ],
+    "reviewHighlights": [
+      { "title": "Exceptional Service", "count": 2481 },
+      { "title": "Clean Vehicles", "count": 1938 },
+      { "title": "Easy Booking", "count": 1756 },
+      { "title": "Great Value", "count": 1542 }
+    ],
+    "reviewSection": {
+      "title": "What People Love About Us",
+      "subtitle": "See what aspects of our service customers appreciate the most"
+    },
+    "ctaSection": {
+      "title": "Ready to Experience It Yourself?",
+      "subtitle": "Join thousands of satisfied customers and book your perfect rental car today.",
+      "buttonText": "Book Now"
+    }
   }
 }

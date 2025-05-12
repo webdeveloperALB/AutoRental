@@ -69,5 +69,59 @@
     "ctaSpan": "ORA",
     "imageAlt": "Auto di lusso",
     "brandLogo": "Logo del marchio"
+  },
+  "testimonials": {
+    "heroSection": {
+      "badge": "Storie dei Clienti",
+      "title": "Cosa dicono i nostri Clienti",
+      "subtitle": "Scopri perché migliaia di clienti scelgono noi per il noleggio auto e si fidano delle nostre esperienze di viaggio."
+    },
+    "stats": [
+      { "value": "15K+", "label": "Clienti Soddisfatti" },
+      { "value": "4.9", "label": "Valutazione Media" },
+      { "value": "98%", "label": "Tasso di Soddisfazione" },
+      { "value": "24/7", "label": "Supporto Clienti" }
+    ],
+    "testimonialData": [
+      {
+        "name": "Erion Dashi",
+        "role": "Viaggiatore d'Affari",
+        "rating": 5,
+        "comment": "La migliore esperienza di noleggio auto che abbia mai avuto! Il processo è stato impeccabile dall'inizio alla fine. L'auto era immacolata e il servizio clienti eccezionale.",
+        "carRented": "Mercedes Benz S-Class W222",
+        "date": "Gennaio 2024"
+      },
+      {
+        "name": "Alma Zeneli",
+        "role": "Vacanza Familiare",
+        "rating": 5,
+        "comment": "Perfetto per la nostra vacanza in famiglia! Il SUV era spazioso, pulito e ben curato. Lo staff è stato incredibilmente disponibile con l'installazione del seggiolino.",
+        "carRented": "Hyundai Santa Fe",
+        "date": "Dicembre 2023"
+      },
+      {
+        "name": "Bledar Hoxha",
+        "role": "Gita del Fine Settimana",
+        "rating": 4,
+        "comment": "Ottimo servizio e prezzi competitivi. Il processo di ritiro e riconsegna è stato veloce ed efficiente. Tornerò sicuramente!",
+        "carRented": "BMW Serie 4",
+        "date": "Febbraio 2024"
+      }
+    ],
+    "reviewHighlights": [
+      { "title": "Servizio Eccezionale", "count": 2481 },
+      { "title": "Veicoli Puliti", "count": 1938 },
+      { "title": "Prenotazione Facile", "count": 1756 },
+      { "title": "Ottimo Valore", "count": 1542 }
+    ],
+    "reviewSection": {
+      "title": "Cosa Apprezzano di Noi",
+      "subtitle": "Scopri quali aspetti del nostro servizio i clienti apprezzano di più"
+    },
+    "ctaSection": {
+      "title": "Pronto a Provarlo?",
+      "subtitle": "Unisciti a migliaia di clienti soddisfatti e prenota la tua auto a noleggio perfetta oggi stesso.",
+      "buttonText": "Prenota Ora"
+    }
   }
 }

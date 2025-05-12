@@ -69,5 +69,59 @@
     "ctaSpan": "TANI",
     "imageAlt": "Makina luksoze",
     "brandLogo": "Logoja e markës"
+  },
+  "testimonials": {
+    "heroSection": {
+      "badge": "Histori Klientësh",
+      "title": "Çfarë Thonë Klientët Tanë",
+      "subtitle": "Zbuloni përse mijëra klientë na zgjedhin për qiranë e makinave dhe besojnë në përvojat tona të udhëtimit."
+    },
+    "stats": [
+      { "value": "15K+", "label": "Klientë të Lumtur" },
+      { "value": "4.9", "label": "Vlerësim Mesatar" },
+      { "value": "98%", "label": "Shkalla e Kënaqësisë" },
+      { "value": "24/7", "label": "Mbështetje Klientësh" }
+    ],
+    "testimonialData": [
+      {
+        "name": "Erion Dashi",
+        "role": "Udhëtar Biznesi",
+        "rating": 5,
+        "comment": "Përvoja më e mirë e qirasë së makinës që kam pasur ndonjëherë! Procesi ishte i pamëkat nga fillimi deri në fund. Makina ishte e paqortueshme dhe shërbimi ndaj klientëve ishte i jashtëzakonshëm.",
+        "carRented": "Mercedes Benz S-Class W222",
+        "date": "Janar 2024"
+      },
+      {
+        "name": "Alma Zeneli",
+        "role": "Pushime Familjare",
+        "rating": 5,
+        "comment": "Perfekt për pushimet tona familjare! SUV-ja ishte e hapësirës, e pastër dhe e mirëmbajtur. Personeli ishte jashtëzakonisht i dobishëm me instalimin e kariges për fëmijë.",
+        "carRented": "Hyundai Santa Fe",
+        "date": "Dhjetor 2023"
+      },
+      {
+        "name": "Bledar Hoxha",
+        "role": "Dalje Fundjavë",
+        "rating": 4,
+        "comment": "Shërbim i shkëlqyer dhe çmime konkurruese. Procesi i marrjes dhe kthimit ishte i shpejtë dhe efikas. Me siguri do të kthehem përsëri!",
+        "carRented": "BMW Seria 4",
+        "date": "Shkurt 2024"
+      }
+    ],
+    "reviewHighlights": [
+      { "title": "Shërbim i Jashtëzakonshëm", "count": 2481 },
+      { "title": "Automjete të Pastra", "count": 1938 },
+      { "title": "Rezervim i Lehtë", "count": 1756 },
+      { "title": "Vlerë e Madhe", "count": 1542 }
+    ],
+    "reviewSection": {
+      "title": "Çfarë Njerëzit Duan tek Ne",
+      "subtitle": "Shihni se çfarë aspektesh të shërbimit tonë vlerësojnë më shumë klientët"
+    },
+    "ctaSection": {
+      "title": "Jeni Gati ta Provoni?",
+      "subtitle": "Bashkohuni me mijëra klientë të kënaqur dhe rezervoni makinën tuaj perfekte me qira sot.",
+      "buttonText": "Rezervoni Tani"
+    }
   }
 }

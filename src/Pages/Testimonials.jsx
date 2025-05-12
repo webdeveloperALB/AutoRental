@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import {
   Star,
   Quote,
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 
 const Testimonials = () => {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
 
@@ -21,75 +23,10 @@ const Testimonials = () => {
     viewport: { once: true },
   };
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "Erion Dashi",
-      role: "Business Traveler",
-      image: "/path/to/avatar1.jpg",
-      rating: 5,
-      comment:
-        "The best car rental experience I've ever had! The process was seamless from start to finish. The car was immaculate and the customer service was exceptional.",
-      carRented: "Mercedes Benz S-Class W222",
-      date: "January 2024",
-    },
-    {
-      id: 2,
-      name: "Alma Zeneli",
-      role: "Family Vacation",
-      image: "/path/to/avatar2.jpg",
-      rating: 5,
-      comment:
-        "Perfect for our family vacation! The SUV was spacious, clean, and well-maintained. The staff was incredibly helpful with car seat installation.",
-      carRented: "Hyundai Santa Fe",
-      date: "December 2023",
-    },
-    {
-      id: 3,
-      name: "Bledar Hoxha",
-      role: "Weekend Getaway",
-      image: "/path/to/avatar3.jpg",
-      rating: 4,
-      comment:
-        "Great service and competitive prices. The pickup and drop-off process was quick and efficient. Will definitely use again!",
-      carRented: "BMW 4 Series",
-      date: "February 2024",
-    },
-  ];
-
-  const stats = [
-    { value: "15K+", label: "Happy Customers", icon: Users },
-    { value: "4.9", label: "Average Rating", icon: Star },
-    { value: "98%", label: "Satisfaction Rate", icon: ThumbsUp },
-    { value: "24/7", label: "Customer Support", icon: MessageCircle },
-  ];
-
-  const reviewHighlights = [
-    {
-      title: "Exceptional Service",
-      count: 2481,
-      color: "text-black",
-      bgColor: "bg-gray-100",
-    },
-    {
-      title: "Clean Vehicles",
-      count: 1938,
-      color: "text-black",
-      bgColor: "bg-gray-100",
-    },
-    {
-      title: "Easy Booking",
-      count: 1756,
-      color: "text-black",
-      bgColor: "bg-gray-100",
-    },
-    {
-      title: "Great Value",
-      count: 1542,
-      color: "text-black",
-      bgColor: "bg-gray-100",
-    },
-  ];
+  // Dynamically get testimonials from translation
+  const testimonials = t('testimonials.testimonialData', { returnObjects: true });
+  const stats = t('testimonials.stats', { returnObjects: true });
+  const reviewHighlights = t('testimonials.reviewHighlights', { returnObjects: true });
 
   // Function to handle user interaction
   const handleInteraction = () => {
@@ -152,14 +89,17 @@ const Testimonials = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full mb-6">
               <Quote className="w-5 h-5 text-black" />
-              <span className="text-black font-medium">Customer Stories</span>
+              <span className="text-black font-medium">
+                {t('testimonials.heroSection.badge')}
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              What Our <span className="text-red-600">Customers</span> Say
+              {t('testimonials.heroSection.title', { 
+                color: <span className="text-red-600">Customers</span> 
+              })}
             </h1>
             <p className="text-black text-lg leading-relaxed">
-              Discover why thousands of customers choose us for their car rental
-              needs and trust us with their travel experiences.
+              {t('testimonials.heroSection.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -178,7 +118,10 @@ const Testimonials = () => {
                 className="text-center p-6 rounded-lg bg-gray-100 group hover:bg-white transition-colors"
               >
                 <div className="flex justify-center mb-4">
-                  <stat.icon className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />
+                  {index === 0 && <Users className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />}
+                  {index === 1 && <Star className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />}
+                  {index === 2 && <ThumbsUp className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />}
+                  {index === 3 && <MessageCircle className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />}
                 </div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-2">
                   {stat.value}
@@ -295,10 +238,10 @@ const Testimonials = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold mb-4">
-              What People Love About Us
+              {t('testimonials.reviewSection.title')}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              See what aspects of our service customers appreciate the most
+              {t('testimonials.reviewSection.subtitle')}
             </p>
           </motion.div>
 
@@ -309,9 +252,9 @@ const Testimonials = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`${highlight.bgColor} rounded-lg p-6 text-center`}
+                className="bg-gray-100 rounded-lg p-6 text-center"
               >
-                <h3 className={`text-2xl font-bold mb-2 ${highlight.color}`}>
+                <h3 className="text-2xl font-bold mb-2 text-black">
                   {highlight.count.toLocaleString()}+
                 </h3>
                 <p className="text-black">{highlight.title}</p>
@@ -331,14 +274,13 @@ const Testimonials = () => {
             className="bg-white rounded-2xl p-8 md:p-12 text-center text-black"
           >
             <h2 className="text-3xl font-bold mb-4">
-              Ready to Experience It Yourself?
+              {t('testimonials.ctaSection.title')}
             </h2>
             <p className="max-w-2xl mx-auto mb-8 text-black">
-              Join thousands of satisfied customers and book your perfect rental
-              car today.
+              {t('testimonials.ctaSection.subtitle')}
             </p>
             <a
-              href="https://wa.me/355698357378" // replace with your full phone number in international format
+              href="https://wa.me/355698357378"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -348,7 +290,7 @@ const Testimonials = () => {
                 className="bg-black text-white px-8 py-3 rounded-lg font-medium 
                transition-colors"
               >
-                Book Now
+                {t('testimonials.ctaSection.buttonText')}
               </motion.button>
             </a>
           </motion.div>
