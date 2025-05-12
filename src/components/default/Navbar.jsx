@@ -205,7 +205,7 @@ const Navbar = () => {
                   className="language-dropdown-btn"
                 >
                   <div className="language-flag-text">
-                    <Flag country={currentLanguage.countryCode} width={24} height={24} />
+                    <Flag country={currentLanguage.countryCode} width={20} height={15}/>
                     <span className="text-sm font-medium">{currentLanguage.name}</span>
                   </div>
                   <ChevronDown
@@ -228,7 +228,7 @@ const Navbar = () => {
                           className="language-dropdown-item"
                         >
                           <div className="language-flag-text">
-                            <Flag country={lang.countryCode} width={20} height={20} />
+                            <Flag country={lang.countryCode} width={20} height={15} />
                             <span>{lang.name}</span>
                           </div>
                         </button>
@@ -304,7 +304,7 @@ const Navbar = () => {
                 className="language-dropdown-btn py-2 px-3 min-w-0"
               >
                 <div className="language-flag-text">
-                  <Flag country={currentLanguage.countryCode} width={24} height={24} />
+                  <Flag country={currentLanguage.countryCode} width={20} height={15} />
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${mobileLangDropdownOpen ? "rotate-chevron" : ""}`}
                   />
@@ -323,7 +323,7 @@ const Navbar = () => {
                       className="language-dropdown-item"
                     >
                       <div className="language-flag-text">
-                        <Flag country={lang.countryCode} width={20} height={20} />
+                        <Flag country={lang.countryCode} width={20} height={15} />
                         <span className="text-sm">{lang.name}</span>
                       </div>
                     </button>
