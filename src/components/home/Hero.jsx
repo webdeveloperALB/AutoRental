@@ -7,7 +7,7 @@ import "./Hero.css";
 import logo1 from "../../assets/images/mercedes.svg";
 import logo2 from "../../assets/images/bmw.svg";
 import logo3 from "../../assets/images/audi.svg";
-import logo4 from "../../assets/images/porsche.svg";
+import logo4 from "../../assets/images/hyundai.svg";
 import logo5 from "../../assets/images/volkswagen.svg";
 
 const Hero = () => {
