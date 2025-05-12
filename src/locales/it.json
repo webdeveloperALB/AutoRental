@@ -123,5 +123,39 @@
       "subtitle": "Unisciti a migliaia di clienti soddisfatti e prenota la tua auto a noleggio perfetta oggi stesso.",
       "buttonText": "Prenota Ora"
     }
+  },
+   "contact": {
+    "contactUs": "Contattaci",
+    "title": "Mettiti in Contatto con Noi",
+    "subtitle": "Siamo qui per aiutarti e rispondere a qualsiasi domanda tu possa avere. Non vediamo l'ora di sentirti!",
+    "contactInfo": {
+      "phone": {
+        "title": "Telefono",
+        "details": "+355 69 835 7378"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "details": "@autorental.tirana"
+      },
+      "location": {
+        "title": "Posizione",
+        "details": "Tirana, Albania"
+      },
+      "businessHours": {
+        "title": "Orari di Apertura",
+        "details": "Lun-Sab: 9-18"
+      }
+    },
+    "form": {
+      "title": "Inviaci un Messaggio",
+      "nameLabel": "Nome Completo",
+      "namePlaceholder": "Inserisci il tuo nome completo",
+      "subjectLabel": "Oggetto",
+      "subjectPlaceholder": "Di cosa si tratta?",
+      "messageLabel": "Il Tuo Messaggio",
+      "messagePlaceholder": "Scrivi il tuo messaggio qui...",
+      "submitButton": "Invia Messaggio",
+      "submitButtonSent": "Messaggio Inviato!"
+    }
   }
 }

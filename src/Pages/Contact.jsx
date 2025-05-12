@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import {
   Phone,
   MapPin,
@@ -13,6 +14,7 @@ import {
 import { FaInstagram } from 'react-icons/fa';
 
 const Contact = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     subject: "",
@@ -67,31 +69,29 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Phone,
-      title: "Phone",
-      details: ["+355 (69) 835-7378"],
+      title: t('contact.contactInfo.phone.title'),
+      details: t('contact.contactInfo.phone.details'),
       color: "text-blue-500",
       bgColor: "bg-blue-50",
     },
     {
       icon: FaInstagram,
-      title: "Instagram",
-      details: ["@auto_rental_tirana_"],
+      title: t('contact.contactInfo.instagram.title'),
+      details: t('contact.contactInfo.instagram.details'),
       color: "text-pink-500",
       bgColor: "bg-pink-50",
     },
     {
       icon: MapPin,
-      title: "Location",
-      details: ["Tirane, Albania"],
+      title: t('contact.contactInfo.location.title'),
+      details: t('contact.contactInfo.location.details'),
       color: "text-green-500",
       bgColor: "bg-green-50",
     },
     {
       icon: Clock,
-      title: "Business Hours",
-      details: [
-        "Monday - Sunday: 9:00 AM - 6:00 PM",
-      ],
+      title: t('contact.contactInfo.businessHours.title'),
+      details: t('contact.contactInfo.businessHours.details'),
       color: "text-purple-500",
       bgColor: "bg-purple-50",
     },
@@ -110,14 +110,15 @@ const Contact = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-400 rounded-full mb-6">
               <MessageSquare className="w-5 h-5 text-black" />
-              <span className="text-black font-medium">Contact Us</span>
+              <span className="text-black font-medium">
+                {t('contact.contactUs')}
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Get in <span className="text-black">Touch</span>
+              {t('contact.title')}
             </h1>
             <p className="text-black text-lg leading-relaxed">
-              We&apos;d love to hear from you. Let us know how we can help make your
-              car rental experience even better.
+              {t('contact.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -147,11 +148,14 @@ const Contact = () => {
                       <h3 className="text-xl font-semibold">{info.title}</h3>
                     </div>
                     <div className="space-y-2">
-                      {info.details.map((detail, idx) => (
-                        <p key={idx} className="text-gray-600">
-                          {detail}
-                        </p>
-                      ))}
+                      {Array.isArray(info.details) 
+                        ? info.details.map((detail, idx) => (
+                            <p key={idx} className="text-gray-600">
+                              {detail}
+                            </p>
+                          ))
+                        : <p className="text-gray-600">{info.details}</p>
+                      }
                     </div>
                   </motion.div>
                 ))}
@@ -185,18 +189,22 @@ const Contact = () => {
             >
               <div className="flex items-center gap-3 mb-8">
                 <MessageCircle className="w-7 h-7 text-green-500" />
-                <h2 className="text-2xl font-bold">Send Message</h2>
+                <h2 className="text-2xl font-bold">
+                  {t('contact.form.title')}
+                </h2>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Input */}
                 <div className="space-y-2">
-                  <label className="text-gray-700 font-medium">Full Name</label>
+                  <label className="text-gray-700 font-medium">
+                    {t('contact.form.nameLabel')}
+                  </label>
                   <div className="relative">
                     <input
                       type="text"
                       name="name"
-                      placeholder="John Doe"
+                      placeholder={t('contact.form.namePlaceholder')}
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
@@ -208,11 +216,13 @@ const Contact = () => {
 
                 {/* Subject Input */}
                 <div className="space-y-2">
-                  <label className="text-gray-700 font-medium">Subject</label>
+                  <label className="text-gray-700 font-medium">
+                    {t('contact.form.subjectLabel')}
+                  </label>
                   <input
                     type="text"
                     name="subject"
-                    placeholder="Inquiry about rental"
+                    placeholder={t('contact.form.subjectPlaceholder')}
                     value={formData.subject}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
@@ -222,11 +232,13 @@ const Contact = () => {
 
                 {/* Message Input */}
                 <div className="space-y-2">
-                  <label className="text-gray-700 font-medium">Message</label>
+                  <label className="text-gray-700 font-medium">
+                    {t('contact.form.messageLabel')}
+                  </label>
                   <textarea
                     name="message"
                     rows="4"
-                    placeholder="Your message..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
@@ -245,12 +257,12 @@ const Contact = () => {
                   {isSubmitted ? (
                     <>
                       <Star className="w-5 h-5 animate-pulse" />
-                      Message Sent!
+                      {t('contact.form.submitButtonSent')}
                     </>
                   ) : (
                     <>
                       <Send className="w-5 h-5" />
-                      Send Message
+                      {t('contact.form.submitButton')}
                     </>
                   )}
                 </motion.button>

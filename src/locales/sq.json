@@ -64,7 +64,7 @@
     },
     "copyright": "© {year} AutoRental. Të gjitha të drejtat e rezervuara."
   },
-   "hero": {
+  "hero": {
     "cta": "Rezervo makinën tënde ekskluzive",
     "ctaSpan": "TANI",
     "imageAlt": "Makina luksoze",
@@ -122,6 +122,40 @@
       "title": "Jeni Gati ta Provoni?",
       "subtitle": "Bashkohuni me mijëra klientë të kënaqur dhe rezervoni makinën tuaj perfekte me qira sot.",
       "buttonText": "Rezervoni Tani"
+    }
+  },
+  "contact": {
+    "contactUs": "Na Kontaktoni",
+    "title": "Na Kontaktoni",
+    "subtitle": "Ne jemi këtu për t'ju ndihmuar dhe për t'iu përgjigjur çdo pyetjeje që mund të keni. Jemi duke pritur me padurim të dëgjojmë nga ju!",
+    "contactInfo": {
+      "phone": {
+        "title": "Telefon",
+        "details": "+355 69 835 7378"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "details": "@autorental.tirana"
+      },
+      "location": {
+        "title": "Vendndodhja",
+        "details": "Tiranë, Shqipëri"
+      },
+      "businessHours": {
+        "title": "Orët e Punës",
+        "details": "Hën-Sht: 9-18"
+      }
+    },
+    "form": {
+      "title": "Dërgoni një Mesazh",
+      "nameLabel": "Emri i Plotë",
+      "namePlaceholder": "Shkruani emrin tuaj të plotë",
+      "subjectLabel": "Subjekti",
+      "subjectPlaceholder": "Çfarë është kjo?",
+      "messageLabel": "Mesazhi Juaj",
+      "messagePlaceholder": "Shkruani mesazhin tuaj këtu...",
+      "submitButton": "Dërgo Mesazhin",
+      "submitButtonSent": "Mesazhi u Dërgua!"
     }
   }
 }

@@ -70,7 +70,7 @@
     "imageAlt": "Luxusauto",
     "brandLogo": "Markenlogo"
   },
-   "testimonials": {
+  "testimonials": {
     "heroSection": {
       "badge": "Kundenstimmen",
       "title": "Was unsere Kunden sagen",
@@ -122,6 +122,40 @@
       "title": "Bereit, es selbst zu erleben?",
       "subtitle": "Schließen Sie sich Tausenden zufriedener Kunden an und buchen Sie noch heute Ihr perfektes Mietauto.",
       "buttonText": "Jetzt buchen"
+    }
+  },
+  "contact": {
+    "contactUs": "Kontaktieren Sie uns",
+    "title": "Nehmen Sie Kontakt mit uns auf",
+    "subtitle": "Ob Fragen oder Anliegen – wir sind immer für Sie da",
+    "contactInfo": {
+      "phone": {
+        "title": "Telefonnummer",
+        "details": "+355 69 835 7378"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "details": "@autorental.al"
+      },
+      "location": {
+        "title": "Standort",
+        "details": "Tirana, Albanien"
+      },
+      "businessHours": {
+        "title": "Öffnungszeiten",
+        "details": "Montag - Sonntag, 08:00 - 20:00 Uhr"
+      }
+    },
+    "form": {
+      "title": "Senden Sie uns eine Nachricht",
+      "nameLabel": "Ihr Name",
+      "namePlaceholder": "Geben Sie Ihren Namen ein",
+      "subjectLabel": "Betreff",
+      "subjectPlaceholder": "Geben Sie den Betreff ein",
+      "messageLabel": "Nachricht",
+      "messagePlaceholder": "Schreiben Sie Ihre Nachricht hier...",
+      "submitButton": "Nachricht senden",
+      "submitButtonSent": "Gesendet!"
     }
   }
 }
