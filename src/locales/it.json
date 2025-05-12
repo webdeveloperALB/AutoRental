@@ -207,5 +207,28 @@
       "title": "Prenota e goditi",
       "description": "Completa la prenotazione e goditi il tuo viaggio"
     }
+  },
+   "locale": "it-IT",
+  "loading": "Caricamento in corso...",
+  "frontView": "Vista frontale",
+  "rearView": "Vista posteriore",
+  "interior": "Interni",
+  "sideView": "Vista laterale",
+  "previousImage2": "Immagine precedente",
+  "nextImage2": "Immagine successiva",
+  "goToImage2": "Vai all'immagine {{number}}",
+  "day2": "giorno",
+  "reviews2": "recensioni",
+  "fuelType2": "carburante",
+  "transmissionType2": "trasmissione",
+  "engineSize2": "Cilindrata",
+  "whatsappMessage": "Ciao! Vorrei prenotare la {{carName}} (€{{price}}/giorno).\n\n📅 Periodo di noleggio:\n- Ritiro: {{pickUpDate}}\n- Riconsegna: {{dropOffDate}}\n\n📍 Luogo di ritiro: {{location}}\n\nDettagli dell'auto:\n🚗 {{categories}}\n🔄 Trasmissione {{transmission}}\n🔧 Motore {{engineSize}}\n⛽ {{fuel}}",
+  "booking": {
+    "pickUpDate": "Data di ritiro",
+    "dropOffDate": "Data di riconsegna",
+    "pickupLocation": "Luogo di ritiro",
+    "enterLocation": "Inserisci la posizione",
+    "confirmBooking": "Conferma prenotazione",
+    "bookNow": "Prenota ora"
   }
 }

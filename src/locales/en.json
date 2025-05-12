@@ -207,5 +207,28 @@
       "title": "Book & Enjoy",
       "description": "Complete your booking and enjoy your journey"
     }
-  }
+  },
+  "locale": "en-US",
+  "loading": "Loading...",
+  "frontView": "Front View",
+  "rearView": "Rear View",
+  "interior": "Interior",
+  "sideView": "Side View",
+  "previousImage2": "Previous image",
+  "nextImage2": "Next image",
+  "goToImage2": "Go to image {{number}}",
+  "day2": "day",
+  "reviews2": "reviews",
+  "fuelType2": "fuel",
+  "transmissionType2": "transmission",
+  "engineSize2": "Engine Size",
+  "whatsappMessage": "Hello! I want to book the {{carName}} (€{{price}}/day).\n\n📅 Rental Period:\n- Pick-up: {{pickUpDate}}\n- Drop-off: {{dropOffDate}}\n\n📍 Pickup Location: {{location}}\n\nCar Details:\n🚗 {{categories}}\n🔄 {{transmission}} transmission\n🔧 {{engineSize}} engine\n⛽ {{fuel}}",
+  "booking": {
+    "pickUpDate": "Pick-up Date",
+    "dropOffDate": "Drop-off Date",
+    "pickupLocation": "Pickup Location",
+    "enterLocation": "Enter location",
+    "confirmBooking": "Confirm Booking",
+    "bookNow": "Book Now"
+}
 }

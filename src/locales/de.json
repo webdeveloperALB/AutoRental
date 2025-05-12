@@ -77,10 +77,22 @@
       "subtitle": "Entdecken Sie, warum Tausende von Kunden uns für ihre Autovermietungsbedürfnisse wählen und uns mit ihren Reiseerfahrungen vertrauen."
     },
     "stats": [
-      { "value": "15K+", "label": "Zufriedene Kunden" },
-      { "value": "4.9", "label": "Durchschnittliche Bewertung" },
-      { "value": "98%", "label": "Zufriedenheitsrate" },
-      { "value": "24/7", "label": "Kundendienst" }
+      {
+        "value": "15K+",
+        "label": "Zufriedene Kunden"
+      },
+      {
+        "value": "4.9",
+        "label": "Durchschnittliche Bewertung"
+      },
+      {
+        "value": "98%",
+        "label": "Zufriedenheitsrate"
+      },
+      {
+        "value": "24/7",
+        "label": "Kundendienst"
+      }
     ],
     "testimonialData": [
       {
@@ -109,10 +121,22 @@
       }
     ],
     "reviewHighlights": [
-      { "title": "Außergewöhnlicher Service", "count": 2481 },
-      { "title": "Saubere Fahrzeuge", "count": 1938 },
-      { "title": "Einfache Buchung", "count": 1756 },
-      { "title": "Gutes Preis-Leistungs-Verhältnis", "count": 1542 }
+      {
+        "title": "Außergewöhnlicher Service",
+        "count": 2481
+      },
+      {
+        "title": "Saubere Fahrzeuge",
+        "count": 1938
+      },
+      {
+        "title": "Einfache Buchung",
+        "count": 1756
+      },
+      {
+        "title": "Gutes Preis-Leistungs-Verhältnis",
+        "count": 1542
+      }
     ],
     "reviewSection": {
       "title": "Was Menschen an uns lieben",
@@ -207,5 +231,28 @@
       "title": "Buchen & Genießen",
       "description": "Schließen Sie Ihre Buchung ab und genießen Sie Ihre Reise"
     }
-  }
+  },
+"locale": "de-DE",
+  "loading": "Wird geladen...",
+  "frontView": "Vorderansicht",
+  "rearView": "Rückansicht",
+  "interior": "Innenraum",
+  "sideView": "Seitenansicht",
+  "previousImage2": "Vorheriges Bild",
+  "nextImage2": "Nächstes Bild",
+  "goToImage2": "Zu Bild {{number}} gehen",
+  "day2": "Tag",
+  "reviews2": "Bewertungen",
+  "fuelType2": "Kraftstoff",
+  "transmissionType2": "Getriebe",
+  "engineSize2": "Motorgröße",
+  "whatsappMessage": "Hallo! Ich möchte den {{carName}} (€{{price}}/Tag) buchen.\n\n📅 Mietzeitraum:\n- Abholung: {{pickUpDate}}\n- Rückgabe: {{dropOffDate}}\n\n📍 Abholort: {{location}}\n\nFahrzeugdetails:\n🚗 {{categories}}\n🔄 {{transmission}} Getriebe\n🔧 {{engineSize}} Motor\n⛽ {{fuel}}",
+  "booking": {
+    "pickUpDate": "Abholdatum",
+    "dropOffDate": "Rückgabedatum",
+    "pickupLocation": "Abholort",
+    "enterLocation": "Ort eingeben",
+    "confirmBooking": "Buchung bestätigen",
+    "bookNow": "Jetzt buchen"
+  } 
 }

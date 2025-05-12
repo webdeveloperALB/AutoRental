@@ -1,10 +1,11 @@
-"use client";
+"use client"
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Fuel, Battery, Leaf } from "lucide-react";
-import { Icon } from "@iconify/react";
-import "./Booking.css";
+import { useEffect, useRef, useState, useCallback } from "react"
+import { useParams } from "react-router-dom"
+import { ChevronLeft, ChevronRight, Fuel, Battery, Leaf } from "lucide-react"
+import { Icon } from "@iconify/react"
+import { useTranslation } from "react-i18next"
+import "./Booking.css"
 
 const cars = [
   {
@@ -538,256 +539,251 @@ const cars = [
     color: "bg-blue-50",
     iconColor: "text-blue-500",
   },
-];
+]
 
 const CarDetailPage = () => {
-  const { id } = useParams();
-  const [selectedCar, setSelectedCar] = useState(null);
-  const scrollContainerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [totalSlides, setTotalSlides] = useState(3); // Default to 3 for backward compatibility
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [currentTranslate, setCurrentTranslate] = useState(0);
-  const [prevTranslate, setPrevTranslate] = useState(0);
-  const [dragThreshold, setDragThreshold] = useState(100); // Threshold to trigger slide change
-  const [galleryHeight, setGalleryHeight] = useState(400); // Dynamic gallery height
-  const [isMobileView, setIsMobileView] = useState(false);
+  const { t } = useTranslation()
+  const { id } = useParams()
+  const [selectedCar, setSelectedCar] = useState(null)
+  const scrollContainerRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [totalSlides, setTotalSlides] = useState(3) // Default to 3 for backward compatibility
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [currentTranslate, setCurrentTranslate] = useState(0)
+  const [prevTranslate, setPrevTranslate] = useState(0)
+  const [dragThreshold, setDragThreshold] = useState(100) // Threshold to trigger slide change
+  const [galleryHeight, setGalleryHeight] = useState(400) // Dynamic gallery height
+  const [isMobileView, setIsMobileView] = useState(false)
 
   useEffect(() => {
-    const car = cars.find((car) => car.id === Number.parseInt(id));
-    setSelectedCar(car);
+    const car = cars.find((car) => car.id === Number.parseInt(id))
+    setSelectedCar(car)
 
     // Set the total number of slides based on the images array if available
     if (car && car.images && car.images.length > 0) {
-      setTotalSlides(car.images.length);
+      setTotalSlides(car.images.length)
     } else {
-      setTotalSlides(3); // Fallback to 3 for backward compatibility
+      setTotalSlides(3) // Fallback to 3 for backward compatibility
     }
 
     // Set mobile view state
     const checkMobileView = () => {
-      setIsMobileView(window.innerWidth < 768);
+      setIsMobileView(window.innerWidth < 768)
       // Adjust gallery height based on screen dimensions for mobile
       if (window.innerWidth < 768) {
-        const aspectRatio = 3/4; // Common car photo aspect ratio
-        const availableWidth = window.innerWidth - 32; // Account for padding
-        setGalleryHeight(availableWidth * aspectRatio);
+        const aspectRatio = 3 / 4 // Common car photo aspect ratio
+        const availableWidth = window.innerWidth - 32 // Account for padding
+        setGalleryHeight(availableWidth * aspectRatio)
       } else {
-        setGalleryHeight(400); // Default height for desktop
+        setGalleryHeight(400) // Default height for desktop
       }
-    };
-    
-    checkMobileView();
-    window.addEventListener('resize', checkMobileView);
-    return () => window.removeEventListener('resize', checkMobileView);
-  }, [id]);
+    }
+
+    checkMobileView()
+    window.addEventListener("resize", checkMobileView)
+    return () => window.removeEventListener("resize", checkMobileView)
+  }, [id])
 
   const [rentalDetails, setRentalDetails] = useState({
     pickUpDate: "",
     dropOffDate: "",
     location: "",
-  });
+  })
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setRentalDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Format dates
     const formatDate = (dateString) => {
-      const options = { day: "numeric", month: "long", year: "numeric" };
-      return new Date(dateString).toLocaleDateString("en-US", options);
-    };
+      const options = { day: "numeric", month: "long", year: "numeric" }
+      return new Date(dateString).toLocaleDateString(t("locale"), options)
+    }
 
     // Get categories as comma-separated string
-    const carCategories = selectedCar.categories
-      ? selectedCar.categories.join(", ")
-      : selectedCar.category;
+    const carCategories = selectedCar.categories ? selectedCar.categories.join(", ") : selectedCar.category
 
     // Create WhatsApp message
-    const message = `Hello! I want to book the ${selectedCar.name} (€${
-      selectedCar.price
-    }/day).
-    
-📅 Rental Period:
-- Pick-up: ${formatDate(rentalDetails.pickUpDate)}
-- Drop-off: ${formatDate(rentalDetails.dropOffDate)}
-
-📍 Pickup Location: ${rentalDetails.location}
-
-Car Details:
-🚗 ${carCategories}
-🔄 ${selectedCar.features.transmission} transmission
-🔧 ${selectedCar.features.engineSize} engine
-⛽ ${selectedCar.features.fuel}`;
+    const message = t("whatsappMessage", {
+      carName: selectedCar.name,
+      price: selectedCar.price,
+      pickUpDate: formatDate(rentalDetails.pickUpDate),
+      dropOffDate: formatDate(rentalDetails.dropOffDate),
+      location: rentalDetails.location,
+      categories: carCategories,
+      transmission: selectedCar.features.transmission,
+      engineSize: selectedCar.features.engineSize,
+      fuel: selectedCar.features.fuel,
+    })
 
     // Encode message for URL
-    const encodedMessage = encodeURIComponent(message);
+    const encodedMessage = encodeURIComponent(message)
 
     // Replace with your WhatsApp number (include country code without + sign)
-    const whatsappNumber = "355698357378";
+    const whatsappNumber = "355698357378"
 
     // Create WhatsApp URL
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
 
     // Open WhatsApp in new tab
-    window.open(whatsappUrl, "_blank");
-  };
+    window.open(whatsappUrl, "_blank")
+  }
 
   // Navigate to specific slide
   const goToSlide = useCallback(
     (index) => {
-      if (!scrollContainerRef.current) return;
+      if (!scrollContainerRef.current) return
 
       // Ensure index is within bounds
-      const newIndex = Math.max(0, Math.min(index, totalSlides - 1));
+      const newIndex = Math.max(0, Math.min(index, totalSlides - 1))
 
-      setActiveIndex(newIndex);
+      setActiveIndex(newIndex)
 
       // Get container width for precise sliding
-      const containerWidth = scrollContainerRef.current.clientWidth;
+      const containerWidth = scrollContainerRef.current.clientWidth
 
       // Apply smooth transition
-      scrollContainerRef.current.style.transition = "transform 0.3s ease-out";
-      const newTranslate = -newIndex * containerWidth;
-      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`;
-      setPrevTranslate(newTranslate);
-      setCurrentTranslate(newTranslate);
+      scrollContainerRef.current.style.transition = "transform 0.3s ease-out"
+      const newTranslate = -newIndex * containerWidth
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
+      setPrevTranslate(newTranslate)
+      setCurrentTranslate(newTranslate)
     },
-    [totalSlides]
-  );
+    [totalSlides],
+  )
 
   // Navigate to previous slide
   const prevSlide = () => {
-    goToSlide(activeIndex - 1);
-  };
+    goToSlide(activeIndex - 1)
+  }
 
   // Navigate to next slide
   const nextSlide = () => {
-    goToSlide(activeIndex + 1);
-  };
+    goToSlide(activeIndex + 1)
+  }
 
   // Mouse down event for drag scrolling
   const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
+    setIsDragging(true)
+    setStartX(e.clientX)
 
     // Disable transition during drag
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transition = "none";
+      scrollContainerRef.current.style.transition = "none"
     }
 
     // Prevent default behavior
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   // Touch start event for mobile drag scrolling
   const handleTouchStart = (e) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].clientX);
+    setIsDragging(true)
+    setStartX(e.touches[0].clientX)
 
     // Disable transition during drag
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transition = "none";
+      scrollContainerRef.current.style.transition = "none"
     }
-  };
+  }
 
   // Mouse move event for drag scrolling
   const handleMouseMove = (e) => {
-    if (!isDragging) return;
+    if (!isDragging) return
 
-    const currentX = e.clientX;
-    const diff = currentX - startX;
-    const newTranslate = prevTranslate + diff;
+    const currentX = e.clientX
+    const diff = currentX - startX
+    const newTranslate = prevTranslate + diff
 
-    setCurrentTranslate(newTranslate);
+    setCurrentTranslate(newTranslate)
 
     // Apply the translation
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`;
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
     }
-  };
+  }
 
   // Touch move event for mobile drag scrolling
   const handleTouchMove = (e) => {
-    if (!isDragging) return;
+    if (!isDragging) return
 
-    const currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    const newTranslate = prevTranslate + diff;
+    const currentX = e.touches[0].clientX
+    const diff = currentX - startX
+    const newTranslate = prevTranslate + diff
 
-    setCurrentTranslate(newTranslate);
+    setCurrentTranslate(newTranslate)
 
     // Apply the translation
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`;
+      scrollContainerRef.current.style.transform = `translateX(${newTranslate}px)`
     }
-  };
+  }
 
   // End dragging
   const handleDragEnd = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
+    if (!isDragging) return
+    setIsDragging(false)
 
     // Calculate which slide to snap to based on drag distance
-    const dragDistance = currentTranslate - prevTranslate;
+    const dragDistance = currentTranslate - prevTranslate
 
     if (Math.abs(dragDistance) > dragThreshold) {
       // If dragged far enough, move to next/prev slide
       if (dragDistance > 0) {
         // Dragged right -> go to previous slide
-        goToSlide(activeIndex - 1);
+        goToSlide(activeIndex - 1)
       } else {
         // Dragged left -> go to next slide
-        goToSlide(activeIndex + 1);
+        goToSlide(activeIndex + 1)
       }
     } else {
       // If not dragged far enough, snap back to current slide
-      goToSlide(activeIndex);
+      goToSlide(activeIndex)
     }
-  };
+  }
 
   // Set initial slide position when component mounts
   useEffect(() => {
     if (scrollContainerRef.current) {
       // Initialize container position
-      goToSlide(0);
+      goToSlide(0)
 
       // Update drag threshold based on container width
-      setDragThreshold(scrollContainerRef.current.clientWidth * 0.15); // 15% of container width
+      setDragThreshold(scrollContainerRef.current.clientWidth * 0.15) // 15% of container width
     }
-  }, [selectedCar, goToSlide]);
+  }, [selectedCar, goToSlide])
 
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       if (scrollContainerRef.current) {
         // Re-calculate position on resize
-        goToSlide(activeIndex);
+        goToSlide(activeIndex)
 
         // Update drag threshold
-        setDragThreshold(scrollContainerRef.current.clientWidth * 0.15);
+        setDragThreshold(scrollContainerRef.current.clientWidth * 0.15)
       }
-    };
+    }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [activeIndex, goToSlide]);
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [activeIndex, goToSlide])
 
   // Loading state
   if (!selectedCar) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-xl font-semibold text-gray-700">Loading...</div>
+        <div className="text-xl font-semibold text-gray-700">{t("loading")}</div>
       </div>
-    );
+    )
   }
 
   return (
@@ -797,10 +793,7 @@ Car Details:
         <div className="w-full md:w-1/2 mb-6 md:mb-0">
           <div className="relative">
             {/* Gallery Container */}
-            <div 
-              className="relative overflow-hidden rounded-lg shadow-md"
-              style={{ height: `${galleryHeight}px` }}
-            >
+            <div className="relative overflow-hidden rounded-lg shadow-md" style={{ height: `${galleryHeight}px` }}>
               {/* Scroll Container */}
               <div
                 ref={scrollContainerRef}
@@ -821,18 +814,15 @@ Car Details:
                 {selectedCar.images && selectedCar.images.length > 0 ? (
                   // Render from images array if available
                   selectedCar.images.map((image, index) => (
-                    <div
-                      key={index}
-                      className="relative flex-shrink-0 w-full h-full"
-                    >
+                    <div key={index} className="relative flex-shrink-0 w-full h-full">
                       <img
                         src={image.url || "/placeholder.svg"}
-                        alt={`${selectedCar.name} - ${image.label}`}
+                        alt={`${selectedCar.name} - ${t(image.label)}`}
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
                       <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
-                        {image.label}
+                        {t(image.label)}
                       </span>
                     </div>
                   ))
@@ -843,12 +833,12 @@ Car Details:
                     <div className="relative flex-shrink-0 w-full h-full">
                       <img
                         src={selectedCar.image || "/placeholder.svg"}
-                        alt={`${selectedCar.name} main view`}
+                        alt={`${selectedCar.name} ${t("frontView")}`}
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
                       <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
-                        Front View
+                        {t("frontView")}
                       </span>
                     </div>
 
@@ -856,12 +846,12 @@ Car Details:
                     <div className="relative flex-shrink-0 w-full h-full">
                       <img
                         src={selectedCar.imageBehind || "/placeholder.svg"}
-                        alt={`${selectedCar.name} rear view`}
+                        alt={`${selectedCar.name} ${t("rearView")}`}
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
                       <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
-                        Rear View
+                        {t("rearView")}
                       </span>
                     </div>
 
@@ -869,12 +859,12 @@ Car Details:
                     <div className="relative flex-shrink-0 w-full h-full">
                       <img
                         src={selectedCar.imageInside || "/placeholder.svg"}
-                        alt={`${selectedCar.name} interior`}
+                        alt={`${selectedCar.name} ${t("interior")}`}
                         className="w-full h-full object-cover rounded-lg"
                         draggable="false"
                       />
                       <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 rounded text-xs md:text-sm">
-                        Interior
+                        {t("interior")}
                       </span>
                     </div>
                   </>
@@ -886,7 +876,7 @@ Car Details:
                 <button
                   onClick={prevSlide}
                   className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1.5 md:p-2 shadow-md z-10 transition-all"
-                  aria-label="Previous image"
+                  aria-label={t("previousImage2")}
                 >
                   <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
                 </button>
@@ -896,7 +886,7 @@ Car Details:
                 <button
                   onClick={nextSlide}
                   className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1.5 md:p-2 shadow-md z-10 transition-all"
-                  aria-label="Next image"
+                  aria-label={t("nextImage2")}
                 >
                   <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
                 </button>
@@ -907,26 +897,24 @@ Car Details:
             <div className="flex justify-center mt-3 gap-1.5 md:gap-2">
               {selectedCar.images && selectedCar.images.length > 0
                 ? selectedCar.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`w-2 md:w-2.5 h-2 md:h-2.5 rounded-full transition-all ${
-                        activeIndex === index ? "bg-black w-3 md:w-4" : "bg-gray-300"
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-2 md:w-2.5 h-2 md:h-2.5 rounded-full transition-all ${activeIndex === index ? "bg-black w-3 md:w-4" : "bg-gray-300"
                       }`}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))
+                    aria-label={t("goToImage2", { number: index + 1 })}
+                  />
+                ))
                 : // Fallback for backward compatibility
-                  [0, 1, 2].map((index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`w-2 md:w-2.5 h-2 md:h-2.5 rounded-full transition-all ${
-                        activeIndex === index ? "bg-black w-3 md:w-4" : "bg-gray-300"
+                [0, 1, 2].map((index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-2 md:w-2.5 h-2 md:h-2.5 rounded-full transition-all ${activeIndex === index ? "bg-black w-3 md:w-4" : "bg-gray-300"
                       }`}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
+                    aria-label={t("goToImage2", { number: index + 1 })}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -934,9 +922,7 @@ Car Details:
         {/* Car Details - Improved padding and font sizes for mobile */}
         <div className="w-full md:w-1/2 bg-white shadow-lg md:shadow-xl rounded-lg p-5 md:p-8">
           {/* Car Name - More compact for mobile */}
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-            {selectedCar.name}
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{selectedCar.name}</h2>
 
           {/* Display multiple categories - Improved wrapping */}
           <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-4">
@@ -947,36 +933,30 @@ Car Details:
                   key={index}
                   className="bg-gray-100 text-gray-700 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm"
                 >
-                  {category}
+                  {t(`categories.${category.toLowerCase().trim()}`)}
                 </span>
               ))
             ) : (
               // Fallback to single category
               <span className="bg-gray-100 text-gray-700 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm">
-                {selectedCar.category}
+                {t(`categories.${selectedCar.category.toLowerCase().trim()}`)}
               </span>
             )}
             <span className="ml-auto text-lg md:text-xl font-semibold">
-              €{selectedCar.price}/day
+              €{selectedCar.price}/{t("day2")}
             </span>
           </div>
 
           {/* Car Rating - Compressed for mobile */}
           <div className="flex items-center space-x-2 md:space-x-3 mb-4 md:mb-6">
             <div className="flex items-center space-x-1">
-              <span className="text-xl md:text-2xl font-semibold text-gray-500">
-                {selectedCar.rating}
-              </span>
+              <span className="text-xl md:text-2xl font-semibold text-gray-500">{selectedCar.rating}</span>
               <div className="flex text-sm text-yellow-500">
                 {[...Array(5)].map((_, index) => (
                   <svg
                     key={index}
                     xmlns="http://www.w3.org/2000/svg"
-                    fill={
-                      index < Math.floor(selectedCar.rating)
-                        ? "currentColor"
-                        : "none"
-                    }
+                    fill={index < Math.floor(selectedCar.rating) ? "currentColor" : "none"}
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                     className="h-4 w-4 md:h-5 md:w-5"
@@ -992,7 +972,7 @@ Car Details:
               </div>
             </div>
             <span className="text-xs md:text-sm text-gray-500">
-              ({selectedCar.reviews} reviews)
+              ({selectedCar.reviews} {t("reviews2")})
             </span>
           </div>
 
@@ -1006,21 +986,24 @@ Car Details:
               ) : (
                 <Fuel className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
               )}
-              <span>{selectedCar.features.fuel} fuel</span>
+              <span>
+                {t(`fuel.${selectedCar.features.fuel.toLowerCase()}`)} {t("fuelType2")}
+              </span>
             </div>
             {selectedCar.features.transmission && (
               <div className="flex items-center space-x-2">
-                <Icon
-                  icon="lucide-lab:gearbox"
-                  className="h-4 w-4 md:h-5 md:w-5 text-gray-600"
-                />
-                <span>{selectedCar.features.transmission} transmission</span>
+                <Icon icon="lucide-lab:gearbox" className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
+                <span>
+                  {t(`transmission.${selectedCar.features.transmission.toLowerCase()}`)} {t("transmissionType2")}
+                </span>
               </div>
             )}
             {selectedCar.features.engineSize && (
               <div className="flex items-center space-x-2">
                 <Icon icon="mdi:engine" className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
-                <span>{selectedCar.features.engineSize}</span>
+                <span>
+                  {t('engineSize2')}: {selectedCar.features.engineSize}
+                </span>
               </div>
             )}
           </div>
@@ -1032,7 +1015,7 @@ Car Details:
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col">
                   <label htmlFor="pickUpDate" className="text-xs md:text-sm text-gray-600 mb-1">
-                    Pick-up Date
+                    {t("booking.pickUpDate")}
                   </label>
                   <input
                     type="date"
@@ -1047,7 +1030,7 @@ Car Details:
 
                 <div className="flex flex-col">
                   <label htmlFor="dropOffDate" className="text-xs md:text-sm text-gray-600 mb-1">
-                    Drop-off Date
+                    {t("booking.dropOffDate")}
                   </label>
                   <input
                     type="date"
@@ -1056,24 +1039,21 @@ Car Details:
                     onChange={handleChange}
                     className="p-2 md:p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black text-sm md:text-base"
                     required
-                    min={
-                      rentalDetails.pickUpDate ||
-                      new Date().toISOString().split("T")[0]
-                    }
+                    min={rentalDetails.pickUpDate || new Date().toISOString().split("T")[0]}
                   />
                 </div>
               </div>
 
               <div className="flex flex-col">
                 <label htmlFor="location" className="text-xs md:text-sm text-gray-600 mb-1">
-                  Pickup Location
+                  {t("booking.pickupLocation")}
                 </label>
                 <input
                   type="text"
                   name="location"
                   value={rentalDetails.location}
                   onChange={handleChange}
-                  placeholder="Enter location"
+                  placeholder={t("booking.enterLocation")}
                   className="p-2 md:p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black text-sm md:text-base"
                   required
                 />
@@ -1083,17 +1063,16 @@ Car Details:
             {/* Fixed at bottom on mobile for better UX */}
             <button
               type="submit"
-              className={`mt-4 md:mt-6 w-full py-3 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 active:scale-95 transition-all duration-300 text-sm md:text-base font-medium ${
-                isMobileView ? 'sticky bottom-4' : ''
-              }`}
+              className={`mt-4 md:mt-6 w-full py-3 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 active:scale-95 transition-all duration-300 text-sm md:text-base font-medium ${isMobileView ? "sticky bottom-4" : ""
+                }`}
             >
-              Confirm Booking
+              {t("booking.confirmBooking")}
             </button>
           </form>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CarDetailPage;
+export default CarDetailPage

@@ -207,5 +207,28 @@
       "title": "Rezervoni dhe shijoni",
       "description": "Përfundoni rezervimin tuaj dhe shijoni udhëtimin tuaj"
     }
+  },
+  "locale": "sq-AL",
+  "loading": "Duke ngarkuar...",
+  "frontView": "Pamja e përparme",
+  "rearView": "Pamja e pasme",
+  "interior": "Interiori",
+  "sideView": "Pamja anësore",
+  "previousImage2": "Imazhi i mëparshëm",
+  "nextImage2": "Imazhi tjetër",
+  "goToImage2": "Shko te imazhi {{number}}",
+  "day2": "ditë",
+  "reviews2": "vlerësime",
+  "fuelType2": "karburant",
+  "transmissionType2": "transmision",
+  "engineSize2": "Madhësia e motorit",
+  "whatsappMessage": "Përshëndetje! Dua të rezervoj {{carName}} (€{{price}}/ditë).\n\n📅 Periudha e qirasë:\n- Marrja: {{pickUpDate}}\n- Kthimi: {{dropOffDate}}\n\n📍 Vendi i marrjes: {{location}}\n\nDetajet e makinës:\n🚗 {{categories}}\n🔄 Transmision {{transmission}}\n🔧 Motor {{engineSize}}\n⛽ {{fuel}}",
+  "booking": {
+    "pickUpDate": "Data e marrjes",
+    "dropOffDate": "Data e kthimit",
+    "pickupLocation": "Vendi i marrjes",
+    "enterLocation": "Vendosni vendndodhjen",
+    "confirmBooking": "Konfirmo rezervimin",
+    "bookNow": "Rezervo tani"
   }
 }

@@ -207,5 +207,28 @@
       "title": "Reserva y disfruta",
       "description": "Complete su reserva y disfrute de su viaje"
     }
+  },
+  "locale": "es-ES",
+  "loading": "Cargando...",
+  "frontView": "Vista frontal",
+  "rearView": "Vista trasera",
+  "interior": "Interior",
+  "sideView": "Vista lateral",
+  "previousImage2": "Imagen anterior",
+  "nextImage2": "Siguiente imagen",
+  "goToImage2": "Ir a la imagen {{number}}",
+  "day2": "día",
+  "reviews2": "reseñas",
+  "fuelType2": "combustible",
+  "transmissionType2": "transmisión",
+  "engineSize2": "Tamaño del motor",
+  "whatsappMessage": "¡Hola! Quiero reservar el {{carName}} (€{{price}}/día).\n\n📅 Período de alquiler:\n- Recogida: {{pickUpDate}}\n- Devolución: {{dropOffDate}}\n\n📍 Lugar de recogida: {{location}}\n\nDetalles del coche:\n🚗 {{categories}}\n🔄 Transmisión {{transmission}}\n🔧 Motor {{engineSize}}\n⛽ {{fuel}}",
+  "booking": {
+    "pickUpDate": "Fecha de recogida",
+    "dropOffDate": "Fecha de devolución",
+    "pickupLocation": "Lugar de recogida",
+    "enterLocation": "Introducir ubicación",
+    "confirmBooking": "Confirmar reserva",
+    "bookNow": "Reservar ahora"
   }
 }
