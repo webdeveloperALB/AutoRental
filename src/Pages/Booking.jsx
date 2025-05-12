@@ -612,7 +612,7 @@ const CarDetailPage = () => {
       : selectedCar.category;
 
     // Create WhatsApp message
-    const message = `Hello! I want to book the ${selectedCar.name} ($${
+    const message = `Hello! I want to book the ${selectedCar.name} (€${
       selectedCar.price
     }/day).
     
