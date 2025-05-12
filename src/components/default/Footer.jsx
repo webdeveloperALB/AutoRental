@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -7,30 +6,15 @@ import {
   Instagram,
   MapPin,
   ArrowRight,
-  Map,
 } from "lucide-react";
 import { RiTiktokFill } from "react-icons/ri";
 import { FaWhatsapp } from "react-icons/fa";
 
-
-
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email) {
-      setIsSubscribed(true);
-      setEmail("");
-      // Here you would typically handle the newsletter subscription
-    }
   };
 
   const socialLinks = [

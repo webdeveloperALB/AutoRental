@@ -1,0 +1,14 @@
+{
+  "Home": "Inicio",
+  "Models": "Modelos",
+  "suv": "SUV",
+  "sedan": "Sedán",
+  "luxury": "Lujo",
+  "sports": "Deportivo",
+  "economy": "Económico",
+  "Testimonials": "Testimonios",
+  "Contact": "Contacto",
+  "logout": "Cerrar sesión",
+  "login": "Iniciar sesión",
+  "signUp": "Registrarse"
+}
