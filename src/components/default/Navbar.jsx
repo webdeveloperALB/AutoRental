@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, LogIn, UserPlus, LogOut, ChevronDown } from "lucide-react"
-import { auth } from "./Auth/Firebase.js"
-import { signOut } from "firebase/auth"
-import useAuthStore from "../../store/store.js"
-import Flag from "./Flag.jsx"
-import "./Navbar.css"
-import { useTranslation } from "react-i18next"
-import i18n from "../../i18n.js"
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, LogIn, UserPlus, LogOut, ChevronDown } from "lucide-react";
+import { auth } from "./Auth/Firebase.js";
+import { signOut } from "firebase/auth";
+import useAuthStore from "../../store/store.js";
+import Flag from "./Flag.jsx";
+import "./Navbar.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n.js";
 
 const Navbar = () => {
-  const { user, setUser, logout } = useAuthStore()
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [modelsDropdownOpen, setModelsDropdownOpen] = useState(false)
-  const [mobileModelsOpen, setMobileModelsOpen] = useState(false)
-  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { t } = useTranslation()
-  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
-  const [mobileLangDropdownOpen, setMobileLangDropdownOpen] = useState(false)
+  const { user, setUser, logout } = useAuthStore();
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [modelsDropdownOpen, setModelsDropdownOpen] = useState(false);
+  const [mobileModelsOpen, setMobileModelsOpen] = useState(false);
+  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
+  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const [mobileLangDropdownOpen, setMobileLangDropdownOpen] = useState(false);
 
   // Supported languages with flag and name properties
   const languages = [
@@ -32,75 +32,77 @@ const Navbar = () => {
     { code: "it", countryCode: "it", name: "Italiano", flag: "🇮🇹" },
     { code: "es", countryCode: "es", name: "Español", flag: "🇪🇸" },
     { code: "sq", countryCode: "al", name: "Shqip", flag: "🇦🇱" },
-  ]
+  ];
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUser(user)
+        setUser(user);
       } else {
-        logout()
+        logout();
       }
-    })
+    });
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+      setScrolled(window.scrollY > 20);
+    };
 
     // Close dropdowns when clicking outside
     const handleClickOutside = (event) => {
       // Only close if clicking outside the dropdown
-      const isClickingOutsideDesktopDropdown = languageDropdownOpen && !event.target.closest(".language-dropdown")
+      const isClickingOutsideDesktopDropdown =
+        languageDropdownOpen && !event.target.closest(".language-dropdown");
 
       const isClickingOutsideMobileDropdown =
-        mobileLangDropdownOpen && !event.target.closest(".mobile-language-dropdown")
+        mobileLangDropdownOpen &&
+        !event.target.closest(".mobile-language-dropdown");
 
       if (isClickingOutsideDesktopDropdown) {
-        setLanguageDropdownOpen(false)
+        setLanguageDropdownOpen(false);
       }
 
       if (isClickingOutsideMobileDropdown) {
-        setMobileLangDropdownOpen(false)
+        setMobileLangDropdownOpen(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    document.addEventListener("mousedown", handleClickOutside)
-    setIsOpen(false)
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    setIsOpen(false);
 
     return () => {
-      unsubscribe()
-      window.removeEventListener("scroll", handleScroll)
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [setUser, logout, location, languageDropdownOpen, mobileLangDropdownOpen])
+      unsubscribe();
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setUser, logout, location, languageDropdownOpen, mobileLangDropdownOpen]);
 
   const handleLanguageChange = (langCode) => {
-    i18n.changeLanguage(langCode)
-    setLanguageDropdownOpen(false)
-    setMobileLangDropdownOpen(false)
-    setIsOpen(false)
-  }
+    i18n.changeLanguage(langCode);
+    setLanguageDropdownOpen(false);
+    setMobileLangDropdownOpen(false);
+    setIsOpen(false);
+  };
 
   const handleLogout = async () => {
     try {
-      await signOut(auth)
-      setIsOpen(false)
-      setAccountDropdownOpen(false)
-      navigate("/")
+      await signOut(auth);
+      setIsOpen(false);
+      setAccountDropdownOpen(false);
+      navigate("/");
     } catch (error) {
-      console.error("Logout error:", error)
+      console.error("Logout error:", error);
     }
-  }
+  };
 
   const isLinkActive = (path) => {
-    const currentPath = location.pathname + location.search
+    const currentPath = location.pathname + location.search;
 
     if (path.includes("?")) {
-      return currentPath === path
+      return currentPath === path;
     }
-    return location.pathname === path
-  }
+    return location.pathname === path;
+  };
 
   const navItems = [
     { path: "/", translationKey: "Home" },
@@ -117,20 +119,30 @@ const Navbar = () => {
     },
     { path: "/testimonials", translationKey: "Testimonials" },
     { path: "/contact", translationKey: "Contact" },
-  ]
+  ];
 
-  const currentLanguage = languages.find((l) => l.code === i18n.language) || languages[0]
+  const currentLanguage =
+    languages.find((l) => l.code === i18n.language) || languages[0];
 
   return (
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={`fixed w-full z-50 h-16 ${scrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-transparent"}`}
+      className={`fixed w-full z-50 h-16 ${
+        scrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-transparent"
+      }`}
     >
       <div className="container mx-auto px-4 h-full">
         <div className="flex items-center justify-between h-full">
-          <Link to="/" className="flex items-center h-full p-2 hover:opacity-90 transition-opacity">
-            <img src="/Logo Auto Rental Tirana Black.png" alt="Auto Rental Tirana Logo" className="responsive-logo" />
+          <Link
+            to="/"
+            className="flex items-center h-full p-2 hover:opacity-90 transition-opacity"
+          >
+            <img
+              src="/Logo Auto Rental Tirana Black.png"
+              alt="Auto Rental Tirana Logo"
+              className="responsive-logo"
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-8 h-full">
@@ -192,7 +204,7 @@ const Navbar = () => {
                     />
                   )}
                 </Link>
-              ),
+              )
             )}
 
             <div className="flex items-center gap-4 ml-4">
@@ -205,11 +217,19 @@ const Navbar = () => {
                   className="language-dropdown-btn"
                 >
                   <div className="language-flag-text">
-                    <Flag country={currentLanguage.countryCode} width={20} height={15}/>
-                    <span className="text-sm font-medium">{currentLanguage.name}</span>
+                    <Flag
+                      country={currentLanguage.countryCode}
+                      width={20}
+                      height={15}
+                    />
+                    <span className="text-sm font-medium">
+                      {currentLanguage.name}
+                    </span>
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform ${languageDropdownOpen ? "rotate-chevron" : ""}`}
+                    className={`w-4 h-4 transition-transform ${
+                      languageDropdownOpen ? "rotate-chevron" : ""
+                    }`}
                   />
                 </motion.button>
 
@@ -228,7 +248,11 @@ const Navbar = () => {
                           className="language-dropdown-item"
                         >
                           <div className="language-flag-text">
-                            <Flag country={lang.countryCode} width={20} height={15} />
+                            <Flag
+                              country={lang.countryCode}
+                              width={20}
+                              height={15}
+                            />
                             <span>{lang.name}</span>
                           </div>
                         </button>
@@ -248,7 +272,9 @@ const Navbar = () => {
                   >
                     <span>{user.displayName || user.email}</span>
                     <ChevronDown
-                      className={`w-4 h-4 transition-transform ${accountDropdownOpen ? "rotate-180" : ""}`}
+                      className={`w-4 h-4 transition-transform ${
+                        accountDropdownOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </motion.button>
 
@@ -298,15 +324,21 @@ const Navbar = () => {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
-                  e.stopPropagation() // Prevent event bubbling
-                  setMobileLangDropdownOpen(!mobileLangDropdownOpen)
+                  e.stopPropagation(); // Prevent event bubbling
+                  setMobileLangDropdownOpen(!mobileLangDropdownOpen);
                 }}
                 className="language-dropdown-btn py-2 px-3 min-w-0"
               >
                 <div className="language-flag-text">
-                  <Flag country={currentLanguage.countryCode} width={20} height={15} />
+                  <Flag
+                    country={currentLanguage.countryCode}
+                    width={20}
+                    height={15}
+                  />
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform ${mobileLangDropdownOpen ? "rotate-chevron" : ""}`}
+                    className={`w-4 h-4 transition-transform ${
+                      mobileLangDropdownOpen ? "rotate-chevron" : ""
+                    }`}
                   />
                 </div>
               </motion.button>
@@ -317,13 +349,17 @@ const Navbar = () => {
                     <button
                       key={lang.code}
                       onClick={(e) => {
-                        e.stopPropagation() // Prevent event bubbling
-                        handleLanguageChange(lang.code)
+                        e.stopPropagation(); // Prevent event bubbling
+                        handleLanguageChange(lang.code);
                       }}
                       className="language-dropdown-item"
                     >
                       <div className="language-flag-text">
-                        <Flag country={lang.countryCode} width={20} height={15} />
+                        <Flag
+                          country={lang.countryCode}
+                          width={20}
+                          height={15}
+                        />
                         <span className="text-sm">{lang.name}</span>
                       </div>
                     </button>
@@ -337,7 +373,11 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -355,14 +395,26 @@ const Navbar = () => {
               <div className="flex flex-col gap-2">
                 {navItems.map((item) =>
                   item.submenu ? (
-                    <div key={item.translationKey} className="flex flex-col gap-2">
+                    <div
+                      key={item.translationKey}
+                      className="flex flex-col gap-2"
+                    >
                       <div className="flex items-center justify-between px-4 py-3">
-                        <Link to={item.path} onClick={() => setIsOpen(false)} className="text-gray-900 font-medium">
+                        <Link
+                          to={item.path}
+                          onClick={() => setIsOpen(false)}
+                          className="text-gray-900 font-medium"
+                        >
                           {t(item.translationKey)}
                         </Link>
-                        <button onClick={() => setMobileModelsOpen(!mobileModelsOpen)} className="p-1">
+                        <button
+                          onClick={() => setMobileModelsOpen(!mobileModelsOpen)}
+                          className="p-1"
+                        >
                           <ChevronDown
-                            className={`w-5 h-5 transition-transform ${mobileModelsOpen ? "rotate-180" : ""}`}
+                            className={`w-5 h-5 transition-transform ${
+                              mobileModelsOpen ? "rotate-180" : ""
+                            }`}
                           />
                         </button>
                       </div>
@@ -373,8 +425,8 @@ const Navbar = () => {
                               key={subItem.path}
                               to={subItem.path}
                               onClick={() => {
-                                setIsOpen(false)
-                                setMobileModelsOpen(false)
+                                setIsOpen(false);
+                                setMobileModelsOpen(false);
                               }}
                               className={`px-6 py-2 rounded-lg ${
                                 isLinkActive(subItem.path)
@@ -394,12 +446,14 @@ const Navbar = () => {
                       to={item.path}
                       onClick={() => setIsOpen(false)}
                       className={`px-4 py-3 rounded-lg ${
-                        isLinkActive(item.path) ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50"
+                        isLinkActive(item.path)
+                          ? "bg-gray-100 text-gray-900"
+                          : "text-gray-600 hover:bg-gray-50"
                       } transition-colors`}
                     >
                       {t(item.translationKey)}
                     </Link>
-                  ),
+                  )
                 )}
 
                 <div className="flex flex-col gap-2 pt-4 border-t mt-2">
@@ -438,7 +492,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
