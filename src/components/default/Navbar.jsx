@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn, UserPlus, LogOut, ChevronDown } from "lucide-react";
-import { auth } from "./Auth/Firebase.js";
-import { signOut } from "firebase/auth";
 import useAuthStore from "../../store/store.js";
 import Flag from "./Flag.jsx";
 import "./Navbar.css";
@@ -35,14 +33,6 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        logout();
-      }
-    });
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -71,7 +61,6 @@ const Navbar = () => {
     setIsOpen(false);
 
     return () => {
-      unsubscribe();
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -84,15 +73,10 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      setIsOpen(false);
-      setAccountDropdownOpen(false);
-      navigate("/");
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
+  const handleLogout = () => {
+    setIsOpen(false);
+    setAccountDropdownOpen(false);
+    navigate("/");
   };
 
   const isLinkActive = (path) => {
@@ -299,20 +283,6 @@ const Navbar = () => {
                 </div>
               ) : (
                 <>
-                  <Link
-                    to="/login"
-                    className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>{t("login")}</span>
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
-                  >
-                    <UserPlus className="w-4 h-4" />
-                    <span>{t("signUp")}</span>
-                  </Link>
                 </>
               )}
             </div>
