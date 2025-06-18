@@ -450,7 +450,7 @@ const cars = [
     price: 50,
     images: [
       {
-        url: "/cars/hyundai santa fe/3.jpg",
+        url: "/cars/3.jpg",
         label: "Front View",
       },
       {
